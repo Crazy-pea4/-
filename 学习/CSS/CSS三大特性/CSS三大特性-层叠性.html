@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body div {
+            color: cadetblue;
+            font-size: 50px;            /*代码的样式覆盖只会出现在相同样式之中，出现了不同的样式则不会覆盖*/
+        }
+        body div {color: darkorange;} body div {color: magenta;}
+        /* 以上三个代码验证了CSS中的代码阅读顺序：从上往下，从左往右。读完代码为止的属性就是最终属性 */
+            
+    </style>
+</head>
+<body>
+    <div>我是天蓬元帅</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!--index.wxml-->
+<!-- 数据绑定 -->
+<view>
+  {{info}}
+</view>
+<view>
+  <!-- 当绑定属性时，跟Vue有所区别，不需要使用v-bind指令，而是统一使用moustache语法 -->
+  <image src="{{pic}}"></image>
+</view>
+<view>
+  <text>{{rd >= 5 ? '随机数大于等于5' : '随机数小于5'}}</text>
+</view>
+<!-- 事件绑定 -->
+<view>
+  <button type="primary" bindtap="tap">点我查看控制台</button>
+</view>
+<view class="count-box">{{count}}</view>
+<button bindtap="changCount1">+1</button>
+<!-- 事件传参 -->
+<view>
+  <button type="primary" bindtap="changCount2" data-num="{{2}}">+2</button>
+</view>
+<!-- 双向绑定数据 -->
+<view>
+  <input type="text" value="{{inpValue}}" bindinput="changeInpValue" />
+</view>
+<!-- 条件渲染 -->
+<!-- block标签类似于Vue中的template标签，在结构树中不显示 -->
+<block wx:if="{{true}}">
+  <!-- wx:if wx:elif wx:else -->
+  <view>view1</view>
+  <view hidden="{{false}}">view2</view>
+  <!-- wx:if与hidden区别类似Vue中的v-if与v-show -->
+  <!-- 此外需要注意一下，在原生html标签中也有hidden属性，如果其后的值不用moustache语法，不论true或false都会隐藏 -->
+</block>
+<!-- 列表渲染 -->
+<view wx:for="{{arr}}">
+  索引：{{index}}，对应项：{{item}}
+  <!-- wx:for用来指定数组进行循环，其中可以接收两个参数index和item -->
+</view>
+``````
+<!-- 也可以手动修改index和item的名称 -->
+<view wx:for="{{['GTA6', '半条命3', '虐杀原形3']}}" wx:for-index="i" wx:for-item="o">
+  {{i}}, {{o}}
+</view>
+``````
+<!-- wx:key 为渲染出来的列表项指定唯一的key值，提高渲染效率，类似于Vue中的:key -->
+<!-- wx:key 的值以两种形式提供（不需要使用双大括号）
+    字符串，代表在 for 循环的 array 中 item 的某个 property，该 property 的值需要是列表中唯一的字符串或数字，且不能动态改变。
+    保留关键字 *this 代表在 for 循环中的 item 本身，这种表示需要 item 本身是一个唯一的字符串或者数字。 -->
+<view wx:for="{{userList}}" wx:key="id" class="red">
+  {{item.name}}
+</view>

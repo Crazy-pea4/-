@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>我是段落1</p>
+        <p>我是段落2</p>
+        <p>我是段落3</p>
+    </div>
+    <script>
+        // 克隆节点 node.cloneNode()
+        var div = document.querySelector('div');
+        var clones = div.children[0].cloneNode(true);
+        div.appendChild(clones);
+        // 注意：如果node.cloneNode() 括号内为 空或者false 则是浅拷贝，只复制标签，不复制里面的内容
+        // 如果括号里面为true 则是深拷贝 复制标签及其内容
+    </script>
+</body>
+</html>

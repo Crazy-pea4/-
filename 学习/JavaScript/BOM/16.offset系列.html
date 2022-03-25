@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <script>
+        // offset x/y 系列相关属性可以动态的得到该元素的位置（偏移）、大小等
+        // 获得元素距离带有 定位的 父元素的位置
+        // .offsetWidth .offsetHeight .offsetLeft .offsetTop
+        // 注意：若使用.offsetWidth 和 .offsetHeight 这方法返回值包括元素的高度 宽度 padding值 边框
+        // .offsetParent 返回最近的带有定位的父亲
+        // 获得元素自身的大小（宽度高度）
+        // 返回的数值都不带单位
+        var father = document.querySelector('.father');
+        var son = document.querySelector('.son');
+        console.log(son.offsetLeft);
+    </script>
+</body>
+
+</html>

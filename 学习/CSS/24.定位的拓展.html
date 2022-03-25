@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 如何使绝对定位的盒子水平居中？ */
+        .box {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -200px;
+            background-color: hotpink;
+            /* 加了margin：0 auto 并没有用 ，方法：先让left：50%再margin-left：-width/2 */
+            /* margin: 0 auto; */
+            /* 若要水平垂直居中，则再加上margin-top：-200px */
+        }
+
+        /* 定位的特殊特性 */
+        .son1 {
+            position: absolute;
+            /*或者是fixed*/
+            height: 500px;
+            width: 500px;
+            top: 100px;
+            background-color:khaki;
+            /* 行内元素给了绝对定位或者固定定位就可以设置高度和宽度 */
+        }
+        .son2 {
+            position: absolute;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <span class="son1">我是span盒子，属于行内元素。但有了绝对定位的属性后，我可以有高度和宽度啦！！</span>
+    <div class="son2">我是div盒子，属于块元素。如果没有给高度和宽度，本来要独占一行的，但是有了绝对定位的属性后，我的高度和宽度就只由内容来决定啦</div>
+</body>
+
+</html>

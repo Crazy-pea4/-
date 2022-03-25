@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .title {
+            width: 200px;
+            height: 100px;
+        }
+
+        .background1 {
+            background-color: skyblue;
+        }
+
+        .background2 {
+            background-color: pink;
+        }
+
+        .background3 {
+            background-color: rebeccapurple;
+        }
+
+        .border {
+            border: 1px solid #ccc;
+            border-radius: 30px;
+        }
+
+        .background {
+            background-color: greenyellow;
+        }
+
+        .font {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+		绑定样式：
+			1. class样式
+				写法:class="xxx" xxx可以是字符串、对象、数组。
+				字符串写法适用于：类名不确定，要动态获取。
+				对象写法适用于：要绑定多个样式，个数不确定，名字也不确定。
+				数组写法适用于：要绑定多个样式，个数确定，名字也确定，但不确定用不用。
+			2. style样式
+				:style="{fontSize: xxx}"其中xxx是动态值。
+				:style="[a,b]"其中a、b是样式对象。
+	-->
+    <div class="r">
+        <!-- 绑定class样式 -- 字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+        <h1 class="title" :class="effecttion">效果</h1>
+        <button @click="changEffection">点击改变文字背景颜色</button><br><br>
+
+        <!-- 绑定class样式 -- 数组写法，适用于：要绑定的样式个数不确定，名字也不确定 -->
+        <h1 class="title" :class="classArr">效果</h1><br><br>
+
+        <!-- 绑定class样式 -- 对象写法，适用于：要绑定的样式个数确定，名字也确定，但要动态决定用不用-->
+        <h1 class="title" :class="classObj">对象-效果</h1><br><br>
+
+        <!-- ----------------------------上面三个常用，非要绑定style样式的话对象写法常用------------------------------------------ -->
+        
+        <!-- 绑定style样式 -- 对象写法 -->
+        <h1 class="title" :style="styleObj">效果</h1><br><br>
+
+        <!-- 绑定style样式 -- 数组对象写法 -->
+        <h1 class="title" :style="[styleObj, styleObj2]">效果</h1><br><br>
+    </div>
+    <script>
+        new Vue({
+            el: '.r',
+            data: {
+                effecttion: '',
+                classArr: ['border', 'background', 'font'],
+                classObj: {
+                    // 要用哪个样式就添加对应的类名并且加上true
+                    border: true,
+                    background2: true
+                },
+                styleObj: {
+                    // 样式对象中的键名是根据原本css中的样式名删去'-'以及采用驼峰写法
+                    fontSize: '40px',
+                    textAlign: 'center',
+                    backgroundColor: 'purple'
+                },
+                styleObj2: {
+                    lineHeight: '100px',
+                    backgroundColor: 'pink'
+                }
+            },
+            methods: {
+                changEffection() {
+                    // 实现点击后随机切换样式
+                    const arr = ['background1', 'background2', 'background3'];
+                    this.effecttion = arr[Math.floor(Math.random() * arr.length)];
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

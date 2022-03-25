@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .w {
+            margin: 100px auto;
+        }
+        .father {
+            width: 200px;
+            height: 200px;
+            background-color: rosybrown;
+        }
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: saddlebrown;
+        }
+    </style>
+</head>
+<body>
+    <div class="father w">
+        <div class="son w"></div>
+    </div>
+    <script>
+        var father = document.querySelector('.father');
+        var son = document.querySelector('.son');
+        father.addEventListener('mouseover', function(e) {
+            // 常跟mouseout 搭配
+            console.log('我是mouseover,经过我的子盒子也会触发哦');
+        })
+        father.addEventListener('mouseenter', function(e) {
+            // 常跟mouseleave搭配，它也不会冒泡
+            console.log('我是mouseenter,经过我的子盒子不会触发哦');
+        })
+        // 主要原因是mouseover会冒泡，当移动到子盒子上的时候，子盒子没有事件，冒泡到父亲上.
+    </script>
+</body>
+</html>

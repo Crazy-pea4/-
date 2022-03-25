@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // 节流阀在轮播图的作用是，防止用户多次点击跳转箭头而造成轮播速度过快
+        let flag = true; // 创建一个节流阀标识变量
+        event.addListener( 'click', function() {
+            if (flag) {
+                flag = false; // 第一次点击后，将节流阀关闭
+                // Code here
+                animate(obj, target, function() {
+                    flag = true; // 当轮播图完全完成一次轮播后，再将节流阀打开
+                })
+            }
+        })
+    </script>
+</body>
+</html>

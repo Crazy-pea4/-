@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // keyup：某个键盘按键被松开时触发
+        // keydown：某个键盘按键被按下时触发
+        // keypress：某个键盘按键被按下时 触发 ！但它不识别功能键，例如：ctrl shift 箭头等！
+        // 传统注册方式不要忘记加on
+        document.addEventListener('keyup', function (e) {
+            console.log('我弹起了');
+        })
+        document.addEventListener('keydown', function (e) {
+            console.log('我被一直按着');
+        })
+        document.addEventListener('keypress', function (e) {
+            console.log('我被按着');
+        })
+        // 若keydown和keypress同时存在，keydown先执行
+
+        document.addEventListener('keyup', function (e) {
+            console.log(e.key); // 返回按下按键的字符串
+            console.log(e.keyCode); // 返回按下按键的ASCII码值
+        })
+    </script>
+</body>
+
+</html>

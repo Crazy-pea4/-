@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1. 如果Date函数没有参数，则返回系统的当前时间
+        var date = new Date();
+        console.log(date);
+        // 2. 参数常用写法  数字型写法：2021,9,23 或 字符串型写法：'2021-9-23 17:46：21'
+        var date1 = new Date(2021, 9, 23);
+        // 如果用数字型写法，返回的月份会大1，这是因为月份从0开始到11结束
+        console.log(date1);
+        var date2 = new Date('2021-9-23 17:46:21');
+        console.log(date2);
+
+        // 格式化日期
+        var date3 = new Date();
+        console.log(date3.getFullYear());
+        console.log(date3.getMonth() + 1); // 因为月份是从0开始，到11结束，所以要+1来保证月份一致
+
+        // 实例
+        var year = date3.getFullYear(); //年份
+        var month = date3.getMonth() + 1; //月份
+        var dates = date3.getDate(); //日期
+        var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']; //为了符合中国人的习惯，巧妙方法
+        var day = date3.getDay(); //星期
+        var hours = date3.getHours(); //小时
+        var minutes = date3.getMinutes(); //分钟
+        var seconds = date3.getSeconds(); //秒钟
+        if (minutes < 10) {
+            minutes = '0'+ minutes;
+        }
+        if (seconds < 10) {
+            seconds = '0'+ seconds;
+        }
+        console.log('今天是' + year + '年' + month + '月' + dates + '日' + arr[day] + hours + ':' + minutes + ':' + seconds);
+        
+        // 时间戳(1970年1月1日距今的毫秒数)
+        // 1. 通过valueOf() 和 getTime()来获得
+        console.log(date3.valueOf());
+        console.log(date3.getTime());
+        // 2.简单写法(常用写法)
+        var mtime = +new Date(); //返回的同样是总毫秒数
+        console.log(mtime);
+        // 3. H5新增的写法
+        console.log(Date.now());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

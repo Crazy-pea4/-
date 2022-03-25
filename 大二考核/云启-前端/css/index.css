@@ -1,0 +1,275 @@
+.w {
+    margin: 0 auto;
+    width: 1420px;
+}
+
+/* 网页大厅 */
+.main-hall {
+    margin-top: 1px;
+    height: 530px;
+    background-color: #fafafa;
+    z-index: 1;
+}
+
+/* 大厅导航栏 */
+.main-hall-nav {
+    height: 65px;
+}
+
+.main-hall-nav ul li {
+    float: left;
+    padding: 15px 16px 0 16px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 17px;
+    font-family: 'PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Verdana,Roboto,Noto,Helvetica Neue,sans-serif';
+}
+
+.main-hall-nav ul li a:hover {
+    color: #5a5666;
+}
+
+/* 大厅主体 */
+.main-hall-body {
+    padding-top: 35px;
+    height: 88%;
+}
+
+/* 大厅头条 */
+.main-hall-body .headlines {
+    float: left;
+    padding-left: 20px;
+    width: 450px;
+    height: 350px;
+}
+
+.main-hall-body .headlines .headlines-icon {
+    float: left;
+    margin-left: -30px;
+    width: 25px;
+}
+
+.main-hall-body .headlines p {
+    padding-left: 28px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.main-hall-body .headlines .headlines-pic {
+    margin-top: 10px;
+    width: 430px;
+    border-radius: 2px;
+}
+
+.main-hall-body .headlines h3 {
+    margin: 10px 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.main-hall-body .headlines i a {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #999999;
+}
+
+/* 大厅右侧板块 */
+.main-hall-body .headswiper {
+    float: left;
+    padding-left: 20px;
+    width: 610px;
+    height: 390px;
+}
+
+/* 左侧新闻 */
+.main-hall-body .headswiper-left,
+.main-hall-body .headswiper-right {
+    position: relative;
+    float: left;
+    padding: 0 15px;
+    width: 295px;
+    height: 100%;
+}
+
+/* 左右侧新闻顶部 */
+.main-hall-body .headswiper-left-top,
+.main-hall-body .headswiper-right-top {
+    position: absolute;
+    width: 100%;
+}
+
+.main-hall-body .headswiper-left-top {
+    padding-right: 50px;
+}
+
+.main-hall-body .headswiper-right-top {
+    padding: 0px 50px 0px 26px;
+}
+
+.main-hall-body .headswiper-right-top .headswiper-right-top-icon {
+    float: left;
+    margin-left: -30px;
+    width: 25px;
+}
+
+/* 右侧新闻头顶标题 */
+.main-hall-body .headswiper-right-top i {
+    float: left;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.main-hall-body .headswiper-left-top span,
+.main-hall-body .headswiper-right-top span {
+    float: right;
+    width: 31px;
+}
+
+.main-hall-body .headswiper-left-top img,
+.main-hall-body .headswiper-right-top img {
+    width: 11px;
+    cursor: pointer;
+}
+
+.main-hall-body .headswiper-left-top .headswiper-left-top-right-arrow,
+.main-hall-body .headswiper-right-top .headswiper-right-top-right-arrow {
+    float: right;
+}
+
+.main-hall-body .headswiper-left-body,
+.main-hall-body .headswiper-right-body {
+    padding-top: 12px;
+}
+
+/* 左右侧新闻信息（包含标题和解释） */
+.main-hall-body .headswiper-left-msg,
+.main-hall-body .headswiper-right-msg {
+    margin-top: 22px;
+}
+
+/* 左右侧新闻标题 */
+.main-hall-body .headswiper-left-msg-title,
+.main-hall-body .headswiper-right-msg-title {
+    float: left;
+    width: 88%;
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    /* 1.将文字强制一行显示 */
+    white-space: nowrap;
+    /* 2.将溢出的部分隐藏 */
+    overflow: hidden;
+    /* 3.隐藏起来的文字用省略号显示 */
+    text-overflow: ellipsis;
+}
+
+/* 左右侧新闻解释 */
+.main-hall-body .headswiper-left-msg-explain,
+.main-hall-body .headswiper-right-msg-explain {
+    display: inline-block;
+    width: 88%;
+    font-size: 14px;
+    color: #999999;
+    /* 1.将文字强制一行显示 */
+    white-space: nowrap;
+    /* 2.将溢出的部分隐藏 */
+    overflow: hidden;
+    /* 3.隐藏起来的文字用省略号显示 */
+    text-overflow: ellipsis;
+}
+
+/* 右侧新闻 */
+.main-hall-body .headswiper-right {
+    position: relative;
+    float: right;
+    width: 295px;
+    height: 100%;
+}
+
+/* 轮播图模块 */
+.main-hall-body .focus-box {
+    position: relative;
+    float: right;
+    width: 350px;
+    height: 420px;
+    overflow: hidden;
+    background-color: antiquewhite;
+}
+
+/* 轮播图左右按钮 */
+.focus-box .arrow-left,
+.focus-box .arrow-right {
+    display: none;
+    position: absolute;
+    top: 185px;
+    height: 40px;
+    font-size: 25px;
+    background-color: white;
+    opacity: 0.7;
+    color: rgb(189, 186, 186);
+    z-index: 2;
+}
+
+.focus-box .arrow-left {
+    left: 0;
+}
+
+.focus-box .arrow-right {
+    right: 0;
+}
+
+/* 放轮播图的盒子 */
+.focus-box .focus-pic {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* 装全部轮播图的大盒子 */
+.focus-pic ul {
+    position: absolute;
+    width: 500%;
+}
+
+/* 每个轮播图的家 */
+.focus-pic ul li {
+    float: left;
+}
+
+/* 轮播图 */
+.focus-pic ul li img {
+    width: 350px;
+    height: 420px;
+}
+
+/* 轮播图下面小圆圈控制按钮 */
+.focus-box .focus-circle {
+    position: absolute;
+    float: left;
+    bottom: 8px;
+    left: 110px;
+    z-index: 2;
+}
+
+.focus-circle li {
+    float: left;
+    margin: 0 5px;
+    padding: 3px 0;
+    width: 25px;
+    height: 5px;
+    background-color: white;
+    opacity: .5;
+    border-radius: 2px;
+}
+
+/* 设置被选中小圆圈按钮的样式 */
+.focus-circle-current {
+    opacity: 1 !important;
+}
+
+/* 鼠标经过显示下划线 */
+.underline:hover {
+    text-decoration: underline;
+}

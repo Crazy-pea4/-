@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是哥哥</div>
+    <p>我是妹妹</p>
+    <script>
+        // 1. 获取下一个兄弟节点 node.nextSibling 找不到则返回NULL 包含所有节点
+        var div = document.querySelector('div');
+        console.log(div.nextSibling);
+        // 2. 获取上一个兄弟节点 node.previousSibling 找不到则返回NULL 包含所有节点
+        var p = document.querySelector('p');
+        console.log(p.previousSibling);
+        // 3.获取上、下的兄弟元素节点 node.nextElementSibling  node.previousElementSibling
+        console.log(div.nextElementSibling);
+        console.log(p.previousElementSibling);
+        // ie9以上才支持
+    </script>
+</body>
+</html>

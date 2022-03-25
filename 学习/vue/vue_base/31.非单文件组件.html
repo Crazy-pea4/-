@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+			Vue中使用组件的三大步骤：
+					一、定义组件(创建组件)
+					二、注册组件
+					三、使用组件(写组件标签)
+
+			一、如何定义一个组件？
+						使用Vue.extend(options)创建，其中options和new Vue(options)时传入的那个options几乎一样，但也有点区别；
+						区别如下：
+								1.el不要写，为什么？ ——— 最终所有的组件都要经过一个vm的管理，由vm中的el决定服务哪个容器。
+								2.data必须写成函数，为什么？ ———— 避免组件被复用时，数据存在引用关系。
+						备注：使用template可以配置组件结构。需要注意template中只能有一个根元素
+
+			二、如何注册组件？
+							1.局部注册：靠new Vue的时候传入components选项
+							2.全局注册：靠Vue.component('组件名',组件)
+
+			三、编写组件标签：
+							<school></school>
+	-->
+    <div class="r">
+        <!-- 使用组件 -->
+        <introduction></introduction>
+        <hr>
+        <skill></skill>
+        <hr>
+    </div>
+
+    <div class="r2">
+        <speech></speech>
+    </div>
+    <script>
+        // 第一步，创建组件
+        const introduction = Vue.extend({
+            // 使用template
+            template: `
+            <div class="">
+                <h2>你好鸭，我是{{name}}</h2>
+                <h2>我来自{{loc}}</h2>
+            </div>`,
+            data() {
+                return {
+                    name: '灭霸',
+                    loc: '泰坦星'
+                }
+            },
+        })
+        const skill = Vue.extend({
+            template: `
+            <div class="">
+                <h2>{{skill}}</h2>
+            </div>`,
+            data() {
+                return {
+                    skill: '我有五颗无限宝石'
+                }
+            },
+        })
+        
+        const speech = Vue.extend({
+            template: `
+            <div>
+                <h2>{{speech}}</h2>
+            </div>`,
+            data() {
+                return {
+                    speech: '我要对地球发动攻击'
+                }
+            },
+        })
+
+        // 全局注册（注意该步骤是第二步）
+        Vue.component('speech', speech)
+
+        new Vue({
+            el: '.r',
+            // 第二步，注册组件（局部注册）
+            components: {
+                // 因为一般组件的名和值都相等，所以用简写也可以 jieshao: introduction 此时jieshao是组件名而不是introduction
+                introduction,
+                skill
+            },
+        })
+
+        new Vue({
+            el: '.r2',
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 150px auto;
+            width: 200px;
+            height: 200px;
+            background-color: mediumaquamarine;
+            transition: all 0.5s;
+        }
+        div:hover {
+            /* transform: scale(x, y)，其中x、y分别代表宽度、高度放大多少倍*/
+            /* transform: scale(1,2) */
+            /* ()括号内只写一个数字，则默认x、y相同，即放大同样的倍数 */
+            /* transform: scale(2) */
+            /* 缩放。括号内的数值小于1即为缩放 */
+            /* transform: scale(0.8) */
+            /* 综合写法，当同时有位移和其他属性的时候，记得要将位移放到最前面（次序会影响效果） */
+            transform: translate(100px, 100px) scale(2, 2) rotate(90deg)
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

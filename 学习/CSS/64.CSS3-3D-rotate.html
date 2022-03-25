@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            perspective: 400px;
+        }
+
+        @keyframes xmove {
+            from {
+                transform: rotateX(0deg);
+            }
+
+            to {
+                transform: rotateX(360deg);
+            }
+        }
+
+        @keyframes ymove {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+
+            }
+        }
+
+        @keyframes zmove {
+            from {
+                transform: rotateZ(0deg);
+            }
+
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
+
+        /* rotate(x, y, z, xxxdeg)，其中xyz不能为空 */
+        @keyframes xyzmove {
+            from {
+                transform: rotate3d(0, 0, 0, 360deg);
+            }
+
+            to {
+                /* x, y, z的数值表示在对应轴上施加多少单位力 */
+                transform: rotate3d(1, 1, 1, 360deg);
+            }
+        }
+
+        .box1,
+        .box2,
+        .box3,
+        .box4 {
+            margin: 0 auto;
+            width: 180px;
+            height: 180px;
+            background-color: darkslateblue;
+        }
+
+        /* 使用左手定则判断旋转的方向：将拇指指向旋转轴的正方向，其余手指指向则为正旋转方向 */
+        .box1 {
+            animation: xmove 3s linear infinite;
+        }
+
+        .box2 {
+            animation: ymove 3s linear infinite;
+        }
+
+        .box3 {
+            animation: zmove 3s linear infinite;
+        }
+
+        .box4 {
+            animation: xyzmove 3s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+</body>
+
+</html>

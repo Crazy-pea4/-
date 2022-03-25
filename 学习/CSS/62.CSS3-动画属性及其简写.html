@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+        /* animation: 动画名称（必须属性） 持续时间（必须属性） 运动曲线（默认是ease） 延时（默认是0s） 重复次数（默认是1） 运动方向（默认是normal正方向，反方向是alternate） 动画结束后状态（默认是backwards回到起始状态，停留在原地forwards） */
+        /* animation-play-state不包含在简写形式里，animation-play-state: puased; 经常和鼠标经过暂停搭配使用 */
+
+        @keyframes move {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 300px;
+            }
+        }
+
+        .box3 {
+            width: 0;
+            height: 50px;
+            background-color: darkslategrey;
+            /* steps()属于timing-function 适合做定格动画 */
+            animation: move 2s steps(10) infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box3"></div>
+
+</body>
+
+</html>

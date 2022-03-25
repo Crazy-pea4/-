@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .pop {
+            margin-top: 20px;
+            height: 50px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+		Vue中的事件修饰符：
+			1.prevent：阻止默认事件（常用）；
+			2.stop：阻止事件冒泡（常用）；
+			3.once：事件只触发一次（常用）；
+			4.capture：使用事件的捕获模式；
+			5.self：只有event.target是当前操作的元素时才触发事件；
+			6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；(移动端用的较多)
+
+            若有多个事件修饰符需要被使用，可以书写成链式调用的方式如：@click.stop.prevent
+	-->
+    <div class="r">
+        <!-- 阻止a链接标签跳转的默认事件 -->
+        <a href="https://baidu.com" @click.prevent="baidu">点击前往百度</a>
+        <div class="pop" @click="maopao">
+            <!-- 阻止事件冒泡 -->
+            <button @click.stop="maopao">点击我</button>
+        </div>
+        <!-- 事件只触发一次 -->
+        <button @click.once="once">只弹出一次</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data: {},
+            methods: {
+                baidu() {
+                    alert('即将前往百度');
+                },
+                maopao() {
+                    alert('你好');
+                },
+                once() {
+                    alert('我只会弹出一次');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

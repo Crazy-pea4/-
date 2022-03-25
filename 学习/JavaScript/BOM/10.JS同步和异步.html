@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        console.log(1);
+
+        setTimeout(function () {
+            console.log(2);
+        }, 0);
+
+        console.log(3);
+
+        // 可以在控制台看到输出顺序是1 3 2，这是因为JavaScript支持异步操作，即若有定时器没完成定时，仍可以执行定时器后面的操作，即使定时时间为0
+
+        // 在JavaScript中，有同步任务和异步任务两种
+        // 同步任务：都是在主线程上执行，形成一个执行栈
+        // 异步任务：有三种类型 普通事件（click mouseover）资源加载（load error）两种定时器
+
+        // 在JS执行过程中，先把主线程的任务给执行了，途中遇到的异步任务先放入任务队列中，等主线程执行玩后再执行异步任务
+        // 遇到的异步任务会先交给异步处理程序，由异步处理程序决定什么时候将异步任务放入任务队列中。例如setTimeOut(fn ,3000) .onlick等，先经过异步处理程序，由它决定在3s后和点击以后将事件放入任务队列中
+        // 主线程执行完毕后还会去任务队列里获取任务再去执行任务，不断循环，我们把这种循环成为 事件循环（event loop）
+    </script>
+</body>
+
+</html>

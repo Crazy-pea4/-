@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax POST 请求</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border: 3px solid #982
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector('div');
+        div.addEventListener('mouseover', function (e) {
+            console.log('test');
+
+            // 1. 创建对象
+            var xhr = new XMLHttpRequest();
+            // 2. 初始化 设置类型与URL
+            xhr.open('POST', 'http://localhost:8000/server');
+            // 设置请求头
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            // Content-Type使用来设置请求体内容的类型，也就是下面send里的字符串
+            // 3. 发送  设置请求体 参数设置以URL的方式
+            xhr.send('a=100&b=200&c=300');
+            // xhr.send('a:100&b:200&c:300');
+            // 4. 事件绑定
+            xhr.onreadystatechange = function () {
+                // 判断状态 readystate
+                if (xhr.readyState == 4) {
+                    // 判断 status
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // 处理服务端返回的结果，返回响应体给div
+                        div.innerHTML = xhr.response
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

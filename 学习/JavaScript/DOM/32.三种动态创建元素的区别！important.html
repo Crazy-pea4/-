@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>点击</button>
+    <p>55566</p>
+    <div></div>
+    <ul></ul>
+    <script>
+        // 1. document.write('')
+
+        var btn = document.querySelector('button');
+        btn.onclick = function () {
+            document.write('<div>我是会导致页面重置的家伙</div>');
+        }
+        // document.write()是直接将内容写入页面的内容流，！但是当文档流执行完毕后，再去执行它就会使页面全部重绘！
+        // ！因此这种方法很少用！
+
+        // 2. element.innerHTML = ''
+
+        var inner = document.querySelector('div');
+        inner.innerHTML = '<a href ="javascript:void(0)">我是innerHTML创建出来的</a>';
+
+        // 3. document.createElement('')
+        
+        var create = document.querySelector('ul');
+        var a = document.createElement('a');
+        create.appendChild(a);
+        // 大量使用创建元素的方式时，建议使用innerHTML = ''的方法(但不要使用拼接字符串的方式！将新增的元素用数组的形式存起来)
+        // 例如：var arr = []; for(var i = 0; i < 100; i++) { arr.push('<a href="">链接</a>');} innerHTML = arr.join(''); 这种方法会比createElement('')高效
+        // 而使用createElement('')的方式会稍微耗时，但结构更清晰
+    </script>
+</body>
+
+</html>

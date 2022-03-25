@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <title>Document</title>
+    <style>
+        .box {
+            margin: 0 auto;
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button>发送get请求</button>
+        <button>发送post请求</button>
+        <button>发送put请求</button>
+        <button>发送delete请求</button>
+    </div>
+
+    <script>
+        const btns = document.querySelectorAll('button');
+        console.log(axios);
+
+        // 发送get请求
+        // 获取posts数组对象
+        btns[0].addEventListener('click', () => {
+            axios({
+                // 请求类型
+                method: 'GET',
+                // url
+                url: 'http://localhost:3000/posts'
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            })
+            // 返回结果是一个promise对象，可以使用promise的api
+        });
+
+        // 发送post请求
+        // 添加新的文章
+        btns[1].addEventListener('click', () => {
+            axios({
+                method: 'post',
+                baseURL: 'http://localhost:3000/',
+                url: 'posts',
+                // 设置请求体
+                data: {
+                    "title": "我爱吃萝卜",
+                    "author": "叶兔萌"
+                }
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            })
+        });
+
+        // 发送put请求
+        // 更新posts中id为3的内容
+        btns[2].addEventListener('click', () => {
+            axios({
+                method: 'put',
+                // put请求需要精确到id
+                url: 'http://localhost:3000/posts/3',
+                // 设置请求体
+                data: {
+                    "title": "抽烟喝酒烫头",
+                    "author": "叶恶霸"
+                }
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            })
+        });
+
+        // 发送delete请求
+        // 删除posts中id为4的文章
+        btns[3].addEventListener('click', () => {
+            axios({
+                method: 'delete',
+                // delete请求需要精确到id
+                url: 'http://localhost:3000/posts/4',
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            })
+        });
+    </script>
+</body>
+
+</html>

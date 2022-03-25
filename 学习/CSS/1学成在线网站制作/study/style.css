@@ -1,0 +1,704 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f1f5f7;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    outline: none;
+}
+
+.w {
+    width: 1226px;
+    margin: auto;
+}
+
+.header {
+    width: 1226px;
+    height: 42px;
+    margin: 22.5px auto;
+}
+
+.header .logo {
+    float: left;
+    width: 196px;
+    height: 42px;
+    margin-right: 48px;
+}
+
+.header .nav-head {
+    float: left;
+    height: 42px;
+}
+
+.header .nav-head li {
+    float: left;
+    height: 42px;
+    padding: 0 22.5px;
+}
+
+.header .nav-head a {
+    float: left;
+    width: 72px;
+    height: 42px;
+    text-align: center;
+    line-height: 42px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+}
+
+.header .nav-head a:hover {
+    color: rgb(73, 191, 238);
+    background-color: rgba(73, 191, 238, 0.05);
+    border-bottom: 2px solid rgb(73, 191, 238);
+}
+
+.header .search {
+    float: left;
+    width: 413.5px;
+    height: 42px;
+    margin-left: 26px;
+}
+
+.header .search .text {
+    float: left;
+    width: 340px;
+    height: 41px;
+    padding-left: 22.5px;
+    border: 1px solid rgb(73, 191, 238);
+    border-right: none;
+    font-size: 15px;
+}
+
+.header .search .button {
+    float: right;
+    width: 50px;
+    height: 43px;
+    border: 0;
+    background-image: url(images/btn.png);
+}
+
+.header .user {
+    /* 不给宽度是因为用户名是自定义的，又长又短 */
+    float: right;
+    height: 42px;
+    margin-right: 28px;
+}
+
+.header .user .user-name {
+    float: right;
+    font-size: 15px;
+    text-align: center;
+    line-height: 42px;
+}
+
+.header .user .user-name a {
+    color: rgb(126, 123, 123);
+}
+
+.banner-big {
+    width: 100%;
+    height: 420px;
+    background-color: #b5a792;
+}
+
+.banner {
+    width: 1226px;
+    height: 420px;
+    background-image: url(images/背景图.png);
+    background-repeat: no-repeat;
+}
+
+.banner .nav-body {
+    float: left;
+    width: 200px;
+    height: 420px;
+}
+
+.banner .nav-body li {
+    float: left;
+    width: 185px;
+    margin-left: 15px;
+    margin-top: 2px;
+}
+
+.banner .nav-body li .nav {
+    float: left;
+    width: 180px;
+    height: 45px;
+    color: white;
+    text-decoration: none;
+    line-height: 45px;
+}
+
+.banner .nav-body li a span {
+    float: right;
+}
+
+.banner .nav-body li a:hover {
+    color: #00a4ff;
+}
+
+/* 右侧课程通知表 */
+.banner .course {
+    float: right;
+    width: 243px;
+    height: 280px;
+    margin: 60px 0;
+    border: 1px solid #00a4ff;
+    background-color: #fcfffc;
+}
+
+.banner .course .top {
+    float: left;
+    width: 243px;
+    height: 40px;
+    background-color: #94cbe9;
+    text-align: center;
+    line-height: 40px;
+    font-size: 22.5px;
+    color: seashell;
+}
+
+.banner .course .bottom {
+    width: 227px;
+    height: 240px;
+    background-color: #fcfffc;
+    margin: 40px auto;
+}
+
+.banner .course .bottom .class1 {
+    float: left;
+    width: 227px;
+    height: 60px;
+    border-bottom: 1px solid #dadfda;
+}
+
+.banner .course .bottom .class1 .class1-1 {
+    float: left;
+    font-size: 17px;
+    color: black;
+}
+
+.banner .course .bottom .class1 .class1-2 {
+    float: left;
+    margin-left: 10px;
+    font-size: 17px;
+    color: black;
+}
+
+.banner .course .bottom .class1 .class1-3 {
+    float: left;
+    color: #c0c2c0;
+    font-size: 14px;
+}
+
+.banner .course .bottom .class2 {
+    float: left;
+    width: 227px;
+    height: 60px;
+    border-bottom: 1px solid #dadfda;
+}
+
+.banner .course .bottom .class2 .class2-1 {
+    float: left;
+    font-size: 17px;
+    color: black;
+
+}
+
+.banner .course .bottom .class2 .class2-2 {
+    float: left;
+    margin-left: 10px;
+    font-size: 17px;
+    color: black;
+
+}
+
+.banner .course .bottom .class2 .class2-3 {
+    float: left;
+    color: #c0c2c0;
+    font-size: 14px;
+}
+
+.banner .course .bottom .class3 {
+    float: left;
+    width: 227px;
+    height: 60px;
+    border-bottom: 1px solid #dadfda;
+}
+
+.banner .course .bottom .class3 .class3-1 {
+    float: left;
+    font-size: 17px;
+    color: black;
+
+}
+
+.banner .course .bottom .class3 .class3-2 {
+    float: left;
+    margin-left: 10px;
+    font-size: 17px;
+    color: black;
+
+
+}
+
+.banner .course .bottom .class3 .class3-3 {
+    float: left;
+    color: #c0c2c0;
+    font-size: 14px;
+}
+
+.banner .course .bottom .all-class {
+    float: left;
+    width: 100%;
+    height: 50px;
+    border: 2px solid #1393e8;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    color: #1393e8;
+}
+
+.goods {
+    width: 1226px;
+    height: 50px;
+    box-shadow: 1px 1px 8px 3px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.goods h3 {
+    float: left;
+    width: 100px;
+    height: 50px;
+    margin: 0 15px;
+    text-align: center;
+    line-height: 50px;
+    color: #1393e8;
+}
+
+.goods .good-items {
+    float: left;
+    width: 720px;
+    height: 50px;
+    margin-left: 60px;
+}
+
+.goods .good-items .each1 {
+    float: left;
+    margin: 13px 0;
+    padding: 0 22.5px;
+    text-align: center;
+    border-right: 1px solid #c0c2c0;
+    color: black;
+}
+
+.goods .good-items .each2 {
+    float: left;
+    margin: 13px 0;
+    padding: 0 22.5px;
+    text-align: center;
+    border-right: 1px solid #c0c2c0;
+    color: black;
+
+}
+
+.goods .good-items .each3 {
+    float: left;
+    margin: 13px 0;
+    padding: 0 22.5px;
+    text-align: center;
+    border-right: 1px solid #c0c2c0;
+    color: black;
+
+}
+
+.goods .good-items .each4 {
+    float: left;
+    margin: 13px 0;
+    padding: 0 22.5px;
+    text-align: center;
+    border-right: 1px solid #c0c2c0;
+    color: black;
+
+}
+
+.goods .good-items .each5 {
+    float: left;
+    margin: 13px 0;
+    padding: 0 22.5px;
+    text-align: center;
+    border-right: 1px solid #c0c2c0;
+    color: black;
+
+}
+
+.goods .good-items .each6 {
+    float: left;
+    margin: 13px 0;
+    padding: 0 22.5px;
+    text-align: center;
+    color: black;
+
+}
+
+.goods .mod {
+    float: right;
+    color: #1393e8;
+    margin: 14px 11px 0 0;
+    text-align: center;
+}
+
+/* 大盒子区域 */
+.box {
+    width: 1226px;
+    height: 550px;
+    margin-top: 10px;
+}
+
+/* 大盒子顶部左侧区域（文字） */
+.box .box-hd {
+    float: left;
+    width: 1216px;
+    height: 50px;
+    padding-left: 10px;
+    font-size: 19px;
+    line-height: 50px;
+    color: #6b6d6d;
+}
+
+/* 大盒子顶部右侧区域（） */
+.box .box-hd a {
+    float: right;
+    width: 56px;
+    height: 0px;
+    margin-right: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #b6babb;
+}
+
+/* 大盒子底下区域（图片和文字） */
+.box .box-bd {
+    float: left;
+    width: 1226px;
+    height: 550px;
+}
+
+/* 第一行 */
+.box .box-bd .line1 {
+    float: left;
+    width: 1226px;
+    height: 265px;
+    margin-bottom: 20px;
+}
+
+/* 第二行 */
+.box .box-bd .line2 {
+    float: left;
+    width: 1226px;
+    height: 265px;
+}
+
+/* 第一行除了最后一个方块的所有方块 */
+.box .box-bd .line1 .block1 {
+    float: left;
+    width: 227px;
+    height: 265px;
+    margin-right: 22.5px;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 第一行最后一个方块 */
+.box .box-bd .line1 .block1-last {
+    float: left;
+    width: 227px;
+    height: 265px;
+    background-color: #ffffff;
+    margin-right: 0;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 第二行除了最后一个方块的所有方块 */
+.box .box-bd .line2 .block2 {
+    float: left;
+    width: 227px;
+    height: 265px;
+    margin-right: 22.5px;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 第二行最后一个方块 */
+.box .box-bd .line2 .block2-last {
+    float: left;
+    width: 227px;
+    height: 265px;
+    background-color: #ffffff;
+    margin-right: 0;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 第一行除了最后一个方块的所有方块的顶部区域（存放图片） */
+.box .box-bd .line1 .block1 .block-top1 {
+    float: left;
+    width: 227px;
+    height: 155px;
+}
+
+.box .box-bd .line1 .block1 .block-top1 img {
+    width: 100%;
+    height: 155px;
+}
+
+/* 第一行最后一个方块的顶部区域（存放图片） */
+.box .box-bd .line1 .block1-last .block-top1 {
+    float: left;
+    width: 227px;
+    height: 155px;
+}
+
+.box .box-bd .line1 .block1-last .block-top1 img {
+    width: 100%;
+    height: 155px;
+}
+
+/* 第一行除了最后一个方块的所有方块的底部区域 */
+.box .box-bd .line1 .block1 .block-bottom1 {
+    float: left;
+    width: 227px;
+    height: 110px;
+}
+
+/* 第一行除了最后一个方块的所有方块的底部位置（课程名称） */
+.box .box-bd .line1 .block1 .block-bottom1 a {
+    float: left;
+    width: 227px;
+    height: 20px;
+    margin: 30px auto;
+    text-align: center;
+    color: black;
+}
+
+/* 第一行除了最后一个方块的所有方块的底部位置（等级） */
+.box .box-bd .line1 .block1 .block-bottom1 span {
+    float: left;
+    margin: 0 25px;
+    color: rgb(253, 114, 0);
+}
+
+/* 第一行除了最后一个方块的所有方块的底部位置（观看人数） */
+.box .box-bd .line1 .block1 .block-bottom1 h6 {
+    float: left;
+    margin-top: 5px;
+    color: #c6c9c6;
+}
+
+/* 第一行最后一个方块的底部区域 */
+.box .box-bd .line1 .block1-last .block-bottom1 {
+    float: left;
+    width: 227px;
+    height: 110px;
+}
+
+/* 第一行最后一个方块的底部位置（课程名称） */
+.box .box-bd .line1 .block1-last .block-bottom1 a {
+    float: left;
+    width: 227px;
+    height: 20px;
+    margin: 30px auto;
+    text-align: center;
+    color: black;
+
+}
+
+/* 第一行最后一个方块的底部位置（等级） */
+.box .box-bd .line1 .block1-last .block-bottom1 span {
+    float: left;
+    margin: 0 25px;
+    color: rgb(253, 114, 0);
+}
+
+/* 第一行最后一个方块的底部位置（观看人数） */
+.box .box-bd .line1 .block1-last .block-bottom1 h6 {
+    float: left;
+    margin-top: 5px;
+    color: #c6c9c6;
+}
+
+/* 第二行除了最后一个方块的所有方块的顶部区域（存放图片） */
+.box .box-bd .line2 .block2 .block-top2 {
+    float: left;
+    width: 227px;
+    height: 155px;
+}
+
+.box .box-bd .line2 .block2 .block-top2 img {
+    width: 100%;
+    height: 155px;
+}
+
+/* 第二行最后一个方块的顶部区域（存放图片） */
+.box .box-bd .line2 .block2-last .block-top2 {
+    float: left;
+    width: 227px;
+    height: 155px;
+}
+
+.box .box-bd .line2 .block2-last .block-top2 img {
+    width: 100%;
+    height: 155px;
+}
+
+/* 第二行除了最后一个方块的所有方块的底部位置（课程名称） */
+.box .box-bd .line2 .block2 .block-bottom2 a {
+    float: left;
+    width: 227px;
+    height: 20px;
+    margin: 30px auto;
+    text-align: center;
+    color: black;
+
+}
+
+/* 第二行除了最后一个方块的所有方块的底部位置（等级） */
+.box .box-bd .line2 .block2 .block-bottom2 span {
+    float: left;
+    margin: 0 25px;
+    color: rgb(253, 114, 0);
+}
+
+/* 第二行除了最后一个方块的所有方块的底部位置（观看人数） */
+.box .box-bd .line2 .block2 .block-bottom2 h6 {
+    float: left;
+    margin-top: 5px;
+    color: #c6c9c6;
+}
+
+/* 第二行最后一个方块的底部位置（课程名称） */
+.box .box-bd .line2 .block2-last .block-bottom2 a {
+    float: left;
+    width: 227px;
+    height: 20px;
+    margin: 30px auto;
+    text-align: center;
+    color: black;
+
+}
+
+/* 第二行最后一个方块的底部位置（等级） */
+.box .box-bd .line2 .block2-last .block-bottom2 span {
+    float: left;
+    margin: 0 25px;
+    color: rgb(253, 114, 0);
+}
+
+/* 第二行最后一个方块的底部位置（观看人数） */
+.box .box-bd .line2 .block2-last .block-bottom2 h6 {
+    float: left;
+    margin-top: 5px;
+    color: #c6c9c6;
+}
+
+/* 底部页面制作 */
+.footer {
+    height: 350px;
+    margin: 95px auto 0px;
+    background-color: white;
+}
+
+.footer .footer-1 {
+    height: 100%;
+    margin: 0px auto;
+    background-color: white;
+}
+
+.footer .footer-1 .copyright {
+    float: left;
+    width: 430px;
+    height: 250px;
+    margin: 10px 0px 0px 20px;
+    background-color: white;
+}
+
+.footer .footer-1 .copyright img {
+    display: block;
+    margin: 10px 0px 0px 25px;
+}
+
+.footer .footer-1 .copyright span {
+    float: left;
+    margin: 22px 0px 0px 25px;
+    font-size: 14px;
+}
+
+.footer .footer-1 .copyright a {
+    float: left;
+    width: 120px;
+    height: 35px;
+    margin: 30px 0px 0px 25px;
+    border: 2px solid #1393e8;
+    text-align: center;
+    line-height: 35px;
+    color: #1393e8;
+    font-size: 17px;
+}
+
+.footer .footer-1 .links {
+    float: right;
+    width: 510px;
+    height: 250px;
+    margin: 10px 20px 0px 0px;
+    background-color: white;
+}
+
+.footer .footer-1 .links a {
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.footer .footer-1 .links .link1 {
+    float: left;
+    margin: 10px 0px 0px 20px;
+}
+
+.footer .footer-1 .links .link1 a {
+    display: block;
+    margin: 10px 0px 0px 0px;
+}
+
+.footer .footer-1 .links .link2 {
+    float: left;
+    margin: 10px 0px 0px 20px;
+    padding-left: 120px;
+}
+
+.footer .footer-1 .links .link2 a {
+    display: block;
+    margin: 10px 0px 0px 0px;
+}
+
+.footer .footer-1 .links .link3 {
+    float: right;
+    margin: 10px 0px 0px 20px;
+}
+
+.footer .footer-1 .links .link3 a {
+    display: block;
+    margin: 10px 0px 0px 0px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 5000px;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        .son1 {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            /* 相对定位 */
+            position: relative;
+            /* 还需要加上边偏移 */
+            top: 50px;
+            left: 50px;
+            /* 可以看到盒子1虽然位置改变，但仍保留原来占领的位置，即下面的元素不会跑上来 */
+        }
+
+        .son2 {
+            width: 300px;
+            height: 250px;
+            background-color: springgreen;
+        }
+
+        .father {
+            width: 500px;
+            height: 450px;
+            background-color: thistle;
+            /* 赋予祖先定位 */
+            position: relative;
+            top: 60px;
+            left: 80px;
+        }
+
+        .son {
+            width: 300px;
+            height: 400px;
+            background-color: violet;
+            /* 绝对定位 */
+            /* 如果祖先元素没有定位，那么该子元素会以浏览器为主进行移动 */
+            position: absolute;
+            top: 35px;
+            left: 80px;
+            /* 如果祖先有定位，就以祖先为主 */
+        }
+        .nomove {
+            width: 300px;
+            height: 450px;
+            background-color: bisque;
+            /* 固定定位 */
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 相对定位 -->
+    <div class="son1">盒子1</div>
+    <div class="son2">盒子2</div>
+    <!-- 绝对定位 -->
+    <div class="father">
+        父盒子
+        <div class="son">子盒子</div>
+    </div>
+    <!-- 固定定位 -->
+    <div class="nomove">不会随着页面滚动而滚动</div>
+</body>
+
+</html>

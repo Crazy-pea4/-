@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>请查看控制台</h2>
+    <script>
+        // 创建axios的实例对象
+        const msg = axios.create({
+            baseURL: 'http://localhost:3000/',
+            timeout: 3000
+        })
+        // 创建出来的实例对象拥有与axios相同的使用方法，其优点是当有多个需要请求的服务器时，可以创建多个实例对象，省时省力
+        // 单个axios不能做到这一点，这也是非常明显的
+
+        // 实例对象使用基本方法
+        // msg({
+        //     url: 'posts',
+        //     method: 'get'
+        // }).then((res) => {
+        //     console.log(res);
+        // })
+
+        // 实例对象使用内置方法
+        msg.get('posts').then((res) => {
+            console.log(res);
+        })
+    </script>
+</body>
+
+</html>

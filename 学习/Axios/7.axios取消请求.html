@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <style>
+        div {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>axios取消请求</h2>
+        <button>发送请求</button>
+        <button>取消请求</button>
+    </div>
+    <script>
+        const btns = document.querySelectorAll('button');
+
+        // 1. 声明全局变量
+        let CancelToken = axios.CancelToken;
+        let cancel = null;
+        btns[0].addEventListener('click', () => {
+            // Tips：可以设置一个简易节流阀，防止用户重复点击造成服务器负担变大
+            if (cancel !== null) {
+                cancel();
+            } else {
+                axios.get('http://localhost:3000/posts', {
+                        // 2. 在发送请求的位置配置cancelToken配置项
+                        cancelToken: new CancelToken((c) => {
+                            // 3. 将形参c的值赋给全局变量cancel
+                            cancel = c;
+                        })
+                    })
+                    .then(res => {
+                        console.log(res)
+                        // 节流阀：请求成功就将cancel的值重新赋为null
+                        cancel = null;
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    })
+            }
+        })
+        btns[1].addEventListener('click', () => {
+            cancel();
+        })
+    </script>
+</body>
+
+</html>

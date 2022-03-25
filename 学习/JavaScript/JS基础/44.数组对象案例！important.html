@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //利用push()筛选数组
+        console.log('======================筛选数组==========================');
+        var arr = [1,2,5,8,96,41,6,21,653,541,456];
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] < 100) {
+                newArr.push(arr[i]); //符合条件的数组元素从末尾一次插入newArr从而达到筛选数组的目的                
+            }
+        }
+        console.log(arr);
+        console.log(newArr);
+        console.log('======================数组去重==========================');
+        //数组去重
+        var arr = [1,2,2,3,9,5,5,6,3,3,10,9,10];
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (newArr.indexOf(arr[i]) == -1) {
+                newArr.push(arr[i]);
+            }
+        }
+        console.log(arr);
+        console.log(newArr);
+        //求目标元素出现的位置和次数
+        console.log('======================求目标元素出现的位置和次数======================');
+        var arr = ['red','blue','green','hotpink','red','yellow','red'];
+        var times = 0;
+        var num = 0;
+        var loca = 0;
+        for (var i = 0; i < arr.length; i++) {
+            num = arr.indexOf('red',loca);
+            if (num != -1) {
+                times++;
+                console.log('第' + times + '出现');
+                console.log('位置：' + num);
+                loca = num + 1;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

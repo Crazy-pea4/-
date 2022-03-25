@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 去除数组中的 0 ,将新数组输出
+        var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+        var new_arr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                new_arr[new_arr.length] = arr[i];
+            }
+        }
+        console.log(new_arr);
+
+        console.log('--------------------------------');
+
+        // 翻转数组，并将新数组输出
+        var arr1 = ['red', 'green', 'blue', 'yellow', 'pink', 'orange'];
+        var new_arr1 = [];
+        for (var i = 0; i < arr1.length; i++) {
+            var j = arr1.length - 1 - i;
+            new_arr1[j] = arr1[i];
+        }
+        console.log(new_arr1);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

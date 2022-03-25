@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 由于给盒子加边框时，相邻盒子的边框会重合导致加重。解决办法：给每一个盒子margin-left: -1px，然后再给第一个盒子margin-left: 1px（保持不变），这样就解决了盒子边框加重问题 */
+        ul li {
+            position: relative;
+            float: left;
+            width: 150px;
+            height: 240px;
+            margin-left: -1px;
+            border: 1px solid rgb(216, 68, 68);
+            list-style: none;
+        }
+        .box1 {
+            margin-left: 1px;
+        }
+        ul li:hover {
+            /* 如果不加相对定位，那除了最后一个盒子，其他盒子会显示异常 */
+            /* 解决方法：只需要提高盒子的层级即可。如果没有定位的加相对定位（不可加绝对定位），如果都有定位则加z-index */
+            /* 1.position: relative; */
+            z-index: 1;
+            border: 1px solid rgb(55, 38, 102);
+        }
+    </style>
+</head>
+<body>
+    <ul>
+    <li class="box1"></li>
+    <li class="box2"></li>
+    <li class="box3"></li>
+    <li class="box4"></li>
+    <li class="box5"></li>
+    </ul>
+</body>
+</html>

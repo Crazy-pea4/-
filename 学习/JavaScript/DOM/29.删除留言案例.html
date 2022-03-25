@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            width: 40px;
+            height: 20px;
+            font-size: 12px;
+        }
+
+        .liuyan {
+            width: 300px;
+            background-color: hotpink;
+        }
+
+        .shanchu {
+            float: right;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <button>提交</button>
+    </div>
+    <ul></ul>
+    <script>
+        var text = document.getElementById("text"); //获取留言板
+        var btn = document.querySelector("button"); //获取按钮
+        var ul = document.querySelector("ul"); //获取留言框
+        btn.onclick = function () {
+            if (text.value == "") {
+                return false;
+            } else {
+                var li = document.createElement("li");
+                var delete_btn = document.createElement("a");
+                li.innerHTML = text.value;
+                li.className = 'liuyan';
+                delete_btn.innerHTML = '删除'; // 添加删除评论选项
+                delete_btn.href = 'javascript:;'; // 阻止链接跳转 另一种写法 javescript:void(0);
+                delete_btn.className = 'shanchu';
+                li.appendChild(delete_btn);
+                ul.insertBefore(li, ul.firstChild);
+                delete_btn.onclick = function () { // 这里写在上一个事件里面的原因是：'按钮'是动态获取的，每发出一条留言就给按钮添加一次事件
+                    ul.removeChild(this.parentNode); // 让爷爷删除爸爸
+                }
+                text.value = ''; // 提交评论后清空留言板
+            }
+        }
+    </script>
+</body>
+
+</html>

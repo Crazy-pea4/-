@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            border: 10px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 我们是用client相关属性来获取元素可视区的相关信息
+        // .clientTop   返回元素上边框的大小
+        // .clientLeft  返回元素做边框的大小
+        // .clientWidth 返回自身包括padding 宽度 但不包含边框 不带单位
+        // .clientHeight 返回自身包括padding 高度 但不包含边框 不带单位
+        const div = document.querySelector('div');
+        console.log(div.clientWidth, div.clientHeight, '加上了宽度高度和padding值，但边框没有算上去哦');
+    </script>
+</body>
+</html>

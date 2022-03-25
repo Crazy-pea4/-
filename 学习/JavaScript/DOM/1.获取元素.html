@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <!-- .xxx 是快速创建class为xxx的标签，#xxx 是快速创建id为xxx的标签 -->
+    <div id="time">2021-10-3</div>
+
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+
+    <ul id="ul">
+        <li>我在ul里面</li>
+    </ul>
+
+    <ol>
+        <li>我在ol里面</li>
+    </ol>
+
+    <div class="box">我是盒子1</div>
+    <div class="box">我是盒子2</div>
+    <div id="nav"></div>
+    <script>
+        // 因为代码是从上往下加载，所以需要先识别到标签再script
+        // 1.通过ID获取元素 （）里面的参数必须是字符串 返回的是一个元素对象
+        var di = document.getElementById('time');
+        console.log(di);
+        console.dir(di); //console.dir() 可以更好的查看元素对象的属性和方法
+        console.log('================================================================');
+        //2.通过标签名获取元素 （）括号里面必须是字符串。!获取的元素对象以伪数组的形式储存，无论元素对象只有一个或者无。!
+        var li = document.getElementsByTagName('li');
+        console.log(li);
+        console.log(li[2]);
+        //3.还可以获取某个元素内部所有指定标签名的子元素 element.getElementByTagName('标签名'); !父元素必须是单个对象!
+        var ul = document.getElementById('ul'); //先在页面下获取id为ul的元素
+        var li = ul.getElementsByTagName('li'); //再在获取的元素里找TagName为li的标签
+        console.log(li);
+        console.log('================================================================');
+        //H5新增获取元素方式 适用：IE8+
+        //4.通过类名获取元素 （）括号里面必须是字符串。获取的元素对象以伪数组的形式储存，无论元素对象只有一个或者无。
+        var box = document.getElementsByClassName('box');
+        console.log(box);
+        //5.querySelector 返回指定选择器的第一个元素对象 querySelectorAll 返回制定选择器的所有元素对象(伪元素形式)
+        var box1 = document.querySelector('.box') //由于有在html页面里有多个选择器，所以需要在名称前面加上 . 或 # 来标注是哪类选择器
+        console.log(box1);
+        var nav = document.querySelector('#nav');
+        console.log(nav);
+        var nav_all = document.querySelectorAll('.box')
+        console.log(nav_all);
+        console.log('================================================================');
+    </script>
+</body>
+
+</html>

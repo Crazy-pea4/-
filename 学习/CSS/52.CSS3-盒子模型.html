@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 500px;
+            height: 400px;
+            background-color: hotpink;
+            font-size: 26px;
+            border: 20px solid green;
+            padding: 10px;
+        }
+
+        /* 可以看到，此时我们需要的宽500、高400盒子被多加的边框和padding值撑大了 */
+        p {
+            width: 500px;
+            height: 400px;
+            background-color: hotpink;
+            font-size: 26px;
+            /* 只需要加上box-sizing：border-box即可 */
+            box-sizing: border-box;
+            border: 20px solid green;
+            padding: 10px;
+            /* 值得注意的是，如果在全局设置中添加了box-sizing：border-box属性，那么想让文字居中的话需要line-height=height-2*(border+padding) px */
+            line-height: 340px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>霸王洗发水</div>
+    <p>我的盒子不会变大，始终保持大小</p>
+</body>
+
+</html>

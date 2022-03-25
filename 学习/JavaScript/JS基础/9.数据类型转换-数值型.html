@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1.parseInt(String)将字符串转换成整数类型
+        var age = 18;
+        console.log('您的年龄+1为：' + (parseInt(age) + 1));
+        // parseInt还可以去单位，在后面做JS动画时会用到,例如：
+        console.log(parseInt('200px'));
+        // 2.parseFloat(String)将字符串转换成浮点数类型
+        // parseFloat也同样可以去单位，跟上面一致
+        var money = 89.77;
+        console.log(parseFloat(money) + 1);
+        // 3.Number(String)将字符串转换成数值型
+        var num = 99;
+        console.log(Number(num));
+        console.log(typeof num);
+        // 4.利用JS隐式转换将字符串转换成数值型
+        var number = 12;
+        console.log('12' / 2);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

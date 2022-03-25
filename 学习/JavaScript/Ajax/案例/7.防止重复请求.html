@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防止重复请求</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <button>点击发送请求</button>
+    <button>点击取消请求</button>
+    <script>
+        var btn = document.querySelectorAll('button');
+        let xhr = null;
+
+        // 设置一个标识变量
+        var flag = false; // 还未发送Ajax请求时，flag为false
+
+        btn[0].addEventListener('click', function (e) {
+            if (flag) {
+                xhr.abort(); 
+                // 第一次点击flag为false不执行，当服务器还未发送数据过来时，再次点击此时flag还未变成false，则会执行if里面的语句，断掉x的发送请求
+            }
+            xhr = new XMLHttpRequest();
+            flag = true; // 按下按钮发送Ajax请求时，flag为true
+            xhr.open('GET', 'http://localhost:8000/delay');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    flag = false; // 当请求完成后才变为false
+                }
+            }
+        })
+        // 终止 abort
+        btn[1].addEventListener('click', function (e) {
+            xhr.abort();
+        })
+        // 因为在不同函数里不能x不共用
+    </script>
+</body>
+
+</html>

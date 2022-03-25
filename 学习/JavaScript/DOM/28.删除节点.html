@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>删除</button>
+    <ul>
+        <li>我是儿子1</li>
+        <li>我是儿子2</li>
+        <li>我是儿子3</li>
+        <li>我是儿子4</li>
+    </ul>
+    <script>
+        // 删除节点 node.removeChild(child) 删除一个子节点，'返回'删除的节点
+        var ul = document.querySelector('ul');
+        var btn = document.querySelector('button')
+        btn.onclick = function () {
+            ul.removeChild(ul.children[0]); // 这里不可用firstchild，因为它包含了文本标签
+            if (ul.children.length == 0) {
+                btn.disabled = true; // 先删除后判断会优化体验
+            }
+        }
+    </script>
+</body>
+
+</html>

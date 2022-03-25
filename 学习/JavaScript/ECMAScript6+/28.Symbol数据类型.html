@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // Symbol()数据类型，用来定义一个独一无二的值，()括号内可以写入一个字符串，标识作用
+        const s = Symbol();
+        console.log(s, typeof s);
+
+        const s2 = Symbol('叶萌');
+        const s3 = Symbol('叶萌');
+        console.log(s2 === s3);
+        // 可以看到，尽管拥有相同标识字符串，但Symbol仍然是唯一的
+
+        console.log('===============================================================');
+        // Symbol.for()方法   每次使用该方法，都会在全局环境下找到Smybol注册表，并寻找其中是否有相同标识字符串的Symbol，如果有，返回它，否则，创建一个与传入的标识字符串参数相关联的Symbol并放入到全局Symbol注册表中
+        const sym1 = Symbol.for('相同的标识字符串');
+        const sym2 = Symbol.for('相同的标识字符串');
+        console.log(sym1 === sym2);
+        console.log('=============================================================');
+        // 注意：该方法内部维护的是 字符串 与 Symbol之间的关系，如果传入的参数不是字符串，那么内部会自动将其转换为字符串
+        console.log(Symbol.for(true) === Symbol.for('true'));
+
+        console.log('====================关于调用在对象中已经被Symbol化的函数问题==============================');
+        const med = Symbol('sayHi');
+        const obj = {
+            [med]: () => {
+                console.log('你好，我是光头强');
+            }
+        }
+        console.log(obj);
+        obj[med]();
+    </script>
+</body>
+</html>

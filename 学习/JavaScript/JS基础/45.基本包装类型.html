@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //一般来说，简单数据类型是没有属性和方法的，但
+        var str = 'boy';
+        console.log(str.length); //定义的str简单数据类型却又length属性
+        //这是因为为了方便操作基本数据类型，在JavaScript里提供了三个特殊的引用类型：String、Number、Boolean。
+        // 基本包装类型就是使简单数据类型包装成为复杂数据类型，这样就能使基本数据类型有了属性和方法
+        // 执行过程如下
+        var temp = new String('boy'); // 1.生成临时变量，把简单数据类型包装成复杂数据类型
+        str = temp; // 2.赋值给我们声明的变量
+        temp = null; // 3.清除临时变量
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

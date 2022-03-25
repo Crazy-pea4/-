@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 简单来说，具有Iterable接口的数据类型，就是拥有了某种规格标准可以去做某件事
+        // 例如可被for...of遍历的，都具有Iterable接口
+        const arr = [1, 2, 3, 4];
+        const iterable = arr[Symbol.iterator]();
+        let next = iterable.next();
+        console.log(next);
+        console.log(iterable.next());
+        console.log(iterable.next());
+        console.log(iterable.next());
+        // 可以看到，当数组里面的元素给遍历玩成以后，值为undefined，完成为true
+        // 因此我们可以推断有iterable接口的数据，在其内部都有一个iterable方法，用于返回带有next方法的对象，通过不断调用next方法就可以实现遍历
+        console.log(iterable.next());
+    </script>
+</body>
+
+</html>

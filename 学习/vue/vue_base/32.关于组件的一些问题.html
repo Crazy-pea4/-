@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+			几个注意点：
+					1.关于组件名:
+								一个单词组成：
+											第一种写法(首字母小写)：school
+											第二种写法(首字母大写)：School
+								多个单词组成：
+											第一种写法(kebab-case命名)：my-school
+											第二种写法(CamelCase命名)：MySchool (需要Vue脚手架支持)
+								备注：
+										(1).组件名尽可能回避HTML中已有的元素名称，例如：h2、H2都不行。
+										(2).可以使用name配置项指定组件在开发者工具中呈现的名字。
+
+					2.关于组件标签:
+								第一种写法：<school></school>
+								第二种写法：<school/>
+								备注：不用使用脚手架时，<school/>会导致后续组件不能渲染。
+
+					3.一个简写方式：
+								const school = Vue.extend(options) 可简写为：const school = options
+								其实写与不写，Vue在内部以及有一个判断，最终都会调用Vue.extend()
+	-->
+	<div class="r">
+		<problems></problems>
+		<test/>
+		<!-- 后面的组件无法渲染 -->
+		<test/>
+		<test></test>
+	</div>
+    <script>
+		const problems = Vue.extend({
+			template: `
+			<div>
+				<h2>关于组件的一些问题</h2>	
+			</div>`
+		})
+		const test = Vue.extend({
+			template: `
+			<div>
+				<h2>如果使用单标签的写法，不在脚手架环境中，后面的组件不能被渲染</h2>
+			</div>`
+		})
+		new Vue({
+			el: '.r',
+			components: {
+				problems,
+				test
+			}
+		})
+    </script>
+</body>
+</html>

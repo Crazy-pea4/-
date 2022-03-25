@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 在ES6中，let为对变量设置块级作用域，所谓块级 {} 是代表一个大括号内的区域
+        // if (true) {
+        //     let num = 1;
+        // }
+        // 可以清楚的在控制台看到报错信息，num只在if{}里
+        // console.log(num);
+        // 对于之前遍历事件出现的问题
+        var elem = [{}, {}, {}];
+        for (let i = 0; i < elem.length; i++) {
+            elem[i].onclick = function () {
+                console.log(i);
+            }
+        }
+        // 可以看到，无论是哪个elem被点击，输出的i都是3，原因是i被定义成了全局变量，每次for完成后i就被重新赋值，而不是给对应的elem[i].onclick
+        // 如果var换成let就能完美地解决问题（利用了闭包原理）let定义的变量不具备像var一样的随意替换性
+        elem[2].onclick();
+
+        // 另外
+        for(let j = 0; j < 3; j++) {
+            let j = '你好';
+            console.log(j);
+            // 你好被打印了三次，证明括号()里的j和大括号{}里的j不同级
+        }
+    </script>
+</body>
+
+</html>

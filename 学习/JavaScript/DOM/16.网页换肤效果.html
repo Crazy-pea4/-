@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 100px auto;
+            width: 655px;
+            text-align: center;
+            background-color: white;
+        }
+
+        img {
+            height: 100px;
+        }
+
+        img:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="../../素材/JavaScript API_material/第二天/images/1.jpg" alt="">
+        <img src="../../素材/JavaScript API_material/第二天/images/2.jpg" alt="">
+        <img src="../../素材/JavaScript API_material/第二天/images/3.jpg" alt="">
+        <img src="../../素材/JavaScript API_material/第二天/images/4.jpg" alt="">
+    </div>
+    <script>
+        var bg = document.body;
+        var bgPic = document.getElementsByTagName('img');
+        for (var i = 0; i < bgPic.length; i++) {
+            bgPic[i].onclick = function () {
+                bg.style.backgroundImage = 'url('+ this.src +')';
+            }
+        }
+    </script>
+</body>
+
+</html>

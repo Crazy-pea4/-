@@ -1,0 +1,3 @@
+<!--pages/welcome/welcome.wxml-->
+<text>恭喜你通过tabBar来到这一页</text>
+<view>现在为你自己鼓掌吧！</view>

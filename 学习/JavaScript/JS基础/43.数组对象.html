@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        console.log('================================================');
+        //new Array()
+        var arr1_1 = new Array(); //创建了一个空数组
+        var arr1_2 = new Array(5); //创建了一个长度为5的数组，里面有五个空的数组元素
+        var arr1_3 = new Array(5, 8); //创建了一个长度为2，内容为5,8的数组等价于arr = [5,8]
+        console.log(arr1_1);
+        console.log(arr1_2);
+        console.log(arr1_3);
+
+        console.log('================================================');
+        //增加数组元素 push() unshift() 
+        var arr2_1 = [1, 5, 10];
+        var exm1 = arr2_1.push(20, 8);
+        console.log(arr2_1); //push 会在数组末尾添加元素
+        console.log(exm1); //push() 返回值是新数组的长度
+
+        var arr2_2 = [2, 8, 16];
+        var exm2 = arr2_2.unshift(0, 9);
+        console.log(arr2_2); //unshift 会在数组开头添加数组
+        console.log(exm2); //unshift() 返回值是新数组的长度
+
+        //删除数组元素 pop() shift()
+        var arr2_3 = [1, 2, 3, 4, 5, 6];
+        var exm3 = arr2_3.pop();
+        console.log(arr2_3); //pop 数组末尾删除一个元素
+        console.log(exm3); //pop() 返回值是删除的元素
+
+        var arr2_4 = [2, 5, 6, 88, 93];
+        var exm4 = arr2_4.shift();
+        console.log(arr2_4); //shift 数组前面删除一个元素
+        console.log(exm4); //shift() 返回值是删除的元素
+
+        console.log('================================================');
+        //翻转数组 reverse();无参数  排序数组 sort();
+        var arr3_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        console.log(arr3_1);
+        console.log(arr3_1.reverse());
+        var arr3_2 = [2, 5, 6, 1, 99, 24, 553, 21, 7];
+        console.log(arr3_2);
+        console.log(arr3_2.sort(function (a, b) {
+            return a - b; //需要一个return 升序 a - b; //降序 b - a;
+        }));
+
+        console.log('================================================');
+        //获取数组元素索引号indexOf(数组元素,[查找的起始位置]) lastIndexOf(数组元素,[查找的起始位置]) 中括号[]表示可选
+        var arr4_1 = [5, 6, 89, 12, 56];
+        console.log(arr4_1.indexOf(89)); //从前往后找，找出目标则返回目标的索引号
+        console.log(arr4_1.lastIndexOf(12)); //后往前找，找出目标则返回目标的索引号
+        console.log(arr4_1.indexOf(100)); //若找不到目标，则返回-1。可用来实现数组去重
+
+        console.log('================================================');
+        //数组转换字符串 toString()
+        var arr5_1 = [1, 2, 3, 4, 5];
+        console.log(arr5_1.toString()); //1,2,3,4,5 分隔符固定为 ','
+
+        //join('分隔符') 数组转换成字符串 可自定义分隔符
+        var arr5_2 = [1, 22, 33, 44];
+        console.log(arr5_2.join(','));
+        console.log(arr5_2.join('&'));
+
+        console.log('================================================');
+        //连接两个或多个数组，返回新数组 arr1.concat(arr2);
+        var arr6_1 = ['a', 'b', 'c'];
+        var arr6_2 = ['d', 'e', 'f'];
+        var arr6_3 = arr6_1.concat(arr6_2);
+        console.log(arr6_3);
+        // expected output: Array ["a", "b", "c", "d", "e", "f"]
+
+        //截取数组 slice(begin,end); 对原数组的拷贝，包括begin但不包括end[begin,end) 不改变原来数组 正数为索引，负数表示倒数第几个
+        var arr6_4 = ['a', 'b', 'c', 'd', 'e', 'f'];
+        console.log(arr6_4.slice(1, 4)); //输出[b,c,d]
+        console.log(arr6_4.slice(-3, -1)); //输出[d,e]
+        //修改数组 splice(start,deleteCount,item); 返回值：被删除元素组成的数组
+            // start 整数，正数表示数组索引，负数表示倒数第几位
+            // deleteCount 整数，正数表示要删除的数组元素个数，0或负数表示不移除元素，则至少要添加一个元素item
+            // item 要添加进数组的元素，从start后开始。如果不指定，则splice()将只删除元素
+        var arr6_5 = ['apple', 'orange', 'banana', 'fish', 'bear'];
+        //删除元素
+        console.log(arr6_5.splice(2, 1)); //删除banana
+        //添加元素
+        console.log(arr6_5.splice(3, 1, '1', '2')); //删除了bear后，在原位置添加1,2
+        //原数组
+        console.log(arr6_5); //原数组改变为apple,orange,fish,1,2
+        console.log('================================================');
+
+        // .filter(function(element, index, arr) {})方法，返回一个通过测试函数的数组
+        // element：正在被处理的元素 index：正在被处理元素的索引号 arr：调用filter()的数组本身
+        const arr7_1 = [0, 3, 7, 9, 31, 57, 64];
+        const arr7_2 = arr7_1.filter((e, index, arr) => e > 10);
+        console.log(arr7_2);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

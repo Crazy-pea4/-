@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1.单行文本溢出显示省略号 */
+        /* 将溢出的文字用省略号显示，分三步 */
+        .box1 {
+            width: 150px;
+            height: 100px;
+            background-color: hotpink;
+            margin: 100px auto;
+            /* 1.将文字强制一行显示 */
+            white-space: nowrap;
+            /* 2.将溢出的部分隐藏 */
+            overflow: hidden;
+            /* 3.隐藏起来的文字用省略号显示 */
+            text-overflow: ellipsis;
+        }
+        .box2 {
+            width: 150px;
+            height: 86px;
+            background-color: cornflowerblue;
+            margin: 100px auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* 弹性伸缩盒子模型显示 */
+            display: -webkit-box;
+            /* 限制显示的行数 */
+            -webkit-line-clamp: 4;
+            /* 设置或检索伸缩盒对象的子元素的排列方式 */
+            -webkit-box-orient: vertical;
+            /* 最后再适当修改盒子的高度即可 */
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">我好帅，我好帅，我好帅，我好帅，我好帅，我好帅，我好帅，我好帅，我好帅，我好帅，我好帅，我好帅</div>
+    <div class="box2">我好美，我好美，我好美，我好美，我好美，我好美，我好美，我好美，我好美，我好美，我好美，我好美，</div>
+</body>
+</html>

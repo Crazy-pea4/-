@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        i {
+            font-style: normal
+        }
+
+        div {
+            position: relative;
+            width: 480px;
+            height: 100px;
+            margin: 200px auto;
+            background-color: aquamarine;
+        }
+
+        i:nth-child(1) {
+            line-height: 100px;
+        }
+
+        input {
+            width: 200px;
+            height: 28px;
+            outline: none;
+        }
+
+        #tips {
+            /* display: none; */
+            position: absolute;
+            top: 22px;
+            right: 0px;
+            width: 192px;
+            height: 28px;
+        }
+
+        #tips img {
+            width: 20px;
+            margin-top: 4px;
+        }
+
+        #tips i {
+            float: right;
+            margin-right: 55px;
+            font-size: 13px;
+            line-height: 28px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <i>设置密码:</i>
+        <input type="text">
+        <p id="tips">
+            <img src="../../JavaScript API_material/第一天/images/mess.png" alt="">
+            <i>请输入6~16位密码</i>
+            <!-- 第二个i -->
+        </p>
+    </div>
+    <script>
+        //灵魂
+        var inp = document.querySelector('input');
+        var img = document.querySelector('img');
+        var text = document.getElementsByTagName('i')
+        inp.onblur = function () {
+            if (this.value.length >= 6 && this.value.length <= 16) {
+                img.src = '../../JavaScript API_material/第一天/images/right.png';
+                text[1].style.display = 'none';
+            } else if (this.value.length === 0) {
+                img.src = '../../JavaScript API_material/第一天/images/mess.png'
+                text[1].style.display = 'block';
+                text[1].style.color = '#999'
+            } else {
+                img.src = '../../JavaScript API_material/第一天/images/wrong.png';
+                text[1].style.color = 'red';
+                text[1].style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

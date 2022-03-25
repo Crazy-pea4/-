@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            top: 50px;
+            width: 200px;
+            height: 200px;
+            background-color: greenyellow;
+        }
+
+        span {
+            position: absolute;
+            top: 260px;
+            width: 300px;
+            height: 250px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <span></span>
+    <button>点击</button>
+    <script>
+        // 简单动画函数封装obj目标对象 target目标停止位置
+        // JS获取的元素都可以看成是对象，因此给获取的obj添加一个timer属性无问题
+        function animate(obj, target) {
+            // 解决按钮被重复点击在成动画加快 每次点击都清除一次定时器效果 但这种方法有弊端，如果点击次数过多或者频率很快，动画会有明显延后效果，这是因为每次点击后重新计时10ms再执行
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                if (obj.offsetLeft > target) {
+                    // 限制条件
+                    clearInterval(obj.timer);
+                } else {
+                    obj.style.left = obj.offsetLeft + 1 + 'px';
+                }
+            }, 10);
+        }
+        const div = document.querySelector('div');
+        const span = document.querySelector('span');
+        const btn = document.querySelector('button');
+        // 有意思的是，当多次点击按钮，定时器数量增加，动画移动速度会增快。这显然在开发中是不被喜欢的 解决方法在上面
+        btn.addEventListener('click', function () {
+            animate(span, 400);
+            animate(div, 400);
+        })
+    </script>
+</body>
+
+</html>

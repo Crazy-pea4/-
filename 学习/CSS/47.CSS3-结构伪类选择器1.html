@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+
+        /* 结构伪类选择器主要根据文档结构来选择元素 */
+        /* 选择ul中的第一个li */
+        ul li:first-child {
+            font-size: 22px;
+        }
+
+        /* 选择ul中最后一个li */
+        ul li:last-child {
+            background-color: hotpink;
+        }
+
+        /* 选择ul中第n个元素 */
+        ul li:nth-child(6) {
+            font-size: 18px;
+            text-decoration: line-through;
+
+        }
+
+        /* 利用nth-child（n）实现隔行变色 */
+        /* even：偶数行 */
+        ol li:nth-child(even) {
+            background-color: grey;
+        }
+
+        /* odd：奇数行 */
+        ol li:nth-child(odd) {
+            background-color: seagreen;
+        }
+
+        /* 如果是nth-child(n)，则从0开始，往后+1,0和超出的元素都会被忽略,选择了所有的孩子
+        box li:nth-child(n) {
+            background-color: tomato;
+        } */
+        /* 如果是nth-child(2n)，则是选择了偶数性质的孩子 等价于even
+         box li:nth-child(2n) {
+            background-color: tomato;
+        } */
+        /* 如果是nth-child(2n+1)，则是选择了奇数性质的孩子 等价于odd
+        box li:nth-child(2n+1) {
+            background-color: tomato;
+        } */
+        /* 如果是nth-child(n+5)，则是选择了从第5个开始的孩子,含第5个
+        box li:nth-child(n+5) {
+            background-color: tomato;
+        } */
+        /* 如果是nth-child(-n+5)，则是选择了前5个孩子,含第5个 */
+        box li:nth-child(-n+5) {
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>我是第1</li>
+        <li>我是第2</li>
+        <li>我是第3</li>
+        <li>我是第4</li>
+        <li>我是第5</li>
+        <li>我是第6</li>
+        <li>我是第7</li>
+        <li>我是第8</li>
+    </ul>
+
+    <ol>
+        <li>我是第1</li>
+        <li>我是第2</li>
+        <li>我是第3</li>
+        <li>我是第4</li>
+        <li>我是第5</li>
+        <li>我是第6</li>
+        <li>我是第7</li>
+        <li>我是第8</li>
+    </ol>
+
+    <box>
+        <li>我是第1</li>
+        <li>我是第2</li>
+        <li>我是第3</li>
+        <li>我是第4</li>
+        <li>我是第5</li>
+        <li>我是第6</li>
+        <li>我是第7</li>
+        <li>我是第8</li>
+    </box>
+</body>
+
+</html>

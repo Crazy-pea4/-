@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+    <style>
+        div {
+            margin: 0 auto;
+            width: 500px;
+            height: 300px;
+            border: 3px solid #468
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector('div');
+        document.addEventListener('keyup', function (e) {
+            // 创建对象
+            var xhr = new XMLHttpRequest();
+            // 设置响应体数据的类型
+            xhr.responseType = 'json';
+            // 初始化
+            xhr.open('GET', 'http://localhost:8000/json-server');
+            // 发送
+            xhr.send();
+
+            xhr.onreadystatechange = function () {
+                // 判断准备阶段
+                if (xhr.readyState == 4) {
+                    //判断状态码
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // console.log(xhr.response);
+                        // div.innerHTML = 'pressed';
+                        // 若数据较多，则不方便查找数据，下面将服务器传过来的字符串转换成对象
+
+                        // 手动对数据转化
+                        // let data = JSON.parse(xhr.response);
+                        // console.log(data);
+                        // div.innerHTML = data.name;
+                        // 可以看到结果已经变成对象
+
+                        // 自动转换
+                        console.log(xhr.response);
+                        div.innerHTML = xhr.response.name;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

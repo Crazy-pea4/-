@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="r">
+        <span>姓：</span><input type="text" name="" id="" v-model="firstName"><br>
+        <span>名：</span><input type="text" name="" id="" v-model="lastName"><br>
+        <span>全名：{{fullName}}</span> <br>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data: {
+                firstName: '罗',
+                lastName: '翔'
+            },
+            // 计算属性名需要另一个配置项 computed
+            computed: {
+                // 简写形式，当只考虑读取不考虑修改时
+                fullName() {
+                    return this.firstName + '-' + this.lastName
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

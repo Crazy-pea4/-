@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 动画的制作分为两步 1. 定义动画 2.使用动画 */
+
+        /* 1. 定义动画 */
+        @keyframes movement {
+
+            /* 0%：开始状态 可以使用form代替 */
+            0% {
+                transform: translate(0, 0)
+            }
+
+            /* 100%：结束状态 可以使用to代替 */
+            100% {
+                transform: translate(300px, 100px) scale(1.5);
+            }
+        }
+
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: darkslateblue;
+            /* 2. 使用动画 */
+            animation-name: movement;
+            /* 持续时间 */
+            animation-duration: 2s;
+        }
+
+        @keyframes circle {
+            0% {
+                transform: translate(500px, 0px)
+            }
+
+            25% {
+                transform: translate(800px, 0px)
+            }
+
+            50% {
+                transform: translate(800px, 200px)
+            }
+
+            75% {
+                transform: translate(500px, 200px)
+            }
+
+            100% {
+                transform: translate(500px, 0px)
+            }
+        }
+
+        .box2 {
+            width: 200px;
+            height: 200px;
+            background-color: darkseagreen;
+            /* 2. 使用动画 */
+            animation-name: circle;
+            /* 持续时间 */
+            animation-duration: 5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 编写一个1s后输出1，2s后输出2，3秒后输出3的程序
+        // setTimeout(() => {
+        //     console.log(1);
+        //     setTimeout(() => {
+        //         console.log(2);
+        //         setTimeout(() => {
+        //             console.log(3);
+        //         }, 3000);
+        //     }, 2000);
+        // }, 1000);
+        // 可以发现，尽管在功能方面可以实现，但如果再有需求，就需要再次嵌套回调函数，容易形成回调地狱
+
+        // 使用generator可以很好的避免嵌套的发生
+        function time1() {
+            setTimeout(() => {
+                console.log(1);
+                gen.next();
+            }, 1000)
+        }
+
+        function time2() {
+            setTimeout(() => {
+                console.log(2);
+                gen.next();
+            }, 2000)
+        }
+
+        function time3() {
+            setTimeout(() => {
+                console.log(3);
+                gen.next();
+            }, 3000)
+        }
+
+        function* generator() {
+            yield time1();
+            yield time2();
+            yield time3();
+        }
+
+        let gen = generator();
+        gen.next();
+    </script>
+</body>
+
+</html>

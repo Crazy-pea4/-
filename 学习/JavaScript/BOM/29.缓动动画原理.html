@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            top: 50px;
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button class="btn500">点击前进到500</button>
+    <button class="btn800">点击前进到800</button>
+    <script>    
+        // 缓动动画：动画元素在运动时速度会渐渐变慢
+        // 缓动动画公式：(目标位置 - 现在位置) / 10
+        function animate(obj, target) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                // 缓动动画初始化
+                let steps = (target - obj.offsetLeft) / 10;
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.timer);
+                } else {
+                    // 判断steps为正负数，正数则向上取整，负数则向下取整
+                    steps = steps > 0 ? Math.ceil(steps) : Math.floor(steps);
+                    obj.style.left = obj.offsetLeft + steps + 'px';
+                    console.log(steps);
+                }
+            }, 10);
+        }
+        const div = document.querySelector('div');
+        const btn500 = document.querySelector('.btn500');
+        const btn800 = document.querySelector('.btn800');
+        btn500.addEventListener('click', function () {
+            animate(div, 500)
+        })
+        btn800.addEventListener('click', function () {
+            animate(div, 800)
+        })
+    </script>
+</body>
+</html>

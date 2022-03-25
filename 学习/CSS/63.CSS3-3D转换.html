@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* perspective透视，需要写在被观察元素的父盒子身上 */
+            /* 其单位为px，透视是从肉眼到屏幕的距离，z轴是元素到屏幕的距离。透视越小，被观察元素越大 */
+            perspective: 200px;
+        }
+
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: darkseagreen;
+            /* translate3d(x, y, z)，括号内的三个坐标数值都要有 */
+            /* 其中默认以浏览器左上角为原点，x轴以右边为正，y轴以下面为正，z轴以垂直屏幕外面为正 */
+            transform: translate3d(200px, 200px, 10px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+        <style>
+            /* 类选择器 */
+            /* 一个标签用多个类名可以做到类似合并同类项的方法，用来简化代码和方便修改 */
+            .box {
+                width: 200px;
+                height: 200px;
+            }
+            .green {
+                /* width: 200px;
+                height: 200px; */
+                /* 背景颜色 */
+                background-color: green;
+            }
+            .red {
+                /* width: 200px;
+                height: 200px; */
+                background-color: red;
+            }
+            #poem {
+                color: gold;
+            }
+        </style>
+    </head>
+ <body>
+     <div class="green box"></div>
+     <div class="red box"></div>
+     <div class="green box"></div>
+
+     <div id="poem">千呼万唤始出来</div>
+     <div id="poem">犹抱琵琶半遮面</div>
+ </body>
+ </html>

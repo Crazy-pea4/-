@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            /* blur:模糊距离，单位是px，数值越大越模糊 */
+            filter: blur(9px);
+            float: right;
+        }
+        .father {
+            width: 400px;
+            height: 350px;
+            background-color: hotpink;
+        }
+
+        .son {
+            /* calc是calculate的缩写，为数不多的CSS函数。 */
+            width: calc(100% - 30px);
+            height: 200px;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <img src="image/abcd.jpg" alt="">
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <p>尝试改动上面的父元素的大小，看看子元素会如何变化</p>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            margin: 100px auto;
+            width: 400px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box input {
+            width: 370px;
+            height: 30px;
+            border: 0;
+            outline: none;
+            font-size: 18px;
+        }
+
+        .box label img {
+            float: right;
+            width: 26px;
+            height: 26px;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <label for="">
+            <img src="../../JavaScript API_material/第一天/images/close.png" alt="">
+        </label>
+        <input type="password" name="" id="">
+    </div>
+    <script>
+        var eye = document.querySelector('img');
+        var input = document.querySelector('input');
+        var flag = 0;
+        eye.onclick = function () {
+            if (flag == 0) { //要记住这里的循环算法，是重点
+                input.type = 'text';
+                eye.src = '../../JavaScript API_material/第一天/images/open.png';
+                flag = 1;
+            } else {
+                input.type = 'password';
+                eye.src = '../../JavaScript API_material/第一天/images/close.png';
+                flag = 0;
+            }
+        }
+    </script>
+</body>
+
+</html>

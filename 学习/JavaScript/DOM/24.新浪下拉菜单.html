@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            float: left;
+            color: black;
+            width: 100px;
+            height: 38px;
+            font-size: 14px;
+            text-decoration: none;
+            line-height: 38px;
+        }
+
+        .nav {
+            margin: 100px auto;
+            width: 400px;
+            height: 45px;
+            text-align: center;
+        }
+
+        .tab_1,
+        .tab_2,
+        .tab_3 {
+            float: left;
+        }
+
+        .weibo,
+        .boke,
+        .youxiang {
+            background-color: white;
+        }
+
+        .tab_1 ul li a,
+        .tab_2 ul li a,
+        .tab_3 ul li a {
+            border-bottom: 1px solid #e5d198;
+        }
+
+        .tab_1 ul,
+        .tab_2 ul,
+        .tab_3 ul {
+            display: none;
+        }
+
+        .tab_1 a:hover,
+        .tab_2 a:hover,
+        .tab_3 a:hover {
+            background-color: rgb(221, 187, 120)
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul class="nav">
+            <li class="tab_1">
+                <a href="" class="weibo">微博</a>
+                <ul>
+                    <li><a href="">私信</a></li>
+                    <li><a href="">评论</a></li>
+                    <li><a href="">@我</a></li>
+                </ul>
+            </li>
+            <li class="tab_2">
+                <a href="" class="boke">博客</a>
+                <ul>
+                    <li><a href="">博客评论</a></li>
+                    <li><a href="">未读提醒</a></li>
+                </ul>
+            </li>
+            <li class="tab_3">
+                <a href="" class="youxiang">邮箱</a>
+                <ul>
+                    <li><a href="">免费邮箱</a></li>
+                    <li><a href="">VIP邮箱</a></li>
+                    <li><a href="">企业邮箱</a></li>
+                    <li><a href="">新浪邮箱客户端</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // 鼠标进过li之后，li里面的第二个孩子也就是ul显现
+        var ul = document.querySelector('.nav');
+        var lis = ul.children; //把大ul里面的所有li孩子获取过来
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onmouseover = function () {
+                // this.lastElementChild.style.display = 'block'; // 对应li里面的最后一个孩子也就是ul做出相应功能
+                // 为了兼容性写成下面的样式
+                this.children[this.children.length - 1].style.display = 'block';
+            }
+            lis[i].onmouseout = function () {
+                // this.lastElementChild.style.display = 'none';
+                // 为了兼容性写成下面的样式
+                this.children[this.children.length - 1].style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

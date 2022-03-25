@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1.统计下列字符串中'o'出现的位置及次数
+        var str = 'abcoefoxyozzopp';
+        var i = 0; //出现位置
+        var times = 0; //出现次数
+        while (true) {
+            var num = str.indexOf('o', i);
+            if (num != -1) {
+                times++;
+                console.log('第' + times + '次出现');
+                console.log('位置:' + num);
+                i = num + 1;
+            } else break;
+        }
+        console.log('================================================================');
+        // 2.判断一个字符串中出现次数最多的字符并统计其次数
+        var str = 'abcoefoxyozzopp';
+        var o = {}; //创建一个空对象，目的是存储每个扫描下来的字符
+        for (var i = 0; i < str.length; i++) { //遍历字符串
+            var item = str.charAt(i); //将字符串里的每个字符存进item里
+            if (o[item]) { //第一次出现的字符不会在o对象里，因此跳到else对出现的字符在对象中成为其属性并赋值1，这样下一次再出现相同的字符则if语句成立，起到加数的效果
+                o[item]++; //用中括号是因为要引入的属性是字符串类型，需要满足o['item']的格式，不可以用o.item
+            } else o[item] = 1;
+        }
+        var max = 0;
+        var char_name = '';
+        for (var key in o) { //遍历对象
+            if (o[key] > max) {
+                max = o[key];
+                char_name = key;
+            }
+        }
+        console.log('出现最多的字符是：' + char_name);
+        console.log('出现次数是：' + max + '次');
+        console.log('================================================================');
+        // 3.将字符串里的目标字符全部替换成其他符号
+        var str = 'abcoefoxyozzopp'; //将o替换成-
+        while (str.indexOf('o') != -1) {
+            str = str.replace('o', '-'); //常用作敏感词过滤
+        }
+        console.log(str);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

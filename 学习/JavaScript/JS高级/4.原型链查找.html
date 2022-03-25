@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="../../素材/images/__proto__.png" alt="" style="width: 1300px;">
+    <script>
+        // 在访问对象成员的时候，js是通过原型链查找的方式
+        // 现在实例对象中查找对应成员，若没找到则通过__proto__前往构造函数中的prototype里查找
+        // 若仍没找到，则通过构造函数中的prototype中的__proto__前往Object构造函数中的prototype里查找
+        // 若仍没找到，Object原型对象prototype中的__proto__返回的是一个null
+        // 因此，查找结束的标志是：找到目标值 或 null
+    </script>
+</body>
+</html>

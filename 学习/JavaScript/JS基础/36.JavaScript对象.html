@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 利用 字面量 创建对象
+        var dog = {
+            Name: '咖啡',
+            type: '阿拉斯加犬',
+            age: 5,
+            color: '棕红色',
+            skill: function () {
+                console.log('bark');
+                console.log('showfilms');
+            }
+        }
+        console.log(dog.Name);
+        console.log(dog.color);
+        dog.skill();
+        console.log(dog['type']);
+
+        console.log('------------------------------------------------------');
+        // 使用变量作为键名，需要给键名添加中括号
+        const x = 1;
+        const obj = {
+            [x]: 12
+        }
+        console.log(obj);
+
+        console.log('----------------------------------------------------');
+
+        // 利用new Object 创建对象
+        var Naruto = new Object();
+        Naruto.Name = '鸣人';
+        Naruto.age = 19;
+        Naruto.sexual = '男';
+        Naruto.skill = function () {
+            console.log('影分身之术');
+        }
+        console.log(Naruto.Name);
+        console.log(Naruto.age);
+        Naruto.skill();
+        // 下面是另一种调用对象属性的方式
+        console.log(Naruto['sexual']);
+
+        console.log('----------------------------------------------------');
+
+        // 利用构造函数创建对象
+        function Hero(Uname, powertype, health, attacktype) {
+            this.name = Uname;
+            this.powertype = powertype;
+            this.health = health;
+            this.attacktype = attacktype;
+        }
+        var lp = new Hero('廉颇', '力量型', 500, '近战');
+        var hy = new Hero('后羿', '射手型', 100, '远程');
+        console.log(lp.name);
+        console.log(lp.health);
+        console.log(lp['powertype']);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

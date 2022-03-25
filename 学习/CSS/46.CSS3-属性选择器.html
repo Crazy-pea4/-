@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        i,em {
+            font-style: normal;
+        }
+        /* CSS3中新增的属性选择器可以选取目标的属性 */
+        input[value] {
+            color: blueviolet;
+        }
+        /* 也可以选取对属性里面的具体属性值 */
+        input[type=search] {
+            border-radius: 5px;
+        }
+        /* 也可以设置以xxx为开头/结尾/属性值中含有某项 */
+        /* 下面是以开头box为例，^=xxx：以xxx为开头 */
+        div[class^=box] {
+            height: 400px;
+            width: 400px;
+            background-color: brown;
+            margin-right: 30px;
+        }
+        /* 下面是以true结尾为例，$=xxx：以xxx为结尾 */
+        i[class$=true] {
+            color: chartreuse;
+        }
+        /* 下面是以最后一种情况为例，*=xxx：包含xxx */
+        ul li[class*=loved] {
+            color: coral;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="" id="" value="wowowowowow">
+    <input type="search" name="" id="">
+
+    <div class="box1" style="float: left;"></div>
+    <div class="box2" style="float: left;"></div>
+
+    <i class="iloveyou-true">我爱你</i><br>
+    <i class="idontloveyou-nottrue">(๑′ᴗ‵๑)Ｉ Lᵒᵛᵉᵧₒᵤ❤</i>
+
+    <ul>
+        <li class="aksdgbjhk loved sadasd">我</li>
+        <li class="masbvdmnas loved asbdkbk">喜欢</li>
+        <li class="jsjdbbnk loved ,msnmdb">你</li>
+    </ul>
+</body>
+</html>

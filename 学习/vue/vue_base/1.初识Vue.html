@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="ym">
+        <!-- {{xxx}} 是Vue中的插值语法，双括号里面要写js表达式 -->
+        <h1>你好，我是{{name}}</h1>
+    </div>
+    <script>
+        // 创建Vue实例，key名不允许随便更改
+        const v = new Vue({
+            el: '.ym', // el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+            // 相当于 el: document.getElementById('ym')
+            data: {
+                // data中用于存放数据，数据供el所指定的容器去使用。
+                name: '叶萌'
+            }
+        });
+    </script>
+</body>
+
+</html>

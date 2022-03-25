@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        thead th {
+            background-color: #0099cc;
+            border: 1px solid #ccc;
+        }
+
+        tbody td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellspacing="0" cellpadding="12px" width="400">
+        <thead>
+            <tr>
+                <th><input type="checkbox" name="" id="js_cball"></th>
+                <th>商品</th>
+                <th>价钱</th>
+            </tr>
+        </thead>
+        <tbody id="js_tb">
+            <tr>
+                <td><input type="checkbox" name=""></td>
+                <td>iPone13</td>
+                <td>5999</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name=""></td>
+                <td>iPad Pro</td>
+                <td>5999</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name=""></td>
+                <td>iPad Air</td>
+                <td>2399</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name=""></td>
+                <td>Appple Watch</td>
+                <td>2099</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var js_cball = document.getElementById("js_cball");
+        var js_tb = document.getElementById("js_tb").getElementsByTagName("input")
+        // 1.全选按钮控制子按钮
+        js_cball.onclick = function () {
+            for (var i = 0; i < js_tb.length; i++) {
+                js_tb[i].checked = this.checked; //当全选按钮被选中时，this.checked的值为真，把真值赋给下面的全部复选框，由此实现全选
+            }
+        }
+        // 2.子按钮控制全选按钮
+        for (var i = 0; i < js_tb.length; i++) { //先给所有子按钮遍历一遍选中效果
+            js_tb[i].onclick = function () {
+                var flag = true;
+                for (var i = 0; i < js_tb.length; i++) {
+                    if (js_tb[i].checked == false) {
+                        flag = false;
+                        break;
+                    }
+                }
+                js_cball.checked = flag;
+            }
+        }
+    </script>
+</body>
+
+</html>

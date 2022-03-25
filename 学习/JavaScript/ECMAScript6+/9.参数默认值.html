@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 只有在fn(); 没有实参或者传递的是undefined才会使用默认值
+        // 注意：带有默认值的形参必须出现在形参表的末尾，否则无法正常工作
+        function fn(parameter = true) {
+            console.log(parameter);
+        }
+        fn();
+    </script>
+</body>
+
+</html>

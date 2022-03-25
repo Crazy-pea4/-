@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // var x = prompt("请输入一批数字的长度:");
+        // var num = [];
+        // for (var i = 0; i < x; i++) {
+        //     num[i] = prompt("请输入第" + (parseInt(i) + 1) + "个数:");
+        // }
+
+        function maxNumber() {
+            var max = arguments[0];
+            for (var i = 0; i < arguments.length; i++) {
+                if (max < arguments[i]) {
+                    max = arguments[i];
+                }
+            }
+            return max;
+        }
+
+        alert("最大数为:" + maxNumber(1,2,5,8,55));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

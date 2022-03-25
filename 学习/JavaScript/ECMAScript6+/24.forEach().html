@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // forEach(function(element, index, arr) {})方法，括号里面跟一个函数fn，fn里面可以接收三个参数
+        // 第一个为element：当前正在处理的元素，第二个为index：数组中正在处理元素的索引，第三个为array：forEach()正在操作的数组
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        arr.forEach((e, index, arr) => console.log(e += 1, index, arr));
+        // forEach()不会改变原数组状态，且返回的是undefined，这点与Map()不同
+    </script>
+</body>
+</html>

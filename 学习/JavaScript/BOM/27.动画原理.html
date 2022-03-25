@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: paleturquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // JS实现动画原理：通过setInterval()不断移动盒子，每次移动1px
+        // 动画元素需要添加定位，以使用left top值
+        const div = document.querySelector('div');
+        div.addEventListener('click', function (e) {
+            const timer = setInterval(function () {
+                if (div.offsetLeft > 500) {
+                    // 限制条件
+                    clearInterval(timer);
+                } else {
+                    div.style.left = div.offsetLeft + 1 + 'px';
+                }
+            }, 10);
+        })
+    </script>
+</body>
+
+</html>

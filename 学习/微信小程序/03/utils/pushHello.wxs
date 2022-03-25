@@ -1,0 +1,6 @@
+function pushHello(str) {
+	return str + 'hello'
+}
+module.exports = {
+    pushHello: pushHello
+}

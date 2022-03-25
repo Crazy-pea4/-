@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // Object.assign 方法可以将多个原对象中的属性复制到一个目标对象中
+        // 若目标对象中有，则替换
+        // 若目标对象中没有，则复制（浅拷贝）
+        const souce1 = {
+            a: 123,
+            b: 456
+        }
+        const souce2 = {
+            c: 777,
+            d: 999
+        }
+        const target = {
+            a: 888,
+            c: 666
+        }
+        // 第一个参数为目标对象，往后的参数为源对象
+        const test = Object.assign(target, souce1, souce2);
+        console.log(test);
+        console.log(test === target); // 这句代码也能看出，被进行操作后的目标对象依然是其本身
+
+        function fn(obj) {
+            // obj.name = '叶萌', // 在函数内部如果修改了传入的形参属性，那么外部也会同样受到变化，因为复杂数据传参是将栈中的地址传递了过去
+            // console.log(obj.name);
+
+            // 如果我们只希望在函数中改变传入的值的属性，可以用Object.assign方法
+            const fnc = Object.assign({}, obj);
+            fnc.name = '叶萌';
+            console.log(fnc);
+        }
+        const obj = {
+            name: '李白'
+        }
+        fn(obj); 
+        console.log(obj);
+    </script>
+</body>
+
+</html>

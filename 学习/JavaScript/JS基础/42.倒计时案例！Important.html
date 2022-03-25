@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function count(time) {
+            //重点案例，需要牢记
+            var time_now = +new Date(); //当前时间总毫秒数 
+            var time_target = +new Date(time); //用户输入的时间的总毫秒数，理论上应该比当前毫秒数大，这样倒计时才有意义
+            var times = (time_target - time_now) / 1000; //将毫秒转换成秒
+
+            var day = parseInt(times / 60 / 60 / 24); //导出天数
+            day = day < 10 ? day = '0' + day : day;
+            var hours = parseInt(times / 60 / 60 % 24); //导出小时
+            hours = hours < 10 ? hours = '0' + hours : hours;
+            var minutes = parseInt(times / 60 % 60); //导出分钟
+            minutes = minutes < 10 ? minutes = '0' + minutes : minutes;
+            var seconds = parseInt(times % 60); //导出秒钟
+
+            return day + '天' + hours + '时' + minutes + '分' + seconds + '秒';
+        }
+
+        console.log(count('2025-9-25 19:48:21'));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

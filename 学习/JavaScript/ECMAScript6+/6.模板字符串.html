@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 使用反引号 -->
+    <script>
+        // 如果需要在字符串中使用反引号，需要反斜杠 \ 引意 \` content \`
+        const str = `hello ECMA2015, a \`string\``
+        console.log(str);
+
+        // 新特性 1.可换行 2.可嵌入内容：${content}
+        const str1 =
+            `我是
+            可以
+            换行的`;
+        console.log(str1);
+
+        const ecma = 'ECMA2015';
+        const str2 = `你好，${ecma}` + `调皮`;
+        console.log(str2);
+    </script>
+</body>
+
+</html>

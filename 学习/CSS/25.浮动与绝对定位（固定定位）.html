@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 浮动元素只会压住下面标准流的盒子，但不会压住下面标准流盒子里面的文字（图片） */
+        .box {
+            /* float: left; */
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+        }
+        /* 绝对定位（固定定位）会压住下面标准流的所有内容 */
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="text">商女不知亡国恨，隔江犹唱后庭花</div>
+</body>
+</html>

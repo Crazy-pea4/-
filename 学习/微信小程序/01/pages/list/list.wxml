@@ -1,0 +1,53 @@
+<!-- pages/list/list.wxml -->
+<!-- view与scroll-view -->
+<!-- 注意这里不要用container类名，因为它会使盒子自动垂直居中 -->
+<view class="container1">
+    <view>A</view>
+    <view>B</view>
+    <view>C</view>
+</view>
+<scroll-view class="container2" scroll-y>
+    <view>A</view>
+    <view>B</view>
+    <view>C</view>
+</scroll-view>
+<!-- swiper与swiper-item -->
+<swiper class="swiper-box" indicator-dots circular>
+    <swiper-item>
+        <view></view>
+    </swiper-item>
+    <swiper-item>
+        <view></view>
+    </swiper-item>
+    <swiper-item>
+        <view></view>
+    </swiper-item>
+</swiper>
+<!-- 基础内容组件。text与rich-text -->
+<view class="text-box">
+    手机号长按选中
+    <text user-select>19898510903</text>
+</view>
+<view class="rich-text-box">
+    <rich-text nodes="<h2 style='color:green'>我是富文本渲染出来的</h2>"></rich-text>
+</view>
+<!-- button组件-->
+<view>---------------通过type指定按钮类型---------------</view>
+<button>默认按钮</button>
+<button type="primary">主色调按钮</button>
+<button type="warn">警告按钮</button>
+<view>---------------通过size指定按钮类型----------------</view>
+<button size="mini">小按钮</button>
+<button size="mini" type="primary">小按钮</button>
+<button size="mini" type="warn">小按钮</button>
+<view>---------------通过plain指定按钮类型---------------</view>
+<button plain>镂空按钮</button>
+<button plain type="primary">镂空按钮</button>
+<button plain type="warn">镂空按钮</button>
+<!-- image组件 -->
+<view class="image-box">
+    <image></image>
+    <!-- 注意：此处的路径是小程序开发包里配置好的，第一个"/"号则代表根目录 -->
+    <!-- 当然也可以通过手动写相对路径的方法 -->
+    <image src="/images/封印解除.png"/>
+</view>

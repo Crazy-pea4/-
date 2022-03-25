@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        section div:nth-child(1) {
+            background-color: hotpink;
+        }
+        /* 可以看到并没有把 乔治 或者是 小猪佩奇 选出来更改颜色 */
+        /* 原因就是在section里面第一个孩子不是div，所以没有选中 */
+        section div:nth-of-type(1) {
+            background-color: hotpink;
+        }
+        /* 如果使用了nth-of-type就可以选中乔治div */
+        section li:nth-of-type(2n) {
+            background-color: sienna;
+        }
+    </style>
+</head>
+<body>
+    <!-- nth-child(n)和nth-of-type(n)的区别 -->
+    <section>
+        <p>小猪佩奇</p>
+        <div>乔治</div>
+        <div>猪妈妈</div>
+        <li>我是第1</li>
+        <li>我是第2</li>
+        <li>我是第3</li>
+        <li>我是第4</li>
+        <li>我是第5</li>
+        <li>我是第6</li>
+        <li>我是第7</li>
+        <li>我是第8</li>
+    </section>
+</body>
+</html>

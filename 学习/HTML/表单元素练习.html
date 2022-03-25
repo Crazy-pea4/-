@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="xxx.php" method="GET"> <!--method中get能看的到用户提交的信息，post看不到-->
+        <!-- text：用户可以输入任何文字 -->
+        <!-- value:默认初始时的值 -->
+        <h4 align="center">用户名: <input type="text" name="username" placeholder="请输入"></h4>
+        <!-- password:输入的密码有遮码功能 -->
+        <h4 align="center">密码: <input type="password" name="pwd" placeholder="请输入"></h4>
+        <!-- radio:单选按钮，可以实现多选一 -->
+        <!-- name:是表单元素的名称，这里的性别选择必须拥有相同的名字，这样才能实现多选一 -->
+        <!-- 单选按钮和复选框可以设置checked属性，当页面打开的时候就可以默认选中这个按钮 -->
+        <!-- label用于绑定一个表单元素，当点击绑定的表单元素时，浏览器会自动将标点（光标）转移或选择到对于被绑定的表单元素上，用来增加用户体验 -->
+        <h4 align="center">性别: <label for="boy">男</label><input type="radio" name="sex" value="男" checked id="boy"> <label for="girl">女</label><input type="radio" name="sex" value="女" id="girl"></h4>
+        <!-- checkbox:复选框，可以实现多选 -->
+        <!-- submit按钮，提交功能，把数据提交到后台服务器，可以赋value值来改变框内内容 -->
+        <!-- reset能把用户输入上去的信息全部清除，方便修改 -->
+        <h4 align="center">爱好: 干饭<input type="checkbox" name="hobby" value="干饭"> 睡觉<input type="checkbox" name="hobby" value="睡觉"> 玩游戏<input type="checkbox" name="hobby" value="玩游戏"></h4>
+        <h4 align="center"><input type="submit" value="免费注册" name="submit"><input type="reset" value="重新填写"> </h4>
+        <!-- botton提供一个按钮 -->
+        <h4 align="center"><input type="button" value="免费获取短信验证码"></h4>
+        <!-- file是文件域，点击后可以上传电脑文件 -->
+        <h4 align="center">选择文件:<input type="file" value="选择文件"></h4>
+
+        目的地：<select>
+            <option>地球</option>
+            <option selected>火星</option>
+            <option>木球</option>
+            <option>太阳</option>
+
+        </select>
+    </form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 在学习class类之前，值得注意的是，class类只是一个es6中新增加的语法糖，其功能也可以通过es5的相关代码实现，学习class只是让对象的结构更加清晰明了
+
+        // 在es6之前，用构造函数写一个实例化对象
+        function Games(name, size) {
+            this.name = name;
+            this.size = size;
+        }
+        Games.prototype.color = function () {
+            console.log('我是射击游戏');
+        }
+        const gta5 = new Games('gta5', '60g');
+        console.log(gta5);
+        gta5.color();
+
+        // 而在es6中，我们可以用class类来创建一个更加‘明确’的对象
+        class youxi {
+            // 构造方法 constructor()为固定格式
+            constructor(name, size) {
+                this.name = name;
+                this.size = size;
+            }
+
+            // 添加方法，不支持写成color: function() {}格式
+            color() {
+                console.log('我是射击游戏');
+            }
+        }
+        const GTA5 = new youxi('使命召唤', '80g');
+        console.log(GTA5);
+        GTA5.color();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 在es6中提供了Map数据结构，类似于对象，也是键值对的集合。但“键”的范围不像普通对象局限于字符串，各种类型的值都可以当做键
+        // 提供iterator接口
+        const m = new Map();
+        // set：增加一个元素返回到当前的Map
+        m.set('name', '叶萌');
+        m.set('skill', function changeform(body) {
+            body += 100; // 体型变化加100
+        });
+        m.set('age', 19);
+        // 也可以向Map中添加对象作为键
+        const key = {
+            location: '惠州'
+        }
+        m.set(key, ['惠城区']);
+
+        // size：返回Map元素个数
+        console.log(m.size);
+
+        // delete：删除指定Map元素
+        m.delete('name');
+
+        // get：返回键名对象的键值
+        console.log(m.get(key));
+
+        // has：检测Map中是否包含某个元素
+        console.log(m.has(key));
+
+        console.log('==========================for...of==================================');
+        // 使用for...of遍历Map
+        for (const e of m) {
+            console.log(e);
+            // Map中使用for...of循环出来的每个元素都是一个数组
+        }
+        console.log('--------------------------------');
+        // 也可以写成下面的样子
+        for (const [key, value] of m) {
+            console.log(key, value);
+        }
+
+        console.log('===========================forEach=================================');
+        // 使用forEach方法遍历Map
+        m.forEach((value, key) => console.log(value, key));
+        
+        console.log(m);
+
+        // clear()：清空集合，返回undefined
+        m.clear();
+        console.log(m);
+    </script>
+</body>
+
+</html>

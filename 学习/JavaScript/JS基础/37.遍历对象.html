@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Obj(name, age, health,skills) {
+            this.name = name;
+            this.age = age;
+            this.health = health;
+            this.skills = skills;
+        }
+        var superman = new Obj('大便超人',26,'5000','使用大便攻击');
+        // for in语句专门用来对对象的属性进行遍历，其中变量key或k是行业规范，in后面的是对象不要写成构造函数名
+        for(var key in superman) {
+            console.log(key); //此时输出的是对象的属性名
+            console.log(superman[key]); //此时输出的是对象的属性值
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

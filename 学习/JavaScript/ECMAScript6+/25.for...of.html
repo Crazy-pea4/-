@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const arr = [12, 56, 83, 98];
+
+        for (const e of arr) {
+            console.log(e);
+            // 可以看出，for...of循环中，拿到的是数组中的元素，而不是对应下标
+            if (e > 56) {
+                break; // 并且for...of循环可以随时终止循环，
+            }
+        }
+        console.log('================================================================');
+        arr.forEach(element => { // 而forEach不能随时终止
+            console.log(element);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function* fn() {
+            console.log('叶萌');
+        }
+        // 可以看到，只有调用了生成器对象函数中的next()方法，整个函数体才会执行
+        console.log(fn().next());
+
+        console.log('--------------------------------------------------------');
+        // 生成器函数经常与yield搭配使用，yield的作用域return相似但不会结束函数体，只会暂停函数体，yield被看做是基于生成器来取代return的关键字
+        function* fnn() {
+            console.log('1');
+            let one = yield 100;
+            console.log(one);
+            yield 200;
+            console.log('3');
+            yield 300;
+            console.log('4');
+            yield 400;
+        }
+        const g = fnn() // 如果不用变量储存fnn()，而是直接输出fnn().next()的话，看到的值是不会变得
+        console.log(g.next()); // next()也可以传参，传入的参数会作为上一个next方法中的value值，也就是yield返回的值
+        console.log(g.next('aaa')); // 例如，我在第二个next()方法中传入一个'aaa'，那么第一个next中的value从100变成了'aaa'
+        console.log(g.next());
+        console.log(g.next());
+        // 惰性执行，每发出一次指令才执行一次
+
+        console.log('--------------------------------------------------------');
+        // 使用生成器对象去创建一个iterable接口(利用了生成器内部也有iterable接口)
+        const o = {
+            arr1: [1, 2, 3, 4, 5],
+            arr2: [6, 7, 8, 9, 10],
+            [Symbol.iterator]: function* () {
+                const all = [...this.arr1, ...this.arr2];
+                for (const item of all) {
+                    yield item;
+                }
+            }
+        }
+        for (const e of o) {
+            console.log(e);
+        }
+    </script>
+</body>
+
+</html>

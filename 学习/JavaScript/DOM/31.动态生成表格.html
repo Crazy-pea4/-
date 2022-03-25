@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        table th {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellspacing='0px' cellpadding='0px' border='1'>
+        <thead>
+            <tr>
+                <th width='100px' height='35px'>姓名</th>
+                <th width='100px' height='35px'>科目</th>
+                <th width='100px' height='35px'>成绩</th>
+                <th width='100px' height='35px'>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        // 模拟从数据库中获取数据
+        var datas = [{
+                name: '陈楚明',
+                subject: '数学',
+                score: 100
+            },
+            {
+                name: '李晨光',
+                subject: '数学',
+                score: 98
+            },
+            {
+                name: '方威',
+                subject: '数学',
+                score: 97
+            },
+            {
+                name: '大便超人',
+                subject: '数学',
+                score: 61
+            },
+            {
+                name: '甄恒熙',
+                subject: '数学',
+                score: 7
+            }
+        ]
+        var tbody = document.querySelector('tbody');
+        // 1. 创建行数
+        for (var i = 0; i < datas.length; i++) { // 通过判断数组长度来添加对于人数的行数
+            var rows = document.createElement('tr');
+            tbody.appendChild(rows); // 每创建一个行就添加到tbody里面
+            // 2. 创建单元格
+            for (var k in datas[i]) { // 每个tr里需要创建对象属性个数数量的单元格 利用forin循环来遍历对象
+                var td = document.createElement('td'); // forin 语句用来遍历对象，有多少个属性遍历多少次
+                td.innerHTML = datas[i][k]; // 创建完成td后将对象里面的属性值也就是object[k]赋给td
+                rows.appendChild(td);
+            }
+            // 3. 创建删除按钮
+            var del = document.createElement('td');
+            del.innerHTML = '<a href = "javascript:void(0)">删除</a>'; // 这里用a标签来写
+            rows.appendChild(del);
+            // 4. 编写删除执行逻辑
+            var del_btn = document.querySelectorAll('a'); // 获取a链接
+            del_btn[i].onclick = function () {
+                tbody.removeChild(this.parentNode.parentNode); // 因为a链接在td（a的爸爸）里面，想要删除tr（a的爷爷）
+            }
+        }
+    </script>
+</body>
+
+</html>

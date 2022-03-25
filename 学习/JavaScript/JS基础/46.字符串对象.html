@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1.字符串不可变性
+        var str1_1 = 'blue'; //首先在内存中开辟了一个存放blue的空间
+        console.log(str1_1);
+        str1_1 = '8'; //由于字符串的不可变性，变量str指向新开辟的存放'8'的空间，但blue所在的空间并不会被消除
+        console.log(str1_1); //因此，字符串不可以大量拼接，避免造成内存资源的浪费
+        console.log('=============================================================');
+        // 2.字符串对象，返回字符位置 indexOf('要查找的字符',[查找的起始位置]) lastIndexOf('要查找的字符',[查找的起始位置])
+        var str2_1 = '经过苏美女神身边，我以女神之名许愿';
+        console.log(str2_1.indexOf('女神')); //输出4,以第一个字为准
+        console.log(str2_1.indexOf('女神', 5)); //从索引号为5的位置（神）开始查找，直至找到下一个女神
+        console.log(str2_1.indexOf('派大星')); //找不到则返回-1
+        console.log('============================================================');
+        // 3.根据位置返回字符
+        var str3_1 = 'blue';
+        console.log(str3_1.charAt(2)); //charAt(index)会根据索引号返回相应字符
+        var str3_2 = 'alike';
+        console.log(str3_2.charCodeAt(0)); //charCodeAt(index)会根据索引号返回相应字符所对应的ASCII值,a:97。常用来获取用户的输入值
+        var str3_3 = 'green';
+        console.log(str3_3[1]); //str[index]获取指定位置的字符,HTML5、IE8支持，与charAt()等效
+        console.log('============================================================');
+        // 4.字符串操作方法（重点）
+        var str4_1 = 'apple';
+        var str4_2 = 'orange';
+        console.log(str4_1.concat(str4_2)); //拼接字符串，等效于'+'，+更常用
+        var str4_3 = 'abcdefghijk';
+        console.log(str4_3.substr(2, 5)); //substr(start,length) 拼接字符串 从start位置开始，去length个值
+        var str4_4 = 'abcdefghijk';
+        console.log(str4_4.slice(1, 4)); //slice(start,end) 拷贝数组 从start开始，到end结束，取不到end，返回拷贝元素组成的数组
+        var str4_5 = 'abcdefghijk';
+        console.log(str4_5.substring(2, 6)); //substring(start,end) 拷贝数组 基本同slice相同，但不接受负数
+        var str4_6 = 'girlgood';
+        console.log(str4_6.replace('g', 'G')); //replace('被替换字符， '替换的字符') 只会替换一个字符 !会形成新的字符串!
+        var str4_7 = 'apple,orange,banana';
+        console.log(str4_7.split(',')); //split('分隔符') 将字符串转换成数组 split里的分隔符必须要与字符串里的一致，才能将里面的元素分成数组
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

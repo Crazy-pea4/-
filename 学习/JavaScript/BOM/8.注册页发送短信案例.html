@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <button>发送</button>
+    <script>
+        var btn = document.querySelector('button');
+        var flag = 5;
+        btn.addEventListener('click', function () {
+            btn.disabled = true;
+            countDown(); // 优化用户体验，先显示时间，而不是等一秒后再显示
+            function countDown() {
+                if (flag >= 1) { // 如果时间大于等于1则执行倒计时
+                    btn.innerHTML = '还剩下' + flag + '秒';
+                    flag--;
+                } else { // 否则复原按钮状态
+                    btn.disabled = false;
+                    btn.innerHTML = '发送';
+                    clearInterval(count); // 停止定时器
+                    flag = 5; // 复原标识变量flag
+                }
+            }
+            var count = setInterval(countDown, 1000);
+        });
+    </script>
+</body>
+
+</html>

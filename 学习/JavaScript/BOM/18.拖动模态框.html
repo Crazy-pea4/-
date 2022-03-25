@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .click {
+            font-size: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .box {
+            display: none;
+            position: relative;
+            margin: 100px auto;
+            width: 500px;
+            height: 250px;
+            background-color: white;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .box p {
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .box .cancel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .username {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .username input {
+            width: 280px;
+            height: 50%;
+        }
+
+        .pwd {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .pwd input {
+            width: 280px;
+            height: 50%;
+        }
+
+        .login {
+            position: absolute;
+            float: left;
+            bottom: 50px;
+            left: 150px;
+            width: 200px;
+            height: 30px;
+            border: 1px solid #ccc;
+            background-color: white;
+            text-align: center;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 需求:
+    1.点击弹出登录框,同时背景变灰
+    2.可关闭登录框
+    3.可拖动登录框 -->
+    <p href="javascript:void(0)" class="click">点击登录</p>
+    <div class="box">
+        <p>登录会员</p>
+        <div class="cancel">×</div>
+        <div class="username">
+            <span>用户名</span>
+            <input type="text">
+        </div>
+        <div class="pwd">
+            <span>登录密码</span>
+            <input type="text">
+        </div>
+        <div>
+            <a href="javascript:void(0)" class="login">登录会员</a>
+        </div>
+    </div>
+    <script>
+        var click = document.querySelector('.click');
+        var box = document.querySelector('.box');
+        var cancel = document.querySelector('.cancel');
+        var p = box.children[0];
+        click.addEventListener('click', function () {
+            box.style.display = 'block';
+            document.body.style.backgroundColor = '#b0b3b0';
+        });
+        cancel.addEventListener('click', function () {
+            box.style.display = 'none';
+            document.body.style.backgroundColor = 'white';
+        })
+        // 拖动登录框
+        p.addEventListener('mousedown', function (e) {
+            // 先把鼠标在盒子中的坐标获取过来
+            var x = e.pageX - this.offsetLeft;
+            var y = e.pageY - this.offsetTop;
+            // 这里要用document而不是p原因在于盒子被拖动时可能跟不上鼠标，鼠标会超出范围，所以用document选中整个页面好一点
+            document.addEventListener('mousemove', movement);
+            // 起个名字，后面好删除
+            function movement(e) {
+                // 每次移动鼠标，鼠标移动的距离等于盒子移动的距离，这样看起来就像是鼠标拖着盒子
+                e.preventDefault();
+                box.style.left = e.pageX - x + 'px';
+                box.style.top = e.pageY - y + 'px';
+            }
+            document.addEventListener('mouseup', function() {
+                document.removeEventListener('mousemove', movement);
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // Object.is方法 比较两个值是否相等
+        console.log(
+            // 0 == false // 两等运算符在比较前会自动转换数据类型
+            // 0 === false
+            // +0 === -0 // 返回结果是true
+            // NaN === NaN // 两个NaN相比较结果是false
+            // Object.is(+0, -0) // 可以区分+0和-0
+            Object.is(NaN, NaN)
+        );
+    </script>
+</body>
+</html>

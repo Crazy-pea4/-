@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 420px;
+            height: 350px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 1.行内操作 element.style 2. 类名样式操作 element.className
+        var box = document.querySelector('div');
+        var flag = 0;
+        box.onclick = function () { //js修改了style样式之后，产生的是行内样式，CSS权重比高
+            if (flag == 0) {
+                box.style.backgroundColor = '#ccc';
+                box.style.width = '800px';
+                box.style.height = '650px';
+                flag = 1;
+            } else {
+                box.style.backgroundColor = 'hotpink';
+                box.style.width = '420px';
+                box.style.height = '350px';
+                flag = 0;
+            }
+        }
+    </script>
+</body>
+
+</html>

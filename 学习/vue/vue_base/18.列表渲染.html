@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+		v-for指令:
+			1.用于展示列表数据
+			2.语法：v-for="(item, index) in xxx" :key="yyy"
+			3.可遍历：数组、对象、字符串（用的很少）、指定次数（用的很少）
+	-->
+    <div class="r">
+        <h2>遍历数组（使用最多）</h2>
+        <ul>
+            <li v-for="(location, index) in locations" :key="location.id">
+                {{location}} --- {{index}}
+            </li>
+        </ul>
+
+        <h2>遍历对象</h2>
+        <ul>
+            <li v-for="(value, key) in person" :key="key">
+                {{value}} --- {{key}}
+            </li>
+        </ul>
+
+        <h2>遍历字符串（罕见）</h2>
+        <ul>
+            <li v-for="(char, index) in str" :key="index">
+                {{char}} --- {{index}}
+            </li>
+        </ul>
+
+        <!-- 极为少见 -->
+        <h2>遍历指定次数（极为罕见）</h2> 
+        <ul>
+            <li v-for="(number, index) in 5" :key="index">
+                {{number}} --- {{index}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '.r',
+            data() {
+                return {
+                    locations: [{
+                            id: 1,
+                            name: '北京'
+                        },
+                        {
+                            id: 2,
+                            name: '上海'
+                        },
+                        {
+                            id: 3,
+                            name: '广州'
+                        }
+                    ],
+                    person: {
+                        name: '迪迦',
+                        age: '18W岁',
+                        skill: '动感光波'
+                    },
+                    str: '你好鸭'
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

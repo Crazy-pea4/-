@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body>a {
+            width: 260px;
+            height: 163px;
+            background-color:cadetblue;
+        }
+
+        body p a {
+            width: 260px;
+            height: 163px;
+            background-color:cadetblue;
+            /* 转换为块元素 */
+            display: block;
+        }
+
+        body div {
+            width: 260px;
+            height: 163px;
+            background-color:goldenrod;
+            /* 转换为行内元素 */
+            display: inline;
+        }
+        body span {
+            width: 300px;
+            height: 163px;
+            background-color:gray;
+            /* 转换为行内块元素 */
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    <a href="#">大便超人</a> <a href="#">京东商城</a>
+
+    <!-- 将a标签设置成块元素后 -->
+    <p><a href="#">我爱中国</a></p>
+
+    <!-- 将div设置为行内元素后 -->
+    <div>一个大便就是你</div>
+
+    <span>将块元素转换为行内块元素</span>
+</body>
+</html>

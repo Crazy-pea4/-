@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 在es6以前，我们通过给构造函数对象添加属性或方法来获得静态的对象或方法，因为函数也是一种对象
+
+        // es6中通过static关键字来声明一个静态方法或者属性
+        class game {
+            constructor() {
+
+            }
+            // 静态对象写在constructor外面，静态方法属于类(game)里的属性，而不属于实例对象(youxi)的属性
+            static gta5 = 'gta5';
+            static size() {
+                console.log('我有80g那么大');
+            };
+        }
+        const youxi = new game;
+        console.log(game.gta5);
+        game.size()
+        // 下面可以看出静态成员不属于实例对象
+        console.log(youxi.gta5);
+        youxi.size();
+    </script>
+</body>
+
+</html>

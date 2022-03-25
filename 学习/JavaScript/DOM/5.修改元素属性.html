@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 400px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="ldy">刘德华</button>
+    <button id="zxy">张学友</button>
+    <!-- 刘德华图片 -->
+    <img src="../../JavaScript API_material/第一天/images/ldh.jpg" alt="" title="刘德华">
+    <script>
+        //修改元素属性
+        var ldh = document.getElementById('ldy');
+        var zxy = document.getElementById('zxy');
+        var img = document.getElementsByTagName('img');
+        ldh.onclick = function () {
+            img[0].src = '../../JavaScript API_material/第一天/images/ldh.jpg'; //修改src
+            img[0].title = '刘德华'; //修改title
+        }
+        zxy.onclick = function () {
+            img[0].src = '../../JavaScript API_material/第一天/images/zxy.jpg';
+            img[0].title = '张学友';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .focus_box {
+            position: relative;
+            margin: 100px auto;
+            width: 800px;
+            height: 500px;
+            background-color: pink;
+        }
+
+        .arrow_left,
+        .arrow_right {
+            display: none;
+            position: absolute;
+            top: 240px;
+            height: 42px;
+            background-color: #ccc;
+            opacity: 0.5;
+            font-size: 28px;
+            z-index: 2;
+        }
+
+        .arrow_left {
+            left: 0;
+        }
+
+        .arrow_right {
+            right: 0;
+        }
+
+        .focus_pic_father {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .focus_box .focus_pic {
+            position: absolute;
+            width: 500%;
+        }
+
+        .focus_box .focus_pic a img {
+            float: left;
+            width: 800px;
+            height: 500px;
+            z-index: 1;
+        }
+
+        .focus_box .focus_circle {
+            position: absolute;
+            bottom: 10px;
+            left: 350px;
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .focus_box .focus_circle li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 0 5px;
+            border: 1px solid white;
+            opacity: 0.8;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .focus_circle_current {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="focus_box">
+        <a href="javascript:void(0)" class="arrow_left">&lt;</a>
+        <a href="javascript:void(0)" class="arrow_right">&gt;</a>
+        <div class="focus_pic_father">
+            <ul class="focus_pic">
+                <li>
+                    <a href="javascript:void(0)"><img src="../../素材/images/focus.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="../../素材/images/focus1.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="../../素材/images/focus2.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="../../素材/images/focus3.jpg" alt=""></a>
+                </li>
+            </ul>
+            <ul class="focus_circle">
+            </ul>
+        </div>
+    </div>
+    <script>
+        const focus_box = document.querySelector('.focus_box');
+        const focus_pic = document.querySelector('.focus_pic');
+        const arrow_left = document.querySelector('.arrow_left');
+        const arrow_right = document.querySelector('.arrow_right');
+        const focus_circle = document.querySelector('.focus_circle');
+        let num = 0;
+        let circle = 0;
+        // ----------------------------经过显示左右箭头，离开隐藏左右箭头------------------------------------
+        focus_box.addEventListener('mouseover', function (e) {
+            arrow_left.style.display = 'block';
+            arrow_right.style.display = 'block';
+            clearInterval(timer);
+            timer = null;
+        });
+        focus_box.addEventListener('mouseout', function (e) {
+            arrow_left.style.display = 'none';
+            arrow_right.style.display = 'none';
+            timer = setInterval(() => {
+                arrow_right.click();
+            }, 3000);
+        });
+        // ----------------------------------动态生成小圆圈---------------------------------------------
+        for (let i = 0; i < focus_pic.children.length; i++) {
+            let li = document.createElement('li');
+            li.setAttribute('index', i);
+            focus_circle.appendChild(li);
+            //----------------------------------小圆圈排他----------------------------------------------------
+            li.addEventListener('click', function (e) {
+                for (let j = 0; j < focus_circle.children.length; j++) {
+                    focus_circle.children[j].className = '';
+                }
+                this.className = 'focus_circle_current';
+                // ------------------------------------点击小圆圈滑动至对应图片（ul动，而不是li动）--------------------------------------------
+                // ！ul移动的距离 = -(每个小圆圈的索引号 * 图片的宽度)！
+                // 获取当前的li里面的索引号
+                let focusWidth = focus_pic.querySelector('img').offsetWidth;
+                let index = this.getAttribute('index');
+                // 让num与index关联起来，解决了点小圆圈后，再点击左右箭头会出现页面跳转不符的bug
+                num = index;
+                // 同时也要让circle与index关联起来
+                circle = index;
+                animate(focus_pic, -(index * focusWidth))
+            })
+        }
+        focus_circle.children[0].className = 'focus_circle_current';
+        const clone = focus_pic.children[0].cloneNode(true);
+        focus_pic.appendChild(clone);
+        // 点击左右箭头，切换图片
+        arrow_right.addEventListener('click', function (e) {
+            if (num == focus_circle.children.length) {
+                // 无缝滚动，将第一张图片复制一份放到最后面，点击了最后面的li（也就是第一个li的复制体），就让left：0，直接切换到第一个li上，从而实现无缝滚动
+                focus_pic.style.left = 0;
+                num = 0;
+            }
+            num++;
+            animate(focus_pic, -(num * focus_pic.querySelector('img').offsetWidth));
+            // 小圆圈跟随箭头移动
+            circle++;
+            if (circle == focus_circle.children.length) {
+                circle = 0;
+            }
+            for (let i = 0; i < focus_circle.children.length; i++) {
+                focus_circle.children[i].className = '';
+            }
+            focus_circle.children[circle].className = 'focus_circle_current';
+        });
+        arrow_left.addEventListener('click', function (e) {
+            if (num == 0) {
+                num = focus_circle.children.length;
+                focus_pic.style.left = -num * focus_pic.querySelector('img').offsetWidth + 'px';
+            }
+            num--;
+            animate(focus_pic, -(num * focus_pic.querySelector('img').offsetWidth));
+            // 小圆圈跟随箭头移动
+            circle--;
+            if (circle < 0) {
+                circle = focus_circle.children.length - 1;
+            }
+            for (let i = 0; i < focus_circle.children.length; i++) {
+                focus_circle.children[i].className = '';
+            }
+            focus_circle.children[circle].className = 'focus_circle_current';
+        });
+        let timer = setInterval(() => {
+            arrow_right.click();
+        }, 3000);
+    </script>
+    <script src="30.动画封装.js"></script>
+</body>
+
+</html>

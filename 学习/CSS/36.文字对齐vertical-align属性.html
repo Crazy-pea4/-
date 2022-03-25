@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            /* baseline是默认情况：基线对齐 */
+            /* vertical-align: baseline; */
+            /* top是与行中最高元素的顶端对齐 */
+            /* vertical-align: top; */
+            /* 最常用，middle是与父元素的中间对齐 */
+            /* vertical-align: middle; */
+            /* bottom是与行中最低的元素的底端对齐 */
+            /* vertical-align: bottom; */
+        }
+
+        div {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 使用vertical-align属性让图片和文字居中对齐 -->
+    <div>
+        <img src="image/封印解除.png" alt="" style="vertical-align: middle;"> 我超勇的啦
+    </div>
+    <!-- 解决图片底部默认空白缝隙问题 -->
+    <div>
+        <img src="image/练习用图.jpg" alt="">可以看到图片下边缘并没有贴合边框，这是因为图片默认与文字的基线对齐，只需要将vertical-align改成不是baseline属性即可或是将图片转换成块元素
+    </div>
+</body>
+
+</html>

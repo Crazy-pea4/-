@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <button>点击发送请求</button>
+    <button>点击取消请求</button>
+    <div></div>
+    <script>
+        var btn = document.querySelectorAll('button');
+        var div = document.querySelector('div');
+        let xhr = null;
+        btn[0].addEventListener('click', function(e) {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET','http://localhost:8000/delay');
+            xhr.send();
+            })
+        // 终止 abort
+        btn[1].addEventListener('click', function(e) {
+            xhr.abort();
+        })
+        // 因为在不同函数里不能x不共用
+    </script>
+</body>
+
+</html>

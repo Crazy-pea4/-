@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>您好</p>
+    <div>
+        <span></span>
+        <i>用户</i>
+    </div>
+    <script>
+        let parameter = location.search.substring(1);
+        const arr = parameter.split("=");
+        const span = document.querySelector('span');
+        span.innerHTML = arr[1];
+    </script>
+</body>
+</html>

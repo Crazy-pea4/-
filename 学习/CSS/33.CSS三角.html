@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 0;
+            height: 0;
+            border-top: 50px solid red;
+            border-bottom: 50px solid green;
+            border-right: 50px solid skyblue;
+            border-left: 50px solid purple;
+            margin: 100px auto;
+            /* 因为没有设置内容，但是有边框，于是边框就从对应的端面延伸，四个端面彼此影响，最终形成4个三角形 */
+        }
+
+        /* 制作上三角 */
+        .box2 {
+            width: 0;
+            height: 0;
+            /* 为了照顾某些浏览器的兼容性 */
+            /* 还需要加上下面这段语法 */
+            line-height: 0;
+            font-size: 0;
+            border: 50px solid transparent;
+            border-top-color: greenyellow;
+            margin: 50px auto;
+        }
+
+        .jingdong {
+            position: relative;
+            float: left;
+            top: 20px;
+            left: 20px;
+            width: 180px;
+            height: 249px;
+            background-color: blueviolet;
+        }
+
+        .triangle1 {
+            position: absolute;
+            top: -18px;
+            left: 135px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-bottom-color: blueviolet;
+        }
+
+        .xiaomi {
+            position: relative;
+            top: 20px;
+            left: 400px;
+            width: 180px;
+            height: 249px;
+            background-color: hotpink;
+        }
+
+        .triangle2 {
+            position: absolute;
+            top: 19px;
+            left: 178px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-left-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="jingdong">
+        <div class="triangle1"></div>
+    </div>
+    <div class="xiaomi">
+        <div class="triangle2"></div>
+    </div>
+</body>
+
+</html>

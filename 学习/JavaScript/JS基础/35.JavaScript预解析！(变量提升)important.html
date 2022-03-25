@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // JavaScript预解析
+        // 1.会提升变量，但不提升赋值操作
+        // 2.将当前作用域的函数声明提升到整个作用域最前面
+        // var a = 25;
+
+        // function abc() {
+        //     alert(a);    结果是：undefined
+        //     var a = 10;
+        // }
+        //      ||
+        //      || 
+        //      ↓
+        // 
+        //  var a;                   // 在全局作用域里提升变量
+        //  function abc() {         // 在全局作用域里提升函数
+        //    var a;                 // 在局部作用域里提升变量
+        //    alert(a);     　　　　　 //  a 的值是 undefined
+        //    a = 10;                // 在局部作用域里给变量赋值
+        //  }
+        //  a = 25;                  // 给变量赋值
+        //  abc();                   // 调用函数
+
+        // 注意：在ES6+新定义的let和const没有变量提升属性，若不声明先调用则会报错 
+
+        // 重点！important
+        function fn() {
+            var a = b = c = 9;
+            // 上面的代码想当于var a = 9; b = 9; c = 9;由于在函数中不声明变量赋值会使变量变成全局变量
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+        fn();
+        console.log(c);
+        console.log(b);
+        console.log(a); // var 定义变量是存在函数作用域的
+        // 所以输出结果为9 9 9 9 9 报错(未定义)
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

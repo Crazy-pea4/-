@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            width: 40px;
+            height: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <button>提交</button>
+    </div>
+    <ul></ul>
+    <script>
+        var text = document.getElementById("text"); //获取留言板
+        var btn = document.querySelector("button"); //获取按钮
+        var ul = document.querySelector("ul"); //获取留言框
+        btn.onclick = function () {
+            if (text.value == "") {
+                return false;
+            } else {
+                var li = document.createElement("li");
+                li.innerHTML = text.value;
+                ul.insertBefore(li, ul.firstChild);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 400px;
+            height: 150px;
+            background-color: hotpink;
+            margin: 100px auto;
+            padding: 5px;
+        }
+        .pic {
+            /* 根据文字会环绕浮动元素，利用这点给图片一个浮动 */
+            float: left;
+            width: 200px;
+            height: 150px;
+            margin-right: 16px;
+        }
+        .pic img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+     <div class="box">
+         <div class="pic">
+             <img src="image/练习用图.jpg" alt="">
+         </div>
+         <p>爱，死亡和机器人是一部由Netflix出品的超级无敌好看的剧，就是第二季有点拉胯了</p>
+     </div>
+</body>
+</html>

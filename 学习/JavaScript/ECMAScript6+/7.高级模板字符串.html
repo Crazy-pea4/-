@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // const str = console.log`你好`;
+        // 会发现 你好 存在数组里
+        // 高级写法：functionName`content`;
+
+        const name1 = '派大星';
+        const sex = 'male';
+        function fn(str, name1, sex) {
+            console.log(str, name1, sex);
+            // 返回值会作为sum的结果
+            return '你好';
+        }
+        // 函数的执行过程：首先会将 ``的内容中以${}为分割，作为第一个数组形参（即str中存放着分隔后的字符数组元素），而剩下的 ${} 会分别当成实参传递会函数当成对应形参（即派大星对应形参name1，male对应形参sex）
+        const sum = fn`你好，${name1}，爱吃冰激凌 ${sex}.`;
+        console.log(sum);
+        // 适合对模板字符串加工，使其符合要求
+    </script>
+</body>
+</html>

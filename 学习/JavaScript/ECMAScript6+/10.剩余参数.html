@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // 注意：这种操作符只能出现在形参表中的最后一位
+        function arr(x, ...args) {
+            // 传统方法运用js提供的arguments方法
+            // console.log(arguments);
+            console.log(args);
+            // 使用新方法 ...数组名 来接收所有形参并将形参放入args中，改进了伪数组arguments不能进行的一些数组操作如push、pop
+        }
+        arr(1,2,3,5,798,54432);
+    </script>
+</body>
+</html>

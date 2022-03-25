@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 此外，箭头函数不会改变this的指向
+        const person = {
+            name: '叶萌',
+            // sayHi: function () {
+            //     console.log(`你好鸭，我是${this.name}`);
+            // }
+            sayHi: () => {
+                // 会看到，相较于普通函数，箭头函数的this仍然指向方括号外，也就是全局对象，故找不到name值 2021.11.07
+                console.log(`你好鸭，我是${this.name}`);
+            },
+            sayHi2: function () {
+                // 在以前，要是在自定义对象的方法中使用定时器进行用this操作，需要在定时器外部创建变量 _this = this 来保存指向的person对象
+                // 因为定时器属于window对象的方法，不这么做会导致在定时器内部使用this指不到自定义对象
+                const _this = this;
+                setTimeout(function () { 
+                    console.log(_this.name);
+                }, 1000)
+            },
+            // 但是在ec2015中，箭头函数很好的解决了这种麻烦的操作
+            // 在箭头函数中使用this，指向的是大括号外面的对象，也就是person
+            sayHi3: function () {
+                setTimeout(() => {
+                    console.log(this.name);
+                }, 1000);
+            }
+        }
+        person.sayHi3();
+    </script>
+</body>
+
+</html>

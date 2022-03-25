@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function Car(name, color) {
+            this.name = name;
+            this.color = color;
+        }
+        const car = new Car('长城', '红色');
+        // 若在原型对象中用对象的方式储存方法。此方法经常需要手动添加一个consrtuctor属性让它指向原来的构造函数
+        Car.prototype = {
+            constructor: Car,
+            run: () => {
+                console.log('我可以行使');
+            },
+            stop: () => {
+                console.log('我可以刹车');
+            }
+        }
+        console.log(car);
+        // 在__proto__和prototype中都有一个constructor属性，因为它指回构造函数本身，所以我们称它为构造函数
+        console.log(Car.prototype.constructor);
+        console.log(car.__proto__.constructor);
+        // car.__proto__仍然指向Car中先前的对象原型
+        console.log(Car.prototype === car.__proto__);
+    </script>
+</body>
+
+</html>

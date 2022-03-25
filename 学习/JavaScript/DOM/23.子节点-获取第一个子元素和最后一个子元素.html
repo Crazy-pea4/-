@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>我是儿子1</li>
+        <li>我是儿子2</li>
+        <li>我是儿子3</li>
+        <li>我是儿子4</li>
+    </ol>
+    <script>
+        var ol = document.querySelector('ol');
+        // 1. 获取第一个子节点parentNode.firstChild(无论元素、属性、文本)  获取最后一个子节点parentNode.firstChild(无论元素、属性、文本)
+        console.log(ol.firstChild);
+        console.log(ol.lastChild);
+        // 2. 获取第一个子元素节点parentNode.firstElementChild  获取最后一个子元素节点parentNode.lastElementChild
+        console.log(ol.firstElementChild);
+        console.log(ol.lastElementChild);
+        // 方法2虽然很好，但在ie9以上才支持
+        // 3. 实际开发写法 第一个子元素parentNode.children[0]  最后一个子元素parentNode.children[parentNode.children.length - 1]
+    </script>
+</body>
+</html>

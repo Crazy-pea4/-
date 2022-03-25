@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 普通函数 需要被调用再执行
+        function fn() {
+            console.log(1);
+        }
+        fn();
+        // 立即执行函数  写法
+        // 1. (function() {})();  ||  2. (function(){}());
+        (function () {
+            console.log(2);
+            console.log(arguments);
+        })(1, 2, 3); // 第二个小括号看成是调用函数，可以传参
+
+        (function () {
+            console.log(2);
+            console.log(arguments);
+        }(1, 2, 3));
+
+        // 立即执行函数做大的作用是 独立创建了一个作用域：在立即函数体内部定义的变量是局部变量，并且在执行完毕后立马释放
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="r">
+        <h2>请搜索您想要的明星</h2>
+        <!-- 1. 收集用户输入信息 -->
+        <input type="text" name="" id="" placeholder="请输入" v-model="keyWord">
+        <button @click="sortType = 1">年龄升序</button>
+        <button @click="sortType = -1">年龄降序</button>
+        <ul>
+            <li v-for="(p, index) in filpeople" :key="p.id">
+                {{p.name}}-年龄：{{p.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '.r',
+            data() {
+                return {
+                    sortType: 0, // 1位升序，-1为降序
+                    keyWord: '',
+                    people: [{
+                            id: 1,
+                            name: '周杰伦',
+                            age: 36,
+                        },
+                        {
+                            id: 2,
+                            name: '温兆伦',
+                            age: 46,
+                        },
+                        {
+                            id: 3,
+                            name: '马冬梅',
+                            age: 32
+                        },
+                        {
+                            id: 4,
+                            name: '周冬雨',
+                            age: 22
+                        }
+                    ],
+                }
+            },
+            computed: {
+                filpeople() {
+                    const arr = this.people.filter((p) => {
+                        return p.name.indexOf(this.keyWord) != -1
+                    })
+                    // 判断是否需要升序
+                    if (this.sortType == 1) {
+                        arr.sort((a, b) => {
+                            return a.age - b.age
+                        })
+                    }
+                    // 判断是否需要降序
+                    if (this.sortType == -1) {
+                        arr.sort((a, b) => {
+                            return b.age - a.age
+                        })
+                    }
+                    return arr
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>

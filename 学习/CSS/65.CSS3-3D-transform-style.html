@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            margin: 100px auto;
+            width: 200px;
+            height: 200px;
+            perspective: 450px;
+            transition: all 1s;
+            /* transform-style控制子元素是否开启3d模式 */
+            /* flat：2d模式  preserve-3d：3d模式 */
+            /* 以后回来复习可以把下面的代码注释掉看看 */
+            transform-style: preserve-3d;
+        }
+
+        .box div:first-child {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: darkslateblue;
+
+        }
+
+        .box div:last-child {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: darkseagreen;
+            transform: rotateX(60deg);
+        }
+
+        .box:hover {
+            transform: rotateY(45deg)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div></div>
+        <div></div>
+    </div>
+</body>
+
+</html>

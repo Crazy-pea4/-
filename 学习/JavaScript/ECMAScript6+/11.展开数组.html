@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const arr = [1, 6, 8, 546];
+        
+        // 传统方法将数组内的元素打印到一行上
+        console.log(arr[0], arr[1], arr[2], arr[3]);
+
+        // ECMA2015中使用 ... 操作符来获取所有的数组元素，不像数组解构中使用，这种方法不写在末尾也不会报错，但还是应该写在末尾
+        console.log(arr[1], ...arr, arr[3]);
+    </script>
+</body>
+
+</html>

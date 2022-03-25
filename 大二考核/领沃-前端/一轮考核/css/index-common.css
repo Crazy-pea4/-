@@ -1,0 +1,88 @@
+body {
+    background-color: aliceblue;
+}
+
+.page_register {
+    position: relative;
+    margin: 200px auto;
+    text-align: center;
+    width: 330px;
+    height: 250px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 8px 0px rgba(0, 0, 0, .3);
+}
+
+.title_register {
+    position: absolute;
+    top: 17px;
+    left: 26px;
+    width: 285px;
+    height: 44px;
+    font-size: 32px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: rgba(0, 132, 255, 0.959);
+}
+
+.page_register .username {
+    margin-top: 80px;
+}
+
+.page_register .pwd {
+    margin-top: 20px;
+}
+
+.page_register .username,
+.page_register .pwd {
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    width: 330px;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+.page_register .username input,
+.page_register .pwd input {
+    width: 284px;
+    height: 28px;
+}
+
+.page_register .pwd .pic {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: 8px;
+    width: 25px;
+    height: 25px;
+}
+
+.page_register .pwd .pic:hover {
+    cursor: pointer;
+}
+
+.register {
+    float: left;
+    margin-left: 9px;
+    margin-top: 26px;
+    width: 316px;
+    height: 32px;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 9px;
+    background-color: rgb(85, 109, 214);
+}
+
+.ready_login {
+    float: right;
+    margin: 9px 7px 0 0;
+}
+
+.ready_login a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #0945ec;
+}

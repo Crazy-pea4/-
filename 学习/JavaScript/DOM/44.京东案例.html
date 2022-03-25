@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 按键输入内容案例 */
+        div {
+            position: relative;
+            width: 400px;
+            height: 50px;
+            margin: 100px auto;
+            background-color: rgb(185, 148, 148);
+            text-align: center;
+        }
+
+        input {
+            width: 200px;
+            height: 25px;
+        }
+
+        .box {
+            display: none;
+            position: absolute;
+            top: -38px;
+            right: 50px;
+            margin: 0;
+            width: 200px;
+            height: 28px;
+            font-size: 17px;
+            text-align: left;
+            background-color: pink;
+            box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 26px;
+            right: 147px;
+            border: 10px solid transparent;
+            border-top: 10px solid pink;
+        }
+
+        /* 快递单号放大案例 */
+    </style>
+</head>
+
+<body>
+    <div>
+        按s键输入
+        <input type="text">
+    </div>
+    <div>
+        快递单号放大
+        <div class="box"></div>
+        <input type="text">
+    </div>
+    <script>
+        var inp = document.querySelectorAll('input');
+        document.addEventListener('keyup', function (e) {
+            if (e.keyCode === 83) { // s or S
+                inp[0].focus();
+            }
+        })
+        console.log('================================================================');
+        var div = document.querySelector('.box');
+        inp[1].addEventListener('keyup', function (e) {
+            div.style.display = 'block';
+            div.innerText = this.value;
+            if (this.value == '') {
+                div.style.display = 'none';
+            }
+        }) // 若改用keydwon或keypress就会出现bug，因为这两者在文本框里的特点：当他们的事件触发时，文字还没有落入文本框中
+        inp[1].addEventListener('focus', function(e) {
+            if (this.value !== '') {
+                div.style.display = 'block';
+            } else {
+                div.style.display = 'none';
+            }
+        })
+        inp[1].addEventListener('blur', function(e) {
+            div.style.display = 'none';
+        })
+    </script>
+</body>
+
+</html>

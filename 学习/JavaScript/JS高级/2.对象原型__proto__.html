@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 实例对象通过__proto__与构造函数中的原型对象进行连接
+        function Game(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        const p = new Game('叶萌', 19);
+        console.log(p);
+        console.log(p.__proto__);
+        // 实例对象中的原型链也就是__proto__属性指向的是构造函数中的原型对象
+        console.log(Game.prototype);
+        console.log(Game.prototype === p.__proto__);
+        console.log('================================================================');
+
+        // 给构造函数的原型对象添加一个属性
+        Game.prototype = {
+            pro: 'pro'
+        };
+        // 会发现在实例对象中找不到pro属性，这是因为p中的__proto__还跟Game中的先前的原型对象有连接，而上面的赋值操作相当于新建了一个原型对象，之前的原型对象仍然存在
+        console.log(p.pro);
+        // 新建一个p2实例对象，发现可以在p2中找到pro属性，这是因为新建的原型对象通过p2中的__proto__连接在了一起
+        const p2 = new Game();
+        console.log(p2);
+        console.log(p2.pro);
+        console.log('================================================================');
+
+        // 原型链查找过程，在上面的例子中，新建的实例对象p2中有name、age、__proto__三个属性
+        // 在查找pro属性的过程中，js首先会去看除了__proto__属性以外的属性是否有目标属性(pro)
+        // 如果有，则返回并结束查找，否则去访问__proto__，看里面是否有目标属性。访问实例对象中的__proto__其实就是访问构造函数的原型对象
+        // 访问停止的条件是：找到目标属性 或 __proto__值为null
+    </script>
+</body>
+
+</html>

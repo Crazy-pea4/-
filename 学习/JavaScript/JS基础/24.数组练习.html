@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 求数组之和及其平均值
+        var arr = [2, 6, 1, 7, 4];
+        var sum = 0;
+        var averge = 0;
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        averge = sum / arr.length;
+        console.log(sum);
+        console.log(averge);
+
+        console.log('--------------------------------');
+        // 求最大值
+        var arr1 = [2, 6, 1, 77, 152, 25, 8];
+        var max = arr1[0];
+        for (var i = 0; i < arr1.length; i++) {
+            if (max < arr1[i]) {
+                max = arr1[i];
+            }
+        }
+        console.log(max);
+
+        console.log('--------------------------------');
+        // 创建一个数组，里面存放1~100的数字
+        var arr2 = [];
+        // 在JavaScript中，数组的元素数量可以自由改变，不用像C语言中需要预先设定数组元素个数，比较自由
+        for (var i = 0; i < 100; i++) {
+            arr2[i] = i + 1;
+        }
+        console.log(arr2);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

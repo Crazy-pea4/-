@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var students,
+            grade,
+            i,
+            result = 0,
+            average_grade = 0;
+        students = prompt('请输入学生总人数：');
+        for (i = 1; i <= students; i++) {
+            // 要注意这里的数据转换！！！
+            grade = parseFloat(prompt('请输入第' + i + '个学生的成绩'));
+            // + 号没有隐式转换功能！！！
+            result += grade;
+        }
+        average_grade = result / students;
+        alert('学生平均成绩为: ' + average_grade + '分');
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

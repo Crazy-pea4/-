@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 第三种方法，:after伪元素法 */
+        /* .clearfix::after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        } */
+        /* 第四种方法，双伪元素法 */
+        .clearfix::before,
+        .clearfix::after{
+            content: "";
+            display: table;
+        }
+        .clearfix::after {
+            clear: both;
+        }
+        .clearfix {
+            /*这个代码是IE6、7专有*/
+            *zoom: 1;
+        }
+
+        .father {
+            /* 不给高度 */
+            width: 1000px;
+            background-color: pink;
+            margin: 0 auto;
+            /* 第二种方法：给父元素添加overflow元素，属性值可为hidden auto scoll */
+            /* overflow: hidden; */
+        }
+
+        /* 给了浮动之后，儿子1和儿子2上浮，则原来的为止高度为零，导致父亲高度塌陷为0，故需要清楚浮动造成的影响 */
+        .son1 {
+            width: 300px;
+            height: 300px;
+            background-color: powderblue;
+            float: left;
+        }
+
+        .son2 {
+            width: 300px;
+            height: 300px;
+            background-color: royalblue;
+            float: left;
+        }
+
+        /* .clear {
+            clear: both;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="father clearfix">
+        <div class="son1">儿子1</div>
+        <div class="son2">儿子2</div>
+        <!-- 第一种方法，添加额外的标签，是额外标签法，也成隔墙法
+        <div class="clear"></div> -->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "630083",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "3705932",
+      "name": "礼物",
+      "font_class": "liwu",
+      "unicode": "e51d",
+      "unicode_decimal": 58653
+    },
+    {
+      "icon_id": "5387553",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "eafe",
+      "unicode_decimal": 60158
+    },
+    {
+      "icon_id": "11372791",
+      "name": "创作",
+      "font_class": "chuangzuo",
+      "unicode": "e8ca",
+      "unicode_decimal": 59594
+    }
+  ]
+}

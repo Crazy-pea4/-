@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+		监视属性watch：
+			1.当被监视的属性变化时, 回调函数自动调用, 进行相关操作
+			2.监视的属性必须存在，才能进行监视！！
+			3.监视的两种写法：
+				(1).new Vue时传入watch配置
+				(2).通过vm.$watch监视
+
+		深度监视：
+			(1).Vue中的watch默认不监测对象内部值的改变（一层）。
+			(2).配置deep:true可以监测对象内部值改变（多层）。
+			备注：
+                (1).Vue自身可以监测对象内部值的改变，但Vue提供的watch默认不可以！
+                (2).使用watch时根据数据的具体结构，决定是否采用深度监视。
+        -->
+    <div class="r">
+        <h1>春天和冬天的温度：{{info}}</h1>
+        <button @click="changWeather">点击改变温度</button>
+        <!-- 若是方法中的函数体比较简单，可以采取下面的简写形式(直接把函数体写进去)，注意：因为模板中的数据都是到Vue实例里的data中去查找，所以不用写this -->
+        <!-- <button @click="temp = !temp">点击改变温度</button> -->
+        <h2>
+            a: {{number.a}}
+            <button @click="number.a++">点击改变a的值</button>
+        </h2>
+        <h2>
+            b: {{number.b}}
+            <button @click="number.b++">点击改变a的值</button>
+        </h2>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data() {
+                return {
+                    temp: true,
+                    number: {
+                        a: 1,
+                        b: 2
+                    }
+                }
+            },
+            computed: {
+                info() {
+                    return this.temp ? '23°C' : '10°C'
+                }
+            },
+            methods: {
+                changWeather() {
+                    this.temp = !this.temp
+                },
+            },
+            // watch配置对象，里面的配置项为想要监视的对象名称
+            watch: {
+                temp: {
+                    // handler可以接收两个参数，分别是newValue, oldValue
+                    handler(newValue, oldValue) {
+                        console.log('正在监视temp', newValue, oldValue);
+                    }
+                },
+                // 也可以检测计算属性
+                info: {
+                    immediate: true, // immediate 初始化时让handler调用一次，默认为false
+                    handler(newValue, oldValue) {
+                        console.log('正在监视info', newValue, oldValue);
+                    }
+                },
+                number: {
+                    deep: true, // 深度监测，默认是false，可以检测到对象中的任一属性的改变
+                    handler(newValue, oldValue) {
+                        console.log('正在监听number对象', newValue, oldValue);
+                    }
+                }
+            },
+        });
+        // 监视属性的第二种写法
+        // vm.$watch('info', {
+        //     handler(newValue, oldValue) {
+        //         console.log('正在监视temp', newValue, oldValue);
+        //     }
+        // })
+    </script>
+</body>
+
+</html>

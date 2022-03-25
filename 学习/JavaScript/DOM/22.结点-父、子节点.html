@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 一般地，节点至少拥有nodeType、nodeName、nodeValue这三个基本属性
+     元素节点 nodeType 为 1
+     属性节点 nodeType 为 2
+     文本节点 nodeType 为 3
+     在实际开发中，节点操作主要操作的是  元素节点 -->
+    <div class="big-father">
+        <div class="father">
+            <div class="son"></div>
+        </div>
+
+        <ul>
+            <li>我是ul的儿子1</li>
+            <li>我是ul的儿子2</li>
+            <li>我是ul的儿子3</li>
+            <li>我是ul的儿子4</li>
+        </ul>
+    </div>
+    <script>
+        var son = document.querySelector('.son');
+        // 1. 获取父元素节点 node.parentNode 获取的是离元素最近的父元素结点 若无父元素节点则返回NULL
+        console.log(son.parentNode);
+        // 2.1 获取所有子节点 parentNode.childNodes(注意有个"s") [标准]
+        var ul = document.querySelector('ul');
+        console.log(ul.childNodes);
+        // 可以看到返回值包含了所有子节点，包括元素节点、文本节点等。如果要获取里面的元素节点还需要单独处理，因此不提倡用childNodes
+        for (var i = 0; i < ul.childNodes.length; i++) {
+            if (ul.childNodes[i].nodeType == 1) {
+                console.log(ul.childNodes[i]);
+            }
+        }
+        // 2.2 获取所有子元素节点 parentNode.children [非标准] (重点掌握)
+        console.log(ul.children);
+    </script>
+</body>
+
+</html>

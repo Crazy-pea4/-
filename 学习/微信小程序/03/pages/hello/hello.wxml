@@ -1,0 +1,4 @@
+<!--pages/hello/hello.wxml-->
+<text>pages/hello/hello.wxml</text>
+<view>-----</view>
+<navigator open-type="navigateBack" delta="1">回退</navigator>

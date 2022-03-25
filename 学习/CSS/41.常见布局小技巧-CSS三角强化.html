@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .triangle1 {
+            /* 若要得到一个向左上直角三角形 */
+            /* 1.先弄出一个CSS普通4三角 */
+            width: 0;
+            height: 0;
+            /* 3.最后增加上边框的宽度并改颜色为透明 */
+            border-top: 150px solid transparent;
+            border-right: 100px solid green;
+            /* 2.再把下、左边框移除 */
+            /* border-bottom: 100px solid hotpink; */
+            /* border-left: 100px solid skyblue; */
+        }
+
+        .triangle2 {
+            /* 或者用简写 */
+            width: 0;
+            height: 0;
+            border-width: 150px 100px 0 0;
+            border-style: solid;
+            border-color: transparent red transparent transparent;
+            float: left;
+            margin: 0 200px;
+        }
+
+        /* 京东价格表练习 */
+        .big-box {
+            float: left;
+            width: 200px;
+            height: 30px;
+            border: 2px solid red;
+        }
+
+        .box {
+            float: left;
+            width: 100px;
+            height: 30px;
+            background-color: red;
+        }
+
+        .big-box .tri {
+            float: left;
+            width: 0;
+            height: 0;
+            border-width: 30px 20px 0 0;
+            border-color: red transparent transparent transparent;
+            border-style: solid;
+        }
+
+        .big-box .new {
+            margin-left: 28px;
+            font-size: 22px;
+            color: white;
+            line-height: 30px;
+            font-weight: 750;
+        }
+
+        .big-box .old {
+            margin-left: 15px;
+            font-size: 15px;
+            color: grey;
+            line-height: 30px;
+            text-decoration: line-through;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="triangle1">三角1</div>
+    <div class="triangle2">三角2</div>
+    <div class="big-box">
+        <div class="box">
+            <span class="new">¥1599</span>
+        </div>
+        <div class="tri"></div>
+        <span class="old">¥2499</span>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function guessNumber(min, max) {
+            return Math.floor(Math.random() * (Math.abs(max - min) + 1)) + min;
+            // 这里加了绝对值就是防止有些猪头写错顺序
+        }
+
+        alert('欢迎来到猜字游戏！');
+        // 要注意这里的prompt，获取到的是一个字符串，要把它转换为数字型！！！！！
+        var num1 = parseInt(prompt('请输入第一个数'));
+        var num2 = parseInt(prompt('请输入第二个数'));
+        var game = guessNumber(num1, num2);
+        var times = 0;  //计数模块
+
+        while (true) {
+            var number = prompt('游戏范围：' + num1 + '~' + num2);
+            times++;
+            if (number > game) {
+                alert('你输入的数字太大了');
+            } else if (number < game) {
+                alert('你输入的数字太小了');
+            } else if (number == game) {
+                alert('恭喜你猜对了！一共猜了' + times + '次');
+                break;
+            } else {
+                alert('你输入的是什么东西');
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

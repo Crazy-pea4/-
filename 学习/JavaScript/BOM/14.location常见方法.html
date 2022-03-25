@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击</button>
+    <script>
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function () {
+            // .assign()与.href()一样，可以跳转页面，记录历史（可以回退）
+            // location.assign('http://baidu.com');
+            // .replace()也可以跳转页面，不记录历史（不可以回退）
+            // location.replace('http://baidu.com');
+            // .reload() 刷新页面，若里面有参数true则是强制刷新 ctrl+F5
+            location.reload();
+        });
+    </script>
+</body>
+</html>

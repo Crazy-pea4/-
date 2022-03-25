@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function person(name) {
+            this.name = name;
+        }
+
+        function f1(x) {
+            console.log(x.name); //输出刘德华
+            x.name = '叶萌' //修改地址上的刘德华为叶萌
+            console.log(x.name); //输出 叶萌
+        }
+        var p = new person('刘德华');
+        console.log(p.name); //输出 刘德华
+        f1(p); //（重点）复杂数据类型在传递过程中会把存放在栈里的地址传递过去
+        console.log(p.name); //输出 叶萌
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="r">
+        <h1>个人信息</h1>
+        <h2>姓名：{{person.name}}</h2>
+        <h2>年龄：{{person.age}}</h2>
+        <h2>爱好：{{person.interest}}</h2>
+        <button @click="addSex">点我添加性别</button>
+        <!-- 再加个v-If来通过判断是否有person.sex，来展示性别 -->
+        <h2 v-if="person.sex">性别：{{person.sex}}</h2>
+        <h1>朋友们：</h1>
+        <h3 v-for="(friend, index) in friends" :key="index">
+            {{friend.name}}-{{friend.age}}
+        </h3>
+
+        <button @click="error">点我，查看控制台</button>
+        <h3>注意：{{something}}</h3>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data() {
+                return {
+                    person: {
+                        name: '叶萌',
+                        age: 19,
+                        interest: '打羽毛球',
+                    },
+                    friends: [{
+                            name: '张三',
+                            age: 30
+                        },
+                        {
+                            name: '马化腾',
+                            age: 47
+                        }
+                    ],
+                    // 当我们初始化完成之后，若要需要添加一个响应式的属性，需要用到Vue.set() 或 vm.$set()
+                }
+            },
+            methods: {
+                addSex() {
+                    // Vue.set(this.person, 'sex', '男');
+                    this.$set(this.person, 'sex', '男');
+                },
+                error() {
+                    // 使用Vue.set() 或 vm.$set()时，target不能是Vue实例对象本身(vm)和Vue实例对象的根数据对象(data)
+                    // 也就是添加一个响应式数据，必须加在data中的对象中
+                    Vue.set(this, 'something', 'xxx');
+                    Vue.set(this._data, 'something', 'xxx');
+                }
+            },
+        })
+        console.log(vm);
+    </script>
+</body>
+
+</html>

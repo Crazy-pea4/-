@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // 传统方法访问数组中的值
+        const arr = [5, 6, 9];
+
+        // const num1 = arr[0];
+        // const num2 = arr[1];
+        // const num3 = arr[2];
+        // console.log(num1, num2, num3);
+    
+        // 等号左边将变量名写进数组中，对应arr中的数据；等号右边写上想要访问数据的数组名
+        // const [num1, num2, num3] = arr;
+        // console.log(num1, num2, num3);
+
+        // 若想要访问指定的数据
+        // const [, , num4] = arr;
+        // console.log(num4);
+
+        // ...变量名将返回一个从对应位置往后的所有元素的 !数组! ，只能写在最后面
+        // const [num, ...rest] = arr;
+        // console.log(rest);
+
+        // 解构数组成员小于被解构数组的长度，则从前到后去提取，多余的成员不会被提取
+        // const [num] = arr;
+        // console.log(num);
+
+        // 结构成员大于被解构数组长度，若访问超出长度的元素则会显示undefined
+        // const [num1, num2, num3, num4] = arr;
+        // console.log(num4);
+
+        // 给提取到的元素设置默认值，只有当没有提取元素时才会修改默认值
+        // const [num1 = 100, num2 = 1, num3, num4 = '我在被解构数组中没有'] = arr;
+        // console.log(num4);
+        // console.log(num1, num2, num4);
+
+        // 使用split()分隔字符串的时候，传统方法
+        const str = 'I/LOVE/YOU';
+        // const temp = str.split('/');
+        // console.log(temp[0]);
+
+        // 根据split()返回的是一个数组
+        const [, love] = str.split('/');
+        console.log(love);
+    </script>
+</body>
+</html>

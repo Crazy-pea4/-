@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul></ul>
+    <script>
+        // 1. 动态创建节点 document.createElement('tagName')
+        // 2. 添加节点 node.appendChild(child) 将一个结点添加到指定'父节点'的子节点列表'末尾'，类似于after伪元素
+        var ul = document.querySelector('ul');
+        var li = document.createElement('li'); //一个元素不能重复添加
+        ul.appendChild(li);
+        // 3. parentnode.insertBefore(child, 指定元素) 将一个结点添加到父节点指定子节点的前面，类似于before伪元素
+        var li_2 = document.createElement('li');
+        ul.insertBefore(li_2, ul.children[0]);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+.container1 {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.container1 view,
+.container2 view {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background-color: pink;
+}
+
+.container2 {
+    border: 1px solid skyblue;
+    width: 100px;
+    height: 110px;
+}
+
+.swiper-box {
+    height: 150px;
+}
+
+.swiper-box swiper-item:nth-child(1) view {
+    height: 100%;
+    background-color: skyblue;
+}
+
+.swiper-box swiper-item:nth-child(2) view {
+    height: 100%;
+    background-color: purple;
+}
+
+.swiper-box swiper-item:nth-child(3) view {
+    height: 100%;
+    background-color: darkgoldenrod;
+}
+
+.image-box image {
+    border: 1px solid red;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+            height: 40px;
+            padding: 0 40px;
+            line-height: 40px;
+        }
+
+        .tab {
+            margin: 200px auto;
+            width: 900px;
+        }
+
+        .tab_list {
+            margin: 0 auto;
+            width: 900px;
+            height: 40px;
+            background-color: #eef1ee;
+            border-bottom: 2px solid #c71521;
+        }
+
+        .tab_con {
+            margin: 0 auto;
+            width: 900px;
+            height: 105px;
+        }
+
+        .tab_list li:hover {
+            cursor: pointer;
+        }
+
+        .tab_list .current {
+            background-color: #c71521;
+            color: white;
+        }
+
+        .tab_con .item {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格包装</li>
+                <li>售后保障</li>
+                <li>商品评价（4563）</li>
+                <li>社区生态</li>
+            </ul>
+        </div>
+        <div class="tab_con">
+            <div class="item" style="display: block;">商品介绍内容</div>
+            <div class="item">规格包装内容</div>
+            <div class="item">售后保障内容</div>
+            <div class="item">商品评价内容</div>
+            <div class="item">社区生态内容</div>
+        </div>
+    </div>
+    <script>
+        var tabList = document.querySelector('.tab_list').querySelectorAll('li');
+        var tabCons = document.querySelector('.tab_con').querySelectorAll('div');
+        for (var i = 0; i < tabList.length; i++) {
+            // 1.点击tab_list里面的li切换颜色(排他思想)
+            tabList[i].setAttribute('data-index', i); //给每个li都添加一个data-index属性  注意！是给每个li 而不是每个内容！
+            tabList[i].onclick = function () {
+                for (var j = 0; j < tabList.length; j++) {
+                    tabList[j].className = '';
+                }
+                this.className = 'current';
+                // 2.(重点) 给上面所有的li添加自定义属性，属性值从0开始编号
+                var index = this.getAttribute('data-index'); // 把每个li的data-index属性值抽出来，再把该属性值赋给index（数字）
+                for (var i = 0; i < tabList.length; i++) { // 排他思想
+                    tabCons[i].style.display = 'none';
+                }
+                tabCons[index].style.display = 'block'; //这样点击每个li时，下面对应的内容就会显示出来
+            }
+        }
+    </script>
+</body>
+
+</html>

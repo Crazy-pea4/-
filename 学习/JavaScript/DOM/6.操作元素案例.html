@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>早上好！</p>
+    <img src="../../素材/JavaScript API_material/第一天/images/z.gif" alt="">
+    <script>
+        //分时问候案例
+        var sayHi = document.querySelector('p');
+        var imges = document.querySelector('img');
+        var date = new Date();
+        if (date.getHours() >= 6 && date.getHours() <= 11) {
+            sayHi.innerHTML = '早上好！';
+            imges.src = '../../素材/JavaScript API_material/第一天/images/z.gif';
+        } else if (date.getHours() >= 12 && date.getHours() <= 17) {
+            sayHi.innerHTML = '下午好！';
+            imges.src = '../../素材/JavaScript API_material/第一天/images/x.gif';
+        } else {
+            sayHi.innerHTML = '晚上好';
+            imges.src = '../../素材/JavaScript API_material/第一天/images/w.gif';
+        }
+    </script>
+</body>
+</html>

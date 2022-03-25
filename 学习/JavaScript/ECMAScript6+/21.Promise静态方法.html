@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 当resolve里是一个常量或者字符串，那么可直接通过.then打印出来
+        Promise.resolve('love').then(value => {
+            console.log(value);
+        })
+
+        // 如果resolve里是一个Promise对象，那么这个被resolve包装的Promise对象还是它自己
+        const promise = Promise.resolve('xxx');
+        const promise2 = Promise.resolve(promise);
+        console.log(promise === promise2);
+
+        // 如果Promise传入了一个对象，并且这个对象里面也有then方法，那么这个对象也可以作为一个Promise对象去执行
+        const obj = {
+            then: function(resolve, reject) {
+                resolve('我也可以当成是Promise对象');
+            }
+        }
+        obj.then(value => {
+            console.log(value);
+        });
+
+        // .reject方法，用来创建一个一定异常的Rromise对象
+        Promise.reject('我异常了').catch(error => {
+            console.log('error: ', error);
+        })
+    </script>
+</body>
+
+</html>

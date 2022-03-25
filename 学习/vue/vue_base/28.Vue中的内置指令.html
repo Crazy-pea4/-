@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+			我们学过的指令：
+						v-bind	     : 单向绑定解析表达式, 可简写为 :xxx
+						v-model	     : 双向数据绑定
+						v-for  	     : 遍历数组/对象/字符串
+						v-on   	     : 绑定事件监听, 可简写为@
+						v-if 	     : 条件渲染（动态控制节点是否存存在）
+						v-else 	     : 条件渲染（动态控制节点是否存存在）
+						v-show 	     : 条件渲染 (动态控制节点是否展示)
+				        v-text       : 渲染内容，会替换掉结点之前的内容，不会解析html标签
+                        v-html       : 
+                            渲染内容，会替换掉结点之前的内容，可以解析html标签
+						    警告！！：v-html有安全性问题！！！！
+									(1).在网站上动态渲染任意HTML是非常危险的，容易导致XSS攻击。
+									(2).一定要在可信的内容上使用v-html，永不要用在用户提交的内容上！
+                        v-cloak      : 是一个特殊属性，没有值，在Vue实例接管容器后会被Vue销毁(常搭配CSS)。一般用于当页面加载过慢时，防止网页源码出现在网页上的问题，
+                        v-once       : 是一个特殊属性，没有值，在初次动态渲染后，就被视为静态内容，往后不再改变
+                        v-pre        : 是一个特殊属性，没有值，会跳过所在结点的编译过程，可以利用它跳过不使用Vue的部分，加快编译
+    -->
+    <div class="r">
+        <h2>v-text</h2>
+        <div>插值语法可以随意增添新的信息---{{text1}}</div>
+        <div v-text="text1">v-text会覆盖掉所用节点的内容</div>
+        <div v-text="str1"></div>
+
+        <h2>v-html</h2>
+        <div>插值语法可以随意增添新的信息---{{text2}}</div>
+        <div v-html="text2">v-text会覆盖掉所用节点的内容</div>
+        <div v-html="str2"></div>
+    
+        <h2>v-cloak</h2>
+        <div v-cloak>{{text3}}</div>
+
+        <h2>v-once</h2>
+        <div v-once>a的初值: {{n}}</div>
+        <div>a的值: {{n}}</div>
+        <button @click="n++">点我a+1</button>
+
+        <h2>v-pre</h2>
+        <div v-pre>a的初值: {{m}}</div>
+        <div v-pre>a的值: {{m}}</div>
+        <button @click="m++">就算点了我a的值也不会改变</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data() {
+                return {
+                    // v-text
+                    text1: '这是一段信息！',
+                    str1: '<h3>我不会被v-text解析</h3>',
+                    // v-html
+                    text2: '这是一段信息',
+                    str2: '<h3>我可以被v-html解析</h3>',
+                    // v-cloak
+                    text3: '我身上的v-cloak属性在Vue接管容器后会被销毁，你现在打开控制台肯定是看不到的',
+                    // v-once
+                    n: 1,
+                    // v-pre
+                    m: 1
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

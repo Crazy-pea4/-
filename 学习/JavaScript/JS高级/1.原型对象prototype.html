@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // 因为在以前每次创建一个实例对象，都需要新开辟一个空间去存放方法(因为方法是复杂数据类型)，方法多了会造成内存空间的浪费
+        // 于是，prototype诞生了，目的主要是共享方法
+        function Car(name, color) {
+            this.name = name;
+            this.color = color;
+        }
+        // 一般来说，构造函数中的方法都放到原型对象中来共享
+        Car.prototype.sayHi = () => console.log('你好，我是原型对象上的方法，可以被实例对象给访问');
+        const car = new Car('长城', '红色');
+        console.log(car);
+        // 实例对象没有prototype属性
+        console.log(car.prototype);
+        car.sayHi()
+        // 只有函数才有prototype，函数被创建后会自动生成一个prototype对象
+        console.log(Car.prototype);
+    </script>
+</body>
+</html>

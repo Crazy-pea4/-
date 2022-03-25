@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>开始计时</button>
+    <button>停止计时</button>
+    <script>
+        // window.clearInterval(intervalID) <--ID意为定时器的标识符（名字）
+    var btns = document.querySelectorAll('button');
+    var time = null; // time定义成一个空null对象
+    btns[0].addEventListener('click', function () {
+        // var time = setTimeout(function () {}) 注意：不可以这样写，因为如果这样定义变量，那么下面的clearInterval就获取不到定时器的名字（作用域）
+        time = setInterval(function () {
+            console.log('开始计时咯');
+        }, 1000);
+    });
+    btns[1].addEventListener('click', function () {
+        clearInterval(time);
+    });
+    </script>
+</body>
+</html>

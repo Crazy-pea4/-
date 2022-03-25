@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            width: 200px;
+            height: 50px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点击我！</button>
+    <p>我是...</p>
+    <button>点击我！</button>
+    <p>我喜欢吃菠萝</p>
+    <script>
+        //改变元素内容：
+        // element.innerText(从起始到终点的内容，不包括html标签，会去掉 空格 和 换行)
+        // element.innerHTML(从起始到终点的全部内容，包括HTML标签，会保留 空格 和 换行)
+        var btn = document.getElementsByTagName('button');
+        var myname = document.getElementsByTagName('p');
+        // 元素获取完毕
+        //注意！！！！！由于ByTageName获取到的是一个伪数组的形势，所以必须在后面加上索引号才能成为一个element！！！！！
+        btn[0].onclick = function () { //注册事件，当点击button时，p做出改变
+            myname[0].innerText = '叶萌！'; //innerText 不识别HTML标签
+        }
+        var description = document.getElementsByTagName('p');
+        btn[1].onclick = function () {
+            description[1].innerHTML = '我要当<strong>奥特曼</strong>'; //innerHTML 识别HTML标签 比较常用
+        }
+    </script>
+</body>
+
+</html>

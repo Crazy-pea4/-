@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <!-- 引入css初始化base.css -->
+    <link rel="stylesheet" href="css/base.css">
+    <!-- 引入css通用样式表common.css -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 引入register页面的专用register.css -->
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- 头部部分 -->
+    <header>
+        <div class="w">
+            <img src="image/logo.png" alt="">
+        </div>
+    </header>
+    <!-- 注册部分 -->
+    <div class="registerarea w">
+        <div class="head">
+            <h3>注册新用户</h3>
+            <p>已有账号，去<a href="">登录</a></p>
+        </div>
+        <div class="reg_form">
+            <form action="" method="get">
+                <ul>
+                    <li>
+                        <label for="tel">手机号:</label>
+                        <input type="text" id="tel">
+                        <span class="error"><i class="error_icon"></i>手机号格式不正确，请重新输入</span>
+                    </li>
+                    <li><label for="num">短信验证码:</label>
+                        <input type="text" id="num">
+                        <span class="success"><i class="success_icon"></i>验证码输入正确</span>
+                    </li>
+                    <li><label for="password">登录密码:</label>
+                        <input type="text" id="password">
+                        <span class="error"><i class="error_icon"></i>密码不少于6位数，请重新输入</span>
+                    </li>
+                    <li class="safe">安全程度 <i>弱</i> <i>中</i> <i>强</i></li>
+                    <li><label for="password_confirm">确认密码:</label>
+                        <input type="text" id="password_confirm">
+                        <span class="error"><i class="error_icon"></i>密码输入错误，请重新输入</span>
+                    </li>
+                    <li class="agree">
+                        <input type="checkbox" name="" id="">
+                        同意协议并注册
+                        <a href="">《宇宙购物准则》</a>
+                    </li>
+                    <li>
+                        <input type="submit" value="提交注册" class="register">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <!-- 底部部分 -->
+    <footer class="register_footer">
+        <div class="w">
+            <!-- 版权信息模块 -->
+            <div class="mod_copyright">
+                <div class="links">
+                    <li><a href="">关于我们</a></li>
+                    <li><a href="">联系我们</a></li>
+                    <li><a href="">联系客服</a></li>
+                    <li><a href="">商家入驻</a></li>
+                    <li><a href="">销售中心</a></li>
+                    <li><a href="">手机品优购</a></li>
+                    <li><a href="">友情链接</a></li>
+                    <li><a href="">销售联盟</a></li>
+                    <li><a href="">品优购社区</a></li>
+                    <li><a href="">品优购公益</a></li>
+                    <li><a href="">English</a></li>
+                    <li><a href="">Site</a></li>
+                    <li><a href="">Contact U</a></li>
+                </div>
+                <div class="copyright">
+                    <p>地址：广东省深圳市宝安区企鹅工厂3楼312 邮编：518100 电话：400-618-4000 传真：010-829.5100 邮箱：ym-firstshow.com</p>
+                    <p>京ICP备08001421号京公安备1101080007702</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 在JS中使用typeof来获取变量的数据类型
+        var age = 18;
+        console.log(typeof age);
+        var str = '叶萌';
+        console.log(typeof str);
+        var buer = true;
+        console.log(typeof buer);
+        var un = undefined;
+        console.log(typeof un);
+        var no = null;
+        // null比较特殊，在这里为对象，object类型
+        console.log(typeof no);
+
+        // 从下面这段代码可以看出，从prompt取过来的数据为字符型string，尽管输入了数字18！！
+        var age1 = prompt('请输入您的年龄：');
+        alert(typeof age1);
+        // 也可以在chrome控制台查看变量颜色来判断数据类型
+        // 数值型：蓝色
+        // 字符型：黑色
+        // 布尔型：深蓝色
+        // undefined和null：浅灰色
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

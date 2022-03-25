@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        em,
+        i {
+            font-style: normal;
+        }
+
+        body {
+            background-color: rgb(219, 215, 215);
+        }
+
+        /* 手机整体盒子 */
+        .phone_box {
+            position: relative;
+            margin: 100px 0 0 300px;
+            width: 275px;
+            height: 425px;
+            transition: all .5s;
+            text-align: center;
+            background-color: white
+        }
+
+        /* 手机图片盒子 */
+        .pic {
+            position: relative;
+            margin: 5px auto;
+            width: 265px;
+            height: 250px;
+            background-color: red;
+        }
+
+        /* 手机图片 */
+        .pic img {
+            float: left;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 遮罩层 */
+        .pic .mask {
+            display: none;
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background-color: rgb(221, 221, 64);
+            opacity: .5;
+            cursor: move;
+        }
+
+        /* 查看大图片 */
+        .preview {
+            /* display: none; */
+            position: absolute;
+            top: 0;
+            left: 280px;
+            width: 450px;
+            height: 500px;
+            background-color: pink;
+            overflow: hidden;
+        }
+
+        .preview img {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: 0;
+            left: 0;
+        }
+
+        /* 介绍 */
+        .title {
+            float: left;
+            font-weight: 400;
+            color: grey;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        /* 价格 */
+        .price {
+            float: left;
+            width: 277px;
+            height: 37px;
+        }
+
+        /* 新价格 */
+        .new_price {
+            float: left;
+            margin-top: 6px;
+            padding-left: 15px;
+            font-size: 25px;
+            color: red;
+            font-weight: 500;
+        }
+
+        /* 旧价格 */
+        .old_price {
+            float: left;
+            margin-top: 13px;
+            padding-left: 5px;
+            color: grey;
+            text-decoration: line-through;
+        }
+
+        /* 销售状态 */
+        .situation {
+            width: 100%;
+            height: 20px;
+            padding-left: 3px;
+            color: grey;
+        }
+
+        .situation span:nth-child(n) {
+            font-size: 14px;
+
+        }
+
+        /* 已售 */
+        .sold {
+            float: left;
+            margin-left: 14px;
+        }
+
+        /* 进度条 */
+        .situation .bar {
+            float: left;
+            margin: 3px 0 0 2px;
+            width: 120px;
+            height: 12px;
+            border: 1px solid red;
+            border-radius: 6px;
+        }
+
+        .situation .bar .bar_in {
+            width: 86%;
+            height: 100%;
+            background-color: red;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }
+
+        /* 剩余 */
+        .left {
+            float: left;
+            margin-left: 2px;
+        }
+
+        /* 购买按钮 */
+        .phone_box .buy {
+            float: left;
+            margin: 3px 0 0 7px;
+            width: 95%;
+            height: 37px;
+            background-color: red;
+            font-size: 23px;
+            color: white;
+            text-align: center;
+            line-height: 37px;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="phone_box">
+        <div class="pic">
+            <a href="javascript:void(0)"><img src="../../CSS/image/小米11 ultra.png" alt=""></a>
+            <!-- 遮罩层 -->
+            <a href="javascript:void(0)" class="mask"></a>
+        </div>
+        <div class="preview">
+            <img src="../../CSS/image/小米11 ultra.png" alt="">
+        </div>
+        <a href="" class="title">小米11 Ultra 至尊 5G 骁龙888 2K AMOLED四曲面柔性屏 陶瓷工艺 12GB+512GB 白色 游戏手机 </a>
+        <div class="price">
+            <div class="new_price">￥6499</div>
+            <div class="old_price">￥6899</div>
+        </div>
+        <div class="situation">
+            <span class="sold">已售<i style="color: red;">86%</i></span>
+            <div class="bar">
+                <div class="bar_in"></div>
+            </div>
+            <span class="left">剩余<i style="color: red;">167</i>件</span>
+        </div>
+        <a href="" class="buy">立即抢购</a>
+    </div>
+
+    <script>
+        const pic = document.querySelector('.pic');
+        const mask = document.querySelector('.mask');
+        const preview = document.querySelector('.preview');
+        // 1. 鼠标经过离开显示隐藏盒子
+        pic.addEventListener('mouseover', function () {
+            mask.style.display = 'block';
+            preview.style.display = 'block';
+        })
+        pic.addEventListener('mouseout', function () {
+            mask.style.display = 'none';
+            preview.style.display = 'none';
+        })
+        // 2. 获取鼠标在图片盒子内的坐标
+        const phone_box = document.querySelector('.phone_box');
+        phone_box.addEventListener('mousemove', function (e) {
+            let x = e.pageX - this.offsetLeft;
+            let y = e.pageY - this.offsetTop;
+            // 赋值给遮挡层，并且减去高 宽的一半让鼠标居中显示
+            let maskX = x - mask.offsetWidth / 2;
+            let maskY = y - mask.offsetHeight / 2;
+            // 不让遮罩层出图片盒子F
+            let maskMaxX = pic.offsetWidth - mask.offsetWidth;
+            let maskMaxY = pic.offsetHeight - mask.offsetHeight;
+            if (maskX <= 5) {
+                maskX = 5;
+            } else if (maskX >= maskMaxX) {
+                maskX = maskMaxX;
+            }
+            if (maskY <= 5) {
+                maskY = 5;
+            } else if (maskY >= maskMaxY) {
+                maskY = maskMaxY;
+            }
+            mask.style.left = maskX + 'px';
+            mask.style.top = maskY + 'px';
+
+            // 3. 大图片同步遮罩层移动 大图片移动距离 = 遮罩层移动距离 * 大图片最大移动距离 / 遮挡层的最大移动距离
+            const bigImg = preview.children[0];
+            // 算出图片的最大移动距离 大图片 - 大盒子
+            let previewMaxX = bigImg.offsetWidth - preview.offsetWidth;
+            let previewMaxY = bigImg.offsetHeight - preview.offsetHeight;
+            // 算出大图片移动距离
+            let previewX = maskX * previewMaxX / maskMaxX;
+            let previewY = maskY * previewMaxY / maskMaxY;
+
+            // 将值赋给大盒子
+            bigImg.style.left = -previewX + 'px';
+            bigImg.style.top = -previewY + 'px';
+        });
+    </script>
+</body>
+
+</html>

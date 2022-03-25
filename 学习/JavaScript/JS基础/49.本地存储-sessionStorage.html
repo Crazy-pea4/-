@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <button class="set">存储数据</button>
+    <button class="get">获取数据</button>
+    <button class="del">删除数据</button>
+    <button class="clear">清空所有数据</button>
+
+    <script>
+        // 如果setItem里面的值不是string字符串，会自动调用toString()方法，若有对象就需要JSON.stringify转成字符串再放入
+        // window.sessionStorage
+        // 生命周期为关闭浏览器窗口
+        const input = document.querySelector('input');
+        const button_set = document.querySelector('.set');
+        const button_get = document.querySelector('.get');
+        const button_del = document.querySelector('.del');
+        const button_clear = document.querySelector('.clear');
+        button_set.addEventListener('click', function () {
+            const value = input.value;
+            // 存储                 '键名', 值
+            sessionStorage.setItem('key', value);
+        });
+        button_get.addEventListener('click', function () {
+            // 获取
+            console.log(sessionStorage.getItem('key'));
+        });
+        button_del.addEventListener('click', function () {
+            // 删除
+            sessionStorage.removeItem('key');
+        })
+        button_clear.addEventListener('click', function () {
+            // 清楚所有数据
+            sessionStorage.clear();
+        })
+    </script>
+</body>
+
+</html>

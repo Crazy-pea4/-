@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .w {
+            margin: 0 auto;
+            width: 1200px;
+        }
+
+        .header {
+            height: 200px;
+            background-color: purple;
+        }
+
+        .body {
+            margin-top: 20px;
+            height: 1000px;
+            background-color: peru;
+        }
+
+        .box {
+            position: absolute;
+            top: 228px;
+            right: 130px;
+            width: 50px;
+            height: 200px;
+            background-color: pink;
+        }
+
+        .box span {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header w">header</div>
+    <div class="body w">body</div>
+    <div class="box">
+        <span>返回顶部</span>
+    </div>
+    <script>
+        // 页面被卷去的头部：可以通过 window.pageYOffset 获得，如果是被卷去的左侧 window.pageXOffset   上一个说的scroll系列指的是元素被卷去的头部
+        const box = document.querySelector('.box');
+        const header = document.querySelector('.header');
+        const body = document.querySelector('.body');
+        const span = box.children[0];
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset >= body.offsetTop) {
+                box.style.position = 'fixed';
+                box.style.top = 0;
+                box.style.right = '130px';
+                span.style.display = 'block';
+            } else {
+                box.style.position = 'absolute';
+                box.style.top = '228px';
+                box.style.right = '130px';
+                span.style.display = 'none';
+            }
+        })
+    </script>
+</body>
+
+</html>

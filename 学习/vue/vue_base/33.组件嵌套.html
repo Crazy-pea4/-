@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="r">
+        <app></app>
+    </div>
+    <script>
+        // 注意这里的子组件不可以写在父组件后面，因为这样会造成还没创建就先注册的情况，会报错
+        const mySelf = Vue.extend({
+            template: `
+            <div>
+                <h2>我是: {{name}}</h2>    
+            </div>`,
+            data() {
+                return {
+                    name: '叶萌'
+                }
+            },
+        })
+        const earth = Vue.extend({
+            template: `
+            <div>
+                <h2>在{{loc}}上有一个人</h2>
+                <mySelf></mySelf>
+            </div>`,
+            data() {
+                return {
+                    loc: '地球'
+                }
+            },
+            components: {
+                mySelf
+            }
+        })
+        const hello = Vue.extend({
+            template: `
+            <div>
+                <h2>欢迎来到地球</h2>    
+            </div>`
+        })
+        // 一般在开发中，vm下面还有一个app组件管理所有的其他组件
+        const app = Vue.extend({
+            template: `
+            <div>
+                <hello></hello>
+                <earth></earth>
+            </div>
+            `,
+            components: {
+                earth,
+                hello
+            }
+        })
+        new Vue({
+            el: '.r',
+            components: {
+                app
+            }
+        })
+    </script>
+</body>
+
+</html>

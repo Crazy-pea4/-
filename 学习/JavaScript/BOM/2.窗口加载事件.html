@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 传统书写方式： window.onload = function () {}
+        // 意为： 当窗口加载（ 包含图像、 脚本文件、 CSS文件等所有） 完毕后， 再执行函数
+        // 弊端： 只能书写一次， 如果有多个， 则以最后一个为准
+
+        // 现在书写方式： window.addEventListener('load', function () {})
+        // 不限制个数
+        window.addEventListener('load', function () {
+            alert('我是window对象');
+        })
+
+
+        // ie9 + 新增事件： DOMContentLoaded， 仅当DOM加载完毕后触发， 不包含样式表、 图片、 flash等
+        // 适用场景： 如果页面很多的话， 适合用DOMContentLoaded事件
+        document.addEventListener('DOMContentLoaded', function () {
+            alert('我是DOMContentLoaded事件，我比window出现的要快');
+        })
+    </script>
+    <!-- 
+        
+     -->
+</body>
+
+</html>

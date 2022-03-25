@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 最外层对象实现了 可迭代接口 Iterable，规定里面要有一个iterator方法，用于返回迭代器
+        const obj = {
+            [Symbol.iterator]: function () {
+                // iterator方法返回的对象，它实现了迭代器接口 Iterator，规定里面要有一个next方法
+                return {
+                    next: function () {
+                        // next返回的对象，迭代结果接口 IterationResult
+                        // 规定里面要有一个value属性来表示当前被迭代到的数据 和 done属性来表示当前迭代是否结束
+                        return {
+                            value: 1,
+                            done: true // 这里为了测试用所以改成true，不可以改成false不然浏览器很卡
+                        }
+                    }
+                }
+            }
+        }
+        // 宏观实现iterable接口
+        const o = {
+            arr: [1, 2, 3, 4, 5],
+            // 设置iterable接口
+            [Symbol.iterator]: function () {
+                let index = 0;
+                const self = this;
+                return {
+                    next: function () {
+                        return {
+                            value: self.arr[index],
+                            done: index >= self.arr.length
+                        }
+                        index++;
+                    }
+                }
+            }
+        }
+        for (const e of o) {
+            console.log(e);
+        }
+        console.log('----------------------------------------------------------------');
+        let a = 0;
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const obj = {
+            name1: 'ym',
+            age: 19,
+            color: '黄'
+        }
+        // 解构的变量名用来匹配对象中的变量名，并把值赋给变量名为name1的变量
+        // const {name1} = obj;
+        // console.log(name1);
+
+        // 若当前作用域当中有同名的成员就会产生冲突，浏览器执行到下面语句会不知所措，不知道是要输出哪个name1
+        // const name1 = 'yyy';
+        // const {name1} = obj;
+        // console.log(name1);
+
+        // 解决方式。解构的变量名 : 变量名 来把被解构成员放入变量名为obj_name的变量中
+        const {
+            name1: obj_name,
+            // 添加默认值与数组解构用法相同
+            color = '黄种人' // 上面的对象中有color，所以默认值不显示
+        } = obj;
+        console.log('解构重命名', obj_name);
+        console.log('解构默认值', color);
+
+        // 嵌套解构（多次解构）
+        const obj2 = {
+            a: {
+                x: 1,
+                y: 2
+            }
+        }
+        const {a: {x, y}} = obj2;
+        console.log('多次解构', x, y);
+        
+        const fn = {
+            sayHi: function() {
+                console.log('你好鸭');
+            }
+        }
+        // 简化了调用方法的代码
+        const {sayHi} = fn;
+        sayHi();
+        sayHi();
+        sayHi();
+    </script>
+</body>
+
+</html>

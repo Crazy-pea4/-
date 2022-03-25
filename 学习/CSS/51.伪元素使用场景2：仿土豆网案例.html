@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            position: relative;
+            width: 444px;
+            height: 320px;
+            margin: 100px auto;
+        }
+
+        .box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 改用伪元素选择器来添加阴影效果 */
+        .box::after {
+            /* 隐藏背景阴影 */
+            content: "";
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 444px;
+            height: 320px;
+            background: rgba(0, 0, 0, 0.4) url(image/arr.png) no-repeat center;
+        }
+        /* 目的：鼠标经过视频盒子后，让里面的背景阴影显示出来 */
+        /* 注意:hover和::after之间不能有空格，否则不生效 */
+        .box:hover::after  {
+            display: block;
+        }
+        .box:hover {
+            box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="image/封印解除.png" alt="">
+    </div> 
+</body>
+
+</html>

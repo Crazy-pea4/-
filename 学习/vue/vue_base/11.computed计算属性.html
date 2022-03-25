@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+		计算属性：
+			1.定义：要用的属性不存在，要通过已有属性计算得来。
+			2.原理：底层借助了Objcet.defineproperty方法提供的getter和setter。
+			3.get函数什么时候执行？
+				(1).初次读取时会执行一次。
+				(2).当依赖的数据发生改变时会被再次调用。
+			4.优势：与methods实现相比，内部有缓存机制（复用），效率更高，调试方便。
+			5.备注：
+			    计算属性最终会出现在vm上，直接读取使用即可。
+			    如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变。
+	-->
+    <div class="r">
+        <span>姓：</span><input type="text" name="" id="" v-model="firstName"><br>
+        <span>名：</span><input type="text" name="" id="" v-model="lastName"><br>
+        <span>全名：{{fullName}}</span> <br>
+        <span>全名：{{fullName}}</span> <br>
+        <span>全名：{{fullName}}</span> <br>
+        <span>全名：{{fullName}}</span> <br>
+        <!-- 就算有多个fullName，get也只调用一次，因为Vue的缓存机制 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data: {
+                firstName: '罗',
+                lastName: '翔'
+            },
+            // 计算属性名需要另一个配置项 computed
+            computed: {
+                // 简写形式，只有get()
+                // fullname() {
+                //     xxx
+                // },
+                fullName: {
+                    // 当fullName被访问时，getter就会调用一次，且返回值作为fullName的值
+                    // get的调用时刻：1.初次读取到fullName时（也就是页面中有多个fullName时，也只调用一次） 2.所依赖的数据发生变化时
+                    get() {
+                        // 原本这里的this指向的是fullname对象，但是Vue做了一件非常棒的事情，将这里的this改成了被创建的Vue实例对象
+                        // console.log(this);
+                        return this.firstName + '-' + this.lastName
+                    },
+                    set(value) {
+                        // 值得注意的是，若是在页面的两个输入框中输入数据导致下面的fullName改变，这样的改变当成“被计算了”而不是“被修改了”，所以看不到set函数的调用
+                        // 可以借助在控制台修改vm.fullName = 'xxx'
+                        console.log('set', value);
+                        const arr = value.split('-'); // 姓名以“-”作分隔
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
+                        // 此时再在控制台修改fullName的值就可以看到上面对应的值也被修改了
+                    }
+                } 
+            }
+        })
+    </script>
+</body>
+
+</html>

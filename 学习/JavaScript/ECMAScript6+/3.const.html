@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // const 只读特性：变量被声明后，不能再被修改
+        // 在声明同时必须赋初值，不能用两行语句完成声明和赋值
+        // 在const中，不能被修改只是说不能再声明变量之后重新指向新的内存地址，是可以修改成员的属性的
+
+        // const xxx = 1;
+        // xxx = 6;  显而易见的会报错
+
+        const obj = {};
+        obj.name = "我自己";
+        console.log(obj.name);
+        // 上面操作属于在obj里面进行改动，并没有将obj指向新的内存地址，即改动属性不会报错
+    </script>
+</body>
+</html>

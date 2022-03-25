@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var selfMath = {
+            findMax: function () {
+                max = arguments[0];
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i] > max) {
+                        max = arguments[i];
+                    }
+                }
+                return max;
+            },
+            findMin: function () {
+                min = arguments[0];
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i] < min) {
+                        min = arguments[i];
+                    }
+                }
+                return min;
+            }
+        }
+        console.log(selfMath.findMax(3,8,5,66));
+        console.log(selfMath.findMin(5,89,-45,-100));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

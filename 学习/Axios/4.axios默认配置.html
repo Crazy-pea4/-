@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <button>发送get请求</button>
+    <script>
+        const btn = document.querySelector('button');
+        axios.defaults.baseURL = 'http://localhost:3000';
+        btn.addEventListener('click', () => {
+            axios.get('/posts')
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        })
+        // 常用的 全局 默认值配置，也可以配置其他的
+        // axios.defaults.baseURL
+        // axios.defaults.headers
+        // axios.defaults.timeout
+    </script>
+</body>
+
+</html>

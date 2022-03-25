@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+		事件的基本使用：
+			1.使用v-on:xxx 或 @xxx 绑定事件，其中xxx是事件名；
+			2.事件的回调需要配置在methods对象中，最终会在vm上；
+			3.methods中配置的函数，不要用箭头函数！否则this就不是vm了；
+			4.methods中配置的函数，都是被Vue所管理的函数，this的指向是vm 或 组件实例对象；
+			5.@click="demo" 和 @click="demo($event)" 效果一致，但后者可以传参；
+	-->
+    <div class="r">
+        <button v-on:click="info1">点我出现提示信息1</button>
+        <!-- v-on:click = @click -->
+        <button @click="info2('在函数名后面加上括号可以实现传参', $event)">点我出现提示信息2</button>
+        <!-- 为了不使传参操作丢失掉event事件，可以在括号里面写上$event作为关键字来保存event事件 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '.r',
+            data: {
+                name: '叶萌'
+            },
+            // 理论上，methods中的方法也可以放在data中，但data中的数据都是要数据代理和数据劫持，这样子会让Vue的运行效率降低
+            methods: {
+                info1() {
+                    alert('欢迎您~')
+                },
+                info2(name, event) {
+                    console.log(name, event);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
