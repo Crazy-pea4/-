@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* 当父盒子设为flex布局后，子元素中的float、clear、vertical-align都会失效 */
+    /* flex布局是控制子盒子的位置和排列方式 */
+    div {
+        display: flex;
+        width: 700px;
+        height: 400px;
+        background-color: pink;
+    }
+    div span:nth-child(1) {
+        width: 150px;
+        height: 150px;
+        background-color: red;
+    }
+    div span:nth-child(2) {
+        flex: 1;
+        background-color: green;
+    }
+    div span:nth-child(3) {
+        width: 150px;
+        height: 150px;
+        background-color: blue;
+    }
+    /* div span:nth-child(n) {
+        width: 200px;
+        height: 100px;
+        background-color: darkgreen;
+    } */
+    /* 父元素设置项 */
+
+    /* 主轴 flex-direction: 
+    row row-reverse column column-reverse
+    默认是主轴是row（从左往右）， 侧轴是column（从上往下） */
+    /* 子元素在主轴上的对齐方式 justify-content: 
+    flex-start      默认值，从头部开始 
+    flex-end        从尾部开始
+    center          在主轴居中对齐
+    space-around    平分剩余空间
+    space-between   先两边贴边，再平分剩余空间 */
+    /* 设置子元素是否换行 flex-wrap: 
+    nowrap  默认值，不换行
+    wrap    换行 */
+    /* 侧轴上的子元素排列方式 1. align-items: 
+    flex-start  从上到下
+    flex-end    从下到上
+    center      挤在一起居中（垂直居中）
+    stretch     拉伸（默认值）
+    2. align-content: 
+    属性值与align-items一样，是以多行进行对应的设置
+    align-items与align-content区别： */
+    /* 主轴与换行复合写法 flex-flow: 主轴属性值, 是否换行 */
+
+    /* 子元素设置项 */
+
+    /* 分配剩余空间 flex: [number];
+    number表示占剩余空间的百分比。默认是 0。如果设置为 >= 1 则占满剩余空间。同级之间number意为占比 */
+    /* 单个子元素在侧轴上的对齐方式 align-self: 
+    属性值与align-items相同。可覆盖align-items。默认为auto表示继承align-items，若没有父元素则等同于stretch */
+    /* 子元素间排序 order: [number];
+    number越小约靠前，可接受负数。默认为 0 */
+</style>
+
+<body>
+    <div>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+
+</html>
