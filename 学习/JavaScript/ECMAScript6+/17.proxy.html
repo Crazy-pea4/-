@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <script>
-        
+        // ES6中新增了Proxy对象，从字面上看可以理解为代理器，主要用户改变对象的默认访问行为，
+        // 实际表现是在访问对象之前增加一层拦截，任何对对象的访问都会通过这一层拦截。在拦截中，我们可以增加自定义的行为
+        // const proxy = new Proxy(target, handler);
+        // 实质上是个构造函数，接收两个参数，第一个参数为目标对象target，第二个参数为定义的回调函数
+        let a = { b: 1 };
+        a_get = {
+            get(target, property) {
+                console.log(target, property);
+            }
+        }
+        const watch = new Proxy(a, a_get);
+        watch.b
+        // 如果跳过Proxy实例调用目标对象的属性，那么proxy不会生效
+        a.b
+
+        let x = {};
+        x_set = {
+            set(target, property, value) {
+                console.log(target, property, value);                
+            }
+        }
+        const setter = new Proxy(x, x_set);
+        setter.a = 1
     </script>
 </body>
+
 </html>
