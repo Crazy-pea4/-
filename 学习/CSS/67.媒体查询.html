@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    /* 
+    @media mediatype and|not|only (media feature) {
+        CSS-Code here
+    }
+    @media          媒体查询声明
+    mediatype       媒体类型，取值all、print（打印机、打印预览）、screen（pc、平板、手机屏幕）
+    and|not|only    将媒体类型或多个媒体特性连接到一起，and连接多个媒体特性，not排除某个媒体类型，only指定某个媒体类型
+    media feature   媒体特性，注意带上括号。主要的有三个：width、min-width、max-width
+
+    引入资源
+    <link ref="stylesheet" href="xxx.css" media="screen and (min-width: 500px)" />
+
+    值得注意的是，媒体查询的样式覆盖是范围覆盖，也就是
+    x min-width == 500;
+    y min-width == 600;
+    那么 x 的实际作用范围是500 ~ 600，而不是y把x全部覆盖掉
+    */
+    @media screen {
+        body {
+            background-color: aquamarine;
+        }
+    }
+    @media screen and (max-width: 800px) {
+        body {
+            background-color: darkcyan;
+        }
+    }
+</style>
+
 <body>
-    
+
 </body>
+
 </html>
