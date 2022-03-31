@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jQuery.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 入口文件-等待dom树加载完毕后再去执行其中的代码
+        // 其中 $ 符为jQuery顶级对象，也是它的别名。$ == jQuery
+        $(function () {
+            $('div').hide();
+        })
+
+        // 可以看到，jQuery把原生对象封装在一个伪数组中，而真正的原生对象是数组中的数组元素
+        console.dir($('div'))
+        // 因此我们可以通过 $('div')[index] 的形式找到原生对象，来对其使用jQuery中没有的原生操作
+        console.dir($('div')[0])
+        // 或者使用$('div').get(index)
+        console.dir($('div').get(0))
+
+        // 基础选择器
+        // $('element') $('.class') $('#index') $('x, y, z') $('ul>li') $('ul li')
+        // 筛选选择器
+        // $('div:first') $('div:last') $('div:eq(index)')选中索引元素 $('div:odd') $('div:even')
+        // 筛选方法
+        // .parent() .children(selector) .find(selector) .siblings(selector) .nextAll([expr]) .prevtAll([expr]) .hasClass(class) .eq(index)
+    </script>
+</body>
+
+</html>
