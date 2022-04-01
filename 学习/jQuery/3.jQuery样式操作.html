@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jQuery.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color:darkkhaki
+        }
+    </style>
+</head>
+<body>
+    <div class="x"></div>
+    <div class="y"></div>
+    <script>
+        $(function() {
+            // 查看样式
+            console.log($('div').css('width'));
+            // 更改样式
+            $('.x').css('width', '300px')
+            // 或者
+            // $('div').css('width', 300)
+            // css函数第一个参数也可以是一个对象
+            $('.y').css({
+                'width': '200px',
+                'background-color': 'skyblue'
+            })
+        })
+    </script>
+</body>
+</html>

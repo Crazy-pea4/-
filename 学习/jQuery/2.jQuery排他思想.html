@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jQuery.min.js"></script>
+    <style>
+        div {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+    </div>
+    <script>
+        // jQuery排他思想。原理：隐式迭代
+        $(function () {
+            $('button').click(function() {
+                // 在隐式迭代中给每一个按钮绑定一个点击后会改变背景颜色的事件
+                // $(this).css('background-color', 'pink');
+                // 随后给被点击按钮的兄弟们去除背景颜色
+                // $(this).siblings().css('background-color', '')
+                // 也可以使用链式编程
+                $(this).css('background-color', 'pink').siblings().css('background-color', '')
+            })
+        })
+    </script>
+</body>
+
+</html>
