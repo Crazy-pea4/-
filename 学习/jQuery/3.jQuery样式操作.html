@@ -12,11 +12,18 @@
             height: 200px;
             background-color:darkkhaki
         }
+        .x1 {
+            color: red;
+        }
+        .x2 {
+            color: skyblue;
+        }
     </style>
 </head>
 <body>
     <div class="x"></div>
     <div class="y"></div>
+    <span class="x1">点我变换颜色</span>
     <script>
         $(function() {
             // 查看样式
@@ -29,6 +36,15 @@
             $('.y').css({
                 'width': '200px',
                 'background-color': 'skyblue'
+            })
+
+            // 添加类、移除类、切换类（添加或者移除）
+            $('span').click(function () {
+                if ($(this).hasClass('x1')) {
+                    $(this).removeClass('x1').addClass('x2')
+                } else {
+                    $(this).removeClass('x2').addClass('x1')
+                }
             })
         })
     </script>

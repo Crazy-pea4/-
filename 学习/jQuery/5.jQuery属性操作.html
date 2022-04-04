@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jQuery.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <input type="button" value="11">
+    <input type="checkbox">
+    <div self="mySelf">my</div>
+    <span data-index="2" data-value="VVV">我身上有数据缓存，在dom树中是看不见的</span>
+    <script>
+        // 获取一般属性 .prop('属性名')
+        console.log($('input').prop('type'));
+        // 设置一般属性
+        $('input').prop('checked', 'true')
+        // 获取自定义属性
+        console.log($('div').attr('self'))
+        console.log($('span').attr('data-index'))
+        // 设置自定义属性
+        $('div').attr('class', 'himSelf')
+        // 数据缓存 data() 是可以在指定的元素上存取数据，并不会改变DOM元素结构。若页面刷新，则之前存放的数据都会被移除
+        // 设置
+        $('span').data('title', '我是在span身上的数据缓存');
+        // 读取
+        console.log($('span').data('title'));
+        // 同时，data() 在获取H5自定义属性时，不需要写前面的data-
+        console.log($('span').data('index'))
+        console.log($('span').data('value'))
+        // 并且由data()返回的自定义属性值，若是数字就会被转化成数字型
+        console.log(typeof($('span').attr('data-index'))) // String
+        console.log(typeof($('span').data('index')))      // Number
+    </script>
+</body>
+</html>

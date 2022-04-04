@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jQuery.min.js"></script>
+    <style>
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <img src="./images/jQuery遍历.png" alt="">
+    <script>
+        // 遍历dom元素 .each()
+        // 注意，第二个参数提供的是真实的dom元素，因此无法对其使用jQuery方法
+        $('div').each((i, domEle) => {
+            console.log(i);
+            console.log(domEle);
+        })
+        console.log('-----------------------$.each()-------------------------------------');
+        // 遍历数据 $.each()
+        // 该方法也可以遍历元素，它可以遍历任何对象主要是用于遍历数据
+        $.each($('div'), (i, ele) => {
+            console.log(i);
+            console.log(ele);
+        })
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let sum = 0;
+        $.each(arr, (i, ele) => {
+            sum += ele
+        })
+        console.log(sum);
+    </script>
+</body>
+</html>
