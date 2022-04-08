@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+    <style>
+        div {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 初始化echarts实例对象
+        let myChart = echarts.init(document.querySelector('div'));
+        let options = {
+            xAxis: {
+                type: 'category', // 类目轴（用于离散数据）
+                data: ['小明', '小红', '小王']
+            },
+            yAxis: {
+                type: 'value', // 数据轴（用于连续数据）
+            },
+            // series系列，给y轴提供数据
+            series: [{
+                name: '成绩',
+                type: 'bar',
+                data: [72, 60, 88],
+                // 标注最大最小值的点
+                markPoint: {
+                    data: [{
+                        type: 'max',
+                        name: '最大值'
+                    }, {
+                        type: 'min',
+                        name: '最小值'
+                    }]
+                },
+                // 标注平均值的线
+                markLine: {
+                    data: [{
+                        type: 'average',
+                        name: '平均值'
+                    }]
+                },
+                // 数值的显示
+                label: {
+                    show: true,
+                },
+                // 柱状图宽度
+                barWidth: '40%'
+            }]
+        }
+        myChart.setOption(options)
+    </script>
+</body>
+
+</html>
