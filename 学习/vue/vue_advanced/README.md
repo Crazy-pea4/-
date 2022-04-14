@@ -872,7 +872,7 @@ module.exports = {
    			children:[
    				{
    					name:'xiangqing',
-   					path:'detail/:id/:title', //使用占位符声明接收params参数
+   					path:'detail/:id/:title?', //使用占位符声明接收params参数，其中 ? 表示该参数可传可不传
    					component:Detail
    				}
    			]

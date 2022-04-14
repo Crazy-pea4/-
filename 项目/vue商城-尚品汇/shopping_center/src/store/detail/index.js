@@ -1,5 +1,6 @@
 import {
-    reqGoodsInfo
+    reqGoodsInfo,
+    reqUpdateShopCart
 } from '../../api'
 export default {
     namespaced: true,
@@ -8,6 +9,16 @@ export default {
             const {data: {code,data}} = await reqGoodsInfo(value)
             if (code == 200) {
                 context.commit('GETGOODSINFO', data)
+            }
+        },
+        // 在这里，我们可以通过对返回的data进行判断，返回一个成功的Promise或失败的Promise，这样来对使用该方法的函数提供一个.then和.catch方法，从而进行纠错
+        async updateShopCart(context, value) {
+            const {data} = await reqUpdateShopCart(value.skuId, value.skuNum)
+            console.log(data);
+            if (data.code == 200) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject();
             }
         }
     },

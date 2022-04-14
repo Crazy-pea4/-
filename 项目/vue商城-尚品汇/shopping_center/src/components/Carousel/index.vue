@@ -20,8 +20,15 @@ import Swiper from "swiper";
 export default {
   name: "Carousel",
   props: ["list"],
+  data() {
+    return {
+      carouselList: this.list
+    }
+  },
+  // 值得注意的是，在轮播图初始化中，对传入的轮播图list进行监视时，不应该直接对props进行监视
+  // 而是将props的值复制一份放到data中，然后再对data中的轮播图list进行监视，否则会出现一些轮播图拖动造成的bug
   watch: {
-    list: {
+    carouselList: {
       immediate: true,
       handler() {
         this.$nextTick(() => {
