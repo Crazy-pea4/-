@@ -13,7 +13,7 @@
               {{ shopCartInfo.skuInfo.skuName }}
             </p>
             <p class="attr">
-              颜色：WFZ5099IH/5L钛金釜内胆 数量：{{ shopCartInfo.skuNum }}
+              {{ shopCartInfo.skuInfo.skuDesc }} 数量：{{ shopCartInfo.skuNum }}
             </p>
           </div>
         </div>

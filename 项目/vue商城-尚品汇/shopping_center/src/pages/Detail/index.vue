@@ -2,7 +2,6 @@
   <div class="detail">
     <!-- 商品分类导航 -->
     <TypeNav />
-
     <!-- 主要内容区域 -->
     <section class="con">
       <!-- 导航路径区域 -->
@@ -83,29 +82,17 @@
           <div class="choose">
             <div class="chooseArea">
               <div class="choosed"></div>
-              <dl>
-                <dt class="title">选择颜色</dt>
-                <dd changepirce="0" class="active">金色</dd>
-                <dd changepirce="40">银色</dd>
-                <dd changepirce="90">黑色</dd>
-              </dl>
-              <dl>
-                <dt class="title">内存容量</dt>
-                <dd changepirce="0" class="active">16G</dd>
-                <dd changepirce="300">64G</dd>
-                <dd changepirce="900">128G</dd>
-                <dd changepirce="1300">256G</dd>
-              </dl>
-              <dl>
-                <dt class="title">选择版本</dt>
-                <dd changepirce="0" class="active">公开版</dd>
-                <dd changepirce="-1000">移动版</dd>
-              </dl>
-              <dl>
-                <dt class="title">购买方式</dt>
-                <dd changepirce="0" class="active">官方标配</dd>
-                <dd changepirce="-240">优惠移动版</dd>
-                <dd changepirce="-390">电信优惠版</dd>
+              <dl v-for="(spuSaleAttr, index) in spuSaleAttrList" :key="index">
+                <dt class="title">{{ spuSaleAttr.saleAttrName }}</dt>
+                <dd
+                  changepirce="0"
+                  v-for="(item, index) in spuSaleAttr.spuSaleAttrValueList"
+                  :key="index"
+                  :class="{ active: item.isChecked == 1 }"
+                  @click="changeActive(item, spuSaleAttr.spuSaleAttrValueList)"
+                >
+                  {{ item.saleAttrValueName }}
+                </dd>
               </dl>
             </div>
             <div class="cartWrap">
@@ -382,7 +369,7 @@ export default {
     this.$store.dispatch("detail/getGoodsInfo", this.$route.params.goodsId);
   },
   computed: {
-    ...mapGetters("detail", ["categoryView", "skuInfo"]),
+    ...mapGetters("detail", ["categoryView", "skuInfo", "spuSaleAttrList"]),
   },
   methods: {
     getskuNum(e) {
@@ -392,6 +379,10 @@ export default {
       } else {
         this.skuNum = parseInt(value);
       }
+    },
+    changeActive(item, itemArr) {
+      itemArr.forEach((i) => (i.isChecked = 0));
+      item.isChecked = 1;
     },
     addToShopCart() {
       let skuId = this.$route.params.goodsId;
@@ -406,14 +397,15 @@ export default {
       //    } catch (error) {}
       // }
       this.$store
+      // 因为dispatch只传递两个参数，第二个参数是传递的值。所以用一个对象包起来
         .dispatch("detail/updateShopCart", { skuId, skuNum })
         .then(() => {
           // 整合要添加到购物车的数据
           let shopCartInfo = {
             skuInfo: this.skuInfo,
-            skuNum: this.skuNum
-          }
-          sessionStorage.setItem('shopCartInfo', JSON.stringify(shopCartInfo))
+            skuNum: this.skuNum,
+          };
+          sessionStorage.setItem("shopCartInfo", JSON.stringify(shopCartInfo));
           this.$router.push({
             name: "addcartsuccess",
             // 这里不使用路由间直接传参，而是通过将数据储存到会话储存当中，这样当用户刷新时就不会报错
