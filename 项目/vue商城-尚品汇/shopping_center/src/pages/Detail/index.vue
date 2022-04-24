@@ -397,7 +397,7 @@ export default {
       //    } catch (error) {}
       // }
       this.$store
-      // 因为dispatch只传递两个参数，第二个参数是传递的值。所以用一个对象包起来
+        // 因为dispatch只传递两个参数，第二个参数是传递的值。所以用一个对象包起来
         .dispatch("detail/updateShopCart", { skuId, skuNum })
         .then(() => {
           // 整合要添加到购物车的数据

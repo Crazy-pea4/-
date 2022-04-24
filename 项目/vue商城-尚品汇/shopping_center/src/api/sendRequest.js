@@ -7,10 +7,16 @@ const sendRequest = axios.create({
     baseURL: 'http://39.98.123.211/api',
     timeout: 3000
 })
+// 获取仓库
+import store from '../store'
 // 为自定义axios实例添加请求拦截器
 sendRequest.interceptors.request.use((config) => {
     // 进度条开始
     nprogress.start();
+    // console.log(config);
+    if (store.state.detail.uuidToken) {
+        config.headers.userTempId = store.state.detail.uuidToken
+    }
     return config
 })
 // 响应拦截器

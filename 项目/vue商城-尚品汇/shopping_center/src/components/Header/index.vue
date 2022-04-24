@@ -70,11 +70,11 @@
       </div>
       <!-- 购物车部分 -->
       <div class="shopcar">
-        <a href="" class="iconfont">
+        <router-link to="/shopcart" class="iconfont">
           我的购物车
           <!-- 购物车计数 -->
           <i class="shopcount">8</i>
-        </a>
+        </router-link>
       </div>
       <!-- 热点词部分 -->
       <div class="hotwords">

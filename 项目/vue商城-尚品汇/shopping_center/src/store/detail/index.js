@@ -2,6 +2,7 @@ import {
     reqGoodsInfo,
     reqUpdateShopCart
 } from '../../api'
+import getUUID from '../../utils/uuid'
 export default {
     namespaced: true,
     actions: {
@@ -28,7 +29,9 @@ export default {
         }
     },
     state: {
-        goodsInfo: {}
+        goodsInfo: {},
+        // 游客临时身份
+        uuidToken: getUUID()
     },
     getters: {
         // goodsInfo的初状态是空对象，为了保险起见让下面的语句至少返回一个空对象{}
