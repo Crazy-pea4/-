@@ -12,8 +12,12 @@ export default {
             }
         },
         async deleteCartBySkuId(context, value) {
-            let {data} = await deleteCart(value);
-            console.log(data);
+            let {data: {code}} = await deleteCart(value);
+            if (code == 200) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject('网络异常');
+            }
         }
     },
     mutations: {
