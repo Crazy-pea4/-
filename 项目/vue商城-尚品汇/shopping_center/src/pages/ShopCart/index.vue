@@ -85,6 +85,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import throttle from "lodash/throttle";
 export default {
   name: "ShopCart",
   mounted() {
@@ -110,8 +111,8 @@ export default {
           alert(err.message);
         });
     },
-    // 修改商品数量
-    changeSkuNum(type, number, item) {
+    // 修改商品数量。使用lodash/throttle节流
+    changeSkuNum: throttle(function (type, number, item) {
       // 判断逻辑。
       switch (type) {
         case "add":
@@ -131,16 +132,19 @@ export default {
           this.updateShopCart(number, item);
           break;
       }
-    },
+    }, 500),
     // 删除商品
-    deleteItem({skuId}) {
+    deleteItem({ skuId }) {
       // console.log(item.skuId);
-      this.$store.dispatch('shopCart/deleteCartBySkuId', skuId).then(() => {
-        this.getCartList()
-      }).catch(() => {
-        alert('网络异常');
-      })
-    }
+      this.$store
+        .dispatch("shopCart/deleteCartBySkuId", skuId)
+        .then(() => {
+          this.getCartList();
+        })
+        .catch(() => {
+          alert("网络异常");
+        });
+    },
   },
   computed: {
     ...mapGetters("shopCart", ["cartInfoList"]),

@@ -7,7 +7,9 @@ export default {
     namespaced: true,
     actions: {
         async getGoodsInfo(context, value) {
-            const {data: {code,data}} = await reqGoodsInfo(value)
+            const {
+                data: {code, data}
+            } = await reqGoodsInfo(value)
             if (code == 200) {
                 context.commit('GETGOODSINFO', data)
             }

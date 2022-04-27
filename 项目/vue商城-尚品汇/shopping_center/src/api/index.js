@@ -2,7 +2,7 @@
 import sendRequest from './sendRequest'
 // 引入模拟数据
 import sendRequest_mock from './sendRequest_mock'
-// 服务器地址：http://39.98.123.211
+// 服务器地址：http://gmall-h5-api.atguigu.cn
 
 // 首页三级分类接口：/api/product/getBaseCategoryList  GET请求  无参数
 export const reqBaseCategoryList = () => {

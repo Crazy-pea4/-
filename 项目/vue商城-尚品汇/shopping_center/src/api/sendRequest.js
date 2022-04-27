@@ -4,7 +4,7 @@ import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 // 利用axios的create方法创建一个axios实例，对它进行一些自定义配置
 const sendRequest = axios.create({
-    baseURL: 'http://39.98.123.211/api',
+    baseURL: 'http://gmall-h5-api.atguigu.cn/api',
     timeout: 3000
 })
 // 获取仓库
