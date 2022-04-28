@@ -4,7 +4,7 @@ enum point {
     y,
     z
 }
-// 运行一下生成的js文件就会看到point.y也给自动赋值了，
+// 运行一下生成的js文件就会看到point.y、point.z也给自动赋值了，
 console.log(point.x);
 console.log(point.y);
 console.log(point.z);
