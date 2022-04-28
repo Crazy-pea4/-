@@ -22,13 +22,14 @@ function fn(name) {
     return 0;
 }
 fn("TS");
-// 对象 --- 对于不清楚的参数，可以在后面加上 ? 代表可传可不传
+// 对象 ---  在传入的对象参数中，各参数之间用分号或者逗号隔开。对于不清楚的参数，可以在后面加上 ? 代表可传可不传
 function localtion(pt) {
     var _a;
     console.log("我现在的坐标是x：" + pt.x + ",y：" + pt.y);
-    // 如果下面pt.pic后面不加 ? 会报错，因为pt.pic可能是undefined。尝试去掉 ? 看看
+    // 如果下面pt.pic后面不加 ? 会报错，因为pt.pic可能是undefined。尝试去掉 ?
     console.log((_a = pt.pic) === null || _a === void 0 ? void 0 : _a.toUpperCase());
 }
+// 但在下面的语句中，对象里的参数之间必须用逗号隔开，因为这是一个真的js对象
 localtion({
     x: 5,
     y: 10,
