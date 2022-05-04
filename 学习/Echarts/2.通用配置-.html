@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+</head>
+<style>
+    .chart {
+        width: 800px;
+        height: 800px;
+    }
+</style>
+
+<body>
+    <div class="chart"></div>
+    <script>
+        let mychart = echarts.init(document.querySelector('.chart'))
+        let options = {
+            title: {
+                // 设置标题文字样式
+                text: '进货量',
+                textStyle: {
+                    color: 'grey'
+                },
+                // 设置标题边框样式
+                borderWidth: 3,
+                borderColor: 'black',
+                borderRadius: 10,
+            },
+            // 配置提示框组件
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove',
+                // 提示框浮层内容格式器，支持 字符串模板 和 回调函数 两种形式。
+                // formatter: '{b}的进货量为{c}'
+                formatter: (params, ticket, callback) => {
+                    // console.log(params)
+                    // console.log(ticket)
+                    // console.log(callback)
+                    return params.name + '的进货量是' + params.data
+                }
+            },
+            // 配置工具箱组件
+            toolbox: {
+                feature: {
+                    saveAsImage: {},
+                    restore: {},
+                    dataZoom: {},
+                    magicType: {
+                        type: ['line', 'bar', 'stack']
+                    },
+                }
+            },
+            // 配置图例，筛选系列series
+            legend: {
+                // data中的每一个数组项可以是字符串和对象
+                // data: ['进货量', '出货量']
+                data: [{
+                    name: '进货量',
+                    icon: 'circle'
+                }, '出货量']
+            },
+            xAxis: {
+                type: 'category',
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                    type: 'bar',
+                    name: '进货量',
+                    data: [75, 99, 45, 75, 68, 88, 24]
+                },
+                {
+                    type: 'bar',
+                    name: '出货量',
+                    data: [68, 97, 40, 36, 55, 87, 18]
+                }
+            ]
+        }
+        mychart.setOption(options)
+    </script>
+</body>
+
+</html>

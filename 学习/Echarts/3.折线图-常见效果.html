@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+    <style>
+      .con {
+        width: 800px;
+        height: 500px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="con"></div>
+    <script>
+      let mychart = echarts.init(document.querySelector(".con"));
+      options = {
+        xAxis: {
+          name: "月份",
+          type: "category",
+          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+          // 让x轴紧挨边缘
+          boundaryGap: false,
+        },
+        yAxis: {
+          name: "销量",
+          type: "value",
+          // 缩放：脱离0值比例
+          scale: true,
+        },
+        series: [
+          {
+            name: "美宜家",
+            type: "line",
+            data: [3215, 5633, 4235, 4651, 5123, 6585, 5421],
+            // 标记点
+            markPoint: {
+              data: [
+                {
+                  name: "最大值",
+                  type: "max",
+                },
+                {
+                  name: "最小值",
+                  type: "min",
+                },
+              ],
+            },
+            // 标记线
+            markLine: {
+              data: [
+                {
+                  name: "平均线",
+                  type: "average",
+                },
+              ],
+            },
+            // 标记区间
+            markArea: {
+              data: [
+                [
+                  // 标记区间的开始值
+                  {
+                    xAxis: "周一",
+                  },
+                  // 标记区间的结束值
+                  {
+                    xAxis: "周二",
+                  },
+                ],
+                [
+                  {
+                    xAxis: "周六",
+                  },
+                  {
+                    xAxis: "周日",
+                  },
+                ],
+              ],
+            },
+            // 平滑模式
+            smooth: true,
+            // 线条风格
+            lineStyle: {
+              type: "dashed",
+            },
+            // 区域风格
+            areaStyle: {
+              color: "pink",
+            },
+            // 堆叠效果，需要同个类目轴上系列配置相同的stack值
+            stack: "my",
+          },
+          {
+            name: "711",
+            type: "line",
+            data: [4533, 5136, 5426, 4124, 8456, 5656, 4867],
+            stack: "my",
+          },
+        ],
+      };
+      mychart.setOption(options);
+    </script>
+  </body>
+</html>

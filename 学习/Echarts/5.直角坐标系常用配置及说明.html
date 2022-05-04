@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+  </head>
+  <style>
+    .con {
+      width: 800px;
+      height: 500px;
+    }
+  </style>
+  <body>
+    <div class="con"></div>
+    <script>
+      let mychart = echarts.init(document.querySelector(".con"));
+      let options = {
+        // 配置grid 用于配置图表的大小和位置
+        grid: {
+          show: true,
+          top: 100,
+          left: 100,
+          width: 500,
+          height: 300
+        },
+        // axis配置项说明
+        // category：离散型轴需要通过data指定数据
+        // value：数值型轴不需要在对象中指定data数据，它会自动在series下寻找data
+        // 显示位置：通过配置position
+        xAxis: {
+          type: "category",
+          data: ["小明", "小红", "小王", "小花", "小刘"],
+          position: 'top'
+        },
+        yAxis: {
+          type: "value",
+          position: 'right'
+        },
+        series: [
+          {
+            name: "成绩",
+            type: "bar",
+            data: [72, 60, 88, 99, 75],
+          },
+        ],
+      };
+      mychart.setOption(options);
+    </script>
+  </body>
+</html>
