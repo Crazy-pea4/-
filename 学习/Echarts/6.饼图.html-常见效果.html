@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+  </head>
+  <style>
+    .con {
+      width: 800px;
+      height: 500px;
+    }
+  </style>
+  <body>
+    <div class="con"></div>
+    <script>
+      let mychart = echarts.init(document.querySelector(".con"));
+      var pieData = [
+        {
+          name: "淘宝",
+          value: 11231,
+        },
+        {
+          name: "京东",
+          value: 22673,
+        },
+        {
+          name: "唯品会",
+          value: 6123,
+        },
+        {
+          name: "1号店",
+          value: 8989,
+        },
+        {
+          name: "聚美优品",
+          value: 6786,
+        },
+      ];
+      let options = {
+        // 由于饼图不属于直角坐标系，因此不需要xAxis和yAxis
+        series: [
+          {
+            type: "pie",
+            data: pieData,
+            label: {
+              formatter: (value) => {
+                console.log(value);
+                return value.data.name + "销量为：" + value.data.value;
+              },
+              fontSize: 16,
+            },
+            // radius设置饼图的内外半径
+            // 当值为数值型时，设置外半径
+            // radius: 80
+            // 当值为百分比字符串时，设置外半径，以外层容器的宽高较小一项进行百分比缩放
+            // radius: '30%'
+            // 当值为数组时，数组内存在两个数据项，0：内半径，1：外半径。每一项遵循前两个描述
+            // radius: [100, 200],
+
+            // 开启南丁格尔图，有两个值'radius'、'area'
+            roseType: "radius",
+            // 设置选中模式，有三个值'single'、'multiple'、'series'
+            selectedMode: 'single',
+            // 设置偏移量
+            selectedOffset: 50
+          },
+        ],
+      };
+      mychart.setOption(options);
+    </script>
+  </body>
+</html>

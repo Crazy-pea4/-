@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+    <style>
+      .con {
+        margin: 0 auto;
+        width: 800px;
+        height: 800px;
+        border: 1px solid darkcyan;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 注意，本文件需要配合live server插件使用，否则会出现跨域问题 -->
+    <div class="con"></div>
+    <script>
+      let mychart = echarts.init(document.querySelector(".con"));
+      // 值得注意的是，series的data里每个对象中的name都必须 与 geoMap规范下json地图中properties中的name属性一一对应，否则将没有效果
+      let airCondition = [
+        { name: "北京市", value: 39.92 },
+        { name: "天津市", value: 39.13 },
+        { name: "上海市", value: 31.22 },
+        { name: "重庆市", value: 66 },
+        { name: "河北省", value: 147 },
+        { name: "河南省", value: 113 },
+        { name: "云南省", value: 25.04 },
+        { name: "辽宁省", value: 50 },
+        { name: "黑龙江省", value: 114 },
+        { name: "湖南省", value: 175 },
+        { name: "安徽省", value: 117 },
+        { name: "山东省", value: 92 },
+        { name: "新疆维吾尔自治区", value: 84 },
+        { name: "江苏省", value: 67 },
+        { name: "浙江省", value: 84 },
+        { name: "江西省", value: 96 },
+        { name: "湖北省", value: 273 },
+        { name: "广西壮族自治区", value: 59 },
+        { name: "甘肃省", value: 99 },
+        { name: "山西省", value: 39 },
+        { name: "内蒙古自治区", value: 58 },
+        { name: "陕西省", value: 61 },
+        { name: "吉林省", value: 51 },
+        { name: "福建省", value: 29 },
+        { name: "贵州省", value: 71 },
+        { name: "广东省", value: 38 },
+        { name: "青海省", value: 57 },
+        { name: "西藏自治区", value: 24 },
+        { name: "四川省", value: 58 },
+        { name: "宁夏回族自治区", value: 52 },
+        { name: "海南省", value: 54 },
+        { name: "台湾省", value: 88 },
+        { name: "香港省", value: 66 },
+        { name: "澳门省", value: 77 },
+        { name: "南海诸岛", value: 55 },
+      ];
+      // 这里教程视频用的是$.get jQuery请求，为了减少麻烦就直接原生ajax获取
+      let xhr = new XMLHttpRequest();
+      let data;
+      let options;
+      xhr.open("GET", "./json/china.json");
+      xhr.send();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          data = JSON.parse(xhr.response);
+          console.log(data);
+          // 第二步，注册地图
+          echarts.registerMap("chinaMap", data);
+          options = {
+            geo: {
+              // 声明地图，值为注册地图时使用的值
+              map: "chinaMap",
+              // 开启缩放和平移
+              roam: true,
+              // 文本标签设置
+              label: {
+                show: true,
+              },
+              // 初始化放大比例（支持小数）
+              zoom: 2,
+              // 设置中心点，地图初始化指向的中点
+              center: [116.405285, 39.904989],
+            },
+            series: [
+              {
+                type: "map",
+                data: airCondition,
+                // 指定第一个geo配置项
+                geoIndex: 0,
+              },
+            ],
+            // 配置visualMap
+            visualMap: [
+              {
+                type: "continuous",
+                // 配置一个最大值最小值
+                min: 0,
+                max: 300,
+                // 配置处在范围内的渐变视觉通道，只一般都是数组，代表从低到高的样式范围
+                inRange: {
+                    color: ['white', 'red'],
+                },
+                // 配置范围条是否可拉动范围（选择范围）
+                calculable: true
+              },
+            ],
+          };
+          mychart.setOption(options);
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -16,6 +16,7 @@
   <body>
     <div class="con"></div>
     <script>
+      // 在echarts中，柱状图、折线图、散点图属于直角坐标系，需要设置xAxis和yAxis
       let mychart = echarts.init(document.querySelector(".con"));
       let options = {
         // 配置grid 用于配置图表的大小和位置
@@ -24,7 +25,7 @@
           top: 100,
           left: 100,
           width: 500,
-          height: 300
+          height: 300,
         },
         // axis配置项说明
         // category：离散型轴需要通过data指定数据
@@ -33,17 +34,33 @@
         xAxis: {
           type: "category",
           data: ["小明", "小红", "小王", "小花", "小刘"],
-          position: 'top'
+          position: "top",
         },
         yAxis: {
           type: "value",
-          position: 'right'
+          position: "right",
         },
         series: [
           {
             name: "成绩",
             type: "bar",
             data: [72, 60, 88, 99, 75],
+          },
+        ],
+        // 区域缩放dataZoom（比工具栏里面的功能更强大）
+        dataZoom: [
+          {
+            type: "slider", // 通过下方的滑动条缩放区域
+            // type: 'inside' // 通过鼠标滚轮或两指缩放
+            // 通过声明xAxisIndex和yAxisIndex来指定作用于哪一个轴，一般x、y轴只有一个，写0即可
+            xAxisIndex: 0,
+          },
+          {
+            type: "slider",
+            yAxisIndex: 0,
+            // 指明初始状态的缩放情况
+            start: 20,
+            end: 80
           },
         ],
       };
