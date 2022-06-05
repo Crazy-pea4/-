@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 高阶函数：是对其他函数进行操作的函数，它 接收函数作为参数 或 将函数作为返回值输出
+        function func(callback) {
+            // 这一步判断是否有callback，有再运行
+            callback && callback();
+        }
+        func(function () {
+            console.log("函数也能被作为参数传递给另一个函数");
+        });
+
+        // 另一种将函数作为返回值输出的，
+    </script>
+</body>
+
+</html>

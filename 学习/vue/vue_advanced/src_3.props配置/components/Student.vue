@@ -12,6 +12,8 @@
 <script>
 // JavaScript
 export default {
+  // 对于props配置项而言，在Vue2不使用props接收参数的话，实际上也能在vc身上的$attrs里找到
+  // $attrs就像是个捡漏的，没有在props里声明接收的参数，都由$attrs接收
   name: "School",
   data() {
     return {

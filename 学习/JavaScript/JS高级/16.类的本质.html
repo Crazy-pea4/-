@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class Person {
+
+        }
+        // 类的本质还是一个构造函数，类就是一个es6提供的语法糖，能更方便的实现继承
+        console.log(Person.prototype);
+        console.log(Person.prototype.constructor); // Person
+        // 也可以给它的原型对象添加方法
+        Person.prototype.sayHi = function () {
+            console.log('你好啊');
+        }
+        let one = new Person();
+        console.log(one);
+        // 类生成的实例的隐式原型属性__proto__指回类的原型对象
+        console.log(one.__proto__ === Person.prototype); // true
+    </script>
+</body>
+
+</html>

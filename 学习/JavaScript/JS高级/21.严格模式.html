@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 全局开启严格模式
+    "use strict";
+    if (true) {
+      var fn = function () {
+        console.log(11);
+      }
+      fn();
+    }
+  </script>
+  <!-- <script>
+    //   (function () {
+    //     "use strict";
+    //   })();
+    </script>
+
+    <script>
+    //   function fn() {
+    //     // 只为单独某个函数开启严格模式
+    //     "use strict";
+    //     // 下面的代码按照严格模式运行
+    //   }
+    </script> -->
+
+  <!-- 
+        严格模式中的变化: 
+                        1. 禁止变量未声明就使用
+                        2. 禁止使用delete关键字删除已经定义的变量
+                        3. 在全局作用域下定义的函数this指向为undefined，不再是window
+                        4. 构造函数如果不用new创造实例，那么使用里面的this会报错
+                        5. 定时器的this还是指向window
+                        6. 函数中，不能有多个同名的形参
+                        7. 不允许在非函数代码块定义函数
+                            例： if(1) {
+                                function fn() {
+                                    console.log(111);  // 非法
+                                }
+                            }  // 但似乎该规则在13行代码不起作用
+    -->
+</body>
+
+</html>

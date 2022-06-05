@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/echarts.js"></script>
+    <style>
+      .con {
+        width: 800px;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="con"></div>
+    <script>
+      let mychart = echarts.init(document.querySelector(".con"));
+      let options = {
+        series: [
+          {
+            type: "gauge",
+            data: [
+              // 每一个对象就是一个指针
+              {
+                value: 95,
+              },
+            ],
+            progress: {
+                show: true
+            },
+          },
+        ],
+      };
+      mychart.setOption(options);
+    </script>
+  </body>
+</html>

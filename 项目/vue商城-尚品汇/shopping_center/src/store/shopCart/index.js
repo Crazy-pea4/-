@@ -1,6 +1,7 @@
 import {
     reqCartList,
-    deleteCart
+    deleteCart,
+    changeCheckCart
 } from '../../api'
 export default {
     namespaced: true,
@@ -18,6 +19,33 @@ export default {
             } else {
                 return Promise.reject('网络异常');
             }
+        },
+        async updateCheckCart(context, {skuId, isChecked}) {
+            let {data: {code}} = await changeCheckCart(skuId, isChecked)
+            if (code == 200) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject('网络异常')
+            }
+        },
+        deleteAllCheckedCart({dispatch, getters}) {
+            let PromiseArr = []
+            getters.cartInfoList.cartInfoList.forEach((item) => {
+                if (item.isChecked) {
+                    let result = dispatch('deleteCartBySkuId', item.skuId);
+                    PromiseArr.push(result)
+                }
+            })
+            return Promise.all(PromiseArr)
+        },
+        checkedAllCart({dispatch, getters}, value) {
+            // console.log(getters, value);
+            let PromiseArr = []
+            getters.cartInfoList.cartInfoList.forEach((item) => {
+                let result = dispatch('updateCheckCart', { skuId: item.skuId, isChecked: value });
+                PromiseArr.push(result);
+            });
+            return Promise.all(PromiseArr)
         }
     },
     mutations: {

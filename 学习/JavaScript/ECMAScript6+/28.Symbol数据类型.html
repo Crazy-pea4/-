@@ -10,7 +10,7 @@
     
     <script>
         // Symbol()数据类型，用来定义一个独一无二的值，()括号内可以写入一个字符串，标识作用
-        const s = Symbol();
+        const s = Symbol(); // 注意，使用Symbol不需要new，因为这是一个原始数据类型
         console.log(s, typeof s);
 
         const s2 = Symbol('叶萌');
@@ -18,12 +18,12 @@
         console.log(s2 === s3);
         // 可以看到，尽管拥有相同标识字符串，但Symbol仍然是唯一的
 
-        console.log('===============================================================');
+        console.log('========================Symbol.for()===============================');
         // Symbol.for()方法   每次使用该方法，都会在全局环境下找到Smybol注册表，并寻找其中是否有相同标识字符串的Symbol，如果有，返回它，否则，创建一个与传入的标识字符串参数相关联的Symbol并放入到全局Symbol注册表中
         const sym1 = Symbol.for('相同的标识字符串');
         const sym2 = Symbol.for('相同的标识字符串');
         console.log(sym1 === sym2);
-        console.log('=============================================================');
+        console.log('==========================true================================');
         // 注意：该方法内部维护的是 字符串 与 Symbol之间的关系，如果传入的参数不是字符串，那么内部会自动将其转换为字符串
         console.log(Symbol.for(true) === Symbol.for('true'));
 

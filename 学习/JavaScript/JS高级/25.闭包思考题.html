@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = 'the window';
+        var obj = {
+            name: 'the obj',
+            getName: function () {
+                return function () {
+                    return this.name;
+                }
+            }
+        };
+        // 下列语句输出谁？
+        console.log(obj.getName()());
+        // 答：this window
+        // 解析：
+        var f = obj.getName();
+        // 等同于
+        f = function () {
+            return this.name;
+        }
+        // 而第二个括号相当于
+        f(); // 也就是
+        (function () { return this.name })()
+        // 立即执行函数的this为window
+        /*
+            简单来说，就是obj.getName();返回了一个无主的匿名函数，这种函数自动由window接收，故this指向window
+        */
+    </script>
+</body>
+
+</html>

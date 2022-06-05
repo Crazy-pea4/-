@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +14,7 @@
             background-color: cornflowerblue;
             margin-top: 50px;
         }
+
         .s {
             width: 200px;
             height: 200px;
@@ -22,6 +24,7 @@
             /* 100比50大，所以父元素执行子元素中的100px的代码 */
             margin-top: 100px;
         }
+
         /* 解决方法：1.可以为父元素定义上边框
                  2.可以为父元素定义上内边框
                  3、可以为父元素添加overflow：hidden */
@@ -32,6 +35,7 @@
             margin: 50px;
             overflow: hidden;
         }
+
         .s1 {
             width: 200px;
             height: 200px;
@@ -40,6 +44,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="f">
         <div class="s"></div>
@@ -48,4 +53,5 @@
         <div class="s1"></div>
     </div>
 </body>
+
 </html>

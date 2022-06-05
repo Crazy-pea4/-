@@ -24,7 +24,7 @@
         // 只有在all中的所有任务都成功结束了，如果有任何一个任务失败了，那整体执行失败回调函数
         const promise = Promise.all([test1, test2, test3])
             .then(result => console.log(result))
-            .catch(err => console.log(err));
+            .catch(err => console.log('我失败了' + err));
 
         // Promise.race方法 与.all的区别：all是等待所有Promise任务结束后再执行，而race是等待任意一个Promise任务结束后就立即执行
         const request = new Promise(function (resolve, reject) {

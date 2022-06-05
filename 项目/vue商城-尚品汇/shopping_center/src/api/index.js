@@ -67,3 +67,11 @@ export const deleteCart = (skuId) => {
         method: 'delete'
     })
 }
+
+// 切换商品选中状态：/api/cart/checkCart/{skuId}/{isChecked}
+export const changeCheckCart = (skuId, isChecked) => {
+    return sendRequest({
+        url: `/cart/checkCart/${skuId}/${isChecked}`,
+        method: 'get'
+    })
+}

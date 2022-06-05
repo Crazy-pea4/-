@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.box {
+    width: 100%;
+    height: 40px;
+    background-color: pink;
+}
+
+.nav {
+    margin: 0 auto;
+    width: 85%;
+    /* width: 70%; */
+    height: 100%;
+}
+
+.nav .floor1 li {
+    float: left;
+    width: 128px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.nav .floor1 li:hover {
+    background-color: orange;
+}
+
+.nav .floor1 li a {
+    padding: 0px 32px;
+}
+
+.nav .floor2 li {
+    display: none;
+    width: 100%;
+    background-color: white;
+}
+
+.nav .floor2 li:hover {
+    background-color: skyblue;
+}

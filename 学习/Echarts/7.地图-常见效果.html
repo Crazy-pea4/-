@@ -70,6 +70,7 @@
           console.log(data);
           // 第二步，注册地图
           echarts.registerMap("chinaMap", data);
+          // 要先注册地图再配置选项
           options = {
             geo: {
               // 声明地图，值为注册地图时使用的值
@@ -93,7 +94,7 @@
                 geoIndex: 0,
               },
             ],
-            // 配置visualMap
+            // 配置visualMap（当需要地图的不同区域显示不同效果时）
             visualMap: [
               {
                 type: "continuous",

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 递归函数：即自己调用自己。可能会造成死循环，因此必须加入判断条件return
+        // 例题：求n的阶乘，如1 * 2 * 3 * 4 * 5 ... n-1 * n
+        function f(n) {
+            if (n === 1) {
+                return 1;
+            }
+            return n * f(n - 1);
+        }
+        // 第一轮：要返回3 * f(2)，即f(3) === 3 * f(2)，此时还没返回，因为要等f(2)的结果出来
+        // 第二轮：要返回2 * f(1)，即f(2) === 2 * f(1)，此时还没返回，因为要等f(1)的结果出来
+        // 第三轮：检测到n === 1，直接返回1，即f(1) === 1
+        // 将所有结果层层返回，最终第一轮的return返回的就是n的阶乘
+        console.log(f(3));
+    </script>
+</body>
+
+</html>

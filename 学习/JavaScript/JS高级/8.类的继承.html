@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Father1 {
+        construtor() {}
+        sayHi() {
+          console.log("hello");
+        }
+      }
+      // 使用extends继承类
+      class Son1 extends Father1 {}
+      let son = new Son1();
+      // 发现可以使用父类中的方法
+      son.sayHi();
+
+      class Father2 {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+        }
+        count() {
+          console.log(this.x + this.y);
+        }
+        hello() {
+          console.log("father");
+        }
+      }
+      // 使用super关键字
+      // 这里试图用Father2的count方法
+      class Son2 extends Father2 {
+        constructor(x, y) {
+          // 下面的写法会报错，原因是Father2中的count方法使用的是Father2中的this
+          // 而下面却又使用的Son2的this，这使得count方法无法正确获取this.x和this.y
+          // this.x = x;
+          // this.y = y;
+
+          // super可以调用父类的constructor和普通函数
+          super(x, y); // 调用父类的constructor
+          super.hello(); // 调用父类的普通函数
+        }
+        hello() {
+          console.log('son');
+        }
+      }
+      let son2 = new Son2(1, 2);
+      son2.count();
+      // 就近原则
+      son2.hello(); // 打印 son
+    </script>
+  </body>
+</html>

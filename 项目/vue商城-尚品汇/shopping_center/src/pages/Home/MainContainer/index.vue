@@ -163,7 +163,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) 2px -3px;
+  background: no-repeat url(../../../assets/images/icons.png) 2px -3px;
 }
 
 .lifeservice li .service_pic2 {
@@ -172,7 +172,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -60px -3px;
+  background: no-repeat url(../../../assets/images/icons.png) -60px -3px;
 }
 
 .lifeservice li .service_pic3 {
@@ -181,7 +181,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -124px -3px;
+  background: no-repeat url(../../../assets/images/icons.png) -124px -3px;
 }
 
 .lifeservice li .service_pic4 {
@@ -190,7 +190,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -187px -3px;
+  background: no-repeat url(../../../assets/images/icons.png) -187px -3px;
 }
 
 .lifeservice li .service_pic5 {
@@ -199,7 +199,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) 2px -72px;
+  background: no-repeat url(../../../assets/images/icons.png) 2px -72px;
 }
 
 .lifeservice li .service_pic6 {
@@ -208,7 +208,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -60px -72px;
+  background: no-repeat url(../../../assets/images/icons.png) -60px -72px;
 }
 
 .lifeservice li .service_pic7 {
@@ -217,7 +217,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -124px -72px;
+  background: no-repeat url(../../../assets/images/icons.png) -124px -72px;
 }
 
 .lifeservice li .service_pic8 {
@@ -226,7 +226,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -187px -72px;
+  background: no-repeat url(../../../assets/images/icons.png) -187px -72px;
 }
 
 .lifeservice li .service_pic9 {
@@ -235,7 +235,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) 2px -142px;
+  background: no-repeat url(../../../assets/images/icons.png) 2px -142px;
 }
 
 .lifeservice li .service_pic10 {
@@ -244,7 +244,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -60px -142px;
+  background: no-repeat url(../../../assets/images/icons.png) -60px -142px;
 }
 
 .lifeservice li .service_pic11 {
@@ -253,7 +253,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -124px -142px;
+  background: no-repeat url(../../../assets/images/icons.png) -124px -142px;
 }
 
 .lifeservice li .service_pic12 {
@@ -262,7 +262,7 @@ export default {
   height: 100%;
   text-align: center;
   padding-top: 46px;
-  background: no-repeat url(./images/icons.png) -187px -142px;
+  background: no-repeat url(../../../assets/images/icons.png) -187px -142px;
 }
 
 .newflash .bargain {

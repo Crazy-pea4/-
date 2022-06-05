@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // 构造函数中的this指向的是实例对象 one
+        function Person(name) {
+            this.name = name;
+        }
+        let that;
+        Person.prototype.sayHi = function() {
+            console.log('i will sing');
+            that = this;
+        }
+        // 原型对象中的this指向的也是实例对象 one
+        let one = new Person('一拳超人');
+        console.log(that === one);
+        // 当然这是在调用之后才会指向one，一句话 “谁调用，指向谁”
+        one.sayHi();
+        console.log(that === one);
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Object.defineProperty(obj, prop, descriptor)
+    // 第一个参数：想要操作的对象
+    // 第二个参数：添加或修改的属性
+    // 第三个参数：是一个对象{}，其中有
+    /*
+            value: 默认为undefined
+            writable: 值是否可以重写。true|false 默认为false
+            enumerable: 目标属性是否可以被枚举。true|false 默认为false
+            configurable：目标属性是否可以被删除或是否可以再次修改特性true|false 默认为false
+        */
+    let obj = {
+      name: "one",
+    };
+    // 使用Object.defineProperty()添加属性
+    Object.defineProperty(obj, "age", {
+      value: 22,
+      // 第一个参数
+      writable: false,
+    });
+    // 无法修改
+    obj.age = 100;
+    console.log(obj);
+    Object.defineProperty(obj, "address", {
+      value: "广西云南",
+      // 第二个参数
+      enumerable: false,
+    });
+    console.log(obj);
+    // 只有一个属性name被枚举了，上面两个新增属性没有枚举
+    console.log(Object.keys(obj));
+    Object.defineProperty(obj, "sexual", {
+      value: "male",
+      writable: true,
+      enumerable: true,
+      // 第三个参数
+      configurable: false,
+    });
+    // 无法删除属性
+    delete obj.sexual;
+    // 无法再次修改特性
+    Object.defineProperty(obj, "sexual", {
+      value: "male",
+      writable: false,
+      enumerable: false,
+      // 第三个参数
+      configurable: true,
+    });
+  </script>
+</body>
+
+</html>

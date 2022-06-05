@@ -12,7 +12,7 @@ import store from './store/index.js'
 
 // 在这里有一个需要注意的点：
 // store文件中的index.js里面用到了Vuex.store，但在计算机读取其中的代码时，Vue并没有使用Vuex插件(没有Vue.use(Vuex))。
-// 即使把第八行的代码放在Vuex.use(Vuex)之后也无济于事，因为js总是优先解析import语句
+// 即使把第八行的代码放在Vue.use(Vuex)之后也无济于事，因为js总是优先解析import语句
 // Vue.use(Vuex)
 
 Vue.config.productionTip = false

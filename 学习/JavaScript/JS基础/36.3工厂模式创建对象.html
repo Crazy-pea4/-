@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // 工厂模式创建对象
+        function create(name, age, gender) {
+            // 创建对象
+            var obj = new Object();
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+            // 返回对象
+            return obj;
+        }
+        // 以后每次调用create函数，都可以生成一个对象，这就是最简单的工厂模式演示
+        var obj1 = create('11', 18, 'male');
+        var obj2 = create('12', 14, 'male');
+        var obj3 = create('13', 54, 'female');
+        console.log(obj1);
+        console.log(obj2);
+        console.log(obj3);
+    </script>
+</body>
+</html>

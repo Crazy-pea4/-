@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        // new 关键字执行过程。第一个参数是构造函数，第二个参数是构造函数传入的值
+        function newProcess(fn, ...args) {
+        // 1. 首先在内存中创建一个新的对象
+        const obj = {};
+        // 2. 让新的对象的隐式原型指向这个构造函数的显示原型
+        obj.__proto__ = fn.prototype;
+        // 3. 执行构造函数里面的代码，给这个新对象添加属性或方法
+        fn.apply(obj, args);
+        // 4. 返回这个新对象
+        return obj
+      }
+    </script>
+  </body>
+</html>

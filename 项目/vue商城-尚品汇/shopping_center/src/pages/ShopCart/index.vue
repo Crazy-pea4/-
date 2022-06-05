@@ -13,7 +13,12 @@
       <div class="cart-body">
         <ul class="cart-list" v-for="item in cartList" :key="item.id">
           <li class="cart-list-con1">
-            <input type="checkbox" name="chk_list" :checked="item.isChecked" />
+            <input
+              type="checkbox"
+              name="chk_list"
+              :checked="item.isChecked"
+              @change="updateChecked(item.skuId, $event)"
+            />
           </li>
           <li class="cart-list-con2">
             <img :src="item.imgUrl" />
@@ -61,13 +66,21 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" type="checkbox" :checked="isAllChecked" />
+        <input
+          class="chooseAll"
+          type="checkbox"
+          :checked="isAllChecked"
+          :disabled="this.cartList.length == 0"
+          @click="checkedAllCart"
+        />
         <span>全选</span>
       </div>
       <div class="option">
-        <a href="#none">删除选中的商品</a>
-        <a href="#none">移到我的关注</a>
-        <a href="#none">清除下柜商品</a>
+        <a href="javascript:void(0)" @click="deleteAllCheckedCart"
+          >删除选中的商品</a
+        >
+        <a href="javascript:void(0)">移到我的关注</a>
+        <a href="javascript:void(0)">清除下柜商品</a>
       </div>
       <div class="money-box">
         <div class="chosed">已选择 <span>0</span>件商品</div>
@@ -145,6 +158,44 @@ export default {
           alert("网络异常");
         });
     },
+    // 修改选中状态
+    updateChecked(skuId, { target: { checked } }) {
+      let isChecked = checked ? 1 : 0;
+      this.$store
+        .dispatch("shopCart/updateCheckCart", {
+          skuId,
+          isChecked,
+        })
+        .then(() => {
+          this.getCartList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // 删除所有选中商品
+    deleteAllCheckedCart() {
+      this.$store
+        .dispatch("shopCart/deleteAllCheckedCart")
+        .then(() => {
+          this.getCartList();
+        })
+        .catch(() => {
+          alert("网络错误");
+        });
+    },
+    // 选中/取消选中 所有商品
+    checkedAllCart({ target: { checked } }) {
+      let isChecked = checked ? 1 : 0;
+      this.$store
+        .dispatch("shopCart/checkedAllCart", isChecked)
+        .then(() => {
+          this.getCartList();
+        })
+        .catch(() => {
+          alert("网络错误");
+        });
+    },
   },
   computed: {
     ...mapGetters("shopCart", ["cartInfoList"]),
@@ -160,7 +211,11 @@ export default {
       return sum;
     },
     isAllChecked() {
-      return this.cartList.every((item) => item.isChecked == 1);
+      if (this.cartList.length == 0) {
+        return false;
+      } else {
+        return this.cartList.every((item) => item.isChecked == 1);
+      }
     },
   },
 };

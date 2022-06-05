@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="n1">
+        <li>可爱女人</li>
+        <li>龙卷风</li>
+        <li>青花瓷</li>
+        <li>一路向北</li>
+    </ul>
+
+    <ul class="n2">
+        <li>榴莲</li>
+        <li>臭豆腐</li>
+        <li>鲱鱼罐头</li>
+        <li>玛莎拉</li>
+    </ul>
+    <script>
+        // 需求：点击每个li打印其对应的索引
+        // 以前在没有es6之前，使用var会容易造成一个问题，var所定义的变量是在其定义域下是容易被改变的
+        let lis1 = document.querySelector('.n1').querySelectorAll('li');
+        for (var i = 0; i < lis1.length; i++) {
+            // 以前的做法：给每个li新增一个属性用来存放索引
+            lis1[i].index = i;
+            lis1[i].onclick = function () {
+                // console.log(i);
+                console.log(this.index);
+            }
+        }
+        // 使用闭包
+        for (var i = 0; i < lis1.length; i++) {
+            (function (i) {
+                lis1[i].onclick = function () {
+                    // 这里的i是用的外面function中的i
+                    console.log(i);
+                    // 但从这里也可以看出，本来外面function的i在函数结束后要被销毁
+                    // 但是这个i却被里面的function给用了，因此必须等到onclick事件完成后i才会销毁。这就是我们说的容易造成内存泄漏
+                }
+            })(i)
+        }
+
+        // 需求三秒后打印点击的li的索引
+        let lis2 = document.querySelector('.n2').querySelectorAll('li');
+        for (var j = 0; j < lis2.length; j++) {
+            // 定时器函数属于异步任务，会在for循环（同步任务）结束后才运行，因此此时的j = 4，报错
+            // setTimeout(function () {
+            //     console.log(lis2[j].innerHTML);
+            // }, 1000)
+            // 使用闭包
+            (function (j) {
+                setTimeout(function () {
+                    console.log(lis2[j].innerHTML);
+                }, 1000)
+            })(j);
+        }
+    </script>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ let obj: any = {};
 // obj = "hello";
 // const n: number = obj;
 
-// 函数 function fnName(params: type, ...): type || void （在函数外声明的是限制函数的返回值类型，可以选择void不返回任何值）
+// 函数 function fnName(params: type, ...): type | void （在函数外声明的是限制函数的返回值类型，可以选择void不返回任何值）
 function fn(name: string): number {
   console.log("我是" + name + "。很高兴认识你");
   return 0;

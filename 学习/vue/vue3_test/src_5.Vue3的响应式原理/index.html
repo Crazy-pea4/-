@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let person = {
+            name: '光头强',
+            age: 36,
+        }
+
+        // Vue2的数据响应式原理————Obejct,defineProperty
+        //#region 
+        // let p = {}
+        // Object.defineProperty(p, 'name', {
+        //     // get()用于捕获属性的读取
+        //     get() {
+        //         // person.name时，返回它
+        //         return person.name;
+        //     },
+        //     // set()用于捕获属性的修改，接受一个参数：改变的值
+        //     set(value) {
+        //         // 将修改的值赋给person.name
+        //         person.name = value;
+        //     }
+        // })
+        //#endregion
+
+        // Vue3的数据响应式原理————Proxy
+        // const p = new Proxy(person, {
+        //     // 当p中某个属性被读取时调用
+        //     get(target, propName) {
+        //         console.log(`我是proxy，我检测到了读取person中${propName}的操作`);
+        //         return target[propName];
+        //     },
+        //     // 当p中某个属性被修改，或p被追加了某个属性时调用
+        //     set(target, propName, value) {
+        //         console.log(`我是proxy，我检测到了修改person中${propName}的操作，且修改的值为：${value}`);
+        //         target[propName] = value;
+        //     },
+        //     // 当p中某个属性被删除时调用
+        //     deleteProperty(target, propName) {
+        //         console.log(`我是proxy，我检测到了删除person中${propName}的操作`);
+        //         // delete target[propName];
+        //         // 删除后可以看到控制台返回的是false，但打印p和person却发现已经成功删除
+        //         // 这是因为deleteProperty方法需要return boolean，没有则为undefined，有 假 意。解决办法：
+        //         return delete target[propName];
+        //     }
+        // });
+    
+        let obj = { a: 1, b:2 };
+        // 追加同一条属性————Object.defineProperty
+        //#region 
+        // Object.defineProperty(obj,'c', {
+        //     get() {
+        //         return 2
+        //     }
+        // });
+        // Object.defineProperty(obj,'c', {
+        //     get() {
+        //         return 9
+        //     }
+        // });
+        // 发现上述代码会在控制台报错，原因是不能redefine变量c，这对于封装框架来说并不友好
+        // 为了防止出错从而终止整个程序，就得使用try...catch...使代码正常运行，这通常会使框架内部全是try...catch...
+        //#endregion
+        
+        // 追加同一条属性————Reflect.defineProperty
+        //#region 
+        const x1 = Reflect.defineProperty(obj,'c',{
+            get() {
+                return 2
+            }
+        })
+        const x2 = Reflect.defineProperty(obj,'c',{
+            get() {
+                return 10
+            }
+        })
+        console.log('我们分别是x1, x2。代表Reflect.defineProperty是否成功' + x1, x2);
+        //#endregion
+        // 除此之外，Reflect还有get()、set()、deleteProperty()等方法
+
+        // 真正的Vue3数据响应式
+        const p = new Proxy(person, {
+            // 当p中某个属性被读取时调用
+            get(target, propName) {
+                console.log(`我是proxy，我检测到了读取person中${propName}的操作`);
+                return Refelct.get(target, propName);
+            },
+            // 当p中某个属性被修改，或p被追加了某个属性时调用
+            set(target, propName, value) {
+                console.log(`我是proxy，我检测到了修改person中${propName}的操作，且修改的值为：${value}`);
+                Reflect.set(target, propName, value);
+            },
+            // 当p中某个属性被删除时调用
+            deleteProperty(target, propName) {
+                console.log(`我是proxy，我检测到了删除person中${propName}的操作`);
+                // delete target[propName];
+                // 删除后可以看到控制台返回的是false，但打印p和person却发现已经成功删除
+                // 这是因为deleteProperty方法需要return boolean，没有则为undefined，有 假 意。解决办法：
+                return Reflect.deleteProperty(target, propertyName);
+            }
+        });
+    </script>
+</body>
+
+</html>

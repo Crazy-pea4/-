@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //   .call(thisArg, parmas1, parmas2, ...); 会改变this指向，并且调用函数，返回值为被使用函数的返回值，若无则undefined
+    let obj1 = {
+      name: "Jack",
+    };
+
+    function Person(a, b) {
+      console.log(this);
+      console.log(a + b);
+    }
+    Person.call(obj1, 1, 2);
+    //   call的主要作用可以实现属性的继承
+    function Father(uname, age) {
+      this.uname = uname;
+      this.age = age;
+      return 0
+    }
+
+    function Son(uname, age) {
+      let x1 = Father.call(this, uname, age);
+      console.log(x1 + ' 我是call方法的返回值，我取决于被我使用的函数的返回值');
+    }
+    let son
+    console.log(son);
+
+    console.log(
+      "------------------------------call------------------------------------"
+    );
+
+    //   .apply(thisArg, [argsArray]); 会改变this指向，并且调用函数，返回值为被使用函数的返回值，若无则undefined
+    let obj2 = {
+      name: "Tom",
+    };
+
+    function fn(arr) {
+      console.log(this);
+      console.log(arr);
+      return 1
+    }
+    let x2 = fn.apply(obj2, ["派大星"]);
+    console.log(x2 + ' 我是call方法的返回值，我取决于被我使用的函数的返回值');
+    //   apply的用途之一就是使用内置一些方法
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    //   重新指回Math对象
+    let max = Math.max.apply(Math, arr);
+    let min = Math.min.apply(Math, arr);
+    console.log(max, min);
+
+    console.log(
+      "------------------------------apply------------------------------------"
+    );
+
+    //   .bind(thisArg, parmas1, parmas2, ...); 会改变this指向，不会调用函数，返回由指定的this值和初始化参数改造的原函数拷贝
+    let obj3 = {
+      name: "rake",
+    };
+
+    function fn1(a, b) {
+      console.log(this);
+      console.log(a + b);
+    }
+    let f = fn1.bind(obj3, 2, 5);
+    f();
+
+    console.log(
+      "------------------------------bind------------------------------------"
+    );
+  </script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 <template>
   <div class="con">
     <Category>
-      <!-- 若要接收slot标签传递过来的值，必须使用template标签和v-slot属性，值可任意 -->
+      <!-- 若要接收slot标签传递过来的值，必须使用template标签和v-slot属性，值可任意(代表接收到的数据集名称) -->
       <template v-slot:games="received">
         <ul>
           <li v-for="(item, index) in received.games" :key="index">{{item}}</li>
@@ -11,7 +11,7 @@
     </Category>
     <Category>
       <!-- 因为传过来的是一个对象（就是Category中的data）并且支持对象解构 -->
-      <template v-slot="{games}">
+      <template v-slot:games="{games}">
         <ol>
           <li v-for="(item, index) in games" :key="index">{{item}}</li>
         </ol>

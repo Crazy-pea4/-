@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个类
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            // 添加方法，不需要用, 跟上面隔开，不支持 : function () {}
+            sayHi(word) {
+                console.log('my name is:' + this.name, word);
+            }
+        }
+        // 利用类创建对象 new
+        let zxc = new Person('周星驰', 50)
+        console.log(zxc.name);
+        zxc.sayHi('你好')
+        // 通过class创建一个类，出于命名习惯还是定义首字母大写
+        // 类中的constructor函数会被new关键字生成实例时，自动调用这个函数。如果不写，类也会自动生成这个函数
+        // 由构造函数传入的参数会传给construtor作为形参
+        // 必须用new来生成实例
+        // 类名后是接一个大括号
+    </script>
+</body>
+</html>

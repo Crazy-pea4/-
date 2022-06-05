@@ -15,6 +15,7 @@
             var pre = 0;
             var newarr = [];
             var j = 0;
+            // 排序
             for (let i = 0; i < nums.length - 1; i++) {
                 for (let j = 0; j < nums.length - 1 - i; j++) {
                     if (nums[j] > nums[j + 1]) {
@@ -25,6 +26,7 @@
                 }
             }
             newarr[pre] = nums[0];
+            // 去重
             for (var i = 1; i < nums.length; i++) {
                 if (nums[pre] == nums[i]) {
                     pre++;
@@ -38,6 +40,20 @@
             return newarr;
         };
         console.log(removeDuplicates([1, 1, 2, 4, 5, 5, 6, 7, 7, 7, 8, 11, 11, 22, 22, 22, 22, 6, 8, 9, 9, 9, 1]));
+
+        // 方法二
+        let arr2 = [1, 2, 3, 2, 1, 2, 2, 4, 6, 6, 2, 5];
+        for (let i = 0; i < arr2.length; i++) {
+            for (let j = i + 1; j < arr2.length; j++) {
+                // console.log(arr2[i] + '---->' + arr2[j]);
+                if (arr2[i] === arr2[j]) {
+                    arr2.splice(j, 1);
+                    // 删除一个元素后，后面的元素自动往前进一位，补上来的元素是新的，还需要再检查一次
+                    j--
+                }
+            }
+        }
+        console.log(arr2);
     </script>
 </body>
 

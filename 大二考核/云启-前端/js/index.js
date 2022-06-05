@@ -426,7 +426,7 @@ window.addEventListener('load', function () {
     const focus_box = document.querySelector('.focus-box');
     const focus_circle = document.querySelector('.focus-circle');
     // 获取focus-pic里面的ul
-    const ul_pic = document.querySelector('.focus-pic').children[0];
+    const ul_pic = document.querySelector('.focus-pic').querySelector('ul');
     // 获取focus-circle，也就是ul
     const ul_circle = document.querySelector('.focus-circle')
     // 轮播图自动播放定时器名称

@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: darkseagreen;
+}
+
+.con {
+    position: relative;
+    margin: 0 auto;
+    width: 1200px;
+    height: 300px;
+    background-color: pink;
+}
+
+.searchBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s;
+}
+
+.searchBox input {
+    float: left;
+    outline: none;
+    width: 0px;
+    height: 100%;
+    border: 0;
+    font-size: 22px;
+    transition: all 0.5s;
+}
+
+.searchBox button {
+    float: left;
+    width: 40px;
+    height: 100%;
+    border: 0;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.searchBox-active {
+    width: 240px;
+}
+
+.input-active {
+    width: 200px !important;
+    padding-left: 10px;
+}

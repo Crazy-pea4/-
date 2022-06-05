@@ -5,4 +5,5 @@ let y: null = null;
 function some(val: string | null) {
   // 非空断言运算符 !
   console.log(val!.toUpperCase());
+  // 用来断言变量一定不为null或undefined
 }

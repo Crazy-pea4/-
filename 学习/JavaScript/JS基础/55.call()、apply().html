@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function fn(p1, p2) {
+            console.log(this);
+            console.log(p1, p2);
+        }
+        let obj = {
+            name: '小花',
+            age: 18
+        }
+        // 直接调用。this为window
+        fn();
+        // 使用call()，并传入一个obj。this为obj
+        fn.call(obj, 'a', 6);
+        // 使用apply()，并传入一个obj。this为obj
+        fn.apply(obj, ['a', 6]);
+    </script>
+</body>
+</html>

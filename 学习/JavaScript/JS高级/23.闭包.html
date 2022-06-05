@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 何为闭包：被访问变量所在作用域的函数就是闭包
+        // 闭包的主要作用：延伸了变量的作用范围
+        function fn() {
+            let num = 1;
+
+            function func() {
+                // func函数作用域内访问了另一个fn函数作用域内的num变量
+                console.log(num);
+                // 因此我们说fn函数就是一个闭包，也可以将闭包称之为一个现象
+            }
+            // 此时，我们return func
+            // func();
+            return func;
+        }
+        let f = fn();
+        // 相当于：
+        // f = function func() {
+        //     console.log(num);
+        // }
+        f();
+    </script>
+</body>
+
+</html>

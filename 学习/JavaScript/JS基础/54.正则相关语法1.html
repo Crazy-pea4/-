@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            量词：
+                在需要指定次数的目标后写上 x{number} 要求出现x的number倍
+                {}只对其前面一个内容起作用，要多重生效的话给前面内容加上括号
+                {n}：出现n次
+                {n-m}：出现n到m次
+                {n,}：出现n次以上
+                +：至少一个，相当于{1,}
+                *：0个或多个，相当于{0,}
+                ?；0个或1个，相当于{0,1}
+
+                检查一个字符串是否以a开头|结尾
+                开头：/^a/  注意区别[^ ]，这个是除了
+                结尾：/a$/
+                特殊：/^a$/ 代表只能有一个a（这个a同时是开头和结尾）
+        */
+      let reg = /x{3}/;
+      let reg2 = /(ab){2}/;
+      console.log(reg.test("axxxc"));
+      console.log(reg2.test("zzababab"));
+      let reg3 = /ac{1,3}d/;
+      console.log(reg3.test("xxaccdxx"));
+
+      // 校验手机号是否合法
+      let phoneStr = "19898510903";
+      let phoneReg = /^1[3-9][0-9]{9}$/;
+      console.log("手机号校验--->" + phoneReg.test(phoneStr));
+
+      /*
+            元字符：
+                  . ：查找单个字符，除了换行和行结束符。
+                  \ ：转义字符，将后面一位的元字符转义为普通字符
+
+            去除开头结尾的所有空格（中间空格不去）：/^\s*|\s*$/g
+      */
+      // 查找字符串是有含有 .
+      let reg4 = /\./;
+      console.log(reg4.test("asd.jk"));
+      // 查找字符串是否含有 \   注意，在普通表达式中，\也有转义效果，因此下面的'asd\b'应该写成'asd\\b'
+      let reg5 = /\\/;
+      console.log(reg5.test('asd\\b'));
+    </script>
+  </body>
+</html>
