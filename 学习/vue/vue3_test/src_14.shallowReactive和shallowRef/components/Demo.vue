@@ -1,5 +1,7 @@
 <template>
   <div class="con">
+    <h2>x：{{x.a}}</h2>
+    <button @click="x.a++">点我</button>
     <h2>{{ person }}</h2>
     <h2>姓名：{{ name }}</h2>
     <button @click="name += '!'">点我修改名字</button>
@@ -11,11 +13,16 @@
 </template>
 
 <script>
-import { ref, reactive, toRef, toRefs } from "vue";
+import { ref, reactive, toRef, toRefs, shallowReactive, shallowRef } from "vue";
 export default {
   name: "Demo",
   setup() {
-    let person = reactive({
+    /*
+      shallow意为浅层的：
+          shallowReactive指只对第一层数据做响应式处理
+          shallowRef只处理基本数据类型，对于对象类型不像ref一样会求助reactive
+    */
+    let person = shallowReactive({
       name: "李四",
       age: 35,
       shenzhen: {
@@ -24,10 +31,17 @@ export default {
         },
       },
     });
-    
+
+    // let x = shallowRef(6);
+    let x = shallowRef({
+      a: 6,
+    });
+
+
     return {
       person,
       ...toRefs(person),
+      x
     };
   },
 };
