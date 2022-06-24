@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function Person(uname, age, address) {
+            this.uname = uname;
+            this.age = age;
+            this.address = address;
+            this.sayHi = function() {
+                console.log('你好鸭');
+            }
+        }
+        let one = new Person('一拳超人', 22, '地球');
+        // 实例成员：在构造函数内部通过this关键字绑定在实例身上的属性或方法，只能通过实例对象访问
+        one.sayHi();
+        console.log(one.uname, one.age, one.address);
+        console.log(Person.uname); // undefined
+    
+        // 静态成员：直接在构造函数身上添加的属性或方法，只能通过构造函数访问
+        Person.sex = 'male';
+        console.log(Person.sex);
+        console.log(one.sex); // undefined
+    </script>
+</body>
+</html>

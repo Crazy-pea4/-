@@ -49,7 +49,7 @@ a {
 }
 
 .nav .floor2 li {
-    display: none;
+    /* display: none; */
     width: 128px;
     background-color: white;
 }
