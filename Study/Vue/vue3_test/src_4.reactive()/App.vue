@@ -27,7 +27,7 @@ export default {
       sport: "dance",
     });
     // reactive处理数组数据
-    let hobby = ["抽烟", "喝酒", "烫头"];
+    let hobby = reactive(["抽烟", "喝酒", "烫头"]);
 
     // 定义一个函数用来修改页面中的name和age
     function changeValue() {

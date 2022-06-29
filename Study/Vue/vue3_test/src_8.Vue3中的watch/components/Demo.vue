@@ -31,6 +31,7 @@ export default {
       },
     });
     let arr = reactive([1, 2, 3, 4]);
+    let arr2 = reactive([1, 2, 3, 6]);
     // watch(target, handler, options)
 
     // 情况一：监视ref定义的一个响应式数据。(目标, 函数)
@@ -45,12 +46,12 @@ export default {
 
     /*
       情况三：监视reactive定义的一个响应式数据的 全部属性 (目标对象, 函数)。注意：
-          1. 此处无法正确的获取到oldValue                                                     2022.6.2 Vue3.2.26
+          1. 此处无法正确的获取到oldValue                                          Bug        2022.6.2 Vue3.2.26
           2. 强制开启了deep: true深度监视，手动改为false也不奏效
     */
     // watch(person, (newVal, oldVal) => {
     //   console.log("person改变", newVal, oldVal);
-    // }, {deeper: false});
+    // }, {deep: false});
 
     /*
       情况四：监视reactive定义的一个响应式数据的 某个属性 (函数=>目标属性, 函数)。
@@ -76,10 +77,11 @@ export default {
 
     // 监视数组 ([函数=>目标属性1, 函数=>目标属性2], 函数)
     watch(
-      () => [...arr],
+      [() => [...arr], () => [...arr2]],
       (newVal, oldVal) => console.log(newVal, oldVal)
     );
     arr.push(5);
+    arr2.push(10);
 
 
     return {

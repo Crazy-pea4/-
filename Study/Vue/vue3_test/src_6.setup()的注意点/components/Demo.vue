@@ -26,7 +26,7 @@ export default {
     console.log("---context---", context); // context有三个常用的参数分别为：attrs, emit, slot
     console.log("---context.attrs---", context.attrs); // 与Vue2中的$attrs作用类似---->捡漏
     console.log("---context.emit---", context.emit); // 触发传递的自定义事件
-    console.log("---context.slots---", context.slots); // 触发传递的自定义事件
+    console.log("---context.slots---", context.slots); // 触发传递的插槽
     let person = reactive({
       name: "张三",
       age: 18,

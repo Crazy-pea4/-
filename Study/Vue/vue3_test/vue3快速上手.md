@@ -313,39 +313,6 @@ npm run dev
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1
 
 - Vue3.0中可以继续使用Vue2.x中的生命周期钩子，但有有两个被更名：
@@ -415,7 +382,7 @@ npm run dev
 
 - 实现防抖效果：
 
-  ```vue
+  ```js
   <template>
   	<input type="text" v-model="keyword">
   	<h3>{{keyword}}</h3>
@@ -434,14 +401,24 @@ npm run dev
   				return customRef((track,trigger)=>{
   					return{
   						get(){
-  							track() //告诉Vue这个value值是需要被“追踪”的
+                /*
+                  在数据改动后（调用set()后）trigger()通知Vue3让它重新解析一下模板
+                  然后在模板读取到{{ keyword }}时，跑去问get()，此时如果不写track()让get追踪一下return的值
+                  那么get就认为值没有改变，因此必须要在return前调用track()
+                */
+  							track()
   							return value
   						},
   						set(newValue){
+                /*
+                  不同于defineProperty和computed中的set() get()
+                  他们在set中将数据改变后，get检测到自身所依赖的数据发生了改变，会自动在set后调用一次get，保障数据自动刷新
+                  但在customRef中，此处的get不会自动检测，必须手动通知Vue3重新解析一次模板。这就用到了customRef提供的两个参数
+                */
   							clearTimeout(timer)
   							timer = setTimeout(()=>{
   								value = newValue
-  								trigger() //告诉Vue去更新界面
+  								trigger()
   							},delay)
   						}
   					}

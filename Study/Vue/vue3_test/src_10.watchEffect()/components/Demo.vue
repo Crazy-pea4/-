@@ -39,7 +39,7 @@ export default {
       let x2 = person.shenzhen.tencent.salary;
       console.log(x1, x2);
     });
-    // watchEffect与computed有些类似，前者注重的是过程，后者注重的是结果
+    // watchEffect与computed有些类似，前者注重的是过程（没有返回值），后者注重的是结果（必须有返回值）
 
     return {
       sum,

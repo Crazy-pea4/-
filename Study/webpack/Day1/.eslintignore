@@ -1,0 +1,7 @@
+# 忽略字体文件 js
+
+src/js/iconfont.js
+
+# 忽略 dist 打包文件夹
+
+dist

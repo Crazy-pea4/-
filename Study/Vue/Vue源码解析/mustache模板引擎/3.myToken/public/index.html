@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>服务器打开</h1>
+    <script src="./bundle.js"></script>
+    <script>
+      let tempStr = `
+          <ul>
+              {{#arr}}
+                  <li>
+                    我是{{name}}，我的爱好有
+                    <ol>
+                      {{#hobby}}
+                        <li>{{.}}</li>
+                      {{/hobby}}  
+                    </ol>
+                  </li>
+              {{/arr}}
+          </ul>`;
+      let data = {};
+
+      myTemplateEngine.render(tempStr, data);
+    </script>
+  </body>
+</html>

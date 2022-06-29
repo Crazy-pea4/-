@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./js/mustache.js"></script>
+    <script>
+      let template = "<h1>我是{{name}}，我想要买{{goods}}</h1>";
+      let data = {
+        name: "周杰伦",
+        goods: "奶茶",
+      };
+
+      // 利用replace()方法
+      function render(template, data) {
+        return template.replace(/\{\{(\w+)\}\}/g, function (match, $1, location, originStr) {
+            return data[$1];
+        });
+      }
+      console.log(render(template, data));
+    </script>
+  </body>
+</html>

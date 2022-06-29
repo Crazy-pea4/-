@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    ----------循环数组对象------------
+    <div class="con1"></div>
+    ----------不循环------------
+    <div class="con2"></div>
+    ----------循环简单数组------------
+    <div class="con3"></div>
+    ----------嵌套循环------------
+    <div class="con4"></div>
+    ----------布尔值------------
+    <div class="con5"></div>
+    <!-- mustache包会引出一个全局对象Mustache -->
+    <script src="./js/mustache.js"></script>
+    <script>
+      /* 循环数组对象 */
+      let con1 = document.querySelector(".con1");
+      let templateStr1 = `
+          <ul>
+              {{#arr}}
+                  <li>
+                      <div>{{name}}的基本信息</div>
+                      <div>
+                          <p>姓名：{{name}}</p>
+                          <p>年龄：{{age}}</p>
+                      </div>
+                  </li>
+              {{/arr}}
+          </ul>
+      `;
+      let data1 = {
+        arr: [
+          { name: "熊大", age: 18 },
+          { name: "熊二", age: 16 },
+          { name: "光头强", age: 37 },
+        ],
+      };
+
+      let result1 = Mustache.render(templateStr1, data1);
+      console.log(result1);
+      con1.innerHTML = result1;
+
+      /* 不循环（传入的对象中属性值都是简单数据） */
+      let con2 = document.querySelector(".con2");
+      let templateStr2 = `
+          <h2>我是{{name}}，他们都叫我{{nickname}}。</h2>
+      `;
+      let data2 = {
+        name: "德鲁比",
+        nickname: "大哥",
+      };
+
+      let result2 = Mustache.render(templateStr2, data2);
+      console.log(result2);
+      con2.innerHTML = result2;
+
+      /* 循环简单数组 */
+      let con3 = document.querySelector(".con3");
+      let templateStr3 = `
+          <ul>
+              {{#arr}}
+                  <li>{{.}}</li>
+              {{/arr}}
+          </ul>
+      `;
+      let data3 = {
+        arr: ["兔八哥", "杰瑞", "汤姆"],
+      };
+
+      let result3 = Mustache.render(templateStr3, data3);
+      console.log(result3);
+      con3.innerHTML = result3;
+
+      /* 嵌套循环 */
+      let con4 = document.querySelector(".con4");
+      let templateStr4 = `
+          <ul>
+              {{#arr}}
+                  <li>
+                    我是{{name}}，我的爱好有
+                    <ol>
+                      {{#hobby}}
+                        <li>{{.}}</li>
+                      {{/hobby}}
+                    </ol>
+                  </li>
+              {{/arr}}
+          </ul>
+      `;
+      let data4 = {
+        arr: [
+          { name: "王小花", hobby: ["放风筝", "打甄恒熙"] },
+          { name: "李大强", hobby: ["编程", "逻辑游戏"] },
+          { name: "甄恒熙", hobby: ["痴呆", "去外面吃饭"] },
+        ],
+      };
+
+      let result4 = Mustache.render(templateStr4, data4);
+      console.log(result4);
+      con4.innerHTML = result4;
+
+      /* 布尔值 */
+      let con5 = document.querySelector(".con5");
+      let templateStr5 = `
+          <ul>
+            {{#t}}
+              <li>我会显示</li>
+            {{/t}}
+            {{#f}}
+              <li>我不会显示</li>
+            {{/f}}
+          </ul>
+      `;
+      let data5 = { t: true, f: false };
+
+      let result5 = Mustache.render(templateStr5, data5);
+      console.log(result5);
+      con5.innerHTML = result5;
+    </script>
+  </body>
+</html>

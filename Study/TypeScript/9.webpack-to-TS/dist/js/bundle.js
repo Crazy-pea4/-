@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("hello webpack");let o=new class{constructor(o){this.name=o}}("汤姆");console.log(o)})();
