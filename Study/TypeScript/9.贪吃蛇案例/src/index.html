@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>webpack与ts的邂逅</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greedy-Snake</title>
+  </head>
+  <body>
+    <!-- 游戏主容器 -->
+    <div class="main">
+      <div class="tips">
+        <div>游戏玩法</div>
+        <div>按方向键上下左右</div>
+        <div>如果你没有小键盘</div>
+        <div>那你先憋着，我还没考虑那么多</div>
+      </div>
+      <!-- 游戏主窗口 -->
+      <div class="view" id="view">
+        <!-- 蛇主体 -->
+        <div class="snake">
+          <div id="head"></div>
+        </div>
+        <!-- 食物 -->
+        <div class="food" id="food">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <!-- 游戏记分牌 -->
+      <div class="score-panel">
+        <div class="score">SCORE:<span class="" id="score">0</span></div>
+        <div class="level">LEVEL:<span class="" id="level">1</span></div>
+      </div>
+    </div>
+  </body>
 </html>

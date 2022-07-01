@@ -1,14 +1,7 @@
-import { hello } from "./test";
+// 初始化样式
+import "./style/index.less";
+import "./style/style.less";
+// 引入主要配置文件
+import controller from "./ts/controller";
 
-function test() {
-  console.log("hello webpack");
-}
-test();
-class myClass {
-  name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
-}
-let Tom = new myClass('汤姆');
-console.log(Tom);
+new controller();

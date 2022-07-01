@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // webpack所有的配置信息都要写在module.exports中
 module.exports = {
+  target: "web",
   // 入口
   entry: "./src/index.ts",
   // 输出
@@ -26,6 +27,23 @@ module.exports = {
         exclude: "/node_modules",
       },
       {
+        test: /\.less$/i,
+        use: [
+          // compiles Less to CSS
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [["postcss-preset-env"]],
+              },
+            },
+          },
+          "less-loader",
+        ],
+      },
+      {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
@@ -37,22 +55,23 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    host: "localhost",
-    port: 8080,
-    open: true,
-    static: {
-      directory: path.join(__dirname, "dist/index.html"),
-    },
-  },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "webpack-ts",
-      template: path.resolve(__dirname, "src/index.html"),
+      template: path.resolve(__dirname, "./src/index.html"),
+      filename: "index.html",
     }),
   ],
   // 配置resolve解析选项，来扩展需要解析的后缀名。重写extensions会覆盖原有配置，使用'...'来访问默认扩展名
   resolve: {
     extensions: [".ts", "..."],
+  },
+  devServer: {
+    host: "localhost",
+    port: 8080,
+    open: true,
+    static: {
+      directory: path.resolve(__dirname, "./dist/index.html"),
+    },
+    watchFiles: 'src/index.html',
   },
 };
