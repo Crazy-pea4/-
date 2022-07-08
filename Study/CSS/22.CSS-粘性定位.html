@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        body {
-            height: 2000px;
-        }
-        .search {
-            width: 300px;
-            height: 20px;
-            margin: 100px auto;
-            background-color: aqua;
-            position: sticky;
-            /* 下面添加的属性值是距XX多少距离就开始黏住浏览框 */
-            top: 0;
-        }
+      body {
+        height: 2000px;
+      }
+      .search {
+        width: 300px;
+        height: 20px;
+        margin: 100px auto;
+        background-color: aqua;
+        position: sticky;
+        /* 
+            下面添加的属性值是距XX多少距离就开始黏住浏览框
+            注意：父元素的高度必须比开启粘性定位的元素大，并且overflow必须为visible
+        */
+        top: 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="search"></div>
-</body>
+  </body>
 </html>
