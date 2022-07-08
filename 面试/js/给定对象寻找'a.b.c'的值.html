@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       *      给定一个obj对象和一个键名。键名的格式为'a.b.c'，请找出键值obj.a.b.c
+       */
+
+        function lookUp(obj, keyName) {
+          if (keyName.includes(".")) {
+            let tempObj = obj;
+            let resolveArr = keyName.split(".");
+
+            for (let i = 0; i < resolveArr.length; i++) {
+              tempObj = tempObj[resolveArr[i]];
+            }
+            console.log(tempObj);
+          } else {
+              console.log("传入的字符串都没有. 这让我怎么找！");
+          }
+        }
+      let obj = {
+        a: {
+          b: {
+            c: "You found me!",
+          },
+        },
+      };
+        lookUp(obj, "a.b.c");
+        lookUp(obj, "abc");
+    </script>
+  </body>
+</html>

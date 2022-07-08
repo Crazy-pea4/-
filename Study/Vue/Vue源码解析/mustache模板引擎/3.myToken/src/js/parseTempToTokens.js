@@ -18,10 +18,10 @@ export default function parseTempToTokens(tempStr) {
     str = scanner.scanUntil("}}");
     // 到底了，还会执行一次scanUntil，只是返回的是''。把这一情况过滤掉
     if (str !== "") {
-      // // 判断{{}}里的首字符是否是'#'
+      // 判断{{}}里的首字符是否是'#'
       if (str[0] == "#") {
         tokens.push(["#", str.substring(1)]);
-        //   // 判断{{}}里的首字符是否是'/'
+        // 判断{{}}里的首字符是否是'/'
       } else if (str[0] == "/") {
         tokens.push(["/", str.substring(1)]);
       } else {

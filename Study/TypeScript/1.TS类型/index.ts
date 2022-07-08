@@ -23,7 +23,7 @@ let boolean: boolean = true;
 // 1.字面量
 let num1: 10 = 10;
 let string1: "hello" = "hello";
-let some: boolean | string = false;
+let some: boolean | string = false; // 联合类型
 
 // 2.any（不推荐使用，相当于关闭类型检测）
 let a: any;
@@ -121,12 +121,6 @@ enum gender {
 let e: { name: string; gender: gender };
 e = { name: "mike", gender: gender.male };
 
-// & 的使用
+// & 的使用（交叉类型）
 let n: { name: string } & { age: number };
 n = { name: "mike", age: 20 };
-
-// 类型别名
-type myString = string;
-let k1: myString;
-let k2: myString;
-k1 = 'ji'

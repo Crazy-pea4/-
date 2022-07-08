@@ -10,6 +10,11 @@
     <h1>服务器打开</h1>
     <script src="./bundle.js"></script>
     <script>
+      // let tempStr = "<h2>我是{{name}}，他们都叫我{{nickname}}。</h2>";
+      // let data = {
+      //   name: "德鲁比",
+      //   nickname: "大哥",
+      // };
       let tempStr = `
           <ul>
               {{#arr}}
@@ -18,12 +23,18 @@
                     <ol>
                       {{#hobby}}
                         <li>{{.}}</li>
-                      {{/hobby}}  
+                      {{/hobby}}
                     </ol>
                   </li>
               {{/arr}}
           </ul>`;
-      let data = {};
+      let data = {
+        arr: [
+          { name: "王小花", hobby: ["放风筝", "打甄恒熙"] },
+          { name: "李大强", hobby: ["编程", "逻辑游戏"] },
+          { name: "甄恒熙", hobby: ["痴呆", "去外面吃饭", "玩王者荣耀"] },
+        ],
+      };
 
       myTemplateEngine.render(tempStr, data);
     </script>
