@@ -24,10 +24,11 @@ function fn2<T, Q>(a: T, b: Q): T {
 }
 console.log(typeof fn2<number, string>(18, "你好"));
 
-/** 通过接口限制泛型 */
+/** 泛型限制条件 */
 interface Inter {
   length: number;
 }
+// 也可以不用extend，直接用Inter当泛型来限制
 function fn3<T extends Inter>(a: T): T {
   // 此时泛型T已经可以限制传入的参数中必须包含length属性，且值类型为number
   return a;
