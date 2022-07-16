@@ -13,7 +13,7 @@ export default function parseTempToTokens(tempStr) {
   while (scanner.pos !== tempStr.length) {
     str = scanner.scanUntil("{{");
     // 将一般字符串存入tokens数组
-    tokens.push(["text", str]);
+    tokens.push(["text", str.replace(/\s{1,}(<)|(>)\s{1,}/g, "$1$2")]);
     scanner.scan("{{");
     str = scanner.scanUntil("}}");
     // 到底了，还会执行一次scanUntil，只是返回的是''。把这一情况过滤掉

@@ -1,23 +1,17 @@
 <template>
   <div class="login">
     <div class="login-box">
-      <!-- <ul>
-        <li v-for="(item, index) in menuOptions" :key="index" @click="chooseMenu(item)"
-          :class="{ active: item.selected }">
-          {{ item.txt }}
-        </li>
-      </ul> -->
       <el-tabs v-model="activeName" :stretch="true" class="login-tabs">
         <el-tab-pane v-for="(item, index) in menuOptions" :key="index" :label="item.txt" :name="item.type">
         </el-tab-pane>
       </el-tabs>
       <!-- 表单部分 -->
-      <!-- 这里犯了个小错误N1 -->
+      <!-- 这里犯了个小错误：N1 -->
       <div>
         <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" class="login-ruleForm">
           <el-form-item prop="account">
             <label for="">账号</label>
-            <el-input v-model="ruleForm.account" type="password" autocomplete="off" maxlength="11" />
+            <el-input v-model="ruleForm.account" type="text" autocomplete="off" maxlength="11" />
           </el-form-item>
           <el-form-item prop="password">
             <label for="">密码</label>
@@ -40,20 +34,23 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
+import { useRouter, useRoute } from 'vue-router'
 import type { FormInstance } from "element-plus";
 import { CKPhoneNum, CKPassword } from "../../utils/verification";
+import link from "../../api/link";
+import { success, error } from "../../hook/elMessage"
+import md5 from "../../hook/pwdMD5";
+
+// 这里犯了个错误 N2
+const router = useRouter();
+const route = useRoute();
+
 // 标签页部分
 const menuOptions = reactive([
   { txt: "登录", selected: true, type: "login" },
   { txt: "注册", selected: false, type: "register" },
 ]);
-const activeName = ref("login");
-// let chooseMenu = (item: any) => {
-//   menuOptions.forEach((e) => {
-//     e.selected = false;
-//   });
-//   item.selected = true;
-// };
+let activeName = ref("login");
 
 // 下面是表单验证
 const ruleFormRef = ref<FormInstance>();
@@ -67,7 +64,6 @@ const checkAccount = (rule: any, value: any, callback: any) => {
     callback();
   }
 };
-
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === "") {
     callback(new Error("请输入密码！"));
@@ -103,12 +99,33 @@ const rules = reactive({
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
+  let data = {
+    account: ruleForm.account,
+    password: md5(ruleForm.password),
+  };
   formEl.validate((valid) => {
     if (valid) {
-      console.log('submit');
+      if (activeName.value === "login") {
+        link("/users", "get", {}, data).then((res: any) => {
+          // console.log(res);
+          if (res.data.length != 0) {
+            router.push({ name: 'home' })
+          } else {
+            error('账号或密码有误！');
+          }
+        })
+      } else {
+        link("/users", "post", data).then((res) => {
+          // console.log(res);
+          success('注册成功');
+          activeName.value = "login";
+          ruleForm.account = '';
+          ruleForm.password = ''
+          ruleForm.checkPass = '';
+        });
+      }
     } else {
-      console.log('error');
-
+      error('请输入正确信息！');
     }
   });
 };
@@ -125,17 +142,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 
 .login-box {
-  // ul {
-  //   text-align: center;
-
-  //   li {
-  //     display: inline-block;
-  //     width: 88px;
-  //     line-height: 36px;
-  //     color: white;
-  //     cursor: pointer;
-  //   }
-  // }
   .login-tabs {
     margin: 0 auto;
     width: 340px;

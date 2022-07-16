@@ -1,6 +1,6 @@
 import server from "../utils/server";
 
-let link = (url: string, method: string, data?: object, params?: object) => {
+const link = (url: string, method: string, data?: object, params?: object) => {
   return new Promise((resolve, reject) => {
     server
       .request({

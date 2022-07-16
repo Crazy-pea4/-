@@ -8,6 +8,8 @@
   </head>
   <body>
     <h1>服务器打开</h1>
+    <div class="box"></div>
+
     <script src="./bundle.js"></script>
     <script>
       // let tempStr = "<h2>我是{{name}}，他们都叫我{{nickname}}。</h2>";
@@ -15,28 +17,46 @@
       //   name: "德鲁比",
       //   nickname: "大哥",
       // };
+      // let tempStr = `
+      //     <ul>
+      //         {{#arr}}
+      //             <li>
+      //               我是{{name}}，我的爱好有
+      //               <ol>
+      //                 {{#hobby}}
+      //                   <li>{{.}}</li>
+      //                 {{/hobby}}
+      //               </ol>
+      //             </li>
+      //         {{/arr}}
+      //     </ul>`;
       let tempStr = `
           <ul>
               {{#arr}}
                   <li>
                     我是{{name}}，我的爱好有
+                    {{#hobby}}
                     <ol>
-                      {{#hobby}}
-                        <li>{{.}}</li>
-                      {{/hobby}}
+                      {{.}}
                     </ol>
-                  </li>
+                    {{/hobby}}
+                    </li>
               {{/arr}}
+              
           </ul>`;
       let data = {
         arr: [
-          { name: "王小花", hobby: ["放风筝", "打甄恒熙"] },
-          { name: "李大强", hobby: ["编程", "逻辑游戏"] },
-          { name: "甄恒熙", hobby: ["痴呆", "去外面吃饭", "玩王者荣耀"] },
+          { name: "王小花", hobby: ["变成", "开玩笑", "征服地球"] },
+          { name: "李大强", hobby: ["抽烟", "喝酒", "烫头"] },
+          { name: "甄恒熙", hobby: ["吃大便", "去吃饭", "发呆"] },
         ],
       };
 
-      myTemplateEngine.render(tempStr, data);
+      let finalStr = myTemplateEngine.render(tempStr, data);
+      console.log(finalStr);
+
+      let box = document.querySelector(".box");
+      box.innerHTML = finalStr;
     </script>
   </body>
 </html>

@@ -1,7 +1,16 @@
 import axios from "axios";
+import { ElMessage } from "element-plus";
+import "element-plus/es/components/message/style/css";
 
-let server = axios.create({
-  baseURL: "",
+// 使用环境变量自动分配baseURL。
+const axiosURL = process.env.VUE_APP_API;
+// if (process.env.NODE_ENV === "development") {
+//   axiosURL = process.env.VUE_APP_API;
+// } else {
+//   axiosURL = process.env.VUE_APP_API;
+// }
+const server = axios.create({
+  baseURL: axiosURL,
   timeout: 3000,
 });
 // 添加请求拦截器
@@ -22,6 +31,25 @@ server.interceptors.response.use(
     return response;
   },
   function (error) {
+    switch (error.response.status) {
+      case 404:
+        ElMessage({
+          message: "请求路径出错！",
+          type: "error",
+        });
+        break;
+      case 500:
+        ElMessage({
+          message: "服务器内部错误，请稍后再试！",
+          type: "error",
+        });
+        break;
+      default:
+        ElMessage({
+          message: "未知错误，请联系管理员",
+          type: "error",
+        });
+    }
     // 对响应错误做点什么
     return Promise.reject(error);
   }
