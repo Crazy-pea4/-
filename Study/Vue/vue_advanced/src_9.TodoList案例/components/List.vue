@@ -3,11 +3,7 @@
     <div class="list">
       <!-- 根据todoList.length决定打印多少个<Item> -->
       <!-- 使用prop传入对应数组对象中的数据给Item组件 -->
-      <Item
-        v-for="item in todoList"
-        :key="item.id"
-        :item="item"
-      ></Item>
+      <Item v-for="item in todoList" :key="item.id" :item="item"></Item>
       <!-- 当任务列表长度为零时，显示提示信息 -->
       <div class="show_whenListIsEmpty" v-if="todoList.length === 0">
         一项任务都没有呢
@@ -34,6 +30,7 @@ export default {
   width: 100%;
   border-top: 1px solid #ccc;
 }
+
 .show_whenListIsEmpty {
   width: 100%;
   height: 80px;

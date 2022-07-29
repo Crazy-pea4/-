@@ -14,9 +14,7 @@
                             <span>{{ item.meta.title }}</span>
                         </template>
                         <el-menu-item v-for="i in item.children" :key="i.path" :index="`/home/${item.path}/${i.path}`">
-                            {{
-                                    i.meta.title
-                            }}
+                            {{ i.meta.title }}
                         </el-menu-item>
                     </el-sub-menu>
                     <!-- 普通菜单 -->

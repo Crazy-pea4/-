@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+  </head>
+  <style>
+    .app {
+      width: 500px;
+      margin: 0 auto;
+    }
+    .box {
+      width: 100%;
+      text-align: center;
+    }
+    .item {
+      display: inline-block;
+      margin: 5px;
+      padding: 0 5px;
+      color: white;
+      background-color: red;
+    }
+    .item a {
+      color: white;
+      text-decoration: none;
+    }
+    .active {
+    }
+  </style>
+
+  <body>
+    <div class="app">
+      <div class="box" v-for="(Arritem, index) in json1" :key="index">
+        <div class="item" v-for="(item, i) in Arritem" :key="i">
+          <a href="" @click.prevent="selectAttr(item, index)">{{item}}</a>
+        </div>
+      </div>
+      <div class="current">
+        <span>当前的选择是：{{target}}</span>
+      </div>
+      <div class="price">
+        <span>价格：</span>
+        <span class="showData" v-show="price == 0?0:price">{{price}}</span>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    new Vue({
+      el: ".app",
+      data() {
+        return {
+          price: 0,
+          target: {
+            color: "",
+            type: "",
+            mianliao: "",
+          },
+          processStr: "",
+          processObj: [],
+          json1: [
+            ["红色", "黄色", "蓝色"],
+            ["S", "M"],
+            ["棉的", "涤纶"],
+          ],
+          json2: [
+            { color: "红色", type: "S", mianliao: "棉的", price: 100 },
+            { color: "红色", type: "M", mianliao: "棉的", price: 200 },
+            { color: "红色", type: "S", mianliao: "涤纶", price: 300 },
+            { color: "红色", type: "M", mianliao: "涤纶", price: 400 },
+            { color: "黄色", type: "S", mianliao: "棉的", price: 500 },
+            { color: "黄色", type: "M", mianliao: "棉的", price: 600 },
+            { color: "黄色", type: "S", mianliao: "涤纶", price: 700 },
+            { color: "黄色", type: "M", mianliao: "涤纶", price: 800 },
+            { color: "蓝色", type: "S", mianliao: "棉的", price: 900 },
+            { color: "蓝色", type: "M", mianliao: "棉的", price: 1000 },
+            { color: "蓝色", type: "S", mianliao: "涤纶", price: 1100 },
+            { color: "蓝色", type: "M", mianliao: "涤纶", price: 1200 },
+          ],
+        };
+      },
+      mounted() {
+        for (const i of this.json2) {
+          let obj = {};
+          let objKey = "";
+          let price = 0;
+          for (const item of Object.values(i)) {
+            if (typeof item === "string") {
+              objKey += item;
+            } else {
+              obj[objKey] = item;
+            }
+          }
+          this.processObj.push(obj);
+        }
+        console.log(this.processObj);
+      },
+      methods: {
+        selectAttr(item, index) {
+          switch (index) {
+            case 0:
+              this.target.color = item;
+              break;
+            case 1:
+              this.target.type = item;
+              break;
+            case 2:
+              this.target.mianliao = item;
+              break;
+            default:
+              break;
+          }
+          this.getPrice();
+        },
+        getPrice() {
+          this.price = 0;
+          this.processStr =
+            this.target.color + this.target.type + this.target.mianliao;
+          this.processObj.find((item) => {
+            if (this.processStr == Object.keys(item)) {
+              this.price = Object.values(item).find(
+                (i) => typeof i == "number"
+              );
+              return true;
+            }
+          });
+          console.log(this.price);
+        },
+      },
+    });
+  </script>
+</html>
