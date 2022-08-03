@@ -71,11 +71,13 @@ export default {
 .echartsBox {
   position: relative;
 }
+
 .echarts {
   margin-top: 125px;
   width: 100%;
   height: 350px;
 }
+
 .switch {
   position: absolute;
   top: -31px;
