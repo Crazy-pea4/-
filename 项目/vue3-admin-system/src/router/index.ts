@@ -4,6 +4,8 @@ import {
   createWebHashHistory,
   RouteRecordRaw,
 } from "vue-router";
+// 这里遇到了一个问题 N5
+import { shallowRef } from "vue";
 import { TrendCharts, List, Management } from "@element-plus/icons-vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -28,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/Home/Children/EchartsView.vue"),
         meta: {
           title: "图表数据",
-          icon: TrendCharts,
+          icon: shallowRef(TrendCharts),
         },
       },
       {
@@ -37,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/Home/Children/PayList.vue"),
         meta: {
           title: "缴费管理",
-          icon: Management,
+          icon: shallowRef(Management),
         },
       },
       {
@@ -46,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/Home/Children/UserInfo.vue"),
         meta: {
           title: "用户信息",
-          icon: List,
+          icon: shallowRef(List),
         },
         children: [
           {

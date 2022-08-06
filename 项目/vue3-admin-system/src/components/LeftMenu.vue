@@ -35,6 +35,7 @@ import { ref, reactive, computed, onMounted, } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import getHomeView from '../hook/getHomeView'
+
 const store = useStore();
 const router = useRouter();
 
@@ -42,7 +43,7 @@ const router = useRouter();
 let menu: any = ref([]);
 onMounted(() => {
     menu.value = getHomeView(router).children
-    console.log(menu.value);
+    console.log('路由信息', menu.value);
 })
 
 const navBool = computed(() => store.state.Home.navBool)

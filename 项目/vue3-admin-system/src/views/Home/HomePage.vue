@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
+import { ref, reactive, } from 'vue'
 import LeftMenu from "../../components/LeftMenu.vue"
 import RightTop from "../../components/RightTop.vue"
 
