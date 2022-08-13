@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button>储存cookie</button>
+  </body>
+  <script>
+    let btn = document.querySelector("button");
+
+    let date = new Date();
+    date.setMinutes(date.getMinutes() + 1);
+    // 访问路径默认是在根目录文件夹下能访问cookie，可以手动指定path='xxx'
+    // 过期时间默认是session，可以手动指定expires=[DateObject]。值得注意的是，中国处在东八区，因此需要转换UTC
+    btn.onclick = () => {
+      document.cookie = `username=yarh;expires=${date.toUTCString()}`;
+    };
+  </script>
+</html>

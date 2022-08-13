@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      console.log("我是开头", 111);
+      let pro = new Promise(function (resolve, reject) {
+        resolve(1);
+      });
+      async function test() {
+        let result = "";
+        // await 后面只能跟同步代码和promise对象
+        await pro.then((res) => {
+          result = res;
+        });
+        console.log("我是在async函数中", 222);
+        return result;
+        // 可以看到执行顺序时1 222
+      }
+      // async await返回的也是一个promise对象
+      test().then((res) => {
+        console.log("我是在函数结束后", res);
+      });
+      console.log("我是结尾", 3333);
+    </script>
+  </body>
+</html>
