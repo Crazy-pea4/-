@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>首页</h1>
+    <ul></ul>
+  </body>
+
+  <script>
+    let ul = document.querySelector("ul");
+
+    fetch("/home/list")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        parse(res);
+      });
+
+    function parse(data) {
+      let list = data.map((i, index) => `<li>你好我是第${index}项</li>`);
+      console.log(list);
+      for (const i of list) {
+        let ele = document.createElement("li");
+        ele.innerText = i;
+        ul.appendChild(ele);
+      }
+    }
+  </script>
+</html>

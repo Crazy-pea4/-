@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>登录页ejs</h1>
+    <h2><%= title %></h2>
+    <button>点我登陆登录</button>
+
+    <form action="/login/validate" method="post">
+      <div>用户名：<input type="text" name="username" /></div>
+      <div>密码：<input type="password" name="password" /></div>
+      <div><input type="submit" value="登录" /></div>
+    </form>
+  </body>
+
+  <script>
+    let btn = document.querySelector("button");
+    btn.onclick = () => {
+      location.href = "/home.html";
+    };
+  </script>
+</html>
