@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      axios.interceptors.request.use(
+        function (config) {
+          console.log("con", config);
+          return config;
+        },
+        function (error) {
+          return Promise.reject(error);
+        }
+      );
+      axios.interceptors.response.use(
+        function (res) {
+          console.log("res", res);
+          localStorage.setItem("token", res.headers.authorization);
+          return res;
+        },
+        function (error) {
+          return Promise.reject(error);
+        }
+      );
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <div class="username">
+        <span>用户名：</span>
+        <input type="text" name="username" />
+      </div>
+      <div class="password">
+        <span>密码：</span>
+        <input type="password" name="password" />
+      </div>
+      <div>
+        <button class="login">登录</button>
+      </div>
+    </div>
+
+    <script>
+      let btn = document.querySelector(".login");
+      let username = document.querySelector("input[name=username]");
+      let password = document.querySelector("input[name=password]");
+
+      // 登录
+      btn.onclick = () => {
+        axios
+          .post("/api/login", {
+            username: username.value,
+            password: password.value,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code === 200) {
+              location.href = "/";
+            } else {
+              alert("请输入正确的账号密码");
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      };
+
+      // btn.onclick = () => {
+      //   console.log(username.value, password.value);
+      //   fetch("/api/login", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       username: username.value,
+      //       password: password.value,
+      //     }),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((res) => {
+      //       if (res.code === 200) {
+      //         location.href = "/";
+      //       } else {
+      //         alert("请输入正确的账号密码");
+      //       }
+      //     });
+      // };
+    </script>
+  </body>
+</html>

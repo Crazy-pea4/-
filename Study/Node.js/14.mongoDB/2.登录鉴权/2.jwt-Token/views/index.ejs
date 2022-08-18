@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      axios.interceptors.request.use(
+        function (config) {
+          console.log("con", config);
+          const token = localStorage.getItem("token");
+          // 加上一个Bearer字段，历史习惯
+          config.headers.Authorization = "Bearer " + token;
+          return config;
+        },
+        function (error) {
+          return Promise.reject(error);
+        }
+      );
+      axios.interceptors.response.use(
+        function (res) {
+          localStorage.setItem("token", res.headers.authorization);
+          return res;
+        },
+        function (error) {
+          console.log(error);
+          if (error.response.status === 401) {
+            alert("登录过期，请重新登录");
+            localStorage.removeItem("token");
+            location.href = "/login";
+          }
+          return Promise.reject(error);
+        }
+      );
+    </script>
+  </head>
+
+  <body>
+    <h1>
+      mongoDB-后台管理系统
+      <button class="exit">退出登录</button>
+    </h1>
+    <div>
+      <div class="username">
+        <span>用户名：</span>
+        <input type="text" name="username" />
+      </div>
+      <div class="password">
+        <span>密码：</span>
+        <input type="password" name="password" />
+      </div>
+      <div>
+        <button class="add">添加账户</button>
+      </div>
+      <hr />
+      <button class="update">修改账号密码</button>
+      <button class="delete">删除账号密码</button>
+    </div>
+
+    <div style="margin-top: 20px">
+      <table border="1">
+        <thead>
+          <tr>
+            <td>用户名</td>
+            <td>密码</td>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      let btn = document.querySelector(".add");
+      let username = document.querySelector("input[name=username]");
+      let password = document.querySelector("input[name=password]");
+      let updateBtn = document.querySelector(".update");
+      let deleteBtn = document.querySelector(".delete");
+      let tbody = document.querySelector("tbody");
+      let exit = document.querySelector(".exit");
+
+      // 一进入页面获取数据库信息
+      axios.get("/api/user/list").then((res) => {
+        tbody.innerHTML = res.data
+          .map(
+            (item, index) => `
+            <tr>
+              <td>${item.username}</td>
+              <td>${item.password}</td>
+            </tr>
+          `
+          )
+          .join("");
+      });
+      // fetch("/api/user/list?page=1&limit=2")
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     console.log(res);
+      //     tbody.innerHTML = res
+      //       .map(
+      //         (item, index) => `
+      //       <tr>
+      //         <td>${item.username}</td>
+      //         <td>${item.password}</td>
+      //       </tr>
+      //     `
+      //       )
+      //       .join("");
+      //   });
+
+      // 退出登录
+      exit.onclick = () => {
+        localStorage.removeItem("token");
+        location.href = "/login";
+        // fetch("/api/logout")
+        //   .then((res) => res.json())
+        //   .then((res) => {
+        //     if (res.code === 200) {
+        //       location.href = "/login";
+        //     }
+        //   });
+      };
+
+      // 添加用户
+      btn.onclick = () => {
+        axios
+          .post("/api/user", {
+            username: username.value,
+            password: password.value,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        // console.log(username.value, password.value);
+        // fetch("/api/user", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     username: username.value,
+        //     password: password.value,
+        //   }),
+        // })
+        //   .then((res) => res.json())
+        //   .then((res) => console.log(222, res));
+      };
+      // 修改
+      updateBtn.onclick = () => {
+        axios
+          .put("/api/user/62f4dc400e20ee459b0d8f48", {
+            username: username.value,
+            password: password.value,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        // fetch("/api/user/62f4dc380e20ee459b0d8f44", {
+        //   method: "PUT",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     username: username.value,
+        //     password: password.value,
+        //   }),
+        // })
+        //   .then((res) => res.json())
+        //   .then((res) => console.log(res));
+      };
+      // 删除
+      deleteBtn.onclick = () => {
+        axios.delete("/api/user/62f4dc400e20ee459b0d8f48").then((res) => {
+          console.log(res);
+        });
+        // fetch("/api/user/62f4dc380e20ee459b0d8f44")
+        //   .then((res) => res.json())
+        //   .then((res) => console.log(res));
+      };
+    </script>
+  </body>
+</html>
