@@ -1,12 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TestPlugin = require("./Plugin/test-plugin");
+const BannerWebpackPlugin = require("./Plugin/banner-webpack-plugin");
+const CleanWebpackPlugin = require("./Plugin/clean-webpack-plugin");
+const AnalyzeWebpackPlugin = require("./Plugin/analyze-webpack-plugin");
+const InlineChunkWebpackPlugin = require("./Plugin/inline-chunk-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.js",
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "js/[name].js",
-    clean: true,
+    // clean: true,
   },
   module: {
     rules: [
@@ -43,9 +48,22 @@ module.exports = {
     ],
   },
   plugins: [
+    new TestPlugin(),
+    new BannerWebpackPlugin("叶萌"),
+    new CleanWebpackPlugin(),
+    new AnalyzeWebpackPlugin(),
+    new InlineChunkWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./index.html"),
     }),
   ],
-  mode: "development",
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}`,
+    },
+  },
+  mode: "production",
 };
