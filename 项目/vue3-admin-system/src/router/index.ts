@@ -11,7 +11,7 @@ import { TrendCharts, List, Management } from "@element-plus/icons-vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/login",
   },
   {
     path: "/login",

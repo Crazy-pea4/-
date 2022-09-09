@@ -36,6 +36,7 @@ import link from '../../../api/link'
 let temperature = ref('')
 let condition = ref('')
 
+// 天气获取
 onMounted(() => {
     link('https://devapi.qweather.com/v7/weather/now', 'GET', {}, {
         key: 'e6e5e0f66a0740b28b4215d7d6d3f798',
@@ -55,6 +56,7 @@ onMounted(() => {
 
 header {
     p {
+        margin-bottom: 1.5rem;
         text-align: center;
         font-size: 26px
     }
