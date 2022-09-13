@@ -3,24 +3,12 @@
     <ul>
       <label :for="item.id">
         <li class="item_li" :class="classObj_Li">
-          <input
-            type="checkbox"
-            :id="item.id"
-            v-model="item.isDone"
-            ref="checkbox"
-          />
+          <input type="checkbox" :id="item.id" v-model="item.isDone" ref="checkbox" />
           <!-- 插值语法渲染数据到页面上 -->
           <span v-show="!item.isEdit">{{ item.title }}</span>
           <!-- 编辑输入框 -->
-          <input
-            v-show="item.isEdit"
-            type="text"
-            v-model="item.title"
-            class="editInput"
-            @keyup.enter="confirmItem(item)"
-            @blur="confirmItem(item)"
-            ref="editInput"
-          />
+          <input v-show="item.isEdit" type="text" v-model="item.title" class="editInput"
+            @keyup.enter="confirmItem(item)" @blur="confirmItem(item)" ref="editInput" />
           <!-- 
             有一个有意思的事情，如果在上面的编辑input框同时添加@keyup.enter和@blur，
             按下enter，会发现input框闪烁的情况。经过我多次仔细的观察后得出结论：
@@ -29,27 +17,10 @@
             （值得注意的是，这次经历可以推导出 搜索框失焦 这一行为是默认事件，优先执行）
              -->
           <!-- 删除按钮 -->
-          <a
-            href="javascript:void(0)"
-            @click="deleteItem(item.id)"
-            class="deleteItem"
-            >删除</a
-          >
+          <a href="javascript:void(0)" @click="deleteItem(item.id)" class="deleteItem">删除</a>
           <!-- 编辑按钮 -->
-          <a
-            href="javascript:void(0)"
-            @click="editItem(item)"
-            class="editItem"
-            v-show="!item.isEdit"
-            >编辑</a
-          >
-          <a
-            href="javascript:void(0)"
-            @click="confirmItem(item)"
-            class="confirmItem"
-            v-if="item.isEdit"
-            >确认</a
-          >
+          <a href="javascript:void(0)" @click="editItem(item)" class="editItem" v-show="!item.isEdit">编辑</a>
+          <a href="javascript:void(0)" @click="confirmItem(item)" class="confirmItem" v-if="item.isEdit">确认</a>
           <!-- 
           在这里需要舍弃掉确认按钮，因为也出现了闪烁的情况，就算使用定时器也无法解决，目前暂不知其原因。
 
@@ -164,6 +135,7 @@ export default {
   background-color: darkturquoise;
   color: rgb(241, 239, 239);
 }
+
 .editInput {
   padding-left: 4px;
   /* 测试“确认按钮时”，请改为width: 350px */
@@ -171,6 +143,7 @@ export default {
   height: 100%;
   font-size: 16px;
 }
+
 .shine {
   background-color: tomato;
 }

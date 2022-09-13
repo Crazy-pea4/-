@@ -18,6 +18,13 @@
   <body>
     <div class="cube"></div>
     <div class="cube"></div>
-    <script></script>
   </body>
+  <script>
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let newArr = arr.map((i) => {
+      // map方法可以直接修改i的值，foreach方法无法直接修改i，需要通过arr[index]
+      return i * 10;
+    });
+    console.log(newArr, arr);
+  </script>
 </html>

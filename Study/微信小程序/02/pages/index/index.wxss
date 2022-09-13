@@ -1,7 +1,0 @@
-/**index.wxss**/
-@import "/common/common.wxss";
-
-input {
-    width: 100%;
-    border: 1px solid red;
-}

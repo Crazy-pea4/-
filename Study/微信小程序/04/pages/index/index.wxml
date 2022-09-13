@@ -1,6 +1,0 @@
-<!--index.wxml-->
-<view class="container">
-  Weixin
-</view>
-<!-- 局部引用自定义组件 -->
-<my-test1></my-test1>

@@ -41,7 +41,7 @@ const obj: myInterfaces1 = {
 };
 obj.sayHi("");
 
-// 使用接口来限制函数（与平常的有些不一样，通过  (p1: type, p2: type, ...): type  的形式）
+// 使用接口来限制函数（与平常的有些不一样，通过  (p1: type, p2: type, ...): type  的形式）。也叫函数调用签名
 interface myInterfaces2 {
   (p: string, age: number): void;
 }
