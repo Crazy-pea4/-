@@ -6,7 +6,7 @@
         </el-tab-pane>
       </el-tabs>
       <!-- 表单部分 -->
-      <!-- 这里犯了个小错误：N1 -->
+      <!-- 这里犯了个小错误：N1 -->s
       <div>
         <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" class="login-ruleForm">
           <el-form-item prop="account">
@@ -23,7 +23,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm(ruleFormRef)" class="login-btn">{{ activeName === 'login' ?
-                '登录' : '注册'
+            '登录' : '注册'
             }}</el-button>
           </el-form-item>
         </el-form>
