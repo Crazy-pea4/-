@@ -36,10 +36,6 @@ import RightTop from "../../components/RightTop.vue"
         background-color: #545c64
     }
 
-    .el-header {
-        // background-color: chocolate;
-    }
-
     .el-main {
         background-color: gainsboro
     }
