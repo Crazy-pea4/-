@@ -15,10 +15,12 @@
       });
       async function test() {
         let result = "";
-        // await 后面只能跟同步代码和promise对象
-        await pro.then((res) => {
-          result = res;
-        });
+        /**
+         *  await 表达式会暂停当前 async function 的执行，等待 Promise 处理完成。若 Promise 正常处理 (fulfilled)，其回调的 resolve 函数参数作为 await 表达式的值，继续执行 async function。
+         *  若 Promise 处理异常 (rejected)，await 表达式会把 Promise 的异常原因抛出。
+         *  另外，如果 await 操作符后的表达式的值不是一个 Promise，则返回该值本身。
+         */
+        result = await pro;
         console.log("我是在async函数中", 222);
         return result;
         // 可以看到执行顺序时1 222
