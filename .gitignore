@@ -1,2 +1,4 @@
 # 忽略LeetCode里面的测试文件
 /LeetCode/test.html
+
+.vscode
