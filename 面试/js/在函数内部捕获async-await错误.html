@@ -9,19 +9,32 @@
 
   <body>
     <script>
-      function pro() {
+      function pro1() {
         return new Promise(function (resolve, reject) {
           reject(1);
         });
       }
-      async function test() {
+      async function test1() {
         try {
-          await pro();
+          await pro1();
         } catch (error) {
           console.log(error);
         }
       }
-      test();
+
+      function pro2() {
+        return new Promise(function (resolve, reject) {
+          reject(1);
+        });
+      }
+      function test2() {
+        pro1().catch((err) => {
+          console.log(err);
+        });
+      }
+
+      test1();
+      test2();
 
       //   不采用下面的方法在函数外面捕获错误, 如何在函数内部捕获错误?
       //   test().catch((err) => {
