@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /**
+       *  promise串联多个内部有同步或异步的任务
+       */
+
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log("异步-任务1");
+          resolve(1);
+        }, 100);
+      })
+        .then((value) => {
+          console.log("任务1的结果", value);
+          console.log("同步-任务2");
+          return 2;
+        })
+        /**
+         *  注意！！：
+         *  下面的then方法中模拟异步任务的结果传递，有两种方法
+         *      1. 新创建一个Promise，在excutor中写setTimeout然后调用resolve方法改变当前promise状态
+         *      return new Promise((resolve, reject) => {
+         *          setTimeout(() => {
+         *              console.log("异步-任务3");
+         *              resolve(3);
+         *          }, 100);
+         *      });
+         *      2. 使用async await将then的成功回调指定为异步任务，await setTimeout，在后面写return Promise.resolve(3)
+         *          ！切记！不可直接在setTimeout里写return Promise.resolve(3)，因为这里的return是setTimeout回调的返回值，而不是当前promise的返回值
+         */
+        .then(async (value) => {
+          console.log("任务2的结果", value);
+          await setTimeout(() => {
+            console.log("异步-任务3");
+          }, 100);
+          return Promise.resolve(3);
+        })
+        .then((value) => {
+          console.log("任务3的结果", value);
+        });
+    </script>
+  </body>
+</html>

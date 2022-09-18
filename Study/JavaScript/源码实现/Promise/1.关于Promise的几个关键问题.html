@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const p = new Promise((resolve, reject) => {
+        // resolve("success"); // Promise变为成功状态
+        reject("error"); // Promise变为失败状态
+        // throw new Error("artificially throwing error"); // Promise变为失败状态
+        // throw 333; // Promise变为失败状态
+      });
+      p.then((result) => {
+        console.log("result", result);
+      }).catch((err) => {
+        console.log("err", err);
+      });
+      // 可以给Promsie指定多个成功或失败回调，且都会执行
+      p.then((result) => {
+        console.log("then function can be called mutiple times", result);
+      })
+        .catch((err) => {
+          console.log("similar to then", err);
+        })
+        .finally(() => {
+          console.log(111);
+          return "正常值";
+          // return Promise.reject(1);
+          // throw 222
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

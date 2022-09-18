@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /**
+       *  promise异常穿透 与 中断promise链
+       */
+
+      new Promise((resolve, reject) => {
+        // resolve(1);
+        reject(0);
+      })
+        .then(
+          (value) => {
+            console.log("resolved1", value);
+            return 2;
+          },
+          // 不指定then的失败回调，相当于：
+          // 往后的then都会做该默认处理，逐级传递
+          (reason) => {
+            throw reason;
+          }
+        )
+        .then((value) => {
+          console.log("resolved2", value);
+          return Promise.resolve(3);
+        })
+        .then((value) => {
+          console.log("resolved3", value);
+        })
+        .catch((err) => {
+          console.log("rejected", err);
+          return new Promise(() => {}); // 中断promise链
+        })
+        /**
+         *  catch(callback)相当于then(undefined, callback)
+         *  因此，若catch的回调中没有抛出错误或Promise.reject()的话，相当于当前promise状态为成功
+         *  catch后面的then中的成功回调会触发
+         *
+         *  如果想catch后的不再执行，则需要promise中断：返回一个padding状态的promise
+         *      - return new Promise(() => {})
+         */
+        .then(
+          (value) => {
+            console.log("resolvedxxx", value);
+          },
+          (reason) => {
+            console.log("rejectedxxx", reason);
+          }
+        );
+    </script>
+  </body>
+</html>

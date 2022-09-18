@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="./lib/class_Promise.js"></script>
+
+    <!-- 1. 完成Promise构造函数、then()和catch() -->
+    <!-- <script>
+      new Promise(function (resolve, reject) {
+        // setTimeout(() => {
+        // resolve(1);
+        reject(2);
+        console.log("状态改变了");
+        // }, 100);
+      })
+        .then(
+          function (value) {
+            console.log("resolved111", value);
+          },
+          function (reason) {
+            console.log("rejected111", reason);
+            // return "err";
+            // throw "error!!!";
+            return new Promise(function (resolve, reject) {
+              reject("no!!");
+            });
+          }
+        )
+        .then(
+          (value) => {
+            console.log("resolved222", value);
+          },
+          (reason) => {
+            console.log("rejected222", reason);
+            throw "error!!!";
+          }
+        )
+        .catch((err) => {
+          console.log("rejected333", err);
+          return new Promise(function () {});
+        })
+        .then(
+          (value) => {
+            console.log("resloved333", value);
+          },
+          (reason) => {
+            console.log("rejected444", reason);
+          }
+        );
+    </script> -->
+
+    <!-- 2. 完成Promise.resolve()和Promsie.reject() -->
+    <!-- <script>
+      const p1 = Promise.resolve("success1");
+      const p2 = Promise.reject("error1");
+      const p3 = Promise.resolve(Promise.resolve("success2"));
+      const p4 = Promise.resolve(Promise.reject("error2"));
+
+      p1.then((value) => {
+        console.log("p1", value);
+      });
+      p2.catch((reason) => {
+        console.log("p2", reason);
+      });
+      p3.then((value) => {
+        console.log("p3", value);
+      });
+      p4.catch((reason) => {
+        console.log("p4", reason);
+      })
+        .finally((value) => {
+          console.log(value, 111);
+          // throw "eee";
+          return "111asdasd";
+        })
+        .then((value) => {
+          console.log(value);
+        })
+        .catch((reason) => {
+          console.log(reason);
+        });
+    </script> -->
+
+    <!-- 3. 完成Promise.all和Promise.race -->
+    <script>
+      const p1 = new Promise(function (resolve, reject) {
+        resolve(1);
+      });
+      const p2 = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(100);
+        }, 2000);
+      });
+      const p3 = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          reject("你好");
+        }, 1000);
+      });
+      const p4 = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(true);
+        }, 1000);
+      });
+      Promise.all([p1, p2, p4, p3])
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      Promise.race([p3, p2, p1, 7, p4])
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

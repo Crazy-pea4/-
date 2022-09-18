@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /** 先回调后状态 */
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("success1"); // 后修改状态
+        }, 100);
+      }).then((res) => {
+        // 先指定回调
+        console.log("res", res);
+      });
+      /** 先状态后回调 */
+      new Promise((resolve, reject) => {
+        resolve("success2"); // 先修改状态
+      }).then((res) => {
+        // 后指定回调
+        console.log("res", res);
+      });
+      /** 同时回调、状态 */
+      let p = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("success3"), 100);
+      });
+
+      setTimeout(() => {
+        p.then((res) => console.log("success3", res));
+      }, 100);
+    </script>
+  </body>
+</html>

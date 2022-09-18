@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /**
+       *  promise.then()返回的新promise的结果状态有什么决定？
+       *  (1)简单表达：由then()指定的回调函数执行结果决定
+       *  (2)详细表达：
+       *    1. 如果抛出异常，则新promise变为rejected，err(reason)为抛出的异常
+       *    2. 如果返回的是非promise的任意值，则新promise变为resolved，value为返回的值
+       *    3. 如果返回的是一个promise，则此promise的结果就会成为新promise的结果
+       */
+
+      new Promise((resolve, reject) => {
+        // resolve(1);
+        /**
+         *  resolve(1)后，首先会进入第一个then中的成功回调函数
+         *  数字1作为value参数接收。随后因为没有return语句（或者说return undefined）
+         *  then()方法返回的promise对象的状态就是resolved。因此会进入第二个then的成功回调函数
+         *  而此时接受的value参数就是上一个promise返回的undefined
+         *  结果：  resolved111 1
+         *          resolved222 undefined
+         */
+        reject(2);
+        /**
+         *  结果：  rejected111 2
+         *          resolved222 undefined
+         */
+      })
+        .then(
+          (value) => {
+            console.log("resolved111", value);
+            // return 2;
+            // return Promise.resolve('success');
+            // return Promsie.reject('err');
+            // throw 'error'
+          },
+          (reason) => {
+            console.log("rejected111", reason);
+          }
+        )
+        .then(
+          (value) => {
+            console.log("resolved222", value);
+          },
+          (reason) => {
+            console.log("rejected222", reason);
+          }
+        );
+    </script>
+  </body>
+</html>
