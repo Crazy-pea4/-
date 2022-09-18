@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <img src="../asset/宏队列微队列.png" alt="" />
+
+    <script>
+      /**
+       *    js引擎在执行时执行时：
+       *        1. 首先执行所有的初始化同步任务代码
+       *        2. 每次准备取出第一个宏任务执行前，都要将所有的微任务一个一个取出来执行
+       */
+
+      // setTimeout 放入宏队列
+      setTimeout(() => {
+        console.log("setTimeout callback1");
+        Promise.resolve("Promise resolved callback3").then((value) => {
+          console.log(value);
+        });
+      }, 0);
+      setTimeout(() => {
+        console.log("setTimeout callback2");
+      }, 0);
+      setTimeout(() => {
+        console.log("setTimeout callback3");
+      }, 0);
+
+      // Promise回调 放入微队列
+      Promise.resolve("Promise resolved callback1").then((value) => {
+        console.log(value);
+      });
+      Promise.resolve("Promise resolved callback2").then((value) => {
+        console.log(value);
+      });
+    </script>
+  </body>
+</html>

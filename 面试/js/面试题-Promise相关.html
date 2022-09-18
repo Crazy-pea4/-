@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 第一题 -->
+    <!-- <script>
+      setTimeout(() => {
+        console.log(1);
+      }, 0);
+      Promise.resolve().then(() => {
+        console.log(2);
+      });
+      Promise.resolve().then(() => {
+        console.log(4);
+      });
+      console.log(3);
+      // expected log: 3 2 4 1
+      /**
+       *  1. 先执行同步任务：log(3)
+       *  2. 执行宏任务前，执行微队列清空：log(2) log(4)
+       *  3. 执行宏任务：log(1)
+       */
+    </script> -->
+
+    <!-- 第二题 -->
+    <!-- <script>
+      setTimeout(() => {
+        console.log(1);
+      }, 0);
+      new Promise((resolve, reject) => {
+        console.log(2);
+        resolve();
+      })
+        .then(() => {
+          console.log(3);
+        })
+        .then(() => {
+          console.log(4);
+        });
+      console.log(5);
+      // expected log: 2 5 3 4 1
+      /**
+       *  1. 先执行同步任务：log(2) log(5)
+       *  2. 在准备执行第一个宏任务前，把处在微队列里的所有微任务执行：log(3) （注意，此时微任务里只有log(3)，因为这个then回调还没执行，它的Promise状态为pending，下面的then回调不满足放入微队列的条件）
+       *  3. log(3)执行完毕，log(4)放入微队列。当js引擎又准备执行第一个宏任务时，发现微队列又有微任务，执行所有微任务：log(4)
+       *  4. 微队列清空，执行宏队列任务：log(1)
+       */
+    </script> -->
+
+    <!-- 第三题 -->
+    <!-- <script>
+      const first = () =>
+        new Promise((resolve, reject) => {
+          console.log(3);
+          let p = new Promise((resolve, reject) => {
+            console.log(7);
+            setTimeout(() => {
+              console.log(5);
+              resolve(6);
+            }, 0);
+            resolve(1);
+          });
+          resolve(2);
+          p.then((value) => {
+            console.log(value);
+          });
+        });
+      first().then((value) => {
+        console.log(value);
+      });
+      console.log(4);
+      // expected log: 3 7 4 1 2 5
+      /**
+       *  1. 从执行first()开始，执行第一个Promise的excutor：log(3)
+       *  2. 随后执行第二个Promise的excutor: log(7)
+       *  3. 遇到定时器，将其放入宏队列
+       *  4. 执行resolve(1)，此时p的Promise状态改变
+       *  5. 执行resolve(2)，此时first的Promise状态改变
+       *  6. p.then()的回调放入微队列
+       *  7. first.then()的回调放入微队列
+       *  8. 执行log(4)
+       *  9. 尝试执行宏任务，发现微队列不为空，执行所有微任务：log(value -> 1) log(value -> 2)
+       *  10. 执行宏任务：log(5)
+       *  11. 执行resolve(6)，但p的Promise状态已经改变，此代码不生效
+       */
+    </script> -->
+
+    <!-- 第四题 -->
+    <script>
+      setTimeout(() => {
+        console.log("0");
+      }, 0);
+      new Promise((resolve, reject) => {
+        console.log("1");
+        resolve();
+      })
+        .then(() => {
+          console.log("2");
+          new Promise((resolve, reject) => {
+            console.log("3");
+            resolve();
+          })
+            .then(() => {
+              console.log("4");
+            })
+            .then(() => {
+              console.log("5");
+            });
+        })
+        .then(() => {
+          console.log("6");
+        });
+      new Promise((resolve, reject) => {
+        console.log("7");
+        resolve();
+      }).then(() => {
+        console.log("8");
+      });
+      // expected log: "1" "7" "2" "3" "8" "4" "6" "5" "0"
+      /**
+       *  1. 首先遇到setTimeout，将其放入宏队列
+       *  2. 遇到第一个new Promise的excutor，同步执行：log("1") resolve()
+       *  3. Promise状态改变，第一个then的回调放入微队列: 微队列 -> [log("2")...]
+       *  4. 第二个then的回调因为上一个then的回调还未执行，先暂存起来
+       *  5. 遇到第三个Promise的excutor，同步执行：log("7") resolve()
+       *  6. 第五个then的回调放入微队列: 微队列 -> [log("2")..., log("8")]
+       *  6. 尝试执行宏任务，发现微队列不为空，执行所有微任务: log("2") 第二个Promise的excutor: log("3") resolve() log("8")
+       *  7. 第二个then的回调放入微队列，第三个then的回调暂存: 微队列 -> [log("4")]
+       *  8. 第一个then的回调return undefined，第四个then的回调放入微队列: 微队列 -> [log("4"), log("6")]
+       *  9. 再次尝试执行宏任务，发现微队列不为空，执行所有微任务：log("4") log("6")
+       *  10. 第三个then的回调放入微队列: 微队列 -> [log("5")]
+       *  11. 执行微任务，执行宏任务: log("5") log("0")
+       */
+    </script>
+  </body>
+</html>
