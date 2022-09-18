@@ -38,8 +38,8 @@ import { useRouter, useRoute } from 'vue-router'
 import type { FormInstance } from "element-plus";
 import { CKPhoneNum, CKPassword } from "../../utils/verification";
 import link from "../../api/link";
-import { success, error } from "../../hook/elMessage"
-import md5 from "../../hook/pwdMD5";
+import { success, error } from "../../utils/elMessage";
+import md5 from "../../utils/pwdMD5";
 
 // 这里犯了个错误 N2
 const router = useRouter();

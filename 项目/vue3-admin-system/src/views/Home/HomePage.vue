@@ -17,10 +17,20 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import cheerio from 'cheerio'
+import link from '../../api/link'
 import LeftMenu from "../../components/LeftMenu.vue"
 import RightTop from "../../components/RightTop.vue"
 
+onMounted(() => {
+    link('http://47.101.166.148/gallery.php', 'GET').then((res) => {
+        console.log(res);
+    }).catch((err) => {
+        console.log(err);
+
+    })
+})
 </script>
 
 <style lang='scss' scoped>
