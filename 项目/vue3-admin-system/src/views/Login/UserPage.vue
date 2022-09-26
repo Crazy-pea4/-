@@ -1,12 +1,12 @@
 <template>
   <div class="login">
     <div class="login-box">
-      <el-tabs v-model="activeName" :stretch="true" class="login-tabs">
+      <el-tabs v-model="activeName" :stretch="true" class="login-tabs" @tab-change="clearInfo">
         <el-tab-pane v-for="(item, index) in menuOptions" :key="index" :label="item.txt" :name="item.type">
         </el-tab-pane>
       </el-tabs>
       <!-- 表单部分 -->
-      <!-- 这里犯了个小错误：N1 -->s
+      <!-- 这里犯了个小错误：N1 -->
       <div>
         <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" class="login-ruleForm">
           <el-form-item prop="account">
@@ -35,15 +35,22 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { useRouter, useRoute } from 'vue-router'
-import type { FormInstance } from "element-plus";
+import { useStore } from 'vuex'
+import type { FormInstance, TabPanelName } from "element-plus";
 import { CKPhoneNum, CKPassword } from "../../utils/verification";
-import link from "../../api/link";
+import { login, register } from "../../api/request"
 import { success, error } from "../../utils/elMessage";
 import md5 from "../../utils/pwdMD5";
+
+interface StringArr {
+  [index: string]: string;
+}
 
 // 这里犯了个错误 N2
 const router = useRouter();
 const route = useRoute();
+
+const store = useStore();
 
 // 标签页部分
 const menuOptions = reactive([
@@ -85,11 +92,18 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
   }
 };
 
-const ruleForm = reactive({
+const ruleForm = reactive<StringArr>({
   account: "",
   password: "",
   checkPass: "",
 });
+
+const clearInfo = () => {
+  let userInfoArr = Object.keys(ruleForm)
+  for (const i of userInfoArr) {
+    ruleForm[i] = ''
+  }
+}
 
 const rules = reactive({
   account: [{ validator: checkAccount, trigger: "blur" }],
@@ -106,7 +120,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       if (activeName.value === "login") {
-        link("/users", "get", {}, data).then((res: any) => {
+        store.dispatch("Home/login", data).then((res: any) => {
           // console.log(res);
           if (res.data.length != 0) {
             router.push({ name: 'home' })
@@ -115,8 +129,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
           }
         })
       } else {
-        link("/users", "post", data).then((res) => {
-          // console.log(res);
+        store.dispatch('Home/register', data).then((res) => {
+          console.log(res);
           success('注册成功');
           activeName.value = "login";
           ruleForm.account = '';

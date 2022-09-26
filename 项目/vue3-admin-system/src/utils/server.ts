@@ -28,7 +28,19 @@ server.interceptors.request.use(
 server.interceptors.response.use(
   function (response) {
     // 对响应数据做点什么
-    return response;
+    console.log(response);
+    switch (response.status) {
+      case 200:
+        ElMessage({
+          message: "操作成功！",
+          type: "success",
+        });
+        break;
+
+      default:
+        break;
+    }
+    return Promise.resolve(response);
   },
   function (error) {
     switch (error.response.status) {

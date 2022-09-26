@@ -30,7 +30,16 @@ export default {
     Brand,
   },
   mounted() {
+    // 获取mock数据，楼层列表
     this.$store.dispatch("home/getFloorList_mock");
+    // 用于用户登陆后，利用token自动登录获取用户信息
+    if (localStorage.getItem("token")) {
+      this.$store.dispatch('user/getUserInfo').then(() => {
+      }).catch((err) => {
+        console.log(err)
+      });
+    }
+
   },
   computed: {
     ...mapState("home", ["floorList_mock"]),
@@ -39,4 +48,5 @@ export default {
 </script>
 
 <style>
+
 </style>

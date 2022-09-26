@@ -5,26 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .cube {
-        width: 100px;
-        height: 100px;
-        background-color: hotpink;
-        margin: 100px;
-      }
-    </style>
   </head>
 
   <body>
-    <div class="cube"></div>
-    <div class="cube"></div>
+    <script>
+      class P {
+        constructor(x) {
+          this.arr = [];
+          this.push(x);
+        }
+        push(x) {
+          this.arr.push(x);
+        }
+        forEach() {
+          this.arr.forEach((i) => {
+            console.log(i);
+          });
+        }
+      }
+      new P(1);
+      new P(2);
+      new P().forEach();
+    </script>
   </body>
-  <script>
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let newArr = arr.map((i) => {
-      // map方法可以直接修改i的值，foreach方法无法直接修改i，需要通过arr[index]
-      return i * 10;
-    });
-    console.log(newArr, arr);
-  </script>
 </html>

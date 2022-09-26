@@ -7,12 +7,12 @@
           <p style="float: left">品优购欢迎您！</p>
           <ul>
             <li>
-              <router-link to="/login" class="sign_in">请登录</router-link>
+              <router-link to="/login" class="sign_in" v-show="!userInfo.name">请登录</router-link>
+              <span to="/login" class="sign_in" v-show="userInfo.name">{{userInfo.name}}</span>
             </li>
             <li>
-              <router-link to="/register" class="register red"
-                >免费注册！</router-link
-              >
+              <router-link to="/register" class="register red" v-show="!userInfo.name">免费注册！</router-link>
+              <span class="logout red" v-show="userInfo.name" @click="logout">退出登录</span>
             </li>
           </ul>
         </section>
@@ -37,9 +37,7 @@
               <a href="" class="arrow_icon iconfont">客户服务</a>
             </li>
             <li>
-              <a href="" style="border: none" class="arrow_icon iconfont"
-                >网站导航</a
-              >
+              <a href="" style="border: none" class="arrow_icon iconfont">网站导航</a>
             </li>
           </ul>
         </section>
@@ -60,12 +58,7 @@
 
       <!-- 搜索部分 -->
       <div class="search">
-        <input
-          type="search"
-          placeholder="一元购惊喜折扣！"
-          v-model="keyword"
-          @keyup.enter="search"
-        />
+        <input type="search" placeholder="一元购惊喜折扣！" v-model="keyword" @keyup.enter="search" />
         <button class="search_button" @click="search">搜索</button>
       </div>
       <!-- 购物车部分 -->
@@ -107,12 +100,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: "Header",
   data() {
     return {
       keyword: "",
     };
+  },
+  mounted() {
+    this.$bus.$on('clearInputValue', () => {
+      this.keyword = ""
+    })
+  },
+  computed: {
+    ...mapState('user', ['userInfo'])
   },
   methods: {
     search() {
@@ -135,11 +137,13 @@ export default {
         alert("请输入商品名！");
       }
     },
-  },
-  mounted() {
-    this.$bus.$on('clearInputValue', () => {
-      this.keyword = ""
-    })
+    logout() {
+      this.$store.dispatch('user/logout').then(() => {
+        this.$router.push({ name: 'Home' })
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
   },
 };
 </script>
@@ -159,7 +163,7 @@ export default {
 /* 快捷栏左边 */
 .shortcut_l {
   float: left;
-  width: 200px;
+  width: 220px;
   height: 32px;
   line-height: 32px;
 }
@@ -171,6 +175,12 @@ export default {
 .shortcut_l .register {
   margin-left: 8px;
   font-weight: 700;
+}
+
+.shortcut_l .logout {
+  margin-left: 8px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* 快捷栏右边 */

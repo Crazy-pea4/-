@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script src="./call.js"></script>
+    <script>
+      let a1 = {
+        name: "小华",
+        sayHi(word, age) {
+          console.log(`${word}，我是${this.name}，我年龄是${age}岁`);
+          return "call";
+        },
+      };
+
+      let b1 = {
+        name: "夏洛特福尔摩斯",
+      };
+
+      let res1 = a1.sayHi.myCall(b1, "Good Morning", 27);
+      console.log(res1);
+    </script>
+
+    <script src="./apply.js"></script>
+    <script>
+      let a2 = {
+        name: "小华",
+        sayHi(word, age) {
+          console.log(`${word}，我是${this.name}，我年龄是${age}岁`);
+          return "apply";
+        },
+      };
+
+      let b2 = {
+        name: "夏洛特福尔摩斯",
+      };
+
+      let res2 = a2.sayHi.myApply(b2, ["Good Morning", 27]);
+      console.log(res2);
+    </script>
+
+    <script src="./bind.js"></script>
+    <script></script>
+  </body>
+</html>

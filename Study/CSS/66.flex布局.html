@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<style>
+  </head>
+  <style>
     /* 当父盒子设为flex布局后，子元素中的float、clear、vertical-align都会失效 */
     /* flex布局是控制子盒子的位置和排列方式 */
     div {
-        display: flex;
-        width: 700px;
-        height: 400px;
-        background-color: pink;
+      display: flex;
+      width: 700px;
+      height: 400px;
+      background-color: pink;
     }
     div span:nth-child(1) {
-        width: 150px;
-        height: 150px;
-        background-color: red;
+      width: 150px;
+      height: 150px;
+      background-color: red;
     }
     div span:nth-child(2) {
-        flex: 1;
-        background-color: green;
+      flex: 1;
+      background-color: green;
     }
     div span:nth-child(3) {
-        width: 150px;
-        height: 150px;
-        background-color: blue;
+      width: 150px;
+      height: 150px;
+      background-color: blue;
     }
     /* div span:nth-child(n) {
         width: 200px;
@@ -67,14 +66,13 @@
     属性值与align-items相同。可覆盖align-items。默认为auto表示继承align-items，若没有父元素则等同于stretch */
     /* 子元素间排序 order: [number];
     number越小约靠前，可接受负数。默认为 0 */
-</style>
+  </style>
 
-<body>
+  <body>
     <div>
-        <span></span>
-        <span></span>
-        <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-</body>
-
+  </body>
 </html>

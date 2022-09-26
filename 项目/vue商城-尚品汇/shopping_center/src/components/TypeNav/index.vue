@@ -11,36 +11,22 @@
             <ul class="iconfont" @click="goSearch">
               <li class="item" v-for="c1 in categoryList" :key="c1.categoryId">
                 <!-- 一级分类 -->
-                <a
-                  :data-categoryName="c1.categoryName"
-                  :data-category1Id="c1.categoryId"
-                  >{{ c1.categoryName }}</a
-                >
+                <a :data-categoryName="c1.categoryName" :data-category1Id="c1.categoryId">{{ c1.categoryName }}</a>
                 <!-- <router-link to="/search">{{ c1.categoryName }}</router-link> -->
                 <div class="item-list clearfix">
                   <!-- 二级分类 -->
-                  <div
-                    class="subitem"
-                    v-for="c2 in c1.categoryChild"
-                    :key="c2.categoryId"
-                  >
+                  <div class="subitem" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
                     <dl class="fore">
                       <dt>
-                        <a
-                          :data-categoryName="c2.categoryName"
-                          :data-category2Id="c2.categoryId"
-                          >{{ c2.categoryName }}</a
-                        >
+                        <a :data-categoryName="c2.categoryName" :data-category2Id="c2.categoryId">{{ c2.categoryName
+                        }}</a>
                         <!-- <router-link to="/search">{{ c2.categoryName }}</router-link> -->
                       </dt>
                       <!-- 三级分类 -->
                       <dd>
                         <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                          <a
-                            :data-categoryName="c3.categoryName"
-                            :data-category3Id="c3.categoryId"
-                            >{{ c3.categoryName }}</a
-                          >
+                          <a :data-categoryName="c3.categoryName" :data-category3Id="c3.categoryId">{{ c3.categoryName
+                          }}</a>
                           <!-- <router-link to="/search">{{ c3.categoryName }}</router-link> -->
                         </em>
                       </dd>
@@ -150,6 +136,7 @@ export default {
 a:hover {
   cursor: pointer;
 }
+
 .nav {
   width: 100%;
   height: 50px;
@@ -180,6 +167,7 @@ a:hover {
   background-color: rgb(224, 10, 10);
   z-index: 999;
 }
+
 .nav .dropdown .dd li ul {
   height: 99%;
   overflow: hidden;
@@ -212,6 +200,7 @@ a:hover {
   margin-right: 5px;
   content: "\eb1b";
 }
+
 .nav .item .item-list {
   display: none;
   position: absolute;

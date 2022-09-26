@@ -31,6 +31,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: "图表数据",
           icon: shallowRef(TrendCharts),
+          keepAlive: true,
         },
       },
       {

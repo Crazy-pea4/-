@@ -34,7 +34,7 @@
 import { ref, reactive, computed, onMounted, } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import getHomeView from '../hook/getHomeView'
+import getHomeView from '../utils/getHomeView'
 
 const store = useStore();
 const router = useRouter();
@@ -57,4 +57,5 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style lang='scss' scoped>
+
 </style>

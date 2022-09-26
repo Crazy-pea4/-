@@ -31,17 +31,16 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from 'vue'
-import link from '../../../api/link'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 let temperature = ref('')
 let condition = ref('')
 
 // 天气获取
 onMounted(() => {
-    link('https://devapi.qweather.com/v7/weather/now', 'GET', {}, {
-        key: 'e6e5e0f66a0740b28b4215d7d6d3f798',
-        location: 101280301
-    }).then(({ data: { now } }) => {
+    store.dispatch('Home/getWeather').then(({ data: { now } }) => {
         temperature.value = now.temp + '℃'
         condition.value = now.text
     })
