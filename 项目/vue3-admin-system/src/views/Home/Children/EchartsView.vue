@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang='ts'>
+import axios from 'axios'
 import { ref, reactive, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
@@ -43,6 +44,11 @@ onMounted(() => {
     store.dispatch('Home/getWeather').then(({ data: { now } }) => {
         temperature.value = now.temp + '℃'
         condition.value = now.text
+    })
+    axios.get('http://47.101.166.148/gallery.php').then((res) => {
+        console.log(res);
+    }).catch((err) => {
+        console.log(err);
     })
 })
 </script>

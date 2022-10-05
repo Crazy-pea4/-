@@ -11,12 +11,12 @@ export default {
     async login(context: any, value: LoginAndRegisterData) {
       const result = await login(value);
       console.log(result);
-      // return Promise.resolve(result);
+      return Promise.resolve(result);
     },
     async register(context: any, value: LoginAndRegisterData) {
       const result = await register(value);
       console.log(result);
-      // return Promise.resolve(result);
+      return Promise.resolve(result);
     },
     async getWeather(context: any) {
       const result = await getWeather();
