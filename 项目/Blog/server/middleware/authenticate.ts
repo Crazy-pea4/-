@@ -7,14 +7,11 @@ import { RequestHandler } from "express";
 export const authenticate: RequestHandler = function (req, res, next) {
   // 尝试从请求头部获取token
   const token = req.headers.token as string | undefined;
-  const id = req.params.id;
   if (token) {
     // 若token存在，校验其是否过期
     try {
-      // 如果解密后token和url上传入的id不同，则不是同一个人，不能修改
-      const { value } = Jwt.verify(token);
-      if (value === id) next();
-      else throw "";
+      Jwt.verify(token);
+      next();
     } catch (err) {
       res.status(401).json({
         code: 401,

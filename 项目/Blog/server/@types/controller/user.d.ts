@@ -6,4 +6,11 @@ export default interface UserController {
   getUser: RequestHandler;
   editUser: RequestHandler;
   deleteUser: RequestHandler;
+  follow: RequestHandler;
+  unfollow: RequestHandler;
+  getFollowing: RequestHandler;
+  getFollowers: RequestHandler;
+  followTopic: RequestHandler;
+  unfollowTopic: RequestHandler;
+  getTopicFollowing: RequestHandler;
 }

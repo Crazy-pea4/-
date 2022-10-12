@@ -10,3 +10,10 @@ export interface authLoginData {
   phoneNumber: string;
   password: string;
 }
+
+// 话题创建参数
+export interface topicCreateData {
+  topicName: string;
+  topicPic: string;
+  topicIntroduction: string;
+}

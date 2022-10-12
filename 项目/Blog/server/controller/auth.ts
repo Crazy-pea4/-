@@ -12,13 +12,11 @@ const authController: AuthController = {
   login: async (req, res, next) => {
     try {
       let { phoneNumber, password } = req.body;
-      console.log(phoneNumber, password);
       // 检查用户是否存在
       if (await userModel.findOne({ phoneNumber })) {
         // 检查密码是否正确（这里将密码再次加密，比对加密密码）
         password = MD5_encrypt(password);
         let data = await userModel.findOne({ password });
-        console.log(data);
         let _id = data!._id as unknown as string;
         if (data) {
           res.status(200).json({

@@ -50,3 +50,29 @@ const Jwt: JWT = {
   },
 };
 ```
+
+## 优化编辑用户editUser接口
+
+将原来的
+
+```js
+router.put(
+
+  "/:id",
+
+  authenticate,
+
+  validate(userRegisterValidator),
+
+  userController.editUser
+
+);
+```
+
+改写为
+
+```js
+router.patch("/:id", authenticate, userController.editUser);
+```
+
+可以看到这里不使用validate中间件来校验传输字段，因为patch的数据可能会没有userRegisterValidator里要求的必选字段，会造成冲突。索性将这里的校验交给前端完成
