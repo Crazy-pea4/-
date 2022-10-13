@@ -7,10 +7,7 @@ import userController from "../controller/user";
 /* 引入中间件 */
 import validate from "../middleware/validate";
 import authenticate from "../middleware/authenticate";
-import {
-  checkUserExisted,
-  checkTopicExisted,
-} from "../middleware/checkExisted";
+import checkExisted from "../middleware/checkExisted";
 
 /* 引入注册校验工具 */
 import { userRegisterValidator } from "../utils/validator";
@@ -22,16 +19,16 @@ router.post("/", validate(userRegisterValidator), userController.register);
 router.get("/", userController.getUserList);
 
 // 获取指定用户
-router.get("/:id", checkUserExisted, userController.getUser);
+router.get("/:id", checkExisted.user, userController.getUser);
 
 // 编辑修改指定用户，因为这里为了使用patch节省带宽，就无法使用validate中间件校验
-router.patch("/:id", authenticate, checkUserExisted, userController.editUser);
+router.patch("/:id", authenticate, checkExisted.user, userController.editUser);
 
 // 删除指定用户
 router.delete(
   "/:id",
   authenticate,
-  checkUserExisted,
+  checkExisted.user,
   userController.deleteUser
 );
 
@@ -39,7 +36,7 @@ router.delete(
 router.put(
   "/following/:id",
   authenticate,
-  checkUserExisted,
+  checkExisted.user,
   userController.follow
 );
 
@@ -47,21 +44,21 @@ router.put(
 router.delete(
   "/following/:id",
   authenticate,
-  checkUserExisted,
+  checkExisted.user,
   userController.unfollow
 );
 
 // 获取关注列表（id为当前用户）
-router.get("/:id/following", checkUserExisted, userController.getFollowing);
+router.get("/:id/following", checkExisted.user, userController.getFollowing);
 
 // 获取粉丝列表（id为当前用户）
-router.get("/:id/followers", checkUserExisted, userController.getFollowers);
+router.get("/:id/followers", checkExisted.user, userController.getFollowers);
 
 // 关注话题（id为被关注话题的id）
 router.put(
   "/topicFollowing/:id",
   authenticate,
-  checkTopicExisted,
+  checkExisted.topic,
   userController.followTopic
 );
 
@@ -69,14 +66,14 @@ router.put(
 router.delete(
   "/topicFollowing/:id",
   authenticate,
-  checkTopicExisted,
+  checkExisted.topic,
   userController.unfollowTopic
 );
 
 // 获取关注话题列表（id为当前用户）
 router.get(
   "/:id/topicFollowing",
-  checkUserExisted,
+  checkExisted.topic,
   userController.getTopicFollowing
 );
 
