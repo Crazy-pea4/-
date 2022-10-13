@@ -6,6 +6,7 @@ import {
   userRegisterData,
   authLoginData,
   topicCreateData,
+  questionCreateData,
 } from "../@types/utils/validator";
 
 // 用户注册校验器
@@ -88,6 +89,24 @@ export function topicCreateValidator(data: topicCreateData) {
       "any.required": "缺少必选参数 topicIntroduction",
       "string.base": "topicIntroduction 类型错误",
       "string.max": "topicIntroduction 不能大于200位",
+    }),
+  });
+
+  return schema.validate(data);
+}
+
+// 问题创建校验器
+export function questionCreateValidator(data: questionCreateData) {
+  const schema = Joi.object({
+    title: Joi.string().max(50).required().messages({
+      "any.required": "缺少必选参数 title",
+      "string.base": "title 类型错误",
+      "string.max": "title 长度不能超过50位",
+    }),
+    descriptions: Joi.string().max(500).required().messages({
+      "any.required": "缺少必选参数 descriptions",
+      "string.base": "descriptions 类型错误",
+      "string.max": "descriptions 长度不能超过500位",
     }),
   });
 

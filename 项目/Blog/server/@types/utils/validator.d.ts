@@ -17,3 +17,9 @@ export interface topicCreateData {
   topicPic: string;
   topicIntroduction: string;
 }
+
+// 问题创建参数
+export interface questionCreateData {
+  title: string;
+  descriptions: string;
+}
