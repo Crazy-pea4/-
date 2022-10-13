@@ -22,7 +22,7 @@ const authController: AuthController = {
           res.status(200).json({
             code: 200,
             message: "登陆成功",
-            token: Jwt.sign(_id, "7d"),
+            token: Jwt.sign(_id),
             data,
           });
         } else {

@@ -7,11 +7,13 @@ import config from "../config/index";
 import JWT from "../@types/utils/jwt";
 
 const Jwt: JWT = {
-  sign: (value, timeout) => {
-    return jwt.sign({ value }, config.secret, { expiresIn: timeout });
+  sign: (value) => {
+    return jwt.sign({ value }, config.jwt.secret, {
+      expiresIn: config.jwt.timeout,
+    });
   },
   verify(token) {
-    return jwt.verify(token, config.secret);
+    return jwt.verify(token, config.jwt.secret);
   },
 };
 

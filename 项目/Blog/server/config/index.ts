@@ -7,6 +7,10 @@ export default {
   database: {
     url: process.env.MONGODB || "mongodb://localhost:27017/Blog",
   },
-  // jwt密钥
-  secret: "e43c830d-687c-5850-8393-94d9d59d3bef-ym",
+  // javaWebToken
+  jwt: {
+    // jwt密钥
+    secret: "e43c830d-687c-5850-8393-94d9d59d3bef-ym",
+    timeout: "7d",
+  },
 };

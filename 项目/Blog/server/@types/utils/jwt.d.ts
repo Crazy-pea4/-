@@ -1,4 +1,4 @@
 export default interface JWT {
-  sign: (value: string, timeout: string) => string;
+  sign: (value: string) => string;
   verify: (token: string) => any;
 }
