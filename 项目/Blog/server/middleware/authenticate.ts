@@ -4,7 +4,7 @@ import Jwt from "../utils/jwt";
 /* 引入express中间件函数声明 */
 import { RequestHandler } from "express";
 
-export const authenticate: RequestHandler = function (req, res, next) {
+const authenticate: RequestHandler = function (req, res, next) {
   // 尝试从请求头部获取token
   const token = req.headers.token as string | undefined;
   if (token) {

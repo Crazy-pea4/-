@@ -45,11 +45,11 @@ onMounted(() => {
         temperature.value = now.temp + '℃'
         condition.value = now.text
     })
-    axios.get('http://47.101.166.148/gallery.php').then((res) => {
-        console.log(res);
-    }).catch((err) => {
-        console.log(err);
-    })
+    // axios.get('http://47.101.166.148/gallery.php').then((res) => {
+    //     console.log(res);
+    // }).catch((err) => {
+    //     console.log(err);
+    // })
 })
 </script>
 

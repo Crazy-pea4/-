@@ -145,7 +145,7 @@ const userController: UserController = {
       const id = req.params.id;
       // 关注者id
       const token = req.headers.token as string;
-      const { value } = Jwt.verify(token);
+      const { userId } = Jwt.verify(token);
       /**
        * 若 被关注的人 的followers粉丝列表中没有关注者id，则可以关注，
        * 否则不能重复关注
@@ -153,7 +153,7 @@ const userController: UserController = {
       // 获取 被关注的人 的粉丝列表
       const user = await userModel.findById(id).select("+followers");
       // 被关注的人 的粉丝列表已存在 关注者 则返回关注失败信息
-      if (user?.followers.includes(value))
+      if (user?.followers.includes(userId))
         return res.status(400).json({
           code: 400,
           message: "已关注用户，不能重复关注",
@@ -163,11 +163,11 @@ const userController: UserController = {
         await userModel.updateOne(
           { _id: id },
           // $addToSet和$push的区别是：前者不会重复添加
-          { $addToSet: { followers: value } }
+          { $addToSet: { followers: userId } }
         );
         // 向 关注者 的关注列表添加 被关注的人id
         await userModel.updateOne(
-          { _id: value },
+          { _id: userId },
           { $addToSet: { following: id } }
         );
         res.status(200).json({
@@ -187,7 +187,7 @@ const userController: UserController = {
       const id = req.params.id;
       // 取消关注者id
       const token = req.headers.token as string;
-      const { value } = Jwt.verify(token);
+      const { userId } = Jwt.verify(token);
       /**
        * 若 被取消关注的人 的followers粉丝列表中没有关注者id，则不可以取消关注，
        * 否则可以取消关注
@@ -195,16 +195,22 @@ const userController: UserController = {
       // 获取 被取消关注的人 的粉丝列表
       const user = await userModel.findById(id).select("+followers");
       // 被取消关注的人 的粉丝列表不存在 关注者 则返回取消关注失败信息
-      if (!user?.followers.includes(value))
+      if (!user?.followers.includes(userId))
         return res.status(400).json({
           code: 400,
           message: "还未关注用户，不能取消关注",
         });
       else {
         // 向 被关注的人 的粉丝列表移除 关注者id
-        await userModel.updateOne({ _id: id }, { $pull: { followers: value } });
+        await userModel.updateOne(
+          { _id: id },
+          { $pull: { followers: userId } }
+        );
         // 向 关注者 的关注列表移除 被关注的人id
-        await userModel.updateOne({ _id: value }, { $pull: { following: id } });
+        await userModel.updateOne(
+          { _id: userId },
+          { $pull: { following: id } }
+        );
         res.status(200).json({
           code: 200,
           message: "取消关注用户成功",
@@ -260,11 +266,11 @@ const userController: UserController = {
       // 被关注的话题id
       const id = req.params.id;
       const token = req.headers.token as string;
-      const { value } = Jwt.verify(token);
+      const { userId } = Jwt.verify(token);
       // 获取 被关注话题的 粉丝列表
       const user = await topicModel.findById(id).select("+topicFollowers");
       // 被关注的话题 的粉丝列表已存在 关注者 则返回关注失败信息
-      if (user?.topicFollowers.includes(value))
+      if (user?.topicFollowers.includes(userId))
         return res.status(400).json({
           code: 400,
           message: "已关注话题，不能重复关注",
@@ -274,11 +280,11 @@ const userController: UserController = {
         await topicModel.updateOne(
           { _id: id },
           // $addToSet和$push的区别是：前者不会重复添加
-          { $addToSet: { topicFollowers: value } }
+          { $addToSet: { topicFollowers: userId } }
         );
         // 向 关注者 的关注列表添加 被关注的话题id
         await userModel.updateOne(
-          { _id: value },
+          { _id: userId },
           { $addToSet: { followingTopic: id } }
         );
         res.status(200).json({
@@ -298,11 +304,11 @@ const userController: UserController = {
       const id = req.params.id;
       // 取消关注者id
       const token = req.headers.token as string;
-      const { value } = Jwt.verify(token);
+      const { userId } = Jwt.verify(token);
       // 获取 被取消关注的话题 的粉丝列表
       const user = await topicModel.findById(id).select("+topicFollowers");
       // 被取消关注的话题 的粉丝列表不存在 关注者 则返回取消关注失败信息
-      if (!user?.topicFollowers.includes(value))
+      if (!user?.topicFollowers.includes(userId))
         return res.status(400).json({
           code: 400,
           message: "还未关注话题，不能取消关注",
@@ -311,11 +317,11 @@ const userController: UserController = {
         // 向 被关注的话题 的粉丝列表移除 关注者id
         await topicModel.updateOne(
           { _id: id },
-          { $pull: { topicFollowers: value } }
+          { $pull: { topicFollowers: userId } }
         );
         // 向 关注者 的关注列表移除 被关注的话题id
         await userModel.updateOne(
-          { _id: value },
+          { _id: userId },
           { $pull: { followingTopic: id } }
         );
         res.status(200).json({
