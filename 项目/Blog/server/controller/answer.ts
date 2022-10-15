@@ -1,91 +1,93 @@
 /* 引入声明文件 */
-import TopicController from "../@types/controller/topic";
+import AnswerController from "../@types/controller/answer";
 
-/* 引入topic模型 */
-import topicModel from "../model/topic";
+/* 引入模型 */
 import questionModel from "../model/question";
+import answerModel from "../model/answer";
 
-const topicController: TopicController = {
-  // 创建话题
-  createTopic: async (req, res, next) => {
+/* 引入jwt工具 */
+import Jwt from "../utils/jwt";
+
+const answerController: AnswerController = {
+  // 创建回答
+  createAnswer: async (req, res, next) => {
     try {
-      /**
-       * 1. 检查话题是否已经存在 --> 若存在则不创建
-       * 2. 若不存在则创建话题
-       */
+      // 获取请求体和questionId
       const info = req.body;
-      const topic = await topicModel.findOne({ topicName: info.topicName });
-      if (!topic) {
-        await topicModel.create(info);
-        res.status(200).json({
-          code: 200,
-          message: "话题创建成功",
-          data: info,
-        });
-      } else
-        return res.status(400).json({
-          code: 400,
-          message: "话题已存在",
-          data: info,
-        });
+      const questionId = req.params.questionId;
+      // 回答创建者id
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
+      // 整合进info中
+      info.answerer = value;
+      info.questionId = questionId;
+      await answerModel.create(info);
+      res.status(200).json({
+        code: 200,
+        message: "话题创建成功",
+        data: info,
+      });
     } catch (err) {
       next(err);
     }
   },
-  // 修改话题
-  updateTopic: async (req, res, next) => {
+  // 修改回答
+  updateAnswer: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const updateInfo = req.body;
-      const topic = await topicModel.findByIdAndUpdate(id, updateInfo);
-      if (topic) {
+      const info = req.body;
+      const answer = await answerModel.findByIdAndUpdate(id, info);
+      if (answer) {
         res.status(200).json({
           code: 200,
-          message: "话题修改成功",
-          data: updateInfo,
+          message: "回答修改成功",
+          data: info,
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "话题修改失败",
-          data: topic,
+          message: "回答修改失败",
+          data: answer,
         });
       }
     } catch (err) {
       next(err);
     }
   },
-  // 查询话题列表
-  getTopicList: async (req, res, next) => {
+  // 查询回答列表
+  getAnswerList: async (req, res, next) => {
     try {
       // 获取页数page
       let { page = 0, limit = 10, keyword = "" } = req.query;
       page = Math.max((page as any) * 1, 1) - 1;
       // 限制每页有多少条数据
       limit = Math.max((limit as any) * 1, 0);
-      const topicList = await topicModel
+
+      // 获取questionId
+      const questionId = req.params.questionId;
+      const answerList = await answerModel
         // 实现模糊搜索，忽略大小写
-        .find({ topicName: new RegExp(keyword as string, "i") })
+        .find({ content: new RegExp(keyword as string, "i"), questionId })
         .limit(limit)
         .skip(page * limit);
-      if (topicList) {
+      if (answerList) {
         res.status(200).json({
           code: 200,
-          message: "查询话题列表成功",
-          data: topicList,
+          message: "查询回答列表成功",
+          data: answerList,
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "查询话题失败",
+          message: "查询回答失败",
         });
       }
     } catch (err) {
       next(err);
     }
   },
-  // 查询指定话题
-  getTopic: async (req, res, next) => {
+  // 查询指定回答
+  getAnswer: async (req, res, next) => {
     try {
       const id = req.params.id;
       // 获取用户详细信息时，使用?detail=xxx的形式
@@ -96,17 +98,22 @@ const topicController: TopicController = {
           .map((item) => " +" + item)
           .join("");
       }
-      let topic = await topicModel.findById(id).select(detail);
-      if (topic) {
+      console.log(detail);
+
+      const answer = await answerModel
+        .findById(id)
+        .select(detail)
+        .populate("answerer");
+      if (answer) {
         res.status(200).json({
           code: 200,
-          message: "查询指定话题成功",
-          data: topic,
+          message: "查询指定回答成功",
+          data: answer,
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "查询指定话题失败",
+          message: "查询指定回答失败",
           data: { id },
         });
       }
@@ -114,11 +121,11 @@ const topicController: TopicController = {
       next(err);
     }
   },
-  // 查询话题粉丝列表
-  getTopicFollowers: async (req, res, next) => {
+  // 查询回答粉丝列表
+  getAnswerFollowers: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const topicFollowersList = await topicModel
+      const topicFollowersList = await questionModel
         .findById(id)
         .select("+topicFollowers")
         .populate("topicFollowers");
@@ -138,21 +145,21 @@ const topicController: TopicController = {
       next(err);
     }
   },
-  // 查询话题的问题列表
-  getTopicQuestions: async (req, res, next) => {
+  // 删除指定回答
+  deleteAnswer: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const questions = await questionModel.find({ topics: id });
-      if (questions) {
+      const data = await answerModel.findByIdAndDelete(id);
+      if (data) {
         res.status(200).json({
           code: 200,
-          message: "查询话题的问题列表成功",
-          data: questions,
+          message: "删除回答成功",
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "查询话题的问题列表失败",
+          message: "删除回答失败",
+          data,
         });
       }
     } catch (err) {
@@ -161,4 +168,4 @@ const topicController: TopicController = {
   },
 };
 
-export default topicController;
+export default answerController;

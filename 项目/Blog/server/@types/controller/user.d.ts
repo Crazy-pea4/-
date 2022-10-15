@@ -13,4 +13,5 @@ export default interface UserController {
   followTopic: RequestHandler;
   unfollowTopic: RequestHandler;
   getTopicFollowing: RequestHandler;
+  getUserQuestions: RequestHandler;
 }

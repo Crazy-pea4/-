@@ -5,4 +5,6 @@ export default interface CheckExisted {
   topic: RequestHandler;
   question: RequestHandler;
   questioner: RequestHandler;
+  answer: RequestHandler;
+  answerer: RequestHandler;
 }

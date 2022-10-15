@@ -19,6 +19,12 @@ const questionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
+    select: false,
+  },
+  // 问题所关联的话题
+  topics: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Topic" }],
+    select: false,
   },
   // 隐藏__v版本信息
   __v: {

@@ -5,7 +5,7 @@
 ## morgan.js 只输出报错信息
 
 这是因为把路由中间件写在了 morgan 中间件之前，这样当正确访问时，不会走 morgan，只有错误时，才会从路由中间件往下找找到 morgan
-事实上，应当把所有的功能性中间件卸载应用性中间件之前。
+事实上，应当把所有的功能性中间件写在应用性中间件之前。
 
 ## 编写中间件时
 
@@ -53,7 +53,7 @@ const Jwt: JWT = {
 
 ## 优化编辑用户editUser接口
 
-将原来的
+将原来的****
 
 ```js
 router.put(
@@ -76,3 +76,44 @@ router.patch("/:id", authenticate, userController.editUser);
 ```
 
 可以看到这里不使用validate中间件来校验传输字段，因为patch的数据可能会没有userRegisterValidator里要求的必选字段，会造成冲突。索性将这里的校验交给前端完成
+
+## 在编写checkExisted的questioner时遇到的ObjectId转换问题
+
+在设计question模块时，对于question的编辑和删除只能是creator操作，其他人无法操作，这就涉及到对questionModel中questioner的ObjectId（ref: "User"）比对当前token是否位同一个用户。
+
+```ts
+if(question?.questioner?.valueOf() !== value) {}
+```
+
+因为在mongoDB中的\_id默认为ObjectId类型，而headers中的token为string类型，无论如何不等式都成立。此时就需要对\_id进行类型转换
+
+```ts
+_id: new ObjectId("63481c1a9a405216649967a8")
+```
+
+一开始查阅资料是使用ObjectId().toString()，但是是在js中，而在ts中则会报错：
+
+```ts
+question?.questioner?.toString()
+
+// (property) toString: {} | undefined
+// Returns a string representation of an object.
+// 此表达式不可调用。
+//   类型 "{}" 没有调用签名。
+```
+
+后来查阅源码发现mongoose对于toString进行改写，使其成为一个属性，直接调用则会报错。
+
+再后来发现在js中各类型的原型链上存在一个valueOf方法，可以取到通过new创建构造函数时传入的值
+
+```ts
+if (question?.questioner?.valueOf() !== value) ()
+```
+
+完美解决！
+
+## 关于“问题”和“话题”之间的互相引用关系，及其数据结构设计
+
+在Blog中，“问题”的数量是庞大的，而“话题”的数量可被视为有限的（相较于“问题数量而言”），因此将“话题”设置在“问题”模型中比反之更加高效。
+
+在“问题”模型中新增一个字段用于存储topics，这样无论是请求“话题”的“问题”列表还是“问题”的“话题”列表比都比将questions设置在”话题“模型中快

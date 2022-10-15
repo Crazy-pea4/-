@@ -23,3 +23,7 @@ export interface questionCreateData {
   title: string;
   descriptions: string;
 }
+
+export interface answerCreateData {
+  content: string;
+}

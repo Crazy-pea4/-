@@ -6,6 +6,8 @@ import user from "./user";
 import auth from "./auth";
 import upload from "./upload";
 import topic from "./topic";
+import question from "./question";
+import answer from "./answer";
 
 /* 用户api */
 router.use("/user", user);
@@ -18,5 +20,11 @@ router.use("/upload", upload);
 
 /* 话题api */
 router.use("/topic", topic);
+
+/* 问题api */
+router.use("/question", question);
+
+/* 回答api */
+router.use("/question/:questionId/answer", answer);
 
 export default router;

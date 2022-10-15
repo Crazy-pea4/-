@@ -41,4 +41,11 @@ router.get(
   topicController.getTopicFollowers
 );
 
+// 查询话题的问题列表
+router.get(
+  "/:id/questions",
+  checkExisted.topic,
+  topicController.getTopicQuestions
+);
+
 export default router;

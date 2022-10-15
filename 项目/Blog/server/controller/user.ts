@@ -1,9 +1,10 @@
 /* 引入声明文件 */
 import UserController from "../@types/controller/user";
 
-/* 引入user模型、topic模型 */
+/* 引入user模型、topic模型 question模型 */
 import userModel from "../model/user";
 import topicModel from "../model/topic";
+import questionModel from "../model/question";
 
 /* 引入加密工具 */
 import MD5_encrypt from "../utils/md5";
@@ -145,7 +146,7 @@ const userController: UserController = {
       const id = req.params.id;
       // 关注者id
       const token = req.headers.token as string;
-      const { userId } = Jwt.verify(token);
+      const { value } = Jwt.verify(token);
       /**
        * 若 被关注的人 的followers粉丝列表中没有关注者id，则可以关注，
        * 否则不能重复关注
@@ -153,7 +154,7 @@ const userController: UserController = {
       // 获取 被关注的人 的粉丝列表
       const user = await userModel.findById(id).select("+followers");
       // 被关注的人 的粉丝列表已存在 关注者 则返回关注失败信息
-      if (user?.followers.includes(userId))
+      if (user?.followers.includes(value))
         return res.status(400).json({
           code: 400,
           message: "已关注用户，不能重复关注",
@@ -163,11 +164,11 @@ const userController: UserController = {
         await userModel.updateOne(
           { _id: id },
           // $addToSet和$push的区别是：前者不会重复添加
-          { $addToSet: { followers: userId } }
+          { $addToSet: { followers: value } }
         );
         // 向 关注者 的关注列表添加 被关注的人id
         await userModel.updateOne(
-          { _id: userId },
+          { _id: value },
           { $addToSet: { following: id } }
         );
         res.status(200).json({
@@ -187,7 +188,7 @@ const userController: UserController = {
       const id = req.params.id;
       // 取消关注者id
       const token = req.headers.token as string;
-      const { userId } = Jwt.verify(token);
+      const { value } = Jwt.verify(token);
       /**
        * 若 被取消关注的人 的followers粉丝列表中没有关注者id，则不可以取消关注，
        * 否则可以取消关注
@@ -195,22 +196,16 @@ const userController: UserController = {
       // 获取 被取消关注的人 的粉丝列表
       const user = await userModel.findById(id).select("+followers");
       // 被取消关注的人 的粉丝列表不存在 关注者 则返回取消关注失败信息
-      if (!user?.followers.includes(userId))
+      if (!user?.followers.includes(value))
         return res.status(400).json({
           code: 400,
           message: "还未关注用户，不能取消关注",
         });
       else {
         // 向 被关注的人 的粉丝列表移除 关注者id
-        await userModel.updateOne(
-          { _id: id },
-          { $pull: { followers: userId } }
-        );
+        await userModel.updateOne({ _id: id }, { $pull: { followers: value } });
         // 向 关注者 的关注列表移除 被关注的人id
-        await userModel.updateOne(
-          { _id: userId },
-          { $pull: { following: id } }
-        );
+        await userModel.updateOne({ _id: value }, { $pull: { following: id } });
         res.status(200).json({
           code: 200,
           message: "取消关注用户成功",
@@ -266,11 +261,11 @@ const userController: UserController = {
       // 被关注的话题id
       const id = req.params.id;
       const token = req.headers.token as string;
-      const { userId } = Jwt.verify(token);
+      const { value } = Jwt.verify(token);
       // 获取 被关注话题的 粉丝列表
       const user = await topicModel.findById(id).select("+topicFollowers");
       // 被关注的话题 的粉丝列表已存在 关注者 则返回关注失败信息
-      if (user?.topicFollowers.includes(userId))
+      if (user?.topicFollowers.includes(value))
         return res.status(400).json({
           code: 400,
           message: "已关注话题，不能重复关注",
@@ -280,11 +275,11 @@ const userController: UserController = {
         await topicModel.updateOne(
           { _id: id },
           // $addToSet和$push的区别是：前者不会重复添加
-          { $addToSet: { topicFollowers: userId } }
+          { $addToSet: { topicFollowers: value } }
         );
         // 向 关注者 的关注列表添加 被关注的话题id
         await userModel.updateOne(
-          { _id: userId },
+          { _id: value },
           { $addToSet: { followingTopic: id } }
         );
         res.status(200).json({
@@ -304,11 +299,11 @@ const userController: UserController = {
       const id = req.params.id;
       // 取消关注者id
       const token = req.headers.token as string;
-      const { userId } = Jwt.verify(token);
+      const { value } = Jwt.verify(token);
       // 获取 被取消关注的话题 的粉丝列表
       const user = await topicModel.findById(id).select("+topicFollowers");
       // 被取消关注的话题 的粉丝列表不存在 关注者 则返回取消关注失败信息
-      if (!user?.topicFollowers.includes(userId))
+      if (!user?.topicFollowers.includes(value))
         return res.status(400).json({
           code: 400,
           message: "还未关注话题，不能取消关注",
@@ -317,11 +312,11 @@ const userController: UserController = {
         // 向 被关注的话题 的粉丝列表移除 关注者id
         await topicModel.updateOne(
           { _id: id },
-          { $pull: { topicFollowers: userId } }
+          { $pull: { topicFollowers: value } }
         );
         // 向 关注者 的关注列表移除 被关注的话题id
         await userModel.updateOne(
-          { _id: userId },
+          { _id: value },
           { $pull: { followingTopic: id } }
         );
         res.status(200).json({
@@ -348,6 +343,27 @@ const userController: UserController = {
           code: 200,
           message: "获取关注话题列表成功",
           data: topicFollowingList,
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 查询用户的问题列表
+  getUserQuestions: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const question = await questionModel.find({ questioner: id });
+      if (question) {
+        res.status(200).json({
+          code: 200,
+          message: "查询问题列表成功",
+          data: question,
+        });
+      } else {
+        res.status(400).json({
+          code: 400,
+          message: "查询问题列表失败",
         });
       }
     } catch (err) {

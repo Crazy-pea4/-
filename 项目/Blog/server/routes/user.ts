@@ -77,4 +77,7 @@ router.get(
   userController.getTopicFollowing
 );
 
+// 获取用户的问题列表（id为当前用户）
+router.get("/:id/questions", userController.getUserQuestions);
+
 export default router;

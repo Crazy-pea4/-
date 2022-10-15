@@ -6,4 +6,5 @@ export default interface TopicController {
   getTopicList: RequestHandler;
   getTopic: RequestHandler;
   getTopicFollowers: RequestHandler;
+  getTopicQuestions: RequestHandler;
 }
