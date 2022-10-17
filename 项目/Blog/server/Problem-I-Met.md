@@ -117,3 +117,60 @@ if (question?.questioner?.valueOf() !== value) ()
 在Blog中，“问题”的数量是庞大的，而“话题”的数量可被视为有限的（相较于“问题数量而言”），因此将“话题”设置在“问题”模型中比反之更加高效。
 
 在“问题”模型中新增一个字段用于存储topics，这样无论是请求“话题”的“问题”列表还是“问题”的“话题”列表比都比将questions设置在”话题“模型中快
+
+## “回答”模块的路由设计
+
+因为先有“问题”才有“回答”，所以把“回答”模块设计为“问题“的二级路由，也就是形如：
+
+```ts
+import question from "./question"
+import answer from "./answer"
+
+// 问题api
+router.use("/question", question)
+
+// 回答api
+router.use("/question/:questionId/answer", answer)
+```
+
+但随后在answer模块中尝试通过req.parmas.questionId获取问题id是失效的，为undefined。（可能的原因为import语句的执行顺序导致）
+
+意识到只能将/:questionId/answer写在answer模块内部的路由中才能通过req.parmas访问到。（在原来路径下最前面加上/:questionId/answer即可）
+
+## 关于VsCode调试TS+NodeJs
+
+调试Nodejs项目总是用console.log()的方式打印太low，而且终端输出的文本不能折叠展开，简直是好心情的杀手。
+
+经过查阅网上的资料后，决定使用ts-node来debug
+
+1. 打开”运行和调试“，点击右上角的齿轮，打开launch.json（本质上时创建 项目根目录/.vscode/launch.json）。
+
+2. ```json
+   {
+     // 使用 IntelliSense 了解相关属性。
+     // 悬停以查看现有属性的描述。
+     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+     "version": "0.2.0",
+     "configurations": [
+       {
+         "type": "node",
+         "request": "launch",
+         "name": "调试NodeTS代码",
+         // ts-node 命令： “直接”运行ts代码。
+         // 作用：调试时加载ts-node包（在调试时“直接”运行ts代码）
+         "runtimeArgs": [
+           "-r",
+           "${workspaceRoot}/项目/Blog/server/node_modules/ts-node/register"
+         ],
+         // 此处的 app.ts 表示要调试的 TS 文件（ 可修改为其他要调试的ts文件 ）
+         "args": ["${workspaceFolder}/项目/Blog/server/app.ts"]
+       }
+     ]
+   }
+   ```
+
+3. Tips：
+   
+   1. 需要再次下载typescript和ts-node到本项目下，因为无法定向到全局的包（其实这也好理解，本身项目放到服务器上就是需要其中已经下载好的包）
+   
+   2. 通常，\${workspaceRoot}就是当前项目的目录，在runtimeArgs和args里面的路径只要定位到app.ts和node_modules/ts-node/register即可

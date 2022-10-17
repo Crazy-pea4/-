@@ -68,6 +68,8 @@ const answerController: AnswerController = {
       const answerList = await answerModel
         // 实现模糊搜索，忽略大小写
         .find({ content: new RegExp(keyword as string, "i"), questionId })
+        .select("+answerer")
+        .populate("answerer")
         .limit(limit)
         .skip(page * limit);
       if (answerList) {

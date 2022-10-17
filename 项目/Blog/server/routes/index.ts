@@ -24,7 +24,7 @@ router.use("/topic", topic);
 /* 问题api */
 router.use("/question", question);
 
-/* 回答api */
-router.use("/question/:questionId/answer", answer);
+/* 回答api（设计为question的二层api） */
+router.use("/question", answer);
 
 export default router;
