@@ -1,55 +1,54 @@
 /* 引入声明文件 */
-import AnswerController from "../@types/controller/answer";
+import CommentController from "../@types/controller/comment";
 
-/* 引入模型 */
-import questionModel from "../model/question";
-import answerModel from "../model/answer";
+/* 引入comment模型 */
+import commentModel from "../model/comment";
 
 /* 引入jwt工具 */
 import Jwt from "../utils/jwt";
 
-const answerController: AnswerController = {
-  // 创建回答
-  createAnswer: async (req, res, next) => {
+const commentController: CommentController = {
+  // 创建评论
+  createComment: async (req, res, next) => {
     try {
-      // 获取请求体和questionId
+      // 获取请求体和answerId
       const info = req.body;
-      const questionId = req.params.questionId;
+      const { answerId } = req.params;
 
-      // 回答创建者id
+      // 评论创建者id
       const token = req.headers.token as string;
       const { value } = Jwt.verify(token);
 
-      // 整合进info中
-      info.answerer = value;
-      info.questionId = questionId;
+      // 将commentator整合进info中
+      info.commentator = value;
+      info.answerId = answerId;
 
-      await answerModel.create(info);
+      await commentModel.create(info);
       res.status(200).json({
         code: 200,
-        message: "话题创建成功",
+        message: "评论创建成功",
         data: info,
       });
     } catch (err) {
       next(err);
     }
   },
-  // 修改回答
-  updateAnswer: async (req, res, next) => {
+  // 修改评论
+  updateComment: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const info = req.body;
-      const answer = await answerModel.findByIdAndUpdate(id, info);
+      const answerInfo = req.body;
+      const answer = await commentModel.findByIdAndUpdate(id, answerInfo);
       if (answer) {
         res.status(200).json({
           code: 200,
-          message: "回答修改成功",
-          data: info,
+          message: "评论修改成功",
+          data: answerInfo,
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "回答修改失败",
+          message: "评论修改失败",
           data: answer,
         });
       }
@@ -57,42 +56,41 @@ const answerController: AnswerController = {
       next(err);
     }
   },
-  // 查询回答列表
-  getAnswerList: async (req, res, next) => {
+  // 查询评论列表
+  getCommentList: async (req, res, next) => {
     try {
       // 获取页数page
-      let { page = 0, limit = 10, keyword = "" } = req.query;
+      let { page = 0, limit = 10 } = req.query;
       page = Math.max((page as any) * 1, 1) - 1;
       // 限制每页有多少条数据
       limit = Math.max((limit as any) * 1, 0);
 
-      // 获取questionId
-      const questionId = req.params.questionId;
-      const answerList = await answerModel
+      // 获取questionId answerId
+      const { answerId } = req.params;
+      const commentList = await commentModel
         // 实现模糊搜索，忽略大小写
-        .find({ content: new RegExp(keyword as string, "i"), questionId })
-        .select("+answerer")
-        .populate("answerer")
-        .limit(limit)
-        .skip(page * limit);
-      if (answerList) {
+        .find({ answerId })
+        // .limit(limit)
+        // .skip(page * limit)
+        .populate("commentator");
+      if (commentList) {
         res.status(200).json({
           code: 200,
-          message: "查询回答列表成功",
-          data: answerList,
+          message: "查询评论列表成功",
+          data: commentList,
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "查询回答失败",
+          message: "查询评论失败",
         });
       }
     } catch (err) {
       next(err);
     }
   },
-  // 查询指定回答
-  getAnswer: async (req, res, next) => {
+  // 查询指定评论
+  getComment: async (req, res, next) => {
     try {
       const id = req.params.id;
       // 获取用户详细信息时，使用?detail=xxx的形式
@@ -105,20 +103,20 @@ const answerController: AnswerController = {
       }
       console.log(detail);
 
-      const answer = await answerModel
+      const comment = await commentModel
         .findById(id)
         .select(detail)
-        .populate("answerer");
-      if (answer) {
+        .populate("commentator");
+      if (comment) {
         res.status(200).json({
           code: 200,
-          message: "查询指定回答成功",
-          data: answer,
+          message: "查询指定评论成功",
+          data: comment,
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "查询指定回答失败",
+          message: "查询指定评论失败",
           data: { id },
         });
       }
@@ -126,20 +124,20 @@ const answerController: AnswerController = {
       next(err);
     }
   },
-  // 删除指定回答
-  deleteAnswer: async (req, res, next) => {
+  // 删除指定评论
+  deleteComment: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const data = await answerModel.findByIdAndDelete(id);
+      const data = await commentModel.findByIdAndDelete(id);
       if (data) {
         res.status(200).json({
           code: 200,
-          message: "删除回答成功",
+          message: "删除评论成功",
         });
       } else {
         res.status(400).json({
           code: 400,
-          message: "删除回答失败",
+          message: "删除评论失败",
           data,
         });
       }
@@ -149,4 +147,4 @@ const answerController: AnswerController = {
   },
 };
 
-export default answerController;
+export default commentController;

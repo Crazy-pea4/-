@@ -5,6 +5,5 @@ export default interface AnswerController {
   updateAnswer: RequestHandler;
   getAnswerList: RequestHandler;
   getAnswer: RequestHandler;
-  getAnswerFollowers: RequestHandler;
   deleteAnswer: RequestHandler;
 }

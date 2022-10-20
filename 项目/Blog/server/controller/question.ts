@@ -11,12 +11,8 @@ const questionController: QuestionController = {
   // 创建问题
   createQuestion: async (req, res, next) => {
     try {
-      /**
-       * 1. 检查话题是否已经存在 --> 若存在则不创建
-       * 2. 若不存在则创建话题
-       */
       const info = req.body;
-      // 话题创建者id
+      // 问题创建者id
       const token = req.headers.token as string;
       const { value } = Jwt.verify(token);
       // 将questioner整合进info中

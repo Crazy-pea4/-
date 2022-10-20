@@ -12,7 +12,6 @@ const answerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-    select: false,
   },
   // 对应问题的id
   questionId: {
@@ -20,6 +19,17 @@ const answerSchema = new mongoose.Schema({
     ref: "Question",
     required: true,
     select: false,
+  },
+  // 赞（喜欢）
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  // 有歧义（踩）
+
+  hesitation: {
+    type: Number,
+    default: 0,
   },
   // 隐藏__v版本信息
   __v: {

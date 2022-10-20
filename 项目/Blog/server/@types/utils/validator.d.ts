@@ -27,3 +27,7 @@ export interface questionCreateData {
 export interface answerCreateData {
   content: string;
 }
+
+export interface commentCreateData {
+  content: string;
+}

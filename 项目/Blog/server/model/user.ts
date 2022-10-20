@@ -58,8 +58,13 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   // 关注话题列表
-  followingTopic: {
+  followingTopics: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Topic" }],
+    select: false,
+  },
+  // 收藏回答列表
+  collectingAnswers: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Answer" }],
     select: false,
   },
   // 隐藏__v版本信息

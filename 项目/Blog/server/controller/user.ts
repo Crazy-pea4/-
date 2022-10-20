@@ -5,6 +5,7 @@ import UserController from "../@types/controller/user";
 import userModel from "../model/user";
 import topicModel from "../model/topic";
 import questionModel from "../model/question";
+import answerModel from "../model/answer";
 
 /* 引入加密工具 */
 import MD5_encrypt from "../utils/md5";
@@ -280,7 +281,7 @@ const userController: UserController = {
         // 向 关注者 的关注列表添加 被关注的话题id
         await userModel.updateOne(
           { _id: value },
-          { $addToSet: { followingTopic: id } }
+          { $addToSet: { followingTopics: id } }
         );
         res.status(200).json({
           code: 200,
@@ -317,7 +318,7 @@ const userController: UserController = {
         // 向 关注者 的关注列表移除 被关注的话题id
         await userModel.updateOne(
           { _id: value },
-          { $pull: { followingTopic: id } }
+          { $pull: { followingTopics: id } }
         );
         res.status(200).json({
           code: 200,
@@ -335,8 +336,8 @@ const userController: UserController = {
       const id = req.params.id;
       const topicFollowingList = await userModel
         .findById(id)
-        .select("+followingTopic")
-        .populate("followingTopic");
+        .select("+followingTopics")
+        .populate("followingTopics");
       console.log(topicFollowingList);
       if (topicFollowingList) {
         res.status(200).json({
@@ -364,6 +365,140 @@ const userController: UserController = {
         res.status(400).json({
           code: 400,
           message: "查询问题列表失败",
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 赞回答（取消）
+  likeAnswer: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const method = req.method;
+      // $inc操作符用于递增目标值
+      const data = await answerModel.findByIdAndUpdate(id, {
+        $inc: { likes: method === "PUT" ? 1 : -1 },
+      });
+      if (data) {
+        res.status(200).json({
+          code: 200,
+          message: method === "PUT" ? "赞同答案成功" : "取消赞同答案成功",
+          data,
+        });
+      } else {
+        res.status(400).json({
+          code: 400,
+          message: "赞同答案失败",
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 歧义答案（取消）
+  hesitateAnswer: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const method = req.method;
+      // $inc操作符用于递增目标值
+      const data = await answerModel.findByIdAndUpdate(id, {
+        $inc: { hesitation: method === "PUT" ? 1 : -1 },
+      });
+      if (data) {
+        res.status(200).json({
+          code: 200,
+          message: method === "PUT" ? "歧义答案成功" : "取消歧义答案成功",
+          data,
+        });
+      } else {
+        res.status(400).json({
+          code: 400,
+          message: "歧义答案失败",
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 收藏回答
+  collectingAnswer: async (req, res, next) => {
+    try {
+      // 被收藏回答id
+      const id = req.params.id as any;
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
+      // 获取 用户的收藏回答列表
+      const answer = await userModel
+        .findById(value)
+        .select("+collectingAnswers");
+      // 被收藏回答 的粉丝列表已存在 关注者 则返回关注失败信息
+      if (answer?.collectingAnswers.includes(id))
+        return res.status(400).json({
+          code: 400,
+          message: "已收藏回答，不能重复收藏",
+        });
+      else {
+        // 向 关注者 的关注列表添加 被关注的话题id
+        await userModel.updateOne(
+          { _id: value },
+          { $addToSet: { collectingAnswers: id } }
+        );
+        res.status(200).json({
+          code: 200,
+          message: "收藏回答成功",
+          data: { id },
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 取消收藏回答
+  uncollectingAnswer: async (req, res, next) => {
+    try {
+      // 被取消收藏回答id
+      const id = req.params.id as any;
+      // 取消收藏者id
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
+      // 获取 被取消收藏回答 的粉丝列表
+      const answer = await userModel
+        .findById(value)
+        .select("+collectingAnswers");
+      if (!answer?.collectingAnswers.includes(id))
+        return res.status(400).json({
+          code: 400,
+          message: "还未收藏回答，不能取消收藏",
+        });
+      else {
+        await userModel.updateOne(
+          { _id: value },
+          { $pull: { collectingAnswers: id } }
+        );
+        res.status(200).json({
+          code: 200,
+          message: "取消收藏回答成功",
+          data: { id },
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 查询收藏回答列表
+  getAnswerCollecting: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const answerFollowingList = await userModel
+        .findById(id)
+        .select("+collectingAnswers")
+        .populate("collectingAnswers");
+      if (answerFollowingList) {
+        res.status(200).json({
+          code: 200,
+          message: "获取收藏回答列表成功",
+          data: answerFollowingList,
         });
       }
     } catch (err) {

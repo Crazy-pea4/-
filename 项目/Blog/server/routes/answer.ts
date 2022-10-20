@@ -39,13 +39,6 @@ router.get(
   answerController.getAnswer
 );
 
-// 查询回答粉丝列表
-router.get(
-  "/:questionId/answer/:id/followers",
-  checkExisted.answer,
-  answerController.getAnswerFollowers
-);
-
 // 删除指定回答
 router.delete(
   "/:questionId/answer/:id",

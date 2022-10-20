@@ -78,6 +78,66 @@ router.get(
 );
 
 // 获取用户的问题列表（id为当前用户）
-router.get("/:id/questions", userController.getUserQuestions);
+router.get(
+  "/:id/questions",
+  checkExisted.user,
+  userController.getUserQuestions
+);
+
+// 赞同答案（id为答案id）
+router.put(
+  "/likeAnswer/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.likeAnswer,
+  userController.hesitateAnswer
+);
+
+// 取消赞同答案
+router.delete(
+  "/likeAnswer/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.likeAnswer
+);
+
+// 歧义答案（id为答案id）
+router.put(
+  "/hesitateAnswer/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.hesitateAnswer
+);
+
+// 取消歧义答案
+router.delete(
+  "/hesitateAnswer/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.hesitateAnswer
+);
+
+// 收藏回答（id为回答id）
+router.put(
+  "/answerCollecting/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.collectingAnswer
+);
+
+// 取消收藏回答（id为回答id）
+router.delete(
+  "/answerCollecting/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.uncollectingAnswer
+);
+
+// 查询收藏回答列表（id为用户id）
+router.get(
+  "/:id/answerCollecting",
+  checkExisted.user,
+  userController.getAnswerCollecting
+);
 
 export default router;

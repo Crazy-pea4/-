@@ -8,6 +8,7 @@ import {
   topicCreateData,
   questionCreateData,
   answerCreateData,
+  commentCreateData,
 } from "../@types/utils/validator";
 
 // 用户注册校验器
@@ -126,6 +127,16 @@ export function answerCreateValidator(data: answerCreateData) {
       "string.base": "content 类型错误",
     }),
   });
+  return schema.validate(data);
+}
 
+// 评论创建校验器
+export function commentCreateValidator(data: commentCreateData) {
+  const schema = Joi.object({
+    content: Joi.string().required().messages({
+      "any.required": "缺少必选参数 content",
+      "string.base": "content 类型错误",
+    }),
+  });
   return schema.validate(data);
 }

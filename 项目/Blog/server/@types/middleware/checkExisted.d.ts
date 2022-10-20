@@ -7,4 +7,6 @@ export default interface CheckExisted {
   questioner: RequestHandler;
   answer: RequestHandler;
   answerer: RequestHandler;
+  comment: RequestHandler;
+  commentator: RequestHandler;
 }
