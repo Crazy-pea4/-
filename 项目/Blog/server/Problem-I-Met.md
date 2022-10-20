@@ -1,27 +1,27 @@
 ## ts+nodejs
 
-在搭建 nodejs 项目使用 ts，可以用 import 语句
+    在搭建 nodejs 项目使用 ts，可以用 import 语句
 
 ## morgan.js 只输出报错信息
 
-这是因为把路由中间件写在了 morgan 中间件之前，这样当正确访问时，不会走 morgan，只有错误时，才会从路由中间件往下找找到 morgan
+    这是因为把路由中间件写在了 morgan 中间件之前，这样当正确访问时，不会走 morgan，只有错误时，才会从路由中间件往下找找到 morgan
 事实上，应当把所有的功能性中间件写在应用性中间件之前。
 
 ## 编写中间件时
 
-写的中间件往往缺少类型注解，在网上找了半天没有具体解决，经过对代码的追索溯源找到源文件中的声明文件导出的接口，在中间件文件处引入即可。（个人感觉不是很优雅）
+    写的中间件往往缺少类型注解，在网上找了半天没有具体解决，经过对代码的追索溯源找到源文件中的声明文件导出的接口，在中间件文件处引入即可。（个人感觉不是很优雅）
 
 ## 关于 Validate 中间件
 
-它能做到的基本上也在 userModel 的 Schema 里面规定了，写它是为了再 routes 里面的文件简洁一点。但它有一个无法做到的地方，那就是查重，毕竟这是数据库的功能，它只是对进来的数据进行校验，至于数据在数据库中的表现它不关心也不能关心到。因此还需要再 routes 里面对 model 操作过后的值进行一个判断。（所以这里我就感觉这个 validate 就是整洁作用占比大）
+    它能做到的基本上也在 userModel 的 Schema 里面规定了，写它是为了再 routes 里面的文件简洁一点。但它有一个无法做到的地方，那就是查重，毕竟这是数据库的功能，它只是对进来的数据进行校验，至于数据在数据库中的表现它不关心也不能关心到。因此还需要再 routes 里面对 model 操作过后的值进行一个判断。（所以这里我就感觉这个 validate 就是整洁作用占比大）
 
 ## 密码加密与 Schema 的冲突
 
-在 userModel 里，给进入模型的数据定了规范，其中密码是最短 6 个最长 16 个。而后在 userControll.register 中把数据加密后再去添加数据到数据库时控制台报错，原因是加密后的密码在进入数据库前不符合 Schema 的最长 16 个规范，考虑到先前使用了 validate 中间件来校验数据，因此可以把这里的 Schema 中的密码最长限制去掉，防止冲突。
+    在 userModel 里，给进入模型的数据定了规范，其中密码是最短 6 个最长 16 个。而后在 userControll.register 中把数据加密后再去添加数据到数据库时控制台报错，原因是加密后的密码在进入数据库前不符合 Schema 的最长 16 个规范，考虑到先前使用了 validate 中间件来校验数据，因此可以把这里的 Schema 中的密码最长限制去掉，防止冲突。
 
 ## 使用jwt.sign发生的问题
 
-起初在utils文件夹下封装了jwt，其中jwt.sign方法传入的第一个参数为string并没有报错。随后为了验证token的有效，写上了第三个参数{expiresIn: timeout}，重启项目发现控制台报错
+    起初在utils文件夹下封装了jwt，其中jwt.sign方法传入的第一个参数为string并没有报错。随后为了验证token的有效，写上了第三个参数{expiresIn: timeout}，重启项目发现控制台报错
 
 ```js
 const Jwt: JWT = {
@@ -38,7 +38,7 @@ const Jwt: JWT = {
 Error: invalid expiresIn option for string payload
 ```
 
-查阅资料得知：加上第三个选项后，第一个选项传进来的不能是string，于是改成一个对象
+    查阅资料得知：加上第三个选项后，第一个选项传进来的不能是string，于是改成一个对象
 
 ```js
 const Jwt: JWT = {
@@ -53,7 +53,7 @@ const Jwt: JWT = {
 
 ## 优化编辑用户editUser接口
 
-将原来的****
+    将原来的****
 
 ```js
 router.put(
@@ -69,29 +69,29 @@ router.put(
 );
 ```
 
-改写为
+    改写为
 
 ```js
 router.patch("/:id", authenticate, userController.editUser);
 ```
 
-可以看到这里不使用validate中间件来校验传输字段，因为patch的数据可能会没有userRegisterValidator里要求的必选字段，会造成冲突。索性将这里的校验交给前端完成
+    可以看到这里不使用validate中间件来校验传输字段，因为patch的数据可能会没有userRegisterValidator里要求的必选字段，会造成冲突。索性将这里的校验交给前端完成
 
 ## 在编写checkExisted的questioner时遇到的ObjectId转换问题
 
-在设计question模块时，对于question的编辑和删除只能是creator操作，其他人无法操作，这就涉及到对questionModel中questioner的ObjectId（ref: "User"）比对当前token是否位同一个用户。
+    在设计question模块时，对于question的编辑和删除只能是creator操作，其他人无法操作，这就涉及到对questionModel中questioner的ObjectId（ref: "User"）比对当前token是否位同一个用户。
 
 ```ts
 if(question?.questioner?.valueOf() !== value) {}
 ```
 
-因为在mongoDB中的\_id默认为ObjectId类型，而headers中的token为string类型，无论如何不等式都成立。此时就需要对\_id进行类型转换
+    因为在mongoDB中的\_id默认为ObjectId类型，而headers中的token为string类型，无论如何不等式都成立。此时就需要对\_id进行类型转换
 
 ```ts
 _id: new ObjectId("63481c1a9a405216649967a8")
 ```
 
-一开始查阅资料是使用ObjectId().toString()，但是是在js中，而在ts中则会报错：
+    一开始查阅资料是使用ObjectId().toString()，但是是在js中，而在ts中则会报错：
 
 ```ts
 question?.questioner?.toString()
@@ -102,9 +102,9 @@ question?.questioner?.toString()
 //   类型 "{}" 没有调用签名。
 ```
 
-后来查阅源码发现mongoose对于toString进行改写，使其成为一个属性，直接调用则会报错。
+    后来查阅源码发现mongoose对于toString进行改写，使其成为一个属性，直接调用则会报错。
 
-再后来发现在js中各类型的原型链上存在一个valueOf方法，可以取到通过new创建构造函数时传入的值
+    再后来发现在js中各类型的原型链上存在一个valueOf方法，可以取到通过new创建构造函数时传入的值
 
 ```ts
 if (question?.questioner?.valueOf() !== value) ()
@@ -114,13 +114,13 @@ if (question?.questioner?.valueOf() !== value) ()
 
 ## 关于“问题”和“话题”之间的互相引用关系，及其数据结构设计
 
-在Blog中，“问题”的数量是庞大的，而“话题”的数量可被视为有限的（相较于“问题数量而言”），因此将“话题”设置在“问题”模型中比反之更加高效。
+    在Blog中，“问题”的数量是庞大的，而“话题”的数量可被视为有限的（相较于“问题数量而言”），因此将“话题”设置在“问题”模型中比反之更加高效。
 
-在“问题”模型中新增一个字段用于存储topics，这样无论是请求“话题”的“问题”列表还是“问题”的“话题”列表比都比将questions设置在”话题“模型中快
+    在“问题”模型中新增一个字段用于存储topics，这样无论是请求“话题”的“问题”列表还是“问题”的“话题”列表比都比将questions设置在”话题“模型中快
 
 ## “回答”模块的路由设计
 
-因为先有“问题”才有“回答”，所以把“回答”模块设计为“问题“的二级路由，也就是形如：
+    因为先有“问题”才有“回答”，所以把“回答”模块设计为“问题“的二级路由，也就是形如：
 
 ```ts
 import question from "./question"
@@ -133,13 +133,13 @@ router.use("/question", question)
 router.use("/question/:questionId/answer", answer)
 ```
 
-但随后在answer模块中尝试通过req.parmas.questionId获取问题id是失效的，为undefined。（可能的原因为import语句的执行顺序导致）
+    但随后在answer模块中尝试通过req.parmas.questionId获取问题id是失效的，为undefined。（可能的原因为import语句的执行顺序导致）
 
-意识到只能将/:questionId/answer写在answer模块内部的路由中才能通过req.parmas访问到。（在原来路径下最前面加上/:questionId/answer即可）
+    意识到只能将/:questionId/answer写在answer模块内部的路由中才能通过req.parmas访问到。（在原来路径下最前面加上/:questionId/answer即可）
 
 ## 关于VsCode调试TS+NodeJs
 
-调试Nodejs项目总是用console.log()的方式打印太low，而且终端输出的文本不能折叠展开，简直是好心情的杀手。
+    调试Nodejs项目总是用console.log()的方式打印太low，而且终端输出的文本不能折叠展开，简直是好心情的杀手。
 
 经过查阅网上的资料后，决定使用ts-node来debug
 
@@ -174,3 +174,17 @@ router.use("/question/:questionId/answer", answer)
    1. 需要再次下载typescript和ts-node到本项目下，因为无法定向到全局的包（其实这也好理解，本身项目放到服务器上就是需要其中已经下载好的包）
    
    2. 通常，\${workspaceRoot}就是当前项目的目录，在runtimeArgs和args里面的路径只要定位到app.ts和node_modules/ts-node/register即可
+
+## 不可控制的字段
+
+    在继续开心地写项目时，发现User中的followingTopic字段会显示出来，而在UserModel中已设置`select: false`
+
+```ts
+// 关注话题列表
+  followingTopics: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Topic" }],
+    select: false,
+  },
+```
+
+不过仔细观察后发现，是之前将followingTopic后面加了一个s，导致模型的结构更新，但是原来存在于数据库中的字段却依然存在，所以这也算是一个小误会。目前来看，这类的错误大概率经常发生在开发阶段，项目上线后不可能随意更改数据库字段。
