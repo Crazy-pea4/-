@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      function flat(arr, depth) {
+        for (let i = 0; i < arr.length; i++) {
+          if (Array.isArray(arr[i])) {
+            // ...展开数组
+            arr = [...arr, ...arr[i]];
+            // 删去重复的
+            arr.splice(i, 1);
+            depth--;
+          }
+          // 当depth减到0时
+          if (!depth) break;
+        }
+        return arr;
+      }
+      console.log(flat([1, 2, [3, [4, [5]]]], 0));
+    </script>
+  </body>
+</html>
