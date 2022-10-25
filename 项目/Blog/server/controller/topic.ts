@@ -5,6 +5,9 @@ import TopicController from "../@types/controller/topic";
 import topicModel from "../model/topic";
 import questionModel from "../model/question";
 
+/* 引入工具 */
+import handelResponse from "../utils/handelResponse";
+
 const topicController: TopicController = {
   // 创建话题
   createTopic: async (req, res, next) => {
@@ -16,14 +19,10 @@ const topicController: TopicController = {
       const info = req.body;
       const topic = await topicModel.findOne({ topicName: info.topicName });
       if (!topic) {
-        await topicModel.create(info);
-        res.status(200).json({
-          code: 200,
-          message: "话题创建成功",
-          data: info,
-        });
+        const result = await topicModel.create(info);
+        handelResponse(res, result, info);
       } else
-        return res.status(400).json({
+        res.status(400).json({
           code: 400,
           message: "话题已存在",
           data: info,
@@ -38,19 +37,7 @@ const topicController: TopicController = {
       const id = req.params.id;
       const updateInfo = req.body;
       const topic = await topicModel.findByIdAndUpdate(id, updateInfo);
-      if (topic) {
-        res.status(200).json({
-          code: 200,
-          message: "话题修改成功",
-          data: updateInfo,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "话题修改失败",
-          data: topic,
-        });
-      }
+      handelResponse(res, topic, updateInfo);
     } catch (err) {
       next(err);
     }
@@ -68,18 +55,7 @@ const topicController: TopicController = {
         .find({ topicName: new RegExp(keyword as string, "i") })
         .limit(limit)
         .skip(page * limit);
-      if (topicList) {
-        res.status(200).json({
-          code: 200,
-          message: "查询话题列表成功",
-          data: topicList,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询话题失败",
-        });
-      }
+      handelResponse(res, topicList);
     } catch (err) {
       next(err);
     }
@@ -97,19 +73,7 @@ const topicController: TopicController = {
           .join("");
       }
       let topic = await topicModel.findById(id).select(detail);
-      if (topic) {
-        res.status(200).json({
-          code: 200,
-          message: "查询指定话题成功",
-          data: topic,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询指定话题失败",
-          data: { id },
-        });
-      }
+      handelResponse(res, topic);
     } catch (err) {
       next(err);
     }
@@ -122,18 +86,7 @@ const topicController: TopicController = {
         .findById(id)
         .select("+topicFollowers")
         .populate("topicFollowers");
-      if (topicFollowersList) {
-        res.status(200).json({
-          code: 200,
-          message: "获取话题粉丝列表成功",
-          data: topicFollowersList,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询话题粉丝列表失败",
-        });
-      }
+      handelResponse(res, topicFollowersList);
     } catch (err) {
       next(err);
     }
@@ -143,18 +96,7 @@ const topicController: TopicController = {
     try {
       const id = req.params.id;
       const questions = await questionModel.find({ topics: id });
-      if (questions) {
-        res.status(200).json({
-          code: 200,
-          message: "查询话题的问题列表成功",
-          data: questions,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询话题的问题列表失败",
-        });
-      }
+      handelResponse(res, questions);
     } catch (err) {
       next(err);
     }

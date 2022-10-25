@@ -5,8 +5,9 @@ import AnswerController from "../@types/controller/answer";
 import questionModel from "../model/question";
 import answerModel from "../model/answer";
 
-/* 引入jwt工具 */
+/* 引入工具 */
 import Jwt from "../utils/jwt";
+import handelResponse from "../utils/handelResponse";
 
 const answerController: AnswerController = {
   // 创建回答
@@ -24,12 +25,8 @@ const answerController: AnswerController = {
       info.answerer = value;
       info.questionId = questionId;
 
-      await answerModel.create(info);
-      res.status(200).json({
-        code: 200,
-        message: "话题创建成功",
-        data: info,
-      });
+      const result = await answerModel.create(info);
+      handelResponse(res, result, info);
     } catch (err) {
       next(err);
     }
@@ -40,19 +37,7 @@ const answerController: AnswerController = {
       const id = req.params.id;
       const info = req.body;
       const answer = await answerModel.findByIdAndUpdate(id, info);
-      if (answer) {
-        res.status(200).json({
-          code: 200,
-          message: "回答修改成功",
-          data: info,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "回答修改失败",
-          data: answer,
-        });
-      }
+      handelResponse(res, answer, info);
     } catch (err) {
       next(err);
     }
@@ -75,18 +60,7 @@ const answerController: AnswerController = {
         .populate("answerer")
         .limit(limit)
         .skip(page * limit);
-      if (answerList) {
-        res.status(200).json({
-          code: 200,
-          message: "查询回答列表成功",
-          data: answerList,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询回答失败",
-        });
-      }
+      handelResponse(res, answerList);
     } catch (err) {
       next(err);
     }
@@ -103,25 +77,11 @@ const answerController: AnswerController = {
           .map((item) => " +" + item)
           .join("");
       }
-      console.log(detail);
-
       const answer = await answerModel
         .findById(id)
         .select(detail)
         .populate("answerer");
-      if (answer) {
-        res.status(200).json({
-          code: 200,
-          message: "查询指定回答成功",
-          data: answer,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询指定回答失败",
-          data: { id },
-        });
-      }
+      handelResponse(res, answer);
     } catch (err) {
       next(err);
     }
@@ -130,19 +90,8 @@ const answerController: AnswerController = {
   deleteAnswer: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const data = await answerModel.findByIdAndDelete(id);
-      if (data) {
-        res.status(200).json({
-          code: 200,
-          message: "删除回答成功",
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "删除回答失败",
-          data,
-        });
-      }
+      const result = await answerModel.findByIdAndDelete(id);
+      handelResponse(res, result);
     } catch (err) {
       next(err);
     }

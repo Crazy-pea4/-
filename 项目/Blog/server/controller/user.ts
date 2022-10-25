@@ -10,6 +10,7 @@ import answerModel from "../model/answer";
 /* 引入加密工具 */
 import MD5_encrypt from "../utils/md5";
 import Jwt from "../utils/jwt";
+import handelResponse from "../utils/handelResponse";
 
 const userController: UserController = {
   // 注册
@@ -50,18 +51,7 @@ const userController: UserController = {
     try {
       // 查询用户列表
       const userList = await userModel.find();
-      if (userList) {
-        res.status(200).json({
-          code: 200,
-          message: "用户列表查询成功",
-          data: userList,
-        });
-      } else {
-        return res.status(404).json({
-          code: 404,
-          message: "用户列表不存在",
-        });
-      }
+      handelResponse(res, userList);
     } catch (err: any) {
       next(err);
     }
@@ -80,13 +70,7 @@ const userController: UserController = {
       }
       // .select()方法 https://mongoosejs.com/docs/api/query.html#query_Query-select
       let user = await userModel.findById(id).select(detail);
-      if (user) {
-        res.status(200).json({
-          code: 200,
-          message: "查询用户成功",
-          data: user,
-        });
-      }
+      handelResponse(res, user);
     } catch (err: any) {
       next(err);
     }
@@ -99,20 +83,8 @@ const userController: UserController = {
       // 这里还需要把password加密一下，否则登陆时的加密比对会不成功，并且在数据库中也是明文存储
       body.password = MD5_encrypt(body.password);
       // 查询用户（返回的是旧值）
-      let oldUser = await userModel.findByIdAndUpdate(_id, body);
-      if (oldUser) {
-        res.status(200).json({
-          code: 200,
-          message: "编辑成功",
-          data: body,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "编辑用户失败",
-          data: { _id },
-        });
-      }
+      const oldUser = await userModel.findByIdAndUpdate(_id, body);
+      handelResponse(res, oldUser, body);
     } catch (err: any) {
       next(err);
     }
@@ -122,20 +94,8 @@ const userController: UserController = {
     try {
       const _id = req.params.id;
       // 删除用户用户（返回删除的用户）
-      let deletedUser = await userModel.findByIdAndDelete(_id);
-      if (deletedUser) {
-        res.status(200).json({
-          code: 200,
-          message: "删除用户成功",
-          data: deletedUser,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "删除用户失败",
-          data: { _id },
-        });
-      }
+      const deletedUser = await userModel.findByIdAndDelete(_id);
+      handelResponse(res, deletedUser);
     } catch (err: any) {
       next(err);
     }
@@ -225,14 +185,7 @@ const userController: UserController = {
         .findById(id)
         .select("+following")
         .populate("following");
-      console.log(followingList);
-      if (followingList) {
-        res.status(200).json({
-          code: 200,
-          message: "获取关注列表成功",
-          data: followingList,
-        });
-      }
+      handelResponse(res, followingList);
     } catch (err) {
       next(err);
     }
@@ -245,13 +198,7 @@ const userController: UserController = {
         .findById(id)
         .select("+followers")
         .populate("followers");
-      if (followersList) {
-        res.status(200).json({
-          code: 200,
-          message: "获取粉丝列表成功",
-          data: followersList,
-        });
-      }
+      handelResponse(res, followersList);
     } catch (err) {
       next(err);
     }
@@ -338,14 +285,7 @@ const userController: UserController = {
         .findById(id)
         .select("+followingTopics")
         .populate("followingTopics");
-      console.log(topicFollowingList);
-      if (topicFollowingList) {
-        res.status(200).json({
-          code: 200,
-          message: "获取关注话题列表成功",
-          data: topicFollowingList,
-        });
-      }
+      handelResponse(res, topicFollowingList);
     } catch (err) {
       next(err);
     }
@@ -355,18 +295,7 @@ const userController: UserController = {
     try {
       const id = req.params.id;
       const question = await questionModel.find({ questioner: id });
-      if (question) {
-        res.status(200).json({
-          code: 200,
-          message: "查询问题列表成功",
-          data: question,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询问题列表失败",
-        });
-      }
+      handelResponse(res, question);
     } catch (err) {
       next(err);
     }
@@ -494,13 +423,7 @@ const userController: UserController = {
         .findById(id)
         .select("+collectingAnswers")
         .populate("collectingAnswers");
-      if (answerFollowingList) {
-        res.status(200).json({
-          code: 200,
-          message: "获取收藏回答列表成功",
-          data: answerFollowingList,
-        });
-      }
+      handelResponse(res, answerFollowingList);
     } catch (err) {
       next(err);
     }

@@ -12,9 +12,9 @@ import checkExisted from "../middleware/checkExisted";
 /* 引入创建评论校验工具 */
 import { commentCreateValidator } from "../utils/validator";
 
-// 创建评论
+// 创建评论（二级评论）
 router.post(
-  "/:answerId/comment/",
+  "/:answerId/comment/:id?",
   authenticate,
   validate(commentCreateValidator),
   commentController.createComment
@@ -22,7 +22,7 @@ router.post(
 
 // 修改评论
 router.patch(
-  "/:answerId/comment/:id",
+  "/:answerId/comment/:id/:sId?",
   authenticate,
   checkExisted.comment,
   checkExisted.commentator,
@@ -41,7 +41,7 @@ router.get(
 
 // 删除指定评论
 router.delete(
-  "/:answerId/comment/:id",
+  "/:answerId/comment/:id/:sId?",
   authenticate,
   checkExisted.comment,
   checkExisted.commentator,

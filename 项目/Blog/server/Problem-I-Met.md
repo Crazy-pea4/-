@@ -188,3 +188,120 @@ router.use("/question/:questionId/answer", answer)
 ```
 
 不过仔细观察后发现，是之前将followingTopic后面加了一个s，导致模型的结构更新，但是原来存在于数据库中的字段却依然存在，所以这也算是一个小误会。目前来看，这类的错误大概率经常发生在开发阶段，项目上线后不可能随意更改数据库字段。
+
+## 烦人的二级评论
+
+    二级评论的结构是放在comment当中（一级评论）：
+
+```ts
+/* 引入二级评论Schema */
+import secondaryCommentSchema from "../schema/secondaryComment";/* 定义comment模型结构 */
+
+const commentSchema = new mongoose.Schema({
+// 二级评论
+    secondaryComment: {
+      type: [
+        {
+          type: secondaryCommentSchema,
+          required: true,
+        },
+      ],
+      default: [],
+      required: true,
+    },
+})
+```
+
+想要对secondaryAnswer中的commentator使用.populate()，并且将二级评论的展示限制在前三项。经过查阅资料得知，在populate的配置项中再写上一个populate即可。
+
+```ts
+const commentList = await commentModel
+        .populate({
+          path: "secondaryAnswer",
+          populate: { path: "commentator" },
+          perDocumentLimit: 3,
+        });
+```
+
+在对二级评论做展示限制时，官网文档中有两个例子：一个使用limit另一个使用perDocumentLimit，对前者的解释是：
+
+```ts
+Story.create([
+  { title: 'Casino Royale', fans: [1, 2, 3, 4, 5, 6, 7, 8] },
+  { title: 'Live and Let Die', fans: [9, 10] }
+]);
+
+const stories = await Story.find().populate({
+  path: 'fans',
+  options: { limit: 2 }
+});
+
+stories[0].name; // 'Casino Royale'
+stories[0].fans.length; // 2
+
+// 2nd story has 0 fans!
+stories[1].name; // 'Live and Let Die'
+stories[1].fans.length; // 0
+
+// 推测是limit只会计数所限制的数量，而不会对每个document做限制
+// 一旦前面的limit数量达到目标值，后续的就不起作用
+```
+
+因此在mongoose5.9.0中新增了一个配置项：（意为对每个文档进行一次限制）
+
+```ts
+const stories = await Story.find().populate({
+  path: 'fans',
+  // Special option that tells Mongoose to execute a separate query
+  // for each `story` to make sure we get 2 fans for each story.
+  perDocumentLimit: 2
+});
+
+stories[0].name; // 'Casino Royale'
+stories[0].fans.length; // 2
+
+stories[1].name; // 'Live and Let Die'
+stories[1].fans.length; // 2
+```
+
+**但**奇怪的是，无论是`options: { limit: 3 }`还是`perDocumentLimit: 3`，在项目中获取的`secondaryAnswer`数组的长度却没有改变（2022.10.22目前仍然未知）
+
+## 接着折腾二级评论--修改与删除
+
+#### 删除：
+
+    开始想着的逻辑是，找到一级评论id然后再匹配二级评论id：
+
+```ts
+await commentModel.findOneAndUpdate(
+      { _id: id },
+      { $pull: { secondaryComment: { _id: sId } } }
+ );
+```
+
+    一开始是想用delete，但是发现对于嵌套数组对象的删除不是很好写，而且不好看，所以改用`findOneAndUpdate`。
+
+    因为涉及到嵌套数组的操作，`$pull`是自动选取最顶层作为参考，因此还需要在里面把二级评论的配置项写上才能定位到
+
+#### 修改：
+
+    写二级评论修改就碰了很多坑，甚至一度不想写了（反正一般网站也没有评论修改功能哈哈哈哈）
+
+    主要碰的坑在于，需要定位到二级评论arr，同时修改其中数组对象的属性值。一开始使用`findByIdAndUpdate`，但是如果用id的话就不方便找到`secondaryComment`，所以改用`findOneAndUpdate`。
+
+    上面解决了定位到的问题，那么如何修改嵌套数组对象中的某一属性值呢？首先，肯定是要定位到想要修改的二级评论中，然后再修改里面的content。
+
+    有想法就实践！一开始我想使用`{_id: id}`的方式定位，确实能找到整个Document，随后就遇到瓶颈了，如何找到Document中的`secondaryComment`里的目标`_id`呢，并且`secondaryComment`是个数组，通过数字去定位肯定是否决掉的。
+
+    经过花费大量时间去网上查找资料，硬着头皮看了超久的英文文档，最终代码实现如下：
+
+```ts
+await commentModel.findOneAndUpdate(
+      { secondaryComment: { $elemMatch: { _id: sId } } },
+      { $set: { "secondaryComment.$.content": info.content } }
+);
+```
+
+1.  首先，通过`{ secondaryComment: { $elemMatch: { _id: sId } } }`，定位到唯一的目标二级评论（不可以采用`_id`去定位，下面会解释）
+
+2.  其次，`{ set: { "secondaryComment..content": info.content } }`利用`$set`操作符修改，而定位交给`"secondaryComment.$.content"`。这里需要注意的是`$`符号是mongodb内置的对于数组元素的投影，并且是唯一的，所以如果上面是用`{_id: id}`去定位的话就会报错：`MongoServerError: The positional operator did not find the match needed from the query.`。

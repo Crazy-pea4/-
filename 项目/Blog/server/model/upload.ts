@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-/* 定义upload模型结构 */
-const uploadSchema = new mongoose.Schema({});
+import uploadSchema from "../schema/upload";
 
-export default mongoose.model("upload", uploadSchema);
+/* 创建upload模型 */
+export default mongoose.model("Upload", uploadSchema);

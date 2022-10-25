@@ -4,8 +4,9 @@ import QuestionController from "../@types/controller/question";
 /* 引入question模型 */
 import questionModel from "../model/question";
 
-/* 引入jwt工具 */
+/* 引入工具 */
 import Jwt from "../utils/jwt";
+import handelResponse from "../utils/handelResponse";
 
 const questionController: QuestionController = {
   // 创建问题
@@ -18,12 +19,8 @@ const questionController: QuestionController = {
       // 将questioner整合进info中
       info.questioner = value;
       // 新建问题，问题可以重复
-      await questionModel.create(info);
-      res.status(200).json({
-        code: 200,
-        message: "话题创建成功",
-        data: info,
-      });
+      const result = await questionModel.create(info);
+      handelResponse(res, result, info);
     } catch (err) {
       next(err);
     }
@@ -34,19 +31,7 @@ const questionController: QuestionController = {
       const id = req.params.id;
       const questionInfo = req.body;
       const question = await questionModel.findByIdAndUpdate(id, questionInfo);
-      if (question) {
-        res.status(200).json({
-          code: 200,
-          message: "问题修改成功",
-          data: questionInfo,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "问题修改失败",
-          data: question,
-        });
-      }
+      handelResponse(res, question, questionInfo);
     } catch (err) {
       next(err);
     }
@@ -69,18 +54,7 @@ const questionController: QuestionController = {
         })
         .limit(limit)
         .skip(page * limit);
-      if (questionList) {
-        res.status(200).json({
-          code: 200,
-          message: "查询问题列表成功",
-          data: questionList,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询问题失败",
-        });
-      }
+      handelResponse(res, questionList);
     } catch (err) {
       next(err);
     }
@@ -97,25 +71,11 @@ const questionController: QuestionController = {
           .map((item) => " +" + item)
           .join("");
       }
-      console.log(detail);
-
       let question = await questionModel
         .findById(id)
         .select(detail)
         .populate("questioner topics");
-      if (question) {
-        res.status(200).json({
-          code: 200,
-          message: "查询指定问题成功",
-          data: question,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询指定问题失败",
-          data: { id },
-        });
-      }
+      handelResponse(res, question);
     } catch (err) {
       next(err);
     }
@@ -124,22 +84,11 @@ const questionController: QuestionController = {
   getQuestionFollowers: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const topicFollowersList = await questionModel
+      const questionFollowersList = await questionModel
         .findById(id)
         .select("+topicFollowers")
         .populate("topicFollowers");
-      if (topicFollowersList) {
-        res.status(200).json({
-          code: 200,
-          message: "获取话题粉丝列表成功",
-          data: topicFollowersList,
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "查询话题粉丝列表失败",
-        });
-      }
+      handelResponse(res, questionFollowersList);
     } catch (err) {
       next(err);
     }
@@ -149,18 +98,7 @@ const questionController: QuestionController = {
     try {
       const id = req.params.id;
       const data = await questionModel.findByIdAndDelete(id);
-      if (data) {
-        res.status(200).json({
-          code: 200,
-          message: "删除问题成功",
-        });
-      } else {
-        res.status(400).json({
-          code: 400,
-          message: "删除问题失败",
-          data,
-        });
-      }
+      handelResponse(res, data);
     } catch (err) {
       next(err);
     }
