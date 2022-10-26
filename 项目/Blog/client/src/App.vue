@@ -1,13 +1,13 @@
 <template>
-  <Hello></Hello>
+  <search></search>
+  <RouterView></RouterView>
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
-import Hello from "./components/hello.vue"
+import { RouterView } from 'vue-router'
+import search from "@/components/searchBar.vue"
 
 </script>
 
 <style lang='' scoped>
-
 </style>
