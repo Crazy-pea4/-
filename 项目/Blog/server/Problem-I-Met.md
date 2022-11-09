@@ -302,6 +302,10 @@ await commentModel.findOneAndUpdate(
 );
 ```
 
-1.  首先，通过`{ secondaryComment: { $elemMatch: { _id: sId } } }`，定位到唯一的目标二级评论（不可以采用`_id`去定位，下面会解释）
+1. 首先，通过`{ secondaryComment: { $elemMatch: { _id: sId } } }`，定位到唯一的目标二级评论（不可以采用`_id`去定位，下面会解释）
 
-2.  其次，`{ set: { "secondaryComment..content": info.content } }`利用`$set`操作符修改，而定位交给`"secondaryComment.$.content"`。这里需要注意的是`$`符号是mongodb内置的对于数组元素的投影，并且是唯一的，所以如果上面是用`{_id: id}`去定位的话就会报错：`MongoServerError: The positional operator did not find the match needed from the query.`。
+2. 其次，`{ set: { "secondaryComment..content": info.content } }`利用`$set`操作符修改，而定位交给`"secondaryComment.$.content"`。这里需要注意的是`$`符号是mongodb内置的对于数组元素的投影，并且是唯一的，所以如果上面是用`{_id: id}`去定位的话就会报错：`MongoServerError: The positional operator did not find the match needed from the query.`。
+
+## 聚合搜索aggregate
+
+之前给每个模型设置了时间戳，但是默认显示的

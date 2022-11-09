@@ -17,8 +17,8 @@ const authController: AuthController = {
         // 检查密码是否正确（这里将密码再次加密，比对加密密码）
         password = MD5_encrypt(password);
         let data = await userModel.findOne({ password });
-        let _id = data!._id as unknown as string;
         if (data) {
+          let _id = data._id as unknown as string;
           res.status(200).json({
             code: 200,
             message: "登陆成功",

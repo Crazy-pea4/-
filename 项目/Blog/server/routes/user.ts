@@ -89,8 +89,7 @@ router.put(
   "/likeAnswer/:id",
   authenticate,
   checkExisted.answer,
-  userController.likeAnswer,
-  userController.hesitateAnswer
+  userController.likeAnswer
 );
 
 // 取消赞同答案

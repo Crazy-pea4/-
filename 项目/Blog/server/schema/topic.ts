@@ -26,6 +26,13 @@ const topicSchema = new mongoose.Schema({
     default: [],
     select: false,
   },
+  createdAt: {
+    type: String,
+  },
+
+  updatedAt: {
+    type: String,
+  },
   __v: {
     type: Number,
     select: false,

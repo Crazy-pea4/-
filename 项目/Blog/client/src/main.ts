@@ -3,10 +3,9 @@ import App from "./App.vue";
 
 import { createPinia } from "pinia";
 import router from "./router";
-import Antd from "ant-design-vue";
 
 // 引入tailwindcss入口样式
 import "./index.css";
 import "ant-design-vue/dist/antd.css";
 
-createApp(App).use(createPinia()).use(router).use(Antd).mount("#app");
+createApp(App).use(createPinia()).use(router).mount("#app");

@@ -52,9 +52,13 @@ const questionController: QuestionController = {
             { descriptions: new RegExp(keyword as string, "i") },
           ],
         })
+        .populate("questioner")
+        .populate({
+          path: "topics",
+        })
         .limit(limit)
         .skip(page * limit);
-      handelResponse(res, questionList);
+      handelResponse(res, questionList, "查询问题列表成功");
     } catch (err) {
       next(err);
     }
@@ -71,7 +75,7 @@ const questionController: QuestionController = {
           .map((item) => " +" + item)
           .join("");
       }
-      let question = await questionModel
+      const question = await questionModel
         .findById(id)
         .select(detail)
         .populate("questioner topics");
