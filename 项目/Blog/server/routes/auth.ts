@@ -12,4 +12,6 @@ import { authLoginValidator } from "../utils/validator";
 
 router.post("/", validate(authLoginValidator), authController.login);
 
+router.get("/", authController.isValid);
+
 export default router;

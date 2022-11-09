@@ -27,10 +27,12 @@ const topicSchema = new mongoose.Schema({
     select: false,
   },
   createdAt: {
+    required: true,
     type: String,
   },
 
   updatedAt: {
+    required: true,
     type: String,
   },
   __v: {

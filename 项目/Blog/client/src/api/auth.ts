@@ -11,3 +11,11 @@ export function login(data: Data) {
     data,
   });
 }
+
+export function isValid(token: string) {
+  return request({
+    url: "/auth",
+    method: "GET",
+    headers: { token },
+  });
+}

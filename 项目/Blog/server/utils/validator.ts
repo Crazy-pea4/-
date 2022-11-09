@@ -92,6 +92,14 @@ export function topicCreateValidator(data: topicCreateData) {
       "string.base": "topicIntroduction 类型错误 需要为string",
       "string.max": "topicIntroduction 不能大于200位",
     }),
+    createdAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 createAt",
+      "string.base": "createAt 类型错误 需要为string",
+    }),
+    updatedAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 updateAt",
+      "string.base": "updateAt 类型错误 需要为string",
+    }),
   });
 
   return schema.validate(data);
@@ -114,6 +122,14 @@ export function questionCreateValidator(data: questionCreateData) {
       "any.required": "缺少必选参数 topics",
       "array.base": "topics 类型错误 需要为array",
     }),
+    createdAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 createAt",
+      "string.base": "createAt 类型错误 需要为string",
+    }),
+    updatedAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 updateAt",
+      "string.base": "updateAt 类型错误 需要为string",
+    }),
   });
 
   return schema.validate(data);
@@ -126,6 +142,14 @@ export function answerCreateValidator(data: answerCreateData) {
       "any.required": "缺少必选参数 content",
       "string.base": "content 类型错误",
     }),
+    createdAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 createAt",
+      "string.base": "createAt 类型错误 需要为string",
+    }),
+    updatedAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 updateAt",
+      "string.base": "updateAt 类型错误 需要为string",
+    }),
   });
   return schema.validate(data);
 }
@@ -136,6 +160,14 @@ export function commentCreateValidator(data: commentCreateData) {
     content: Joi.string().required().messages({
       "any.required": "缺少必选参数 content",
       "string.base": "content 类型错误",
+    }),
+    createdAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 createAt",
+      "string.base": "createAt 类型错误 需要为string",
+    }),
+    updatedAt: Joi.string().required().messages({
+      "any.required": "缺少必选参数 updateAt",
+      "string.base": "updateAt 类型错误 需要为string",
     }),
   });
   return schema.validate(data);

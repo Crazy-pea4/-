@@ -28,10 +28,12 @@ const questionSchema = new mongoose.Schema({
   },
 
   createdAt: {
+    required: true,
     type: String,
   },
 
   updatedAt: {
+    required: true,
     type: String,
   },
   // 隐藏__v版本信息

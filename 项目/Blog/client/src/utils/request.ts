@@ -37,6 +37,7 @@ instance.interceptors.response.use(
           break;
         case 400:
           message.error(error.response.data.message);
+          break;
       }
     } else {
       message.error(error.message);

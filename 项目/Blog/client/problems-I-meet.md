@@ -99,7 +99,7 @@ interface FormState {
 
 ```
 runtime-core.esm-bundler.js:38 
-        
+
 [Vue warn]: Unhandled error during execution of scheduler flush. This is likely a Vue internals bug. Please open an issue at https://new-issue.vuejs.org/?repo=vuejs/core 
   at <KeepAlive> 
   at <RouterView> 
@@ -158,3 +158,13 @@ Uncaught (in promise) TypeError: parentComponent.ctx.deactivate is not a functio
 ```
 
 问题解决
+
+## vite静态资源处理
+
+vite内部将public文件夹下的所有文件暴露在根目录下，因此访问的时候直接`/assets/xxx`，而不是`/public/assets/xxx`
+
+## 全局路由守卫--.then()与await
+
+在vue-router4中，舍弃了路由守卫第三个参数next，转变为使用
+
+`return {name: xxx}`的形式去跳转路由。如果我们在里面进行请求操作时采用.then()获取异步结果是不行的，因为在.then()回调内部去`return {name: xxx} `是无效的，必须采用async await来保证函数作用域始终处在beforeEach回调当中

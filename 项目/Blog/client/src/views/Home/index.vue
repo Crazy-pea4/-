@@ -1,6 +1,5 @@
 <template>
-    <div class="absolute w-1/2 h-auto left-1/2 -translate-x-1/2 mt-36 p-5 border-2 rounded-md transform">
-        <!-- <div class="fixed w-20 h-36 border-2 -left-28">111</div> -->
+    <div class="float-left w-1/2 h-auto relative left-1/2 -translate-x-1/2 mt-36 p-5 border-2 rounded-md transform">
         <mainFloor></mainFloor>
     </div>
 </template>
@@ -11,5 +10,6 @@ import mainFloor from './mainFloor/index.vue'
 
 </script>
 
-<style lang='' scoped>
+<style lang='css' scoped>
+
 </style>

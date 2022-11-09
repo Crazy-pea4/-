@@ -41,6 +41,22 @@ const authController: AuthController = {
       next(err);
     }
   },
+  isValid: async (req, res, next) => {
+    try {
+      const token = req.headers.token as string;
+      // 检查用户是否存在
+      Jwt.verify(token);
+      res.status(200).json({
+        code: 200,
+        message: "token validate",
+      });
+    } catch (err) {
+      res.status(401).json({
+        code: 401,
+        message: "token invalidate",
+      });
+    }
+  },
 };
 
 export default authController;

@@ -1,13 +1,16 @@
 <template>
-  <sidebar></sidebar>
-  <searchBar></searchBar>
-  <!-- 路由组件 -->
-  <RouterView v-slot="{ Component }">
-    <keep-alive>
-      <component :is="Component" v-if="$route.meta.isKeepAlive" :key="$route.name" />
-    </keep-alive>
-    <component :is="Component" v-if="!$route.meta.isKeepAlive" :key="$route.name" />
-  </RouterView>
+  <div class="app">
+    <sidebar></sidebar>
+    <searchBar></searchBar>
+    <!-- 路由组件 -->
+    <RouterView v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" v-if="$route.meta.isKeepAlive" :key="$route.name" />
+      </keep-alive>
+      <component :is="Component" v-if="!$route.meta.isKeepAlive" :key="$route.name" />
+    </RouterView>
+  </div>
+
 </template>
 
 <script setup lang='ts'>
@@ -17,5 +20,13 @@ import sidebar from "@/components/sideBar.vue"
 
 </script>
 
-<style lang='' scoped>
+<style lang='css' scoped>
+.app {
+  /* BFC */
+  overflow: hidden;
+  background-image: url("../../../assets/flat-mountains.svg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 </style>

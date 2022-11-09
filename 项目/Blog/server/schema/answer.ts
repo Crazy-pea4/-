@@ -32,10 +32,12 @@ const answerSchema = new mongoose.Schema({
     default: 0,
   },
   createdAt: {
+    required: true,
     type: String,
   },
 
   updatedAt: {
+    required: true,
     type: String,
   },
   // 隐藏__v版本信息
