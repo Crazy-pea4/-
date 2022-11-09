@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
+  <body>
+    <script>
+      function Father(uname, age) {
+        this.uname = uname;
+        this.age = age;
+        this.sing = function () {
+          console.log("我可以唱歌");
+        };
+      }
 
-<body>
-  <script>
-    function Father(uname, age) {
-      this.uname = uname;
-      this.age = age;
-      this.sing = function () {
-        console.log("我可以唱歌");
-      };
-    }
-
-    function Son(uname, age) {
-      // 核心 使用.call()修改
-      // 把Father中的this指向Son
-      Father.call(this, uname, age);
-    }
-    let son = new Son("一拳超人", 22);
-    // 可以发现son实例对象有了对应的属性和方法
-    console.log(son);
-  </script>
-</body>
-
+      function Son(uname, age) {
+        // 核心 使用.call()修改
+        // 把Father中的this指向Son
+        Father.call(this, uname, age);
+      }
+      let son = new Son("一拳超人", 22);
+      // 可以发现son实例对象有了对应的属性和方法
+      console.log(son);
+    </script>
+  </body>
 </html>

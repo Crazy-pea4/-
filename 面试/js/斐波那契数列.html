@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      let i = 0;
+      // 数学上的斐波那契数列：1 1 2 3 5 8 13 21 34 ...
+      function fib(n) {
+        // 要注意递归的停止条件
+        i++;
+        return n === 1 || n === 0 ? 1 : fib(n - 1) + fib(n - 2);
+      }
+      console.log(fib(40));
+      console.log("我计算了" + i + "次");
+
+      // 升级版 - 使用缓存的思想解决重复计算的问题;
+      let j = 0;
+      let cache = {};
+      function advFib(n) {
+        if (cache.hasOwnProperty(n)) {
+          return cache[n];
+        }
+        j++;
+        // 若缓存对象中不存在n，计算出来并存入缓存对象
+        let v = n === 1 || n === 0 ? 1 : advFib(n - 1) + advFib(n - 2);
+        // 写入缓存
+        cache[n] = v;
+        return v;
+      }
+      console.log(advFib(40));
+      console.log("我计算了" + j + "次");
+
+      // 不使用递归实现斐波那契数列
+      let z = 0;
+      let arr = [1, 1];
+      function fibArr(n) {
+        while (arr.length <= n) {
+          z++;
+          arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
+        }
+        return arr[arr.length - 1];
+      }
+      console.log(fibArr(40));
+      console.log(
+        "我计算了" +
+          z +
+          "次" +
+          " 实际上这里计算的次数和缓存次数一样,是因为把最开始前两项 1 1 人工写上去了"
+      );
+    </script>
+  </body>
+</html>

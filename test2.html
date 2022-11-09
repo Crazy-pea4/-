@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function magicStr(str) {
+        let numberStack = [];
+        let strStack = [""];
+        let newStr = "";
+
+        for (let i = 0; i < str.length; i++) {
+          if (/[1-9]/.test(str[i])) {
+            numberStack.push(parseInt(str[i]));
+          } else if (/\[/.test(str[i])) {
+            strStack.push("");
+          } else if (/[a-z]/.test(str[i])) {
+            strStack[strStack.length - 1] += str[i];
+          } else {
+            // let num = numberStack[numberStack.length - 1];
+            // for (let i = 0; i < num; i++) {
+            //   strStack[strStack.length - 2] += strStack[strStack.length - 1];
+            // }
+            // strStack.pop();
+            // numberStack.pop();
+            // newStr += strStack[strStack.length - 1];
+            let popNum = numberStack.pop();
+            let repeatedStr = strStack.pop().repeat(popNum);
+            strStack[strStack.length - 1] += repeatedStr;
+          }
+        }
+        return strStack;
+      }
+      console.log(magicStr("2[3[a]4[1[b]2[c]]]"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "ast-abstract_syntax_tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "rollup -cw"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@rollup/plugin-babel": "^6.0.2",
+    "rollup": "^3.2.5",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^2.0.1"
+  }
+}
