@@ -59,7 +59,7 @@ const userController: UserController = {
   // 查询指定用户
   getUser: async (req, res, next) => {
     try {
-      const id = req.params.id;
+      let id = req.params.id;
       // 获取用户详细信息时，使用?detail=xxx的形式
       let detail = req.query.detail as string;
       if (detail) {
@@ -81,10 +81,10 @@ const userController: UserController = {
       const _id = req.params.id;
       const body = req.body;
       // 这里还需要把password加密一下，否则登陆时的加密比对会不成功，并且在数据库中也是明文存储
-      body.password = MD5_encrypt(body.password);
+      if (body.password) body.password = MD5_encrypt(body.password);
       // 查询用户（返回的是旧值）
       const oldUser = await userModel.findByIdAndUpdate(_id, body);
-      handelResponse(res, oldUser, body);
+      handelResponse(res, oldUser, "修改成功", body);
     } catch (err: any) {
       next(err);
     }

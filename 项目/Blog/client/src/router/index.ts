@@ -36,7 +36,6 @@ const router = createRouter({
       path: "/setting",
       component: () => import("@/views/Setting/index.vue"),
       meta: {
-        isShowSearchBar: true,
         isKeepAlive: true,
         isShowSideBar: true,
       },
@@ -46,17 +45,20 @@ const router = createRouter({
 
 // 路由守卫
 router.beforeEach(async (to, form) => {
+  if (localStorage.getItem("isValid") === "true") return;
   const token = localStorage.getItem("token");
-  if (!token && to.name !== "Login") {
+  if (!token && to.name !== "Login" && to.name !== "Register") {
+    localStorage.setItem("isValid", "false");
     await message.error("登录校验失效，请重新登录", 0.8);
     return { name: "Login" };
   } else if (token) {
     try {
-      const res = await isValid(token);
-      console.log(res);
+      await isValid();
+      localStorage.setItem("isValid", "true");
     } catch (err) {
       console.log(err);
       if (to.name !== "Login" && to.name !== "Register") {
+        localStorage.setItem("isValid", "false");
         await message.error("身份校验失效，请重新登录", 0.8);
         return { name: "Login" };
       }

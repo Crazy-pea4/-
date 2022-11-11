@@ -1,5 +1,6 @@
 <template>
-    <div class="float-left w-1/2 h-auto relative left-1/2 -translate-x-1/2 mt-36 p-5 border-2 rounded-md transform">
+    <div
+        class="float-left w-1/2 h-auto relative left-1/2 -translate-x-1/2 mt-36 mb-24 p-5 border-2 rounded-md transform">
         <mainFloor></mainFloor>
     </div>
 </template>

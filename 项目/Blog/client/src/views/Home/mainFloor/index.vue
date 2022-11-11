@@ -20,16 +20,17 @@
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useCounterStore } from '@/stores/home'
+import { useMainFloorStore } from '@/stores/home'
 // import useAfterHandelTimeHooks from "@/hooks/useAfterHandelTimeHooks"
+
 // 创建store实例 并响应式地解构
-const counterStore = useCounterStore()
-const { questionList } = storeToRefs(counterStore)
+const mainFloorStore = useMainFloorStore()
+const { questionList } = storeToRefs(mainFloorStore)
 // 使用hooks
-// const isShow = useAfterHandelTimeHooks(counterStore)
+// const isShow = useAfterHandelTimeHooks(mainFloorStore)
 
 onMounted(() => {
-    counterStore.updateQuestionList()
+    mainFloorStore.updateQuestionList()
 })
 
 

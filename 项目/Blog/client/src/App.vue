@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app h-screen">
     <sidebar></sidebar>
     <searchBar></searchBar>
     <!-- 路由组件 -->
@@ -23,7 +23,7 @@ import sidebar from "@/components/sideBar.vue"
 <style lang='css' scoped>
 .app {
   /* BFC */
-  overflow: hidden;
+  overflow: auto;
   background-image: url("../../../assets/flat-mountains.svg");
   background-attachment: fixed;
   background-size: cover;

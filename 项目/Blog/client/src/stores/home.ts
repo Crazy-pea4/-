@@ -3,7 +3,7 @@ import { getQuestionList } from "@/api/question";
 import transformTime from "@/utils/transformTime";
 import type { QuestionList } from "@/@types/store/home";
 
-export const useCounterStore = defineStore("counter", {
+export const useMainFloorStore = defineStore("mainFloor", {
   /**
    *  state，储存全局状态
    *  1. 必须是函数，为了在服务端渲染的时候避免交叉请求导致的数据状态污染

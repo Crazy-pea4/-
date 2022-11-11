@@ -46,8 +46,8 @@ const authController: AuthController = {
       const token = req.headers.token as string;
       // 检查用户是否存在
       Jwt.verify(token);
-      res.status(200).json({
-        code: 200,
+      res.status(201).json({
+        code: 201,
         message: "token validate",
       });
     } catch (err) {

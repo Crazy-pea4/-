@@ -3,7 +3,7 @@ import HandelResponse from "../@types/utils/handelResponse";
 const handelResponse: HandelResponse = function (
   res,
   result,
-  message = "操作成功",
+  message = "请求成功",
   data?
 ) {
   if (result) {
