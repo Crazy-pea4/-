@@ -161,10 +161,26 @@ Uncaught (in promise) TypeError: parentComponent.ctx.deactivate is not a functio
 
 ## vite静态资源处理
 
-vite内部将public文件夹下的所有文件暴露在根目录下，因此访问的时候直接`/assets/xxx`，而不是`/public/assets/xxx`
+    vite内部将public文件夹下的所有文件暴露在根目录下，因此访问的时候直接`/assets/xxx`，而不是`/public/assets/xxx`
 
 ## 全局路由守卫--.then()与await
 
-在vue-router4中，舍弃了路由守卫第三个参数next，转变为使用
+    在vue-router4中，舍弃了路由守卫第三个参数next，转变为使用
 
 `return {name: xxx}`的形式去跳转路由。如果我们在里面进行请求操作时采用.then()获取异步结果是不行的，因为在.then()回调内部去`return {name: xxx} `是无效的，必须采用async await来保证函数作用域始终处在beforeEach回调当中
+
+## mongoDB莫名罢工事件
+
+    事情发生在一个优雅的夜晚，本人像以往一样熟练地打开mongodb连接`localhost:27017`，随后突如其来的报错把我震得一愣一愣的，在终端中显示
+
+```
+MongooseServerSelectionError: connect ECONNREFUSED ::1:27017
+```
+
+我就纳闷，跟平常一样的手法居然这回不管用，去网上查了查，发现是连接`::1:27017`搞的鬼，本人前几天恰好将node升级成为了18版本（之前是16）node18内部使用的时ipv6，会自动将localhost域名翻译成`::1`而不是`127.0.0.1`，而我的代码恰好是
+
+```
+mongoose.connect("mongodb://localhost:27017/Blog");
+```
+
+所以只需要把localhost改成127.0.0.1即可，或者不嫌麻烦回退node版本

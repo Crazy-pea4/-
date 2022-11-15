@@ -2,7 +2,7 @@
     <!-- 列表 -->
     <div class="w-full h-auto">
         <!-- 列表中的每一项 -->
-        <div class="w-full h-36 border-2 rounded-xl transition-all duration-200 flex flex-col justify-around text-center hover:shadow-lg text-white my-5 px-5 first:mt-0 last:mb-0"
+        <div class="w-full h-36 border-2 rounded-xl transition-all duration-200 flex flex-col justify-around text-center hover:shadow-lg my-5 px-5 first:mt-0 last:mb-0"
             v-for="item in questionList" :key="item._id">
             <div class="text-2xl">{{ item.title }}</div>
             <div>{{ item.descriptions }}</div>

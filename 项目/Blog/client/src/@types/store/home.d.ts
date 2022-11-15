@@ -12,3 +12,4 @@ export interface QuestionList {
     avatarUrl: string;
   };
 }
+[{}, {}];
