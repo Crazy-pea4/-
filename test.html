@@ -9,37 +9,12 @@
 
   <body>
     <script>
-      /**
-       * 给定一个多维数组例如[1, 2, [3, [4, 5], 6], 7, [8], 9]，
-       * 实现将其改写为如下对象形式：
-       * {
-       *    children: [
-       *        { value: 1 },
-       *        { value: 2 },
-       *        { children: [
-       *              { value: 3 },
-       *              { children: [...] }
-       *              ]}
-       *        ]
-       * }
-       */
-      function arrToObj(arr) {
-        let obj = {
-          children: [],
-        };
-        for (let i = 0; i < arr.length; i++) {
-          if (Array.isArray(arr[i])) {
-            const subObj = arrToObj(arr[i]);
-            obj.children.push(subObj);
-          } else {
-            obj.children.push({ value: arr[i] });
-          }
-        }
-        return obj;
+      function test(x, y) {
+        console.log(x, y);
       }
 
-      const arr = [1, 2, [3, [4, 5], 6], 7, [8], 9];
-      console.log(arrToObj(arr));
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      test(...arr);
     </script>
   </body>
 </html>

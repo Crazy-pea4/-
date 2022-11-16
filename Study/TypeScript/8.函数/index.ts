@@ -74,7 +74,47 @@ printSomething("我是一段信息");
 printSomething("派大星", "我喜欢海绵宝宝", "我也喜欢你");
 // printSomething("如果我只发送两个参数", "那我就报错了"); // errMsg: 没有需要 2 参数的重载，但存在需要 1 或 3 参数的重载。
 /**
- * 由此可见，函数重载就是为了方便我们看到输入什么就输出什么的情况，而不必去函数体中找对应的类型返回什么类型
  * 简单理解来看实现签名主要是之前普通实现思路的情况，TS编译的时候检查所有类型和函数体中的对比检查是否存在。
  * 实现签名和函数体检查通过后，执行函数的时候实际上是某个重载签名+函数体，跳过了实现签名。
  */
+
+/**
+ * 函数的this
+ */
+interface User {
+  admin: boolean;
+}
+
+interface DB {
+  filter: (cb: () => boolean) => User[];
+}
+
+const db: DB = {
+  filter: (cb: () => boolean) => {
+    let user1: User = {
+      admin: true,
+    };
+    let user2: User = {
+      admin: false,
+    };
+    // cb()
+    return [user1, user2];
+  },
+};
+const list = db.filter(function (this: User) {
+  return this.admin;
+});
+console.log(list);
+
+/**
+ * void
+ *
+ *  - 通过定义上下文函数返回值类型为void的函数，在实现时，可以返回其他任何的值，但它会被忽略
+ *  - 通过字面量定义的函数返回值类型为void的函数，在实现时，必须不返回任何值
+ */
+
+type f1 = () => void;
+
+const func1: f1 = () => {
+  return 111;
+};
