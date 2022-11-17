@@ -1,6 +1,6 @@
 <template>
     <!-- 搜索框 -->
-    <div class="w-96 xl:w-96 p-3 fixed z-50 left-1/2 -translate-x-1/2 hover:-translate-y-0 transition-all duration-300"
+    <div class="2xl:w-2/5 xl:w-2/5 lg:w-2/5 p-3 fixed z-50 left-1/2 -translate-x-1/2 hover:-translate-y-0 transition-all duration-300"
         :class="{'-translate-y-9': flag }" v-if="$route.meta.isShowSearchBar">
         <a-input class="w-full h-8 border-2 border-slate-600 rounded-lg text-sm ring-1" allow-clear type="text">
             <template #prefix>

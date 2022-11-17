@@ -39,7 +39,7 @@ module.exports = {
 
 打开控制台可以看到tailwindcss的样式都加上了`!important`
 
-<img title="" src="file:///C:/Users/Crazy_pea/AppData/Roaming/marktext/images/2022-10-26-10-18-35-image.png" alt="" data-align="inline">
+<img title="" src="file:///C:/Users/Crazy_pea/AppData/Roaming/marktext/images/2022-10-26-10-18-35-image.png" alt="" data-align="inline">****
 
 ### delete注册时用的checkPassword字段
 
@@ -184,3 +184,24 @@ mongoose.connect("mongodb://localhost:27017/Blog");
 ```
 
 所以只需要把localhost改成127.0.0.1即可，或者不嫌麻烦回退node版本
+
+## storeToRefs之多重解构有时不成功
+
+    在写展示ip地址的组件时，为了方便在模板中使用数据，使用了storeToRefs进行数据响应式解构：
+
+```js
+import useCustomStore from "@/stores/custom"
+import { storeToRefs } from 'pinia'
+// 创建自定义功能仓库
+const customStore = useCustomStore()
+const { ipInfo } = storeToRefs(customStore)
+```
+
+但是这样写还是不可避免地要在模板中写`ipInfo.xxx`的形式，于是我想能不能多重解构，由于解构出来的ipInfo是被ref()处理过的，因此：
+
+```js
+const { ipInfo: { value: { area, city, country, isp, ip } } }
+    = storeToRefs(customStore)
+```
+
+但是奇怪的是这样解构出来的数据有时会**出现**有时则不会，而不会的情况占大多数，所以还是只能采用第一种写法。（后来推测是使用下面的多重解构方式破坏了ipInfo的响应性，在组件初始化的时候上面代码已经执行，而异步请求稍后才改变ipInfo对象，破坏了其响应性导致即使后面数据更改，也无法在模板中改变）

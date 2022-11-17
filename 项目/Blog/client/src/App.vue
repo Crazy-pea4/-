@@ -1,5 +1,5 @@
 <template>
-  <div class="app h-screen">
+  <div class="app">
     <sidebar @getMask="getMask"></sidebar>
     <searchBar></searchBar>
     <!-- 路由组件 -->
@@ -35,10 +35,11 @@ const getMask = () => {
 <style lang='css' scoped>
 .app {
   /* BFC */
-  /* overflow: auto;
-  background-image: url("../../../assets/flat-mountains.svg");
+  overflow: auto;
+  /* background-image: url("../../client/public/assets/home.svg");
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat; */
+
 }
 </style>

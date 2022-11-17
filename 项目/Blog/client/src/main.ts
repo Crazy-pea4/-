@@ -6,6 +6,7 @@ import router from "./router";
 
 // 引入包入口样式
 import "./index.css";
+import "nprogress/nprogress.css";
 import "ant-design-vue/dist/antd.css";
 import "v-calendar/dist/style.css";
 

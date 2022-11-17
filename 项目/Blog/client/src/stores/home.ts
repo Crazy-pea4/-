@@ -21,10 +21,14 @@ export const useMainFloorStore = defineStore("mainFloor", {
   },
   actions: {
     async updateQuestionList() {
-      const {
-        data: { data: questionList },
-      } = await getQuestionList();
-      this.questionList = questionList;
+      try {
+        const {
+          data: { data: questionList },
+        } = await getQuestionList();
+        this.questionList = questionList;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 });

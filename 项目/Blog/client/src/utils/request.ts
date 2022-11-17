@@ -11,7 +11,12 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-    config.headers!["token"] = localStorage.getItem("token");
+
+    // 过滤从网上找来api，不给它加token
+    if (config.baseURL!.match(/\/api/)) {
+      config.headers!["token"] = localStorage.getItem("token");
+    }
+
     nprogress.start();
     return config;
   },
@@ -26,11 +31,11 @@ instance.interceptors.response.use(
   function (response) {
     // 对响应数据做点什么
     nprogress.done();
-    switch (response.data.code) {
-      case 200:
-        message.success(response.data.message, 0.8);
-        break;
-    }
+    // switch (response.data.code) {
+    //   case 200:
+    //     message.success(response.data.message, 0.8);
+    //     break;
+    // }
     return response;
   },
   function (error) {
