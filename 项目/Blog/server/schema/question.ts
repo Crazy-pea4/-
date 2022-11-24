@@ -14,6 +14,11 @@ const questionSchema = new mongoose.Schema({
     required: true,
     maxLength: 500,
   },
+  content: {
+    type: String,
+    required: true,
+    select: false,
+  },
   // 提出问题者
   questioner: {
     type: mongoose.Schema.Types.ObjectId,

@@ -93,12 +93,12 @@ export function topicCreateValidator(data: topicCreateData) {
       "string.max": "topicIntroduction 不能大于200位",
     }),
     createdAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 createAt",
-      "string.base": "createAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 createdAt",
+      "string.base": "createdAt 类型错误 需要为string",
     }),
     updatedAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 updateAt",
-      "string.base": "updateAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 updatedAt",
+      "string.base": "updatedAt 类型错误 需要为string",
     }),
   });
 
@@ -118,17 +118,21 @@ export function questionCreateValidator(data: questionCreateData) {
       "string.base": "descriptions 类型错误 需要为string",
       "string.max": "descriptions 长度不能超过500位",
     }),
+    content: Joi.string().required().messages({
+      "any.required": "缺少必选参数 content",
+      "string.base": "content 类型错误 需要为string",
+    }),
     topics: Joi.array().required().messages({
       "any.required": "缺少必选参数 topics",
       "array.base": "topics 类型错误 需要为array",
     }),
     createdAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 createAt",
-      "string.base": "createAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 createdAt",
+      "string.base": "createdAt 类型错误 需要为string",
     }),
     updatedAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 updateAt",
-      "string.base": "updateAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 updatedAt",
+      "string.base": "updatedAt 类型错误 需要为string",
     }),
   });
 
@@ -143,12 +147,12 @@ export function answerCreateValidator(data: answerCreateData) {
       "string.base": "content 类型错误",
     }),
     createdAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 createAt",
-      "string.base": "createAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 createdAt",
+      "string.base": "createdAt 类型错误 需要为string",
     }),
     updatedAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 updateAt",
-      "string.base": "updateAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 updatedAt",
+      "string.base": "updatedAt 类型错误 需要为string",
     }),
   });
   return schema.validate(data);
@@ -162,12 +166,12 @@ export function commentCreateValidator(data: commentCreateData) {
       "string.base": "content 类型错误",
     }),
     createdAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 createAt",
-      "string.base": "createAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 createAdt",
+      "string.base": "createdAt 类型错误 需要为string",
     }),
     updatedAt: Joi.string().required().messages({
-      "any.required": "缺少必选参数 updateAt",
-      "string.base": "updateAt 类型错误 需要为string",
+      "any.required": "缺少必选参数 updatedAt",
+      "string.base": "updatedAt 类型错误 需要为string",
     }),
   });
   return schema.validate(data);

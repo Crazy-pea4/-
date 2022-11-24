@@ -82,7 +82,6 @@ const onFinish = (values: FormState) => {
         if (rememberMe.value === true) {
             localStorage.setItem('token', data.token)
             localStorage.setItem('id', data.data._id)
-            localStorage.setItem("isValid", "true");
         } else localStorage.removeItem('token')
         router.push({ name: 'Home' })
     }).catch((err) => { })

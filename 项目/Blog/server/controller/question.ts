@@ -53,9 +53,7 @@ const questionController: QuestionController = {
           ],
         })
         .populate("questioner")
-        .populate({
-          path: "topics",
-        })
+        .populate("topics")
         .limit(limit)
         .skip(page * limit);
       handelResponse(res, questionList, "查询问题列表成功");

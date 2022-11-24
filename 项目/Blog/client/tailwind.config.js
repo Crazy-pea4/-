@@ -7,6 +7,14 @@ module.exports = {
       width: {
         108: "26rem",
         120: "30rem",
+        130: "32rem",
+        sHeart: "46rem",
+        heart: "75rem",
+      },
+      height: {
+        108: "26rem",
+        120: "30rem",
+        130: "32rem",
       },
     },
   },

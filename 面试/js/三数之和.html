@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /**
+         * 2、三数之和
+                题目：给定一个数组nums,判断nums中是否
+                存在三个元素a,b,c,使得a+b+c=target
+                找出所有满足条件且不重复的三元组合
+                输入：nums:[5,2,1,1,3,4,6];target:8
+                输出：[1,1,6]，[1,2,5]，[1,3,4]
+         */
+      function treeNumAdd(arr, target) {
+        if (Array.isArray(arr)) {
+          arr.sort((a, b) => a - b);
+          const resultArr = [];
+          // console.log(arr);
+          for (let i = 0; i < arr.length; i++) {
+            // 当下标不是第一个并且当前的元素跟前一个元素一样的话，就跳过，因为前一个元素已经处理过了
+            if (i && arr[i] === arr[i - 1]) continue;
+            // 前后（头尾）双指针
+            let left = i + 1; // 前指针出现在下标i的后一位
+            let right = arr.length - 1;
+
+            while (left < right) {
+              let sum = arr[i] + arr[left] + arr[right];
+              if (sum < target) {
+                // 说明left指向的元素不够大，left右移
+                left++;
+              } else if (sum > target) {
+                // 说明right指向的元素太大，right左移
+                right--;
+              } else {
+                // 三者之和正好为目标值，将三者推送到resultArr中，先存进去后+1
+                resultArr.push([arr[i], arr[left++], arr[right--]]);
+                // while (arr[left] === arr[left - 1]) left++;
+                // while (arr[right] === arr[right + 1]) right--;
+              }
+            }
+          }
+          return resultArr;
+        }
+        return [];
+      }
+
+      const result = treeNumAdd([2, 3, 4, 2, 1, 1, 3, 8, 6], 7);
+      console.log(result);
+    </script>
+  </body>
+</html>

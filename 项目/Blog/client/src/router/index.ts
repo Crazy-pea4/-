@@ -1,64 +1,39 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { message } from "ant-design-vue";
 import { isValid } from "@/api/auth";
+// 引入路由
+import routes from "./routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/",
-      redirect: "/home",
-    },
-    {
-      name: "Login",
-      path: "/login",
-      component: () => import("@/views/Login/index.vue"),
-      meta: {},
-    },
-    {
-      name: "Register",
-      path: "/register",
-      component: () => import("@/views/Register/index.vue"),
-      meta: {},
-    },
-    {
-      name: "Home",
-      path: "/home",
-      component: () => import("@/views/Home/index.vue"),
-      meta: {
-        isShowSearchBar: true,
-        isKeepAlive: true,
-        isShowSideBar: true,
-      },
-    },
-    {
-      name: "Setting",
-      path: "/setting",
-      component: () => import("@/views/Setting/index.vue"),
-      meta: {
-        isKeepAlive: true,
-        isShowSideBar: true,
-      },
-    },
-  ],
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 始终滚动到顶部
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
 });
 
-// 路由守卫
+// 前置路由守卫
 router.beforeEach(async (to, form) => {
-  if (localStorage.getItem("isValid") === "true") return;
+  console.log(111);
+  if (sessionStorage.getItem("isValid") === "true") return;
   const token = localStorage.getItem("token");
   if (!token && to.name !== "Login" && to.name !== "Register") {
-    localStorage.setItem("isValid", "false");
+    sessionStorage.setItem("isValid", "false");
     await message.error("登录校验失效，请重新登录", 0.8);
     return { name: "Login" };
   } else if (token) {
     try {
       await isValid();
-      localStorage.setItem("isValid", "true");
+      sessionStorage.setItem("isValid", "true");
     } catch (err) {
       console.log(err);
       if (to.name !== "Login" && to.name !== "Register") {
-        localStorage.setItem("isValid", "false");
+        sessionStorage.setItem("isValid", "false");
         await message.error("身份校验失效，请重新登录", 0.8);
         return { name: "Login" };
       }

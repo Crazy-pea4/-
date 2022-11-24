@@ -18,7 +18,6 @@ const answerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Question",
     required: true,
-    select: false,
   },
   // 赞（喜欢）
   likes: {
@@ -26,7 +25,6 @@ const answerSchema = new mongoose.Schema({
     default: 0,
   },
   // 有歧义（踩）
-
   hesitation: {
     type: Number,
     default: 0,

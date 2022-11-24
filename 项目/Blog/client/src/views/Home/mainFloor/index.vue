@@ -1,13 +1,13 @@
 <template>
     <!-- 列表 -->
-    <div class="w-full h-auto">
+    <div class="w-full h-auto" @click="ToQuestion">
         <!-- 列表中的每一项 -->
-        <div class="w-full h-36 border-2 rounded-xl transition-all duration-200 flex flex-col justify-around text-center hover:shadow-lg my-5 px-5 first:mt-0 last:mb-0"
-            v-for="item in questionList" :key="item._id">
-            <div class="text-2xl">{{ item.title }}</div>
-            <div>{{ item.descriptions }}</div>
+        <div class="w-full h-36 border-2 rounded-xl transition-all duration-200 flex flex-col justify-around text-center cursor-pointer hover:shadow-lg my-5 px-5 first:mt-0 last:mb-0"
+            v-for="item in questionList" :key="item._id" :data-questionId="item._id">
+            <div class="text-2xl" :data-questionId="item._id">{{ item.title }}</div>
+            <div :data-questionId="item._id">{{ item.descriptions }}</div>
             <!-- 提出问题的人的信息 -->
-            <div class="flex justify-end items-end">
+            <div class="flex justify-end items-end" :data-questionId="item._id">
                 <!-- 发起者 -->
                 <div class="text-sm mr-2">{{ item.questioner.nickname }}</div>
                 <!-- 发起时间 -->
@@ -19,9 +19,13 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia'
 import { useMainFloorStore } from '@/stores/home'
 // import useAfterHandelTimeHooks from "@/hooks/useAfterHandelTimeHooks"
+
+// 创建路由器实例
+const router = useRouter()
 
 // 创建store实例 并响应式地解构
 const mainFloorStore = useMainFloorStore()
@@ -33,9 +37,9 @@ onMounted(() => {
     mainFloorStore.updateQuestionList()
 })
 
-
-
-
+const ToQuestion = (e: any) => {
+    router.push({ name: "Question", "query": e.target.dataset })
+}
 
 </script>
 

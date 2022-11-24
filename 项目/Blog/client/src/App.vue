@@ -1,12 +1,10 @@
 <template>
   <div class="app">
-    <sidebar @getMask="getMask"></sidebar>
+    <sidebar></sidebar>
     <searchBar></searchBar>
     <!-- 路由组件 -->
     <div class="relative">
-      <!-- 遮罩层 -->
-      <div class="w-full h-screen opacity-50 bg-stone-800 fixed top-0 left-0 z-40" :class="{ 'hidden': !isMaskShow }">
-      </div>
+      <!-- 路由 -->
       <RouterView v-slot="{ Component }">
         <keep-alive>
           <component :is="Component" v-if="$route.meta.isKeepAlive" :key="$route.name" />
@@ -24,11 +22,6 @@ import { RouterView } from 'vue-router'
 import searchBar from "@/components/searchBar.vue"
 import sidebar from "@/components/sideBar.vue"
 
-const isMaskShow = ref(false)
-
-const getMask = () => {
-  isMaskShow.value = !isMaskShow.value
-}
 
 </script>
 

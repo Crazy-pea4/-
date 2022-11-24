@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /**
+         * 1、两数之和
+            题目：给定一个数组nums和一个目标
+            值target,在该数组中找出和为目标值的两个数
+            输入：nums:[8,2,6,5,4,1,3];target:7
+            输出：[2,5]
+         */
+      function twoNumAdd(arr, target) {
+        if (Array.isArray(arr)) {
+          let map = {};
+          for (let i = 0; i < arr.length; i++) {
+            // 目标值减去当前遍历到的数组元素，看看在map里面有没有对应的值(key)存在
+            if (map[target - arr[i]]) {
+              // 若存在，返回这两个值
+              return [map[target - arr[i]], arr[i]];
+            } else {
+              // 若不存在，map中的key为当前遍历到的数组元素，value是什么反而不重要了
+              map[arr[i]] = arr[i];
+            }
+          }
+        }
+        return [];
+      }
+
+      const result = twoNumAdd([8, 2, 6, 5, 4, 1, 3], 6);
+      console.log(result);
+    </script>
+  </body>
+</html>
