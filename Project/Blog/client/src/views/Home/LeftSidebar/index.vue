@@ -8,7 +8,7 @@
     <div class="w-full border-2 flex flex-col overflow-hidden justify-center duration-300 items-center cursor-pointer"
         :class="{ 'h-0': !isShow, 'h-16': isShow }">
         <edit-outlined @click="visible = true" class="text-4xl" />
-        <span>新增问题</span>
+        <span class="text-xs">新增问题</span>
     </div>
     <!-- 对话框 -->
     <div>
@@ -33,8 +33,6 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { EditOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { FormInstance } from 'ant-design-vue';
-import dayjs from "dayjs"
-import { createQuestion } from "@/api/question"
 import { useMainFloorStore } from "@/stores/home"
 const mainFloorStore = useMainFloorStore()
 
@@ -60,26 +58,13 @@ const formState = reactive<FormState>({
 // 对话框显示变量
 const visible = ref(false);
 
-const create = async (values: { [key: string]: any }) => {
-    const time = dayjs(new Date()).format("YYYY-M-D HH:mm")
-    try {
-        values.createdAt = time
-        values.updatedAt = time
-        await createQuestion(values)
-        visible.value = false;
-        formRef.value!.resetFields()
-        // 新建问题后，再一次获取问题列表
-        mainFloorStore.updateQuestionList()
-        return Promise.resolve()
-    } catch (err) {
-        return Promise.reject(err)
-    }
-}
 const handleOk = () => {
     formRef.value!
         .validateFields()
         .then((values) => {
-            create(values)
+            mainFloorStore.CreateQuestion(values)
+            visible.value = false;
+            formRef.value!.resetFields()
         })
         .catch(info => {
             console.log('Failed:', info);

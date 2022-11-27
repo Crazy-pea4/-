@@ -9,7 +9,7 @@ export default defineStore("custom", {
   }),
   getters: {},
   actions: {
-    async updateIpInfo() {
+    async UpdateIpInfo() {
       try {
         const { data } = await getIpInfo();
         this.ipInfo = data;
@@ -17,7 +17,7 @@ export default defineStore("custom", {
         console.log(err);
       }
     },
-    async updateNewsList() {
+    async UpdateNewsList() {
       try {
         // T1467284926140这个是网易新闻api设置的字段，不知未来是否会改变
         const {

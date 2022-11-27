@@ -5,7 +5,7 @@
             class="h-80 md:h-96 2xl:h-120 flex justify-center bg-cover bg-gradient-to-l from-slate-400">
             <div class="relative w-2/3">
                 <img :src="i.imgsrc" alt="" class="absolute right-0 w-10/12 h-full opacity-60">
-                <div class="absolute top-1/2 -translate-y-1/2 text-white">
+                <div class="w-full absolute top-1/2 -translate-y-1/2 text-white">
                     <!-- 标题 -->
                     <div class="text-3xl 2xl:text-4xl mt-10 font-semibold">{{ i.title }}</div>
                     <!-- 简介 -->
@@ -36,10 +36,10 @@ const customStore = useCustomStore()
 const { newsList } = storeToRefs(customStore)
 
 onMounted(() => {
-    customStore.updateNewsList()
+    customStore.UpdateNewsList()
 })
 // 提供给swiper组件的模块，不提供的话在属性中写了也没用
-const modules = [Pagination, Autoplay]
+const modules = [Pagination]
 
 </script>
 

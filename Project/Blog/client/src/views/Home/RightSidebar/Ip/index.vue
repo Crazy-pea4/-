@@ -24,7 +24,7 @@ const customStore = useCustomStore()
 const { ipInfo } = storeToRefs(customStore)
 
 onMounted(() => {
-    customStore.updateIpInfo()
+    customStore.UpdateIpInfo()
 })
 
 </script>

@@ -11,7 +11,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-    if (config.method === "post") {
+    if (config.method !== "get") {
       message.success("操作成功！");
     }
     // 过滤从网上找来api，不给它加token

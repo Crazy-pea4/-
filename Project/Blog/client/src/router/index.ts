@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { message } from "ant-design-vue";
+import "ant-design-vue/es/message/style/css";
 import { isValid } from "@/api/auth";
+
 // 引入路由
 import routes from "./routes";
 
@@ -19,7 +21,6 @@ const router = createRouter({
 
 // 前置路由守卫
 router.beforeEach(async (to, form) => {
-  console.log(111);
   if (sessionStorage.getItem("isValid") === "true") return;
   const token = localStorage.getItem("token");
   if (!token && to.name !== "Login" && to.name !== "Register") {
@@ -28,8 +29,12 @@ router.beforeEach(async (to, form) => {
     return { name: "Login" };
   } else if (token) {
     try {
-      await isValid();
-      sessionStorage.setItem("isValid", "true");
+      const { data } = await isValid();
+      if (data.code === 201) {
+        sessionStorage.setItem("isValid", "true");
+      } else {
+        throw new Error("inValid");
+      }
     } catch (err) {
       console.log(err);
       if (to.name !== "Login" && to.name !== "Register") {

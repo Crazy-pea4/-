@@ -75,12 +75,10 @@ let question = ref();
 onBeforeMount(async () => {
     // 由于使用了其他模块的store，在页面刷新的时候也要加上mainFloor的数据获取步骤
     if (!mainFloorStore.questionList.length) {
-        await mainFloorStore.updateQuestionList()
+        await mainFloorStore.GetQuestionList()
     }
-    questionStore.updateAnswerList(query.questionid as string)
+    questionStore.GetAnswerList(query.questionid as string)
     question.value = mainFloorStore.questionList[Number(query.index)]
-})
-onMounted(() => {
 })
 
 </script>

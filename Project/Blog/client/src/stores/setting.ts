@@ -8,7 +8,7 @@ export const useSettingStore = defineStore("setting", {
   }),
   getters: {},
   actions: {
-    async updateUserSetting(id: string) {
+    async GetUser(id: string) {
       const {
         data: { data },
       } = await getUser(id);

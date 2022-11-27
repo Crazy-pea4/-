@@ -53,7 +53,7 @@ const settingStore = useSettingStore()
 const { userSetting } = storeToRefs(settingStore)
 
 onMounted(() => {
-    settingStore.updateUserSetting(localStorage.getItem('id')!)
+    settingStore.GetUser(localStorage.getItem('id')!)
 })
 
 const saveUserInfo = (async () => {

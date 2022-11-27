@@ -15,3 +15,10 @@ export function createQuestion(createQuestionData: CreateQuestionData) {
     data: createQuestionData,
   });
 }
+
+export function deleteQuestion(questionId: String) {
+  return request({
+    url: `/question/${questionId}`,
+    method: "DELETE",
+  });
+}

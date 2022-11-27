@@ -3,6 +3,7 @@ import QuestionController from "../@types/controller/question";
 
 /* 引入question模型 */
 import questionModel from "../model/question";
+import answerModel from "../model/answer";
 
 /* 引入工具 */
 import Jwt from "../utils/jwt";
@@ -100,6 +101,8 @@ const questionController: QuestionController = {
     try {
       const id = req.params.id;
       const data = await questionModel.findByIdAndDelete(id);
+      // 删除问题下面的回答
+      await answerModel.deleteMany({ questionId: id });
       handelResponse(res, data);
     } catch (err) {
       next(err);

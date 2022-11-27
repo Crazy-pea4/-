@@ -5,7 +5,7 @@
             <News />
         </header>
         <!-- 主体部分 -->
-        <div class="flex justify-center mt-8">
+        <div class="flex justify-center mt-8 mb-6">
             <!-- 左侧边栏 -->
             <div class="w-16 flex flex-col items-center ml-52">
                 <LeftSideBar />

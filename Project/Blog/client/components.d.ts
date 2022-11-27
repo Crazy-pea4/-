@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     AInputNumber: typeof import('ant-design-vue/es')['InputNumber']
     AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
     AModal: typeof import('ant-design-vue/es')['Modal']
+    APopconfirm: typeof import('ant-design-vue/es')['Popconfirm']
     ARadio: typeof import('ant-design-vue/es')['Radio']
     ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
