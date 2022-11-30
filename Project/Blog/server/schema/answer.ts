@@ -24,10 +24,18 @@ const answerSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  isLikes: {
+    type: Boolean,
+    default: false,
+  },
   // 有歧义（踩）
   hesitation: {
     type: Number,
     default: 0,
+  },
+  isHesitation: {
+    type: Boolean,
+    default: false,
   },
   createdAt: {
     required: true,

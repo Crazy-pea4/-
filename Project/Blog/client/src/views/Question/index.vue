@@ -16,70 +16,49 @@
                     <div
                         class="w-20 h-8 bg-slate-600 rounded-md text-white flex justify-center items-center cursor-pointer">
                         收藏回答</div>
-                    <div
-                        class="w-20 h-8 ml-4 border-1 flex justify-center items-center rounded-md border-slate-600 cursor-pointer">
+                    <div class="w-20 h-8 ml-4 border-1 flex justify-center items-center rounded-md border-slate-600 cursor-pointer"
+                        @click="ToWrite">
                         写回答</div>
                 </div>
             </div>
         </header>
         <!-- 主体 -->
-        <div class="w-sHeart mx-auto mt-6">
-            <div class="w-full px-4 py-2 mb-4 bg-white rounded-sm shadow" v-for="i in answerList" :key="i._id">
-                <!-- 回答头部 -->
-                <div class="flex">
-                    <!-- 头像 -->
-                    <div class=" w-12 h-12 bg-yellow-700 rounded-full"></div>
-                    <!-- 昵称 -->
-                    <div class="ml-2">{{ i.answerer.nickname }}</div>
-                </div>
-                <!-- 回答主体 -->
-                <div class="w-full my-4">
-                    {{ i.content }}
-                </div>
-                <!-- 赞和质疑 -->
-                <div class="flex">
-                    <div
-                        class="w-16 h-7 bg-slate-600 flex justify-center items-center cursor-pointer text-white rounded-xl mr-1">
-                        赞
-                    </div>
-                    <div
-                        class="w-7 h-7 bg-slate-600 flex justify-center items-center cursor-pointer text-white rounded-xl">
-                        <caret-down-outlined />
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Answer :questionId="questionId"></Answer>
     </div>
-
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, onMounted, onBeforeMount } from 'vue'
+import { ref, reactive, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
 import { useQuestionStore } from '@/stores/question'
 import { useMainFloorStore } from "@/stores/home"
-import { CaretDownOutlined } from '@ant-design/icons-vue';
+import Answer from "@/views/Question/Answer/index.vue"
 
+// 创建路由器实例
+const router = useRouter()
 // 创建路由实例
 const route = useRoute()
-const query = route.query
-console.log(query);
+const questionId = route.query.questionId as string
 
 // 创建Store实例
 const questionStore = useQuestionStore()
-const { answerList } = storeToRefs(questionStore)
 const mainFloorStore = useMainFloorStore()
-let question = ref();
+const question = ref();
 
 onBeforeMount(async () => {
     // 由于使用了其他模块的store，在页面刷新的时候也要加上mainFloor的数据获取步骤
     if (!mainFloorStore.questionList.length) {
         await mainFloorStore.GetQuestionList()
     }
-    questionStore.GetAnswerList(query.questionid as string)
-    question.value = mainFloorStore.questionList[Number(query.index)]
+    // 获取目标问题
+    question.value = mainFloorStore.questionList[Number(route.query.index)]
+    // 获取目标问题下的回答
+    questionStore.GetAnswerList(questionId)
 })
+
+const ToWrite = () => {
+    router.push({ name: "Write", params: { questionId } })
+}
 
 </script>
 

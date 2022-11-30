@@ -4,14 +4,14 @@ import { message } from "ant-design-vue";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API,
-  timeout: 5000,
+  timeout: 10000,
 });
 
 // 添加请求拦截器
 instance.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-    if (config.method !== "get") {
+    if (config.method !== "get" && !config.url?.match(/auth/)) {
       message.success("操作成功！");
     }
     // 过滤从网上找来api，不给它加token
@@ -47,6 +47,8 @@ instance.interceptors.response.use(
         case 500:
           message.error("服务器错误，请联系管理员", 0);
           break;
+        case 401:
+          message.error("登录鉴权不通过，请重新登陆后重试");
         case 400:
           message.error(error.response.data.message);
           break;

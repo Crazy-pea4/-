@@ -23,3 +23,35 @@ export function getUser(id: string) {
     method: "GET",
   });
 }
+
+export function likeAnswer(
+  questionId: string,
+  answerId: string,
+  flag: boolean
+) {
+  return request({
+    url: `/user/likeAnswer/${questionId}/${answerId}`,
+    method: flag === true ? "PUT" : "DELETE",
+  });
+}
+
+export function hesitateAnswer(
+  questionId: string,
+  answerId: string,
+  flag: boolean
+) {
+  return request({
+    url: `/user/hesitateAnswer/${questionId}/${answerId}`,
+    method: flag === true ? "PUT" : "DELETE",
+  });
+}
+
+export function clearIsLikesAndIsHesitation(
+  questionId: string,
+  answerId: string
+) {
+  return request({
+    url: `/user/clearIsLikesAndIsHesitation/${questionId}/${answerId}`,
+    method: "GET",
+  });
+}

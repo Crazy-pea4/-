@@ -1,5 +1,5 @@
 <template>
-    <Calendar :attributes='attrs' />
+    <Calendar :attributes='attrs' class="" />
 </template>
 
 <script setup lang='ts'>
@@ -21,6 +21,6 @@ const attrs = ref([
 ])
 </script>
 
-<style lang='' scoped>
+<style lang='css' scoped>
 
 </style>

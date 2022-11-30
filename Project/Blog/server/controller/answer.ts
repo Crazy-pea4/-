@@ -9,12 +9,23 @@ import answerModel from "../model/answer";
 import Jwt from "../utils/jwt";
 import handelResponse from "../utils/handelResponse";
 
+// 防xss攻击
+import xss from "xss";
+
 const answerController: AnswerController = {
   // 创建回答
   createAnswer: async (req, res, next) => {
     try {
       // 获取请求体和questionId
       const info = req.body;
+      // 重要！answer设计为富文本渲染，虽然使用的wangeditor有简单的防xss功能
+      // 但更为复杂的攻击要借助专业的 xss库
+      info.content = xss(info.content, {
+        // 下面的代码是将属性原封不动的的返回，只处理<script></script>
+        onTagAttr(tag, name, value, isWhiteAttr) {
+          return `${name}="${value}"`;
+        },
+      });
       const questionId = req.params.questionId;
 
       // 回答创建者id

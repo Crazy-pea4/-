@@ -307,7 +307,12 @@ const userController: UserController = {
       const method = req.method;
       // $inc操作符用于递增目标值
       const data = await answerModel.findByIdAndUpdate(id, {
+        // 根据请求方法决定增加或是减少，此时歧义（踩）一定是-1
         $inc: { likes: method === "PUT" ? 1 : -1 },
+        $set: {
+          isLikes: method === "PUT" ? true : false,
+          isHesitation: method === "PUT" ? false : true,
+        },
       });
       if (data) {
         res.status(200).json({
@@ -333,7 +338,12 @@ const userController: UserController = {
       // $inc操作符用于递增目标值
       const data = await answerModel.findByIdAndUpdate(id, {
         $inc: { hesitation: method === "PUT" ? 1 : -1 },
+        $set: {
+          isHesitation: method === "PUT" ? true : false,
+          isLikes: method === "PUT" ? false : true,
+        },
       });
+
       if (data) {
         res.status(200).json({
           code: 200,
@@ -346,6 +356,25 @@ const userController: UserController = {
           message: "歧义答案失败",
         });
       }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 清理isLikes和isHesitation
+  clearIsLikesAndIsHesitation: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const data = await answerModel.findByIdAndUpdate(id, {
+        $set: {
+          isLikes: false,
+          isHesitation: false,
+        },
+      });
+      res.status(200).json({
+        code: 200,
+        message: "取消成功",
+        data,
+      });
     } catch (err) {
       next(err);
     }

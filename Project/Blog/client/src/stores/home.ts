@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import { getQuestionList } from "@/api/question";
 import { createQuestion, deleteQuestion } from "@/api/question";
-import transformTime from "@/utils/transformTime";
+import type { CreateQuestionData } from "@/@types/api/question";
+// import transformTime from "@/utils/transformTime";
 import type { QuestionList } from "@/@types/store/home";
-
 import dayjs from "dayjs";
 
 export const useMainFloorStore = defineStore("mainFloor", {
@@ -33,12 +33,12 @@ export const useMainFloorStore = defineStore("mainFloor", {
         console.log(err);
       }
     },
-    async CreateQuestion(values: any) {
+    async CreateQuestion(createQuestionData: CreateQuestionData) {
       const time = dayjs(new Date()).format("YYYY-M-D HH:mm");
       try {
-        values.createdAt = time;
-        values.updatedAt = time;
-        await createQuestion(values);
+        createQuestionData.createdAt = time;
+        createQuestionData.updatedAt = time;
+        await createQuestion(createQuestionData);
         // 新建问题后，再一次获取问题列表
         this.GetQuestionList();
       } catch (err) {

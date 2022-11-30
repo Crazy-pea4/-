@@ -86,7 +86,7 @@ router.get(
 
 // 赞同答案（id为答案id）
 router.put(
-  "/likeAnswer/:id",
+  "/likeAnswer/:questionId/:id",
   authenticate,
   checkExisted.answer,
   userController.likeAnswer
@@ -94,7 +94,7 @@ router.put(
 
 // 取消赞同答案
 router.delete(
-  "/likeAnswer/:id",
+  "/likeAnswer/:questionId/:id",
   authenticate,
   checkExisted.answer,
   userController.likeAnswer
@@ -102,7 +102,7 @@ router.delete(
 
 // 歧义答案（id为答案id）
 router.put(
-  "/hesitateAnswer/:id",
+  "/hesitateAnswer/:questionId/:id",
   authenticate,
   checkExisted.answer,
   userController.hesitateAnswer
@@ -110,10 +110,18 @@ router.put(
 
 // 取消歧义答案
 router.delete(
-  "/hesitateAnswer/:id",
+  "/hesitateAnswer/:questionId/:id",
   authenticate,
   checkExisted.answer,
   userController.hesitateAnswer
+);
+
+// 清理isLikes和isHesitation字段，注意是字段而不是赞和歧义的数量
+router.get(
+  "/clearIsLikesAndIsHesitation/:questionId/:id",
+  authenticate,
+  checkExisted.answer,
+  userController.clearIsLikesAndIsHesitation
 );
 
 // 收藏回答（id为回答id）

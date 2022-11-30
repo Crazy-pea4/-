@@ -36,7 +36,7 @@ export default [
   },
   {
     name: "Write",
-    path: "/write",
+    path: "/write/:questionId",
     component: () => import("@/views/Write/index.vue"),
   },
   {

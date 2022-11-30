@@ -12,7 +12,7 @@
     </div>
     <!-- 对话框 -->
     <div>
-        <a-modal v-model:visible="visible" title="新增问题" @ok="handleOk">
+        <a-modal v-model:visible="visible" title="新增问题" @ok="handleOk" okText="创建" cancelText="取消">
             <a-form ref="formRef" :model="formState" name="basic" autocomplete="off">
                 <!-- 问题标题 -->
                 <a-form-item label="问题" name="title" :rules="[{ required: true, message: '请输入标题！' }]">
@@ -34,6 +34,7 @@ import { useRouter } from 'vue-router'
 import { EditOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { FormInstance } from 'ant-design-vue';
 import { useMainFloorStore } from "@/stores/home"
+import type { CreateQuestionData } from "@/@types/api/question"
 const mainFloorStore = useMainFloorStore()
 
 // 获取form表单元素
@@ -43,13 +44,8 @@ interface FormState {
     descriptions: string;
 }
 
-// 创建路由器实例
-const router = useRouter()
-
 const isShow = ref(true)
-// const ToWrite = () => {
-//     router.push({ name: "Write" })
-// }
+
 const formState = reactive<FormState>({
     title: '',
     descriptions: '',
@@ -61,8 +57,8 @@ const visible = ref(false);
 const handleOk = () => {
     formRef.value!
         .validateFields()
-        .then((values) => {
-            mainFloorStore.CreateQuestion(values)
+        .then(async (values) => {
+            await mainFloorStore.CreateQuestion(values as CreateQuestionData)
             visible.value = false;
             formRef.value!.resetFields()
         })

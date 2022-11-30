@@ -239,3 +239,31 @@ onBeforeMount(async () => {
 ```
 
 再次刷新页面后发现数据出现在模板上，但是控制台还是报错，为了让控制台美观一点，添加`v-if` <header v-if="question></header>保证question不为undefined时再使用
+
+### 设计互斥点赞、踩功能
+
+后端：在设计接口的时候，只设计了两个接口：点赞和踩，通过分辨是`PUT`和`DELETE`方法来分辨是新增还是取消。
+
+前端：通过后端返回的isLikes和isHesitation字段来判别当前的按钮状态，然后决定是新增还是取消
+
+以上是原先的想法，当实践过后发现还有很多问题要解决，比如无法确定当前是点击了哪个按钮（采用了事件代理），已经点赞但是又想点踩等
+
+于是给按钮都添加上自定义属性
+
+```html
+<div class="w-16 h-7 border-slate-600 border-1 flex justify-center items-center cursor-pointer rounded-xl mr-1"
+     :class="{ 'bg-slate-600': i.isLikes, 'text-white': i.isLikes }" :data-answerId="i._id"
+     :data-which="1" :data-isLikes="i.isLikes" :data-isHesitation="i.isHesitation">
+     赞
+</div>
+```
+
+分三种情况：
+
+1. 没有点赞信息，直接点赞，赞值+1
+
+2. 有点赞信息，再次点击点赞（取消点赞），赞值-1
+
+3. 有点赞信息，点击踩，赞值+1、踩值+1
+
+同时以上的值也要对应相应的样式更改。由于后端部分设计的耦合度太高，将第二种情况单独领出来修改isLikes和isHesitation

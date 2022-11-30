@@ -12,7 +12,8 @@
                         @click.stop>x</div>
                 </a-popconfirm>
                 <!-- 问题标题 -->
-                <div class="text-2xl" :data-questionId="item._id" :data-index="index">{{ item.title }}</div>
+                <div class="text-2xl mt-2 truncate" :data-questionId="item._id" :data-index="index">{{ item.title }}
+                </div>
                 <!-- 问题描述 -->
                 <div class="truncate" :data-questionId="item._id" :data-index="index">{{ item.descriptions }}</div>
                 <!-- 提出问题的人的信息 -->
@@ -51,7 +52,7 @@ onMounted(() => {
 const ToQuestion = (e: any) => {
     router.push({
         name: "Question", query: {
-            questionid: e.target.dataset.questionid as string,
+            questionId: e.target.dataset.questionid as string,
             index: e.target.dataset.index as number
         }
     })

@@ -39,7 +39,7 @@ onMounted(() => {
     customStore.UpdateNewsList()
 })
 // 提供给swiper组件的模块，不提供的话在属性中写了也没用
-const modules = [Pagination]
+const modules = [Pagination, Autoplay]
 
 </script>
 
