@@ -18,10 +18,10 @@
             </div>
             <!-- 赞和质疑 -->
             <div class="flex w-24" @click="feedback">
-                <div class="w-16 h-7 border-slate-600 border-1 flex justify-center items-center cursor-pointer rounded-xl mr-1"
+                <div class="w-16 h-7 border-slate-600 flex justify-center items-center border-1 cursor-pointer rounded-xl mr-1"
                     :class="{ 'bg-slate-600': i.isLikes, 'text-white': i.isLikes }" :data-answerId="i._id"
                     :data-which="1" :data-isLikes="i.isLikes" :data-isHesitation="i.isHesitation">
-                    赞
+                    赞&nbsp;{{ i.likes }}
                 </div>
                 <div class="w-7 h-7 border-slate-600 border-1 flex justify-center items-center cursor-pointer rounded-xl text-2xl"
                     :class="{ 'bg-slate-600': i.isHesitation, 'text-white': i.isHesitation }" :data-answerId="i._id"
@@ -29,7 +29,6 @@
                     ▾
                 </div>
             </div>
-            {{ i.likes }}, {{ i.hesitation }}
         </div>
     </div>
 </template>

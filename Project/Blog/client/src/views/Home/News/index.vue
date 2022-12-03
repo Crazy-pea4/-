@@ -4,7 +4,7 @@
         <swiper-slide v-for="i in newsList" :key="i.sourceId"
             class="h-80 md:h-96 2xl:h-120 flex justify-center bg-cover bg-gradient-to-l from-slate-400">
             <div class="relative w-2/3">
-                <img :src="i.imgsrc" alt="" class="absolute right-0 w-10/12 h-full opacity-60">
+                <img :src="i.imgsrc" alt="" class="absolute right-0 w-10/12 h-full opacity-60" v-if="i.imgsrc">
                 <div class="w-full absolute top-1/2 -translate-y-1/2 text-white">
                     <!-- 标题 -->
                     <div class="text-3xl 2xl:text-4xl mt-10 font-semibold">{{ i.title }}</div>

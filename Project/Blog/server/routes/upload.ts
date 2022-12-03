@@ -7,6 +7,6 @@ import uploadController from "../controller/upload";
 /* upload中间件 */
 import upload from "../middleware/upload";
 
-router.post("/", upload.single("file"), uploadController.upload);
+router.post("/:id", upload.single("file"), uploadController.upload);
 
 export default router;

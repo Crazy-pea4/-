@@ -1,6 +1,7 @@
 export default {
   // app端口
   app: {
+    baseUrl: process.env.baseUrl || "D:/Program/H5C3-JS/Project/Blog/server",
     port: process.env.PORT || 3000,
   },
   // 数据库url

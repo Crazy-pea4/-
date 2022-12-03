@@ -43,5 +43,9 @@ export default [
     name: "Question",
     path: "/question",
     component: () => import("@/views/Question/index.vue"),
+    meta: {
+      isShowSearchBar: true,
+      isShowSideBar: true,
+    },
   },
 ];

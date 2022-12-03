@@ -1,9 +1,20 @@
 <template>
-    <div class="w-4/6 h-screen mx-auto p-10">
+    <div class="w-sHeart h-120 mx-auto my-auto">
         <div class="w-full h-full flex flex-col justify-around items-center bg-slate-400">
             <!-- 头像 -->
-            <div class="w-24 h-24 rounded-full bg-blue-600">
-                <!-- <img src="" alt=""> -->
+            <div class="w-24 h-24 relative">
+                <a-upload v-model:file-list="fileList" :list-type="userSetting.avatarUrl ? 'picture' : 'picture-card'"
+                    class="w-24 h-24 cursor-pointer" :show-upload-list="false" :before-upload="beforeUpload"
+                    :customRequest="uploadAvatar">
+                    <img class="h-24 w-24 rounded-full absolute top-0" v-if="userSetting.avatarUrl"
+                        :src="userSetting.avatarUrl" alt="头像" />
+                    <div v-else>
+                        <loading-outlined v-if="loading"></loading-outlined>
+                        <plus-outlined v-else></plus-outlined>
+                        <div>上传</div>
+                    </div>
+                </a-upload>
+                <picture-outlined class="absolute right-2 bottom-0 text-white text-lg" />
             </div>
             <!-- 用户数据修改框 -->
             <div class="w-1/2 flex flex-wrap">
@@ -46,6 +57,8 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useSettingStore } from '@/stores/setting'
 import { storeToRefs } from 'pinia'
+import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+import { PictureOutlined } from '@ant-design/icons-vue';
 import { editUser } from '@/api/user'
 
 // 创建settingStore
@@ -56,11 +69,35 @@ onMounted(() => {
     settingStore.GetUser(localStorage.getItem('id')!)
 })
 
+// 文件列表
+const fileList = ref([]);
+// 上传头像的loading图标
+const loading = ref<boolean>(false);
+
+// 上传之前的类型和大小的检查
+const beforeUpload = (file: any) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+        console.log('只能上传jpg或png格式的图片');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        console.log('图片大小必须小于2MB');
+    }
+    return isJpgOrPng && isLt2M;
+};
+// 上传头像方法
+const uploadAvatar = (file: any) => {
+    const form = new FormData()
+    form.append('file', file.file)
+    settingStore.UploadAvatar(userSetting.value._id, form)
+}
+// 保存信息（不包含头像）
 const saveUserInfo = (async () => {
     const id = localStorage.getItem('id')!
-    const res = await editUser(id, userSetting.value)
-    console.log(res);
+    await editUser(id, userSetting.value)
 })
+
 </script>
 
 <style lang='' scoped>

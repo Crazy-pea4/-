@@ -12,6 +12,7 @@
       // 简单来说，具有Iterable接口的数据类型，就是拥有了某种规格标准可以去做某件事
       // 例如可被for...of遍历的，都具有Iterable接口
       const arr = [1, 2, 3, 4];
+      console.log(arr);
       // Symbol.iterator是一种固定写法
       const iterable = arr[Symbol.iterator]();
       let next = iterable.next();
