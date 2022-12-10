@@ -3,7 +3,7 @@
         :pagination="{ clickable: true }">
         <swiper-slide v-for="i in newsList" :key="i.sourceId"
             class="h-80 md:h-96 2xl:h-120 flex justify-center bg-cover bg-gradient-to-l from-slate-400">
-            <div class="relative w-2/3">
+            <div class="relative w-2/3 select-none">
                 <img :src="i.imgsrc" alt="" class="absolute right-0 w-10/12 h-full opacity-60" v-if="i.imgsrc">
                 <div class="w-full absolute top-1/2 -translate-y-1/2 text-white">
                     <!-- 标题 -->
@@ -35,8 +35,8 @@ import "swiper/css/pagination";
 const customStore = useCustomStore()
 const { newsList } = storeToRefs(customStore)
 
-onMounted(() => {
-    customStore.UpdateNewsList()
+onMounted(async () => {
+    await customStore.UpdateNewsList()
 })
 // 提供给swiper组件的模块，不提供的话在属性中写了也没用
 const modules = [Pagination, Autoplay]

@@ -32,6 +32,9 @@ router.patch(
 // 查询问题列表
 router.get("/", questionController.getQuestionList);
 
+// 查询问题收藏列表
+router.get("/collection", questionController.getQuestionCollectedList);
+
 // 查询指定问题
 router.get("/:id", checkExisted.question, questionController.getQuestion);
 

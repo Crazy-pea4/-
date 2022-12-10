@@ -36,17 +36,17 @@
 <script setup lang = 'ts' >
 import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia';
-import { useQuestionStore } from '@/stores/question'
+import { useAnswerStore } from '@/stores/answer'
 
 // 接受父组件传递过来的Props
 const props = defineProps(['questionId'])
 
 // 创建question仓库
-const questionStore = useQuestionStore()
-const { answerList } = storeToRefs(questionStore)
+const answerStore = useAnswerStore()
+const { answerList } = storeToRefs(answerStore)
 
 const deleteAnswer = (questionId: string, answerId: string) => {
-    questionStore.DeleteAnswer(questionId, answerId)
+    answerStore.DeleteAnswer(questionId, answerId)
 }
 
 const feedback = async (e: any) => {
@@ -56,28 +56,28 @@ const feedback = async (e: any) => {
     ishesitation = ishesitation === 'true' ? true : false
     if (which === "1") {
         // 当前是点赞
-        await questionStore.LikeAnswer(props.questionId, answerid, !islikes)
+        await answerStore.LikeAnswer(props.questionId, answerid, !islikes)
         // 如果踩的值是真，那么点赞的同时需要取消踩
         if (ishesitation) {
-            await questionStore.HesitateAnswer(props.questionId, answerid, !ishesitation)
+            await answerStore.HesitateAnswer(props.questionId, answerid, !ishesitation)
         }
         // 若在有赞的情况下还点了赞，那么就是取消
         if (islikes) {
-            await questionStore.ClearIsLikesAndIsHesitation(props.questionId, answerid)
+            await answerStore.ClearIsLikesAndIsHesitation(props.questionId, answerid)
         }
-        questionStore.GetAnswerList(props.questionId)
+        answerStore.GetAnswerList(props.questionId)
     } else {
         // 当前是踩
-        await questionStore.HesitateAnswer(props.questionId, answerid, !ishesitation)
+        await answerStore.HesitateAnswer(props.questionId, answerid, !ishesitation)
         // 如果点赞的值是真，那么踩的同时需要取消点赞
         if (islikes) {
-            await questionStore.LikeAnswer(props.questionId, answerid, !islikes)
+            await answerStore.LikeAnswer(props.questionId, answerid, !islikes)
         }
         // 若在有踩的情况下还点了踩，那么就是取消
         if (ishesitation) {
-            await questionStore.ClearIsLikesAndIsHesitation(props.questionId, answerid)
+            await answerStore.ClearIsLikesAndIsHesitation(props.questionId, answerid)
         }
-        questionStore.GetAnswerList(props.questionId)
+        answerStore.GetAnswerList(props.questionId)
     }
 }
 

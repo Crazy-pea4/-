@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-zinc-100">
+    <div class="bg-zinc-100 pb-8">
         <!-- 顶部 -->
         <header class="w-full h-80 md:h-96 2xl:h-120 relative bg-slate-600">
             <News />
@@ -19,7 +19,6 @@
                 <RightSideBar />
             </div>
         </div>
-        <footer></footer>
     </div>
 </template>
 

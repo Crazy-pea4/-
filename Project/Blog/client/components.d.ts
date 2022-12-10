@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ABackTop: typeof import('ant-design-vue/es')['BackTop']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACalendar: typeof import('ant-design-vue/es')['Calendar']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
@@ -21,6 +22,8 @@ declare module '@vue/runtime-core' {
     ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
     AUpload: typeof import('ant-design-vue/es')['Upload']
+    BackTop: typeof import('./src/components/backTop.vue')['default']
+    CopyRight: typeof import('./src/components/copyRight.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./src/components/searchBar.vue')['default']

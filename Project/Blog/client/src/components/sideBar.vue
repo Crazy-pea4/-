@@ -23,14 +23,14 @@
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { HomeOutlined, SettingOutlined, MenuOutlined } from '@ant-design/icons-vue'
+import { HomeOutlined, UserOutlined, MenuOutlined } from '@ant-design/icons-vue'
 // 创建路由器实例
 const router = useRouter()
 
 // 图标数组（方便动态渲染）
 const iconArr = ref([
     { icon: HomeOutlined, text: "Home" },
-    { icon: SettingOutlined, text: "Setting" }
+    { icon: UserOutlined, text: "User" }
 ])
 
 const isMaskShow = ref(false)
@@ -46,7 +46,7 @@ const ToLocation = (index: number) => {
             changeShow()
             break;
         case 1:
-            router.replace({ name: "Setting" })
+            router.replace({ name: "User" })
             changeShow()
             break;
     }

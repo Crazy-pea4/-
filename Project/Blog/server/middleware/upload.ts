@@ -1,8 +1,8 @@
 /* 引入声明文件 */
 import Upload from "../@types/middleware/upload";
-
 /* 引入multer库，创建upload中间件 */
 import multer from "multer";
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/uploads");

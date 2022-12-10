@@ -1,7 +1,9 @@
 <template>
   <div class="app">
+    <!-- Components组件 -->
     <sidebar></sidebar>
     <searchBar></searchBar>
+    <backTop></backTop>
     <!-- 路由组件 -->
     <div class="relative">
       <!-- 路由 -->
@@ -12,6 +14,7 @@
         <component :is="Component" v-if="!$route.meta.isKeepAlive" :key="$route.name" />
       </RouterView>
     </div>
+    <copyRight></copyRight>
   </div>
 
 </template>
@@ -21,7 +24,8 @@ import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import searchBar from "@/components/searchBar.vue"
 import sidebar from "@/components/sideBar.vue"
-
+import backTop from "@/components/backTop.vue"
+import copyRight from "@/components/copyRight.vue"
 
 </script>
 

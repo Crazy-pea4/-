@@ -24,6 +24,20 @@ export function getUser(id: string) {
   });
 }
 
+export function collectingQuestions(questionId: string) {
+  return request({
+    url: `/user/questionCollecting/${questionId}`,
+    method: "PUT",
+  });
+}
+
+export function uncollectingQuestions(questionId: string) {
+  return request({
+    url: `/user/questionCollecting/${questionId}`,
+    method: "DELETE",
+  });
+}
+
 export function likeAnswer(
   questionId: string,
   answerId: string,

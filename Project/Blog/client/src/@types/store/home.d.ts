@@ -11,5 +11,13 @@ export interface QuestionList {
     phoneNumber: string;
     avatarUrl: string;
   };
+  isCollected: boolean;
+  questionCollector: [
+    {
+      _id: string;
+      nickname: string;
+      phoneNumber: string;
+      avatarUrl: string;
+    }
+  ];
 }
-[{}, {}];

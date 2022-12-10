@@ -21,9 +21,21 @@ const questionSchema = new mongoose.Schema({
     required: true,
     select: false,
   },
+  isCollected: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  // 问题收藏粉丝列表
+  questionCollector: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    default: [],
+    select: false,
+  },
   // 问题所关联的话题
   topics: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Topic" }],
+    default: [],
     select: false,
   },
 

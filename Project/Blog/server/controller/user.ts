@@ -300,6 +300,100 @@ const userController: UserController = {
       next(err);
     }
   },
+  // 收藏问题（id为问题id）
+  collectingQuestions: async (req, res, next) => {
+    try {
+      // 问题id
+      const id = req.params.id;
+      // 关注者id
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
+      /**
+       * 若 被关注的问题 的followers粉丝列表中没有关注者id，则可以关注，
+       * 否则不能重复关注
+       */
+      // 获取 被收藏的问题 的收藏列表
+      const user = await questionModel
+        .findById(id)
+        .select("+questionCollector");
+      // 被收藏的问题 的收藏列表已存在 收藏者 则返回收藏失败信息
+      if (user?.questionCollector.includes(value))
+        return res.status(400).json({
+          code: 400,
+          message: "已收藏问题，不能重复收藏",
+        });
+      else {
+        // 向 被收藏的问题 的收藏列表添加 关注者id
+        await questionModel.updateOne(
+          { _id: id },
+          // $addToSet和$push的区别是：前者不会重复添加
+          {
+            $addToSet: { questionCollector: value },
+            $set: { isCollected: true },
+          }
+        );
+        // 向 收藏者 的收藏列表添加 被关注的问题id
+        await userModel.updateOne(
+          { _id: value },
+          { $addToSet: { collectingAnswers: id } }
+        );
+        res.status(200).json({
+          code: 200,
+          message: "收藏问题成功",
+          data: { id },
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // 取消收藏问题（id为问题id）
+  uncollectingQuestions: async (req, res, next) => {
+    try {
+      // 问题id
+      const id = req.params.id;
+      // 关注者id
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
+      /**
+       * 若 被关注的问题 的followers粉丝列表中没有关注者id，则可以关注，
+       * 否则不能重复关注
+       */
+      // 获取 被收藏的问题 的收藏列表
+      const user = await questionModel
+        .findById(id)
+        .select("+questionCollector");
+      // 被收藏的问题 的收藏列表不存在 收藏者 则返回取消收藏失败信息
+      if (!user?.questionCollector.includes(value))
+        return res.status(400).json({
+          code: 400,
+          message: "还未收藏问题，不能取消收藏",
+        });
+      else {
+        // 向 被收藏的问题 的收藏列表删除 关注者id
+        await questionModel.updateOne(
+          { _id: id },
+          // $addToSet和$push的区别是：前者不会重复添加
+          {
+            $pull: { questionCollector: value },
+            $set: { isCollected: false },
+          }
+        );
+        // 向 收藏者 的收藏列表删除 被关注的问题id
+        await userModel.updateOne(
+          { _id: value },
+          { $pull: { collectingAnswers: id } }
+        );
+        res.status(200).json({
+          code: 200,
+          message: "取消收藏问题成功",
+          data: { id },
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
   // 赞回答（取消）
   likeAnswer: async (req, res, next) => {
     try {

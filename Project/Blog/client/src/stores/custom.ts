@@ -20,11 +20,11 @@ export default defineStore("custom", {
     async UpdateNewsList() {
       try {
         // T1467284926140这个是网易新闻api设置的字段，不知未来是否会改变
-        const {
+        let {
           data: { T1467284926140 },
         } = await getNewsList();
+        T1467284926140.splice(10);
         this.newsList = T1467284926140;
-        this.newsList.splice(5, 999);
       } catch (err) {
         console.log(err);
       }

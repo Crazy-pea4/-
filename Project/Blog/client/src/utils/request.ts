@@ -1,6 +1,6 @@
 import axios from "axios";
 import nprogress from "nprogress";
-import { message } from "ant-design-vue";
+import { success, error } from "./message";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API,
@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
     if (config.method !== "get" && !config.url?.match(/auth/)) {
-      message.success("操作成功！");
+      success("操作成功！");
     }
     // 过滤从网上找来api，不给它加token
     if (config.baseURL!.match(/\/api/)) {
@@ -35,7 +35,7 @@ instance.interceptors.response.use(
     nprogress.done();
     // switch (response.data.code) {
     //   case 200:
-    //     message.success(response.data.message, 0.8);
+    //     success(response.data.message, 0.8);
     //     break;
     // }
     return response;
@@ -45,16 +45,20 @@ instance.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 500:
-          message.error("服务器错误，请联系管理员", 0);
+          error("服务器错误，请联系管理员", 0);
+          error(error.response.data.message, 0);
           break;
         case 401:
-          message.error("登录鉴权不通过，请重新登陆后重试");
-        case 400:
-          message.error(error.response.data.message);
+          error("登录鉴权不通过，请重新登陆后重试");
           break;
+        case 400:
+          error(error.response.data.message);
+          break;
+        default:
+          error("网络错误，请重试");
       }
     } else {
-      message.error(error.message);
+      error(error.message);
     }
     nprogress.done();
     return Promise.reject(error);

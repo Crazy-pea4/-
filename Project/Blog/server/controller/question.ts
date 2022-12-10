@@ -62,6 +62,26 @@ const questionController: QuestionController = {
       next(err);
     }
   },
+  // 查询问题收藏列表
+  getQuestionCollectedList: async (req, res, next) => {
+    try {
+      // 获取页数page
+      let { page = 0, limit = 10 } = req.query;
+      page = Math.max((page as any) * 1, 1) - 1;
+      // 限制每页有多少条数据
+      limit = Math.max((limit as any) * 1, 0);
+      const questionList = await questionModel
+        // 实现模糊搜索，忽略大小写
+        .find({ isCollected: true })
+        .populate("questioner")
+        .populate("topics")
+        .limit(limit)
+        .skip(page * limit);
+      handelResponse(res, questionList, "查询问题列表成功");
+    } catch (err) {
+      next(err);
+    }
+  },
   // 查询指定问题
   getQuestion: async (req, res, next) => {
     try {

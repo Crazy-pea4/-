@@ -14,6 +14,8 @@ export default interface UserController {
   unfollowTopic: RequestHandler;
   getTopicFollowing: RequestHandler;
   getUserQuestions: RequestHandler;
+  collectingQuestions: RequestHandler;
+  uncollectingQuestions: RequestHandler;
   likeAnswer: RequestHandler;
   hesitateAnswer: RequestHandler;
   clearIsLikesAndIsHesitation: RequestHandler;

@@ -1,11 +1,11 @@
 <template>
     <!-- 上下箭头 -->
-    <div class="w-full h-5 border-2 border-b-0 flex justify-center items-center cursor-pointer z-10"
+    <div class="w-full h-5 border-2 border-b-0 bg-white flex justify-center items-center cursor-pointer z-10"
         @click="isShow = !isShow">
         <up-outlined class="duration-300" :class="{ '-rotate-180': isShow }" />
     </div>
     <!-- 功能小图标 -->
-    <div class="w-full border-2 flex flex-col overflow-hidden justify-center duration-300 items-center cursor-pointer"
+    <div class="w-full border-2 bg-white flex flex-col overflow-hidden justify-center duration-300 items-center cursor-pointer"
         :class="{ 'h-0': !isShow, 'h-16': isShow }">
         <edit-outlined @click="visible = true" class="text-4xl" />
         <span class="text-xs">新增问题</span>
@@ -33,9 +33,9 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { EditOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { FormInstance } from 'ant-design-vue';
-import { useMainFloorStore } from "@/stores/home"
+import { useQuestionStore } from "@/stores/question"
 import type { CreateQuestionData } from "@/@types/api/question"
-const mainFloorStore = useMainFloorStore()
+const mainFloorStore = useQuestionStore()
 
 // 获取form表单元素
 const formRef = ref<FormInstance>();

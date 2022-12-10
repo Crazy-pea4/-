@@ -28,7 +28,7 @@
 import { onBeforeUnmount, ref, shallowRef, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-import { useQuestionStore } from '@/stores/question'
+import { useAnswerStore } from '@/stores/answer'
 
 // 引入声明类型
 import type { IDomEditor, IEditorConfig } from '@wangeditor/editor'
@@ -39,7 +39,7 @@ import { RollbackOutlined } from '@ant-design/icons-vue';
 const router = useRouter()
 const route = useRoute()
 // 创建问题store实例
-const questionStore = useQuestionStore()
+const answerStore = useAnswerStore()
 // 工具栏、编辑器配置
 const toolbarDefaultConfig = {}
 const editorDefaultConfig: Partial<IEditorConfig> = {
@@ -49,6 +49,7 @@ const editorDefaultConfig: Partial<IEditorConfig> = {
                 { text: 'CSS', value: 'css' },
                 { text: 'HTML', value: 'html' },
                 { text: 'JS', value: 'javascript' },
+                { text: "vue", value: 'vue' }
             ]
         }
     }
@@ -69,7 +70,7 @@ const createAnswer = async () => {
     console.log(editor.getHtml());
     const questionId = route.params.questionId as string
     const data = { content: editor.getHtml(), createdAt: '', updatedAt: '' }
-    await questionStore.CreateAnswer(questionId, data)
+    await answerStore.CreateAnswer(questionId, data)
     editor.setHtml('')
     router.back();
 }

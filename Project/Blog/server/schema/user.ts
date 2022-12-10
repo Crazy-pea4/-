@@ -62,6 +62,11 @@ const userSchema = new mongoose.Schema({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Topic" }],
     select: false,
   },
+  // 收藏问题列表
+  collectingQuestions: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
+    select: false,
+  },
   // 收藏回答列表
   collectingAnswers: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Answer" }],

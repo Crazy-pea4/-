@@ -306,6 +306,109 @@ await commentModel.findOneAndUpdate(
 
 2. 其次，`{ set: { "secondaryComment..content": info.content } }`利用`$set`操作符修改，而定位交给`"secondaryComment.$.content"`。这里需要注意的是`$`符号是mongodb内置的对于数组元素的投影，并且是唯一的，所以如果上面是用`{_id: id}`去定位的话就会报错：`MongoServerError: The positional operator did not find the match needed from the query.`。
 
-## 聚合搜索aggregate
+## 使用腾讯云cos储存桶压缩并存放用户图片
 
-之前给每个模型设置了时间戳，但是默认显示的
+存放：
+
+    在uploadController中，讲原本的upload方法进行了改造，使其能够对接腾讯云cos存储桶。
+
+1. 安装tencent cos_v5
+
+```
+import Cos from "cos-nodejs-sdk-v5";
+```
+
+2. 根据文档使用上传文件api，同时删掉保留在本地的图片
+
+```js
+const filepath = `${config.app.baseUrl}/public/
+uploads/${req.file.originalname}`;
+const Key = `${id}_${req.file.originalname}`;
+
+cos.uploadFile({
+        Bucket: "blog-user-avatar-1308742510",
+        Region: "ap-guangzhou",
+        Key: Key,
+        FilePath: filepath,
+        onFileFinish: async function (err, data, options) {
+          if (err) {
+            res.status(500).json({ code: 500, message: err });
+          }
+          // 成功后设置userModel.avatar为图床的图片url
+          await userModel.findByIdAndUpdate(id, {
+            $set: {
+              avatarUrl: `https://${data.Location}`,
+            },
+          });
+          // 删除留在本地的图片
+          fs.rmSync(filepath);
+          res.status(200).json({
+            code: 200,
+            message: "上传成功！",
+          });
+        },
+      });
+```
+
+3. 后来发现，用户新上传的图片无法覆盖前一个上传过的，于是先判断用户是否上传若有则先删除掉再上传新的
+
+```js
+// 查询用户先前是否已经上传过头像
+      cos.getBucket(
+        {
+          Bucket: "blog-user-avatar-1308742510",
+          Region: "ap-guangzhou",
+          Prefix: id,
+        },
+        (err, data) => {
+          if (err) {
+            res.status(500).json({
+              code: 500,
+              message: err.message,
+            });
+          }
+          // 若用户存在之前上传过的图片，删除掉再添加新的
+          if (data.Contents[0]) {
+            cos.deleteObject(
+              {
+                Bucket: "blog-user-avatar-1308742510",
+                Region: "ap-guangzhou",
+                Key: data.Contents[0].Key,
+              },
+              (err, data) => {
+                if (err) {
+                  res.status(500).json({
+                    code: 500,
+                    message: err.message,
+                  });
+                }
+              }
+            );
+          }
+        }
+      );
+```
+
+4. 虽然前端设置了上传的图片不能大于2MB，但是上传超过1MB的图片在下载时还是会加载卡顿，考虑到头像比较小因此在上传时将图片压缩再储存
+
+[对象存储 基础图片处理-SDK 文档-文档中心-腾讯云 (tencent.com)](https://cloud.tencent.com/document/product/436/55332#.E7.A4.BA.E4.BE.8B.E4.BB.A3.E7.A0.81)
+
+```js
+// 在uploadFile加入如下请求头字段，注意：
+// 注意：里面的双引号要严格对应，写成单引号也会报错（被这个搞蒙好久）
+cos.uploadFile({
+        ...
+        Headers: {
+          // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 128，宽度等比压缩
+          "Pic-Operations": `{"is_pic_info": 1, "rules": [{"fileid": "${Key}", "rule": "imageMogr2/thumbnail/128x/"}]}`,
+        },
+        ...
+      });
+```
+
+5. 后面测试发现当传入的图片有中文时，上传到存储桶的文件名是乱码，但是经过压缩后的文件名有可以显示中文，这样的话后端返回的仍然是没压缩过的图片，为了解决将Key：
+
+```js
+// 加上Date.now()是防止路径不变src属性走缓存，这样图片不会改变
+const Key = `${id}_${Date.now()}_avatar.jpg`;
+```

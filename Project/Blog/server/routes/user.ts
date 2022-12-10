@@ -73,7 +73,7 @@ router.delete(
 // 获取关注话题列表（id为当前用户）
 router.get(
   "/:id/topicFollowing",
-  checkExisted.topic,
+  checkExisted.user,
   userController.getTopicFollowing
 );
 
@@ -82,6 +82,20 @@ router.get(
   "/:id/questions",
   checkExisted.user,
   userController.getUserQuestions
+);
+
+// 收藏回答（id为回答id）
+router.put(
+  "/questionCollecting/:id",
+  checkExisted.question,
+  userController.collectingQuestions
+);
+
+// 取消收藏回答（id为回答id）
+router.delete(
+  "/questionCollecting/:id",
+  checkExisted.question,
+  userController.uncollectingQuestions
 );
 
 // 赞同答案（id为答案id）
