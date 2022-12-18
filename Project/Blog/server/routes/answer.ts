@@ -32,6 +32,9 @@ router.patch(
 // 查询回答列表
 router.get("/:questionId/answer/", answerController.getAnswerList);
 
+// 查询回答收藏列表
+router.get("/answer/liked", answerController.getAnswerLikedList);
+
 // 查询指定回答
 router.get(
   "/:questionId/answer/:id",

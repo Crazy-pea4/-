@@ -397,7 +397,11 @@ const userController: UserController = {
   // 赞回答（取消）
   likeAnswer: async (req, res, next) => {
     try {
-      const id = req.params.id;
+      // 回答id
+      const id = req.params.id as any;
+      // 获取token，解密获得用户id
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
       const method = req.method;
       // $inc操作符用于递增目标值
       const data = await answerModel.findByIdAndUpdate(id, {
@@ -408,6 +412,11 @@ const userController: UserController = {
           isHesitation: method === "PUT" ? false : true,
         },
       });
+      // 像userModel中的likesAnswers添加点赞的回答
+      await userModel.updateOne(
+        { _id: value },
+        { $addToSet: { likesAnswers: id } }
+      );
       if (data) {
         res.status(200).json({
           code: 200,
@@ -427,7 +436,11 @@ const userController: UserController = {
   // 歧义答案（取消）
   hesitateAnswer: async (req, res, next) => {
     try {
-      const id = req.params.id;
+      // 回答id
+      const id = req.params.id as any;
+      // 获取token，解密获得用户id
+      const token = req.headers.token as string;
+      const { value } = Jwt.verify(token);
       const method = req.method;
       // $inc操作符用于递增目标值
       const data = await answerModel.findByIdAndUpdate(id, {
@@ -437,7 +450,11 @@ const userController: UserController = {
           isLikes: method === "PUT" ? false : true,
         },
       });
-
+      // 像userModel中的likesAnswers移除点赞的回答
+      await userModel.updateOne(
+        { _id: value },
+        { $pull: { likesAnswers: id } }
+      );
       if (data) {
         res.status(200).json({
           code: 200,

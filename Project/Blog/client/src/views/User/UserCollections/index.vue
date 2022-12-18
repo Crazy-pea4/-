@@ -13,7 +13,7 @@
             </div>
         </div>
         <!-- 主体内容部分 -->
-        <div class="mt-8 h-130">
+        <div class="mt-8 overflow-auto min-h-screen">
             <router-view v-slot="{ Component }">
                 <keep-alive>
                     <component :is="Component" />
@@ -25,12 +25,25 @@
 
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
+import { useRoute } from 'vue-router';
 import { ReloadOutlined } from '@ant-design/icons-vue';
 import { useQuestionStore } from "@/stores/question"
+import { useAnswerStore } from '@/stores/answer';
+
+const route = useRoute()
 
 const questionStore = useQuestionStore()
+const answerStore = useAnswerStore()
+
 const refresh = () => {
-    questionStore.GetQuestionCollectedList()
+    switch (route.name) {
+        case 'LikedAnswer':
+            questionStore.GetQuestionCollectedList()
+            break;
+        case 'CollectedQuestion':
+            answerStore.GetAnswerLikedList()
+            break;
+    }
 }
 
 const tabBar = [{

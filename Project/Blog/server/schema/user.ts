@@ -67,6 +67,11 @@ const userSchema = new mongoose.Schema({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
     select: false,
   },
+  // 赞回答列表
+  likesAnswers: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Answer" }],
+    select: false,
+  },
   // 收藏回答列表
   collectingAnswers: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Answer" }],

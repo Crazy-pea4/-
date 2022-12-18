@@ -1,0 +1,112 @@
+/* 
+    fr: 作为grid布局特有的单位，表示所占的份数。
+        例如 columns: 1fr 2fr 1fr 表示中间列所占宽度是旁边两个的2倍
+    
+*/
+
+.grid1 {
+  display: grid;
+  /* grid-template-columns: 20px 35px 20px 20px 20px; */
+  /* 也可以通过repeat(times, unit)方法简写
+    第一个参数：表示重复的次数
+    第二个参数：表示使用的单位
+  */
+  grid-template-columns: repeat(2, 20px) 100px repeat(2, 20px);
+}
+
+.grid1 div {
+  background-color: darkolivegreen;
+}
+
+/* -------------------------grid-template-areas------------------------------- */
+
+/* .grid2 {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(3, 80px);
+  grid-template-areas:
+    "header header header header"
+    "main main . sidebar"
+    "footer footer footer footer";
+} */
+/* .的含义是空白占位，表示这里没有内容 */
+
+/* 上面的也可以使用grid-template简写 */
+
+.grid2 {
+  display: grid;
+  grid-template:
+    "header header header header" 80px
+    "main main . sidebar" 80px
+    "footer footer footer footer" 80px
+    / 80px 80px 80px 80px;
+}
+
+.grid2 div:nth-child(1) {
+  grid-area: header;
+  background-color: darkgreen;
+}
+.grid2 div:nth-child(2) {
+  grid-area: sidebar;
+  background-color: darkblue;
+}
+.grid2 div:nth-child(3) {
+  grid-area: main;
+  background-color: darkorange;
+}
+.grid2 div:nth-child(4) {
+  grid-area: footer;
+  background-color: darkviolet;
+}
+
+/* -----------------------row-gap column-gap--------------------------------- */
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  /* row-gap: 10px;
+  column-gap: 10px; */
+  /* 上面两行可以用gap属性来简写，当接收2个值时，顺序为水平方向和垂直方向的间距；一个值就是水平垂直 */
+  gap: 20px 5px;
+}
+
+.grid3 div {
+  background-color: darkred;
+}
+
+/* -----------------------grid-[column | row]-[start | end]--------------------------------- */
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  /* row-gap: 10px;
+    column-gap: 10px; */
+  /* 上面两行可以用gap属性来简写，当接收2个值时，顺序为水平方向和垂直方向的间距；一个值就是水平垂直 */
+  gap: 20px 5px;
+}
+
+.grid4 div {
+  background-color: skyblue;
+}
+
+.grid4 div:nth-child(1) {
+  /* grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4; */
+  grid-area: 2 / 2 / 4 / 4;
+  /* 
+    也可以接收列和行的名称；
+    通过span来表示 跨越
+        如果span: number 表示跨域到第number行
+        如果span: string 表示跨越到string名称的列或行
+  */
+  /* 同样的，可以使用grid-column和grid-row简写上面的形式。
+        grid-column: <start-line> / <end-line>
+        左右边分别表示开始和结束
+
+    grid-area除了可以定义属性归属区间，也可以用在这里当作描绘区间
+        grid-area: <row-start> / <column-start> / <row-end> / <column-end>
+  */
+}

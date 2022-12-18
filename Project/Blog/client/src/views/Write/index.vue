@@ -6,7 +6,7 @@
             </div>
         </div>
         <!-- 顶部编辑菜单栏 -->
-        <div class="">
+        <div class="pb-24">
             <Toolbar class="" :editor="editorRef" :mode="mode" :defaultConfig="toolbarDefaultConfig" />
             <Editor style="border: 1px solid #ccc; overflow-y: auto; height: 500px;"
                 :defaultConfig="editorDefaultConfig" :mode="mode" @onCreated="handleCreated"

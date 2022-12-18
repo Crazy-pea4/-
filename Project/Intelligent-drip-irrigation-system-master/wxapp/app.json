@@ -1,0 +1,47 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/history/history",
+    "pages/setting/setting"
+  ],
+  "tabBar": {
+    
+    "color": "#999999",
+    "backgroundColor": "#111111",
+    "selectedColor": "#1989fa",
+    
+      "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./static/tabs/Home.png",
+        "selectedIconPath": "./static/tabs/Home_selected.png"
+      },
+      
+      {
+        "pagePath": "pages/setting/setting",
+        "text": "设置",
+        "iconPath": "./static/tabs/setting.png",
+        "selectedIconPath": "./static/tabs/setting_selected.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true,
+  
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationStyle": "custom"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于天气效果展示"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

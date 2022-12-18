@@ -1,0 +1,43 @@
+/* pages/setting/setting.wxss */
+.root-wrapper{
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.header-wrapper{
+  background: rgba(0, 0, 0, 0.6) no-repeat center center;
+  background-blend-mode: multiply;
+  height: 35vh;
+  color: #ffffff;
+}
+.user-info{
+  padding: 120px 0 20px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.avatar-wrapper{
+  height: 96px;
+  width: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.username-wrapper{
+  font-size: 32px;
+}
+.body-wrapper{
+  box-sizing: border-box;
+  padding: 20px 15px 0 15px;
+}
+.list-wrapper{
+  margin: 10px 0;
+}
+.list{
+  border-radius: 25px;
+  background-color: #111111;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}

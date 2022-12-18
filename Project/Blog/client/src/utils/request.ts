@@ -40,26 +40,24 @@ instance.interceptors.response.use(
     // }
     return response;
   },
-  function (error) {
+  function (err) {
     // 对响应错误做点什么
-    if (error.response) {
-      switch (error.response.status) {
+    if (err.response) {
+      switch (err.response.status) {
         case 500:
           error("服务器错误，请联系管理员", 0);
-          error(error.response.data.message, 0);
+          error(err.response.data.message, 0);
           break;
         case 401:
           error("登录鉴权不通过，请重新登陆后重试");
           break;
         case 400:
-          error(error.response.data.message);
+          error(err.response.data.message);
           break;
         default:
           error("网络错误，请重试");
       }
-    } else {
-      error(error.message);
-    }
+    } else error(err.message);
     nprogress.done();
     return Promise.reject(error);
   }

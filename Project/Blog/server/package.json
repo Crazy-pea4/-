@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.ts"
+    "start": "nodemon ./app.ts",
+    "compile": "tsc"
   },
   "keywords": [],
   "author": "",

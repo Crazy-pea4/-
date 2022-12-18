@@ -78,6 +78,7 @@ export const useQuestionStore = defineStore("question", {
         await deleteQuestion(questionId);
         // 重新获取一次问题列表
         this.GetQuestionList();
+        this.GetQuestionCollectedList();
       } catch (err) {
         console.log(err);
       }

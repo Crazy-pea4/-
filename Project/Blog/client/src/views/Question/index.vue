@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-zinc-100 h-screen overflow-auto">
+    <div class="bg-zinc-100 min-h-screen">
         <!-- 顶部问题标题区 -->
         <header class="w-full pt-10 bg-white shadow" v-if="question">
             <div class="w-sHeart mx-auto flex flex-col">
@@ -26,7 +26,7 @@
             </div>
         </header>
         <!-- 主体 -->
-        <Answer :questionId="questionId"></Answer>
+        <Answer></Answer>
     </div>
 </template>
 

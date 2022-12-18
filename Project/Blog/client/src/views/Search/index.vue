@@ -3,7 +3,7 @@
         <!-- 列表 -->
         <SearchList :searchList="searchList" v-if="searchList.length > 0" />
         <div v-else class="flex justify-center items-center">
-            <img src="../../../assets/pinia.svg" alt="" class="w-20">
+            <img src="../../../public/assets/pinia.svg" alt="" class="w-20">
             <span class="self-end align-bottom">什么都没有找到呢</span>
         </div>
     </div>

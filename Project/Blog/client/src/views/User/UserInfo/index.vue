@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen h-full px-10 flex justify-center items-center bg-white">
+    <div class="w-full h-full pt-4 flex justify-center items-center bg-white">
         <div class="w-sHeart h-32 flex relative">
             <!-- 头像 -->
             <div class="h-28 w-28 mr-8">

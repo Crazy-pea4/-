@@ -8,6 +8,13 @@ export function getAnswerList(questionId: string) {
   });
 }
 
+export function getAnswerLikedList() {
+  return request({
+    url: `/question/answer/liked`,
+    method: "GET",
+  });
+}
+
 export function createAnswer(
   questionId: string,
   createAnswerData: CreateAnswerData

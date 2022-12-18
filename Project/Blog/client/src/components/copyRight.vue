@@ -1,4 +1,5 @@
 <template>
+    <!-- 底部区域 -->
     <div class="h-20 bg-zinc-500 flex flex-col justify-center items-center text-white"
         v-if="$route.meta.isShowCopyRight">
         <div class="">copyright yarh-blog 2022©️</div>

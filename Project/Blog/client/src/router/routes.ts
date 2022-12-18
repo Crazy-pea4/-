@@ -44,7 +44,7 @@ export default <RouteRecordRaw[]>[
         name: "CollectedQuestion",
         path: "collectedQuestion",
         component: () =>
-          import("@/views/user/userCollections/Question/index.vue"),
+          import("@/views/User/UserCollections/Question/index.vue"),
         meta: {
           index: 0,
         },
@@ -53,7 +53,7 @@ export default <RouteRecordRaw[]>[
         name: "LikedAnswer",
         path: "LikedAnswer",
         component: () =>
-          import("@/views/user/userCollections/Answer/index.vue"),
+          import("@/views/User/UserCollections/Answer/index.vue"),
         meta: {
           index: 1,
         },

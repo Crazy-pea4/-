@@ -1,6 +1,11 @@
 import { defineStore } from "pinia";
 import type { AnswerList } from "@/@types/store/question";
-import { getAnswerList, createAnswer, deleteAnswer } from "@/api/answer";
+import {
+  getAnswerList,
+  getAnswerLikedList,
+  createAnswer,
+  deleteAnswer,
+} from "@/api/answer";
 import {
   likeAnswer,
   hesitateAnswer,
@@ -12,6 +17,7 @@ import dayjs from "dayjs";
 export const useAnswerStore = defineStore("answer", {
   state: () => ({
     answerList: [] as AnswerList[],
+    likedList: [] as AnswerList[],
   }),
   getters: {},
   actions: {
@@ -21,6 +27,16 @@ export const useAnswerStore = defineStore("answer", {
           data: { data },
         } = await getAnswerList(questionId);
         this.answerList = data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async GetAnswerLikedList() {
+      try {
+        const {
+          data: { data },
+        } = await getAnswerLikedList();
+        this.likedList = data;
       } catch (err) {
         console.log(err);
       }
@@ -49,7 +65,7 @@ export const useAnswerStore = defineStore("answer", {
     async LikeAnswer(questionId: string, answerId: string, flag: boolean) {
       try {
         await likeAnswer(questionId, answerId, flag);
-        // await this.GetAnswerList(questionId);
+        await this.GetAnswerLikedList();
       } catch (err) {
         console.log(err);
       }
@@ -57,7 +73,7 @@ export const useAnswerStore = defineStore("answer", {
     async HesitateAnswer(questionId: string, answerId: string, flag: boolean) {
       try {
         await hesitateAnswer(questionId, answerId, flag);
-        // await this.GetAnswerList(questionId);
+        await this.GetAnswerLikedList();
       } catch (err) {
         console.log(err);
       }

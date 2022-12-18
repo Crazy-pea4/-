@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang='ts'>
+// @ts-nocheck
 import "v-calendar/dist/style.css";
 import { ref, reactive } from 'vue'
 import { Calendar } from 'v-calendar';

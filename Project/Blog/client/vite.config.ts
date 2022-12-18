@@ -20,7 +20,6 @@ export default defineConfig({
     },
   },
   server: {
-    hmr: true,
     port: 5050,
     proxy: {
       "/news": {

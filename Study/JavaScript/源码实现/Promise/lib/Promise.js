@@ -5,7 +5,7 @@
 
 (function () {
   // Promise构造函数
-  function Promise(excutor) {
+  function Promise(executor) {
     /**
      *  status: 初始的promise状态
      *  data: 用于存储结果数据
@@ -47,9 +47,9 @@
       }
     }
 
-    // 立即同步执行excutor。抛出异常也要捕获并且改状态为rejected
+    // 立即同步执行executor。抛出异常也要捕获并且改状态为rejected
     try {
-      excutor(resolve, reject);
+      executor(resolve, reject);
     } catch (error) {
       reject(error);
     }

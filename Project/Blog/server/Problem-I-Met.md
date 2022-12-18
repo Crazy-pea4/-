@@ -412,3 +412,38 @@ cos.uploadFile({
 // 加上Date.now()是防止路径不变src属性走缓存，这样图片不会改变
 const Key = `${id}_${Date.now()}_avatar.jpg`;
 ```
+
+## duplicate key error
+
+    在后续的测试当中，发现在注册时，填写一样的nickname会导致服务器报错，`E11000 duplicate key error collection: Blog.users index: nickname_1 dup key: { : "hmbb" }`。根据报错提醒，推测时users模块的索引重复，可是印象中并没有主动设置nickname_1的索引，于是打开NoSQLBooster for MongoDB来查看，发现在users下的indexes中有nickname_1的索引。删除后功能恢复正常
+
+    推测：在先前的代码编写时将nickname字段设置为了`require: true`，因此在mongodb中自动将nickname设置为了索引，后续将代码中的require: true删除，却没有对indexes中已存在的nickname_1做处理，遗留了下来
+
+## 项目上线服务器的相关问题
+
+    首先安装的是宝塔面板，之后安装一下应用，nodejs版本管理器、mongoDB。
+
+    然后将后端代码整个打包发到服务器，为了方便，就不用tsc事先编译了。前提条件是，在服务器全局安装nodemon和typescript，就像在本地一样。
+
+    选择后端代码的文件夹，配置相关的参数，端口号就选择开发时监听的端口号
+
+<img title="" src="file:///C:/Users/Crazy_pea/AppData/Roaming/marktext/images/2022-12-17-22-10-12-image.png" alt="" data-align="center" width="729">
+
+    然后配置nginx配置文件，将根路径映射为客户端文件下的index.htm
+
+```nginx
+location / {
+        root /www/wwwroot/client;
+        try_files $uri $uri/ /index.html;
+    }
+```
+
+    同时，由于我们在前端用到了代理，在服务器上也要配置一下代理（打包不会把代理服务器的内容打包进去）
+
+```nginx
+location ^~/news {
+        proxy_pass http://c.3g.163.com/nc/article/list/T1467284926140/0-20.html;
+    }
+```
+
+    （不要忘记修改一下文件里面的路径，有些路径要对应服务器的）

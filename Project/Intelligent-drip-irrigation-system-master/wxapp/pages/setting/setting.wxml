@@ -1,0 +1,33 @@
+<!--pages/setting/setting.wxml-->
+<view class="root-wrapper">
+  <view class="root">
+    <view class="header-wrapper">
+      <!--BG-IMAGE START-->
+      <image style="height:40vh;z-index:-999;position:absolute;" mode="heightFix" src="/static/images/home.jpg"></image>
+      <!--BG-IMAGE END-->
+      <view class="user-info">
+        <view class="avatar-wrapper">
+          <open-data type="userAvatarUrl" default-avatar="/static/images/avatar.png"></open-data>
+        </view>
+        <view class="username-wrapper">
+          <open-data type="userNickName" default-text="游客"></open-data>
+        </view>
+      </view>
+
+    </view>
+    <view class="body-wrapper">
+      <view class="list-wrapper">
+        <view class="list">
+          <view>微信版本号</view>
+          <view>8.0.1</view>
+        </view>
+      </view>
+      <view class="list-wrapper">
+        <view class="list">
+          <view>操作系统</view>
+          <view>Android 10</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

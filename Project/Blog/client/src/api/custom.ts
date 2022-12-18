@@ -11,7 +11,7 @@ export function getIpInfo() {
 // 有跨域限制
 export function getNewsList() {
   return request({
-    url: "http://localhost:5050/news",
+    url: import.meta.env.VITE_NEWS_API,
     method: "GET",
     baseURL: "",
   });

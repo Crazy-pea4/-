@@ -267,3 +267,25 @@ onBeforeMount(async () => {
 3. 有点赞信息，点击踩，赞值+1、踩值+1
 
 同时以上的值也要对应相应的样式更改。由于后端部分设计的耦合度太高，将第二种情况单独领出来修改isLikes和isHesitation
+
+## 将项目打包放入服务器中
+
+    在腾讯云的宝塔面板里完成后端的相关配置后（在后端的problem-i-meet.md中写了），将项目build打包，期间可能会有些库和vite+ts的检测不合符，可以使用`@ts-nocheck`来整个文件忽略ts检查
+
+```js
+// @ts-nocheck
+
+const a = 100
+let b = true
+...
+```
+
+    项目顺利打包后，找个离后端文件夹近的地方放client文件夹，之后配置运行的后端项目，填写域名
+
+![](C:\Users\Crazy_pea\AppData\Roaming\marktext\images\2022-12-18-00-39-22-image.png)
+
+然后打开外网映射
+
+![](C:\Users\Crazy_pea\AppData\Roaming\marktext\images\2022-12-18-00-39-39-image.png)
+
+此时再去访问公网地址就会发现可以进入项目的前端页面了

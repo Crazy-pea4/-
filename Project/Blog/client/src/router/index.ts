@@ -25,6 +25,7 @@ router.beforeEach(async (to, form) => {
   const token = localStorage.getItem("token");
   if (!token && to.name !== "Login" && to.name !== "Register") {
     sessionStorage.setItem("isValid", "false");
+    localStorage.setItem("token", "");
     await message.error("登录校验失效，请重新登录", 0.8);
     return { name: "Login" };
   } else if (token) {

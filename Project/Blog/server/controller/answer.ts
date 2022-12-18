@@ -76,6 +76,26 @@ const answerController: AnswerController = {
       next(err);
     }
   },
+  // 查询回答收点赞列表
+  getAnswerLikedList: async (req, res, next) => {
+    try {
+      // 获取页数page
+      let { page = 0, limit = 10 } = req.query;
+      page = Math.max((page as any) * 1, 1) - 1;
+      // 限制每页有多少条数据
+      limit = Math.max((limit as any) * 1, 0);
+
+      const answerList = await answerModel
+        // 实现模糊搜索，忽略大小写
+        .find({ isLikes: true })
+        .populate("answerer")
+        .limit(limit)
+        .skip(page * limit);
+      handelResponse(res, answerList, "查询问题列表成功");
+    } catch (err) {
+      next(err);
+    }
+  },
   // 查询指定回答
   getAnswer: async (req, res, next) => {
     try {

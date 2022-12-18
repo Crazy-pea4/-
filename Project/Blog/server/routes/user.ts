@@ -84,21 +84,21 @@ router.get(
   userController.getUserQuestions
 );
 
-// 收藏回答（id为回答id）
+// 收藏问题（id为回答id）
 router.put(
   "/questionCollecting/:id",
   checkExisted.question,
   userController.collectingQuestions
 );
 
-// 取消收藏回答（id为回答id）
+// 取消收藏问题（id为回答id）
 router.delete(
   "/questionCollecting/:id",
   checkExisted.question,
   userController.uncollectingQuestions
 );
 
-// 赞同答案（id为答案id）
+// 赞同回答（id为答案id）
 router.put(
   "/likeAnswer/:questionId/:id",
   authenticate,
@@ -106,7 +106,7 @@ router.put(
   userController.likeAnswer
 );
 
-// 取消赞同答案
+// 取消赞同回答
 router.delete(
   "/likeAnswer/:questionId/:id",
   authenticate,
@@ -114,7 +114,7 @@ router.delete(
   userController.likeAnswer
 );
 
-// 歧义答案（id为答案id）
+// 歧义回答（id为答案id）
 router.put(
   "/hesitateAnswer/:questionId/:id",
   authenticate,
@@ -122,7 +122,7 @@ router.put(
   userController.hesitateAnswer
 );
 
-// 取消歧义答案
+// 取消歧义回答
 router.delete(
   "/hesitateAnswer/:questionId/:id",
   authenticate,

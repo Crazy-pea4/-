@@ -178,7 +178,7 @@ const onFinish = (values: FormState) => {
 <style lang='css' scoped>
 .loginBox {
     background-color: #ffffff;
-    background-image: url("../../../assets/subtle-prism.svg");
+    background-image: url("../../../public/assets/subtle-prism.svg");
     background-attachment: fixed;
     background-size: cover;
 }

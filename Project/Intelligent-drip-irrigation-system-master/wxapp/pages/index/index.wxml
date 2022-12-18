@@ -1,0 +1,165 @@
+<!--index.wxml-->
+<view class="root-wrapper">
+  <view class="root">
+    <view class="header-wrapper">
+      <image style="height:30vh;z-index:-999;position:absolute;" mode="heightFix" src="/static/images/yangtai(1).jpg"></image>
+      <view class="header-content-wrapper">
+        <view class="header-title">
+          <text>空气质量 - {{airText}}</text>
+          <text>{{area}} - {{city}}</text>
+        </view>
+        <view  class="header-text">
+          <text>{{airValue}}</text>
+          <text>{{weather}}</text>
+        </view>
+        <view class="weather-advice">
+          {{weatherAdvice}}
+        </view>
+      </view>
+    </view>
+    <view class="body-wrapper">
+      <view class="body">
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/tap.png"></image>
+              <view class="data-title">自动灌溉</view>
+            </view>
+            <view class="data-value">
+              <switch bind:change="onAutoWater" color="#3d7ef9" checked="{{autotap}}"></switch>
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/light.png"></image>
+              <view class="data-title">自动补光</view>
+            </view>
+            <view class="data-value">
+              <switch bind:change="onAutoLight" color="#3d7ef9" checked="{{autolight}}"></switch>
+            </view>
+          </view>
+        </view>
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/temperature.png"></image>
+              <view class="data-title">温度</view>
+            </view>
+            <view class="data-value">
+              {{Temperature}}℃
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/humidity.png"></image>
+              <view class="data-title">湿度</view>
+            </view>
+            <view class="data-value" style="color:{{color_soil}}">
+              {{Humidity}}%
+            </view>
+          </view>
+        </view>
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/wifi.png"></image>
+              <view class="data-title">补光灯</view>
+            </view>
+            <view class="data-value">
+              在线
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/light.png"></image>
+              <view class="data-title">补光灯</view>
+            </view>
+            <view class="data-value">
+              <switch bind:change="onLightChange" color="#3d7ef9" checked="{{LightSwitch}}"></switch>
+            </view>
+          </view>
+        </view>
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/wifi.png"></image>
+              <view class="data-title">1号花盆</view>
+            </view>
+            <view class="data-value">
+              在线
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="{{src_soil}}"></image>
+              <view class="data-title">土壤湿度</view>
+            </view>
+            <view class="data-value" style="color:{{color_soil}}">
+              {{SoilMoisture}}%
+            </view>
+          </view>
+        </view>
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/lux.png"></image>
+              <view class="data-title">光照度</view>
+            </view>
+            <view class="data-value">
+              {{LightLux}}%
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/tap.png"></image>
+              <view class="data-title">滴灌开关</view>
+            </view>
+            <view class="data-value">
+              <switch bind:change="onWaterChange" color="#3d7ef9" checked="{{WaterOutletSwitch}}"></switch>
+            </view>
+          </view>
+        </view>
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/wifi.png"></image>
+              <view class="data-title">2号花盆</view>
+            </view>
+            <view class="data-value">
+              在线
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="{{src_soil}}"></image>
+              <view class="data-title">土壤湿度</view>
+            </view>
+            <view class="data-value" style="color:{{color_soil}}">
+              {{SoilMoisture2}}%
+            </view>
+          </view>
+        </view>
+        <view class="data-wrapper">
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/lux.png"></image>
+              <view class="data-title">光照度</view>
+            </view>
+            <view class="data-value">
+              {{LightLux2}}%
+            </view>
+          </view>
+          <view class="data">
+            <view class="data-left">
+              <image class="data-logo" src="/static/images/tap.png"></image>
+              <view class="data-title">滴灌开关</view>
+            </view>
+            <view class="data-value">
+              <switch bind:change="onWaterChange2" color="#3d7ef9" checked="{{WaterOutletSwitch2}}"></switch>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
