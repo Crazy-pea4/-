@@ -44,3 +44,16 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## If you want activate mongoDB serve
+
+first you need to cd mongoDBPath like D:/App/mongodb/bin
+then mongod --dbpath={your db path(absolute)}
+
+it is all setup in `package.json` `"srcipt: {activateDB}"`
+change it according to you environment
+
+then
+```sh
+npm run activateDB
+```
