@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col>
-            <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
+            <el-menu active-text-color="#ffd04b" background-color="#3881ca" class="el-menu-vertical-demo"
                 :collapse="navBool" :router="true" text-color="#fff" @open="handleOpen" @close="handleClose">
                 <template v-for="item in menu" :key="item.path">
                     <!-- 下拉菜单 -->

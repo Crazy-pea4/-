@@ -29,19 +29,19 @@ import RightTop from "../../components/RightTop.vue"
 
 <style lang='scss' scoped>
 .common-layout {
-    height: 100%;
+    height: 100vh;
 }
 
 .el-container {
     height: 100%;
+    background: url(../../assets/R.jpg) no-repeat;
+    background-size: cover;
 
     .el-aside {
         height: 100%;
-        background-color: #545c64
+        background-color: #3881ca
     }
 
-    .el-main {
-        background-color: gainsboro
-    }
+    .el-main {}
 }
 </style>

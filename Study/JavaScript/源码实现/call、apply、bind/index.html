@@ -45,6 +45,24 @@
     </script>
 
     <script src="./bind.js"></script>
-    <script></script>
+    <script>
+      const obj = {
+        name: "foo",
+      };
+
+      function fn(str1, str2, num) {
+        console.log(this, str1, str2, num);
+      }
+      fn.prototype.gender = "male";
+
+      const fnBind = fn.myBind(obj, "hello", "world");
+
+      fnBind(100);
+
+      // 同时bind返回的函数还可以进行new操作，但new后this应该是instance实例
+      let instance = new fnBind("~~~~");
+
+      console.log(instance.gender);
+    </script>
   </body>
 </html>

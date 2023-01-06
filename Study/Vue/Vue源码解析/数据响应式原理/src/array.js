@@ -39,7 +39,7 @@ generalArrayMethods.forEach((method) => {
       let inserted = [];
 
       switch (method) {
-        case "posh":
+        case "push":
         case "unshift":
           inserted = args;
           break;

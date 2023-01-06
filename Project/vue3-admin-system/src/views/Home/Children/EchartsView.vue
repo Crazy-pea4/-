@@ -63,16 +63,16 @@ header {
     p {
         margin-bottom: 1.5rem;
         text-align: center;
-        font-size: 26px
+        font-size: 26px;
+        color: rgb(214, 117, 87)
     }
 }
 
 .body {
     display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 95%;
-
-    justify-content: space-between;
 
     .leftSide {
         display: flex;
@@ -87,10 +87,12 @@ header {
             width: 100%;
             height: 23%;
             border: 1px solid black;
+            background-color: #3881ca;
 
             .title {
                 text-align: center;
                 font-size: 20px;
+                color: white;
             }
 
             .info {
@@ -110,6 +112,7 @@ header {
         width: 75%;
         height: 100%;
         border: 1px solid black;
+        background-color: #fff;
 
         .img {
             position: absolute;
