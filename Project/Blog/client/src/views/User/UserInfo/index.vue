@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full pt-4 flex justify-center items-center bg-white">
+    <div class="w-full h-full pt-4 flex justify-center items-center">
         <div class="w-sHeart h-32 flex relative">
             <!-- 头像 -->
             <div class="h-28 w-28 mr-8">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <!-- 修改资料 -->
-            <div class="absolute right-0 bottom-4 w-20 h-8 text-center leading-7 rounded-md bg-slate-400 text-white cursor-pointer"
+            <div class="absolute right-0 bottom-4 w-20 h-8 text-center leading-7 rounded-md bg-gray-200 text-gray-700 cursor-pointer"
                 @click="visible = true">
                 修改资料
             </div>

@@ -4,7 +4,7 @@
         <!-- 列表中的每一项 -->
         <TransitionGroup name="questionList" enter-active-class="animate__animated animate__fadeInDown animate__faster"
             leave-active-class="animate__animated animate__fadeOutUp animate__faster">
-            <div class="w-full h-36 border-2 relative rounded-sm hover:shadow transition-all duration-200 flex flex-col justify-around text-center cursor-pointer my-5 px-5 first:mt-0 last:mb-0"
+            <div class="w-full h-36 border-2 relative rounded-sm transition-all duration-200 flex flex-col justify-around text-center cursor-pointer my-5 px-5 first:mt-0 last:mb-0"
                 v-for="(item, index) in collectedList" :key="item._id" :data-questionId="item._id" :data-index="index">
                 <!-- 删除按钮 -->
                 <a-popconfirm title="确认要删除吗？" cancel-text="取消" ok-text="确认" @confirm="deleteQuestion(item._id)">
@@ -13,7 +13,7 @@
                 </a-popconfirm>
                 <!-- 问题标题 -->
                 <div class="text-3xl mt-2 truncate" :data-questionId="item._id" :data-index="index">{{
-                        item.title
+                    item.title
                 }}
                 </div>
                 <!-- 问题描述 -->

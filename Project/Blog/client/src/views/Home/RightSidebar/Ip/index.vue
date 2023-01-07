@@ -1,14 +1,14 @@
 <template>
-    <div class="w-full border-2 mt-4 rounded-lg border-dashed flex flex-col">
+    <div class="w-full rounded-lg border-dashed flex flex-col text-xs">
         <!-- 访问所在地 -->
-        <div class="flex">
+        <div class="flex justify-center">
             <div class="mr-2">
                 ip: {{ ipInfo.ip }}
             </div>
             <div>{{ ipInfo.isp }}</div>
         </div>
         <!-- 供应商和ip地址 -->
-        <div class="flex mt-2">
+        <div class="flex mt-2 justify-center">
             <div class="mr-2">{{ ipInfo.area }}</div>
             <div>{{ ipInfo.city }}</div>
         </div>

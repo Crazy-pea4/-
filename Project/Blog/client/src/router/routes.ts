@@ -24,7 +24,8 @@ export default <RouteRecordRaw[]>[
     meta: {
       isShowSearchBar: true,
       isKeepAlive: true,
-      isShowSideBar: true,
+      isShowTopBar: true,
+      isShowCreateQuestion: true,
       isShowCopyRight: true,
     },
   },
@@ -36,8 +37,8 @@ export default <RouteRecordRaw[]>[
     redirect: "/user/CollectedQuestion",
     meta: {
       isKeepAlive: true,
+      isShowTopBar: true,
       isShowCopyRight: true,
-      isShowSideBar: true,
     },
     children: [
       {
@@ -64,6 +65,7 @@ export default <RouteRecordRaw[]>[
     name: "Write",
     path: "/write/:questionId",
     component: () => import("@/views/Write/index.vue"),
+    meta: {},
   },
   {
     name: "Question",
@@ -71,7 +73,7 @@ export default <RouteRecordRaw[]>[
     component: () => import("@/views/Question/index.vue"),
     meta: {
       isShowSearchBar: true,
-      isShowSideBar: true,
+      isShowTopBar: true,
       isShowCopyRight: true,
     },
   },
@@ -81,7 +83,7 @@ export default <RouteRecordRaw[]>[
     component: () => import("@/views/Search/index.vue"),
     meta: {
       isShowSearchBar: true,
-      isShowSideBar: true,
+      isShowTopBar: true,
       isShowCopyRight: true,
     },
   },

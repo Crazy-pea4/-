@@ -1,5 +1,5 @@
 <template>
-    <div class=" min-h-screen bg-zinc-100 pt-20">
+    <div class="min-h-screen pt-20">
         <!-- 列表 -->
         <SearchList :searchList="searchList" v-if="searchList.length > 0" />
         <div v-else class="flex justify-center items-center">

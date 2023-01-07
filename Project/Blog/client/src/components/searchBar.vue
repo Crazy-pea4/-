@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { notification } from 'ant-design-vue';
 import { useQuestionStore } from "@/stores/question";
 import useMouseScrollTopHooks from "@/hooks/useMouseScrollTopHooks";
 import { SearchOutlined } from "@ant-design/icons-vue";
@@ -28,16 +29,21 @@ const flag = useMouseScrollTopHooks();
 const searchInpVal = ref("");
 
 const search = () => {
-    const props = {
-        keyword: searchInpVal.value,
-        limit: 10,
-        page: 0,
-    };
-    questionStore.GetSearchList(props);
-    // 将keyword存入sessionStore，防止搜索页在刷新时丢失数据
-    sessionStorage.setItem("keyword", searchInpVal.value);
-    searchInpVal.value = "";
-    router.push({ name: "Search" });
+    if (searchInpVal.value) {
+        const props = {
+            keyword: searchInpVal.value,
+            limit: 10,
+            page: 0,
+        };
+        questionStore.GetSearchList(props);
+        // 将keyword存入sessionStore，防止搜索页在刷新时丢失数据
+        sessionStorage.setItem("keyword", searchInpVal.value);
+        searchInpVal.value = "";
+        router.push({ name: "Search" });
+    } else {
+        notification.warning({ message: '请输入内容搜索', duration: 2 })
+    }
+
 };
 </script>
 

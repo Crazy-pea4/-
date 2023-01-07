@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-zinc-100 min-h-screen">
+    <div class="min-h-screen">
         <!-- 顶部问题标题区 -->
-        <header class="w-full pt-10 bg-white shadow" v-if="question">
+        <header class="w-full pt-10 bg-black bg-opacity-40 shadow" v-if="question">
             <div class="w-sHeart mx-auto flex flex-col">
                 <!-- 标题 -->
                 <div class="w-full text-2xl font-medium mb-2">
@@ -13,13 +13,13 @@
                 </div>
                 <!-- 操作按钮 -->
                 <div class="w-full flex rounded-md my-4">
-                    <div class="w-20 h-8 border-slate-600 border-1 rounded-md flex justify-center items-center cursor-pointer"
+                    <div class="w-20 h-8 border-gray-200 border-1 rounded-md flex justify-center items-center cursor-pointer"
                         @click="collectingQuestion" :class="{
-                            'bg-slate-600': question.isCollected,
-                            'text-white': question.isCollected
+                            'bg-gray-200': question.isCollected,
+                            'text-gray-700': question.isCollected
                         }">
                         收藏回答</div>
-                    <div class="w-20 h-8 ml-4 border-1 flex justify-center items-center rounded-md border-slate-600 cursor-pointer"
+                    <div class="w-20 h-8 ml-4 border-1 flex justify-center items-center rounded-md border-gray-200 cursor-pointer"
                         @click="ToWrite">
                         写回答</div>
                 </div>

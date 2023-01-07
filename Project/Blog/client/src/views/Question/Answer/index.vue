@@ -1,6 +1,6 @@
 <template>
     <div class="w-sHeart min-h-full mx-auto mt-6 pb-10">
-        <div class="w-full px-4 py-2 my-6 first:mt-0 last:mb-0 relative bg-white rounded-sm shadow"
+        <div class="w-full px-4 py-2 my-6 first:mt-0 last:mb-0 relative bg-black bg-opacity-40 rounded-sm shadow"
             v-for="i in answerList" :key="i._id">
             <!-- 删除按钮 -->
             <a-popconfirm title="确认要删除吗？" cancel-text="取消" ok-text="确认" @confirm="deleteAnswer(i.questionId, i._id)">
@@ -9,9 +9,11 @@
             <!-- 回答头部 -->
             <div class="flex">
                 <!-- 头像 -->
-                <div class=" w-12 h-12 bg-yellow-700 rounded-full"></div>
+                <div class="">
+                    <img class="w-14 h-14 rounded-full object-cover" :src="userSetting.avatarUrl" alt="">
+                </div>
                 <!-- 昵称 -->
-                <div class="ml-2">{{ i.answerer.nickname }}</div>
+                <div class="ml-2 text-lg">{{ i.answerer.nickname }}</div>
             </div>
             <!-- 回答主体 -->
             <div class="w-full my-4" v-html="i.content">
@@ -34,13 +36,22 @@
 </template>
 
 <script setup lang = 'ts' >
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user'
 import { useAnswerStore } from '@/stores/answer'
 
 // 创建question仓库
 const answerStore = useAnswerStore()
 const { answerList } = storeToRefs(answerStore)
+
+// 创建settingStore
+const userStore = useUserStore()
+const { userSetting } = storeToRefs(userStore)
+
+onMounted(() => {
+    userStore.GetUser(localStorage.getItem('id')!)
+})
 
 const deleteAnswer = (questionId: string, answerId: string) => {
     answerStore.DeleteAnswer(questionId, answerId)

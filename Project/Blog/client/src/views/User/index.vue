@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full bg-zinc-100 flex flex-col justify-center items-center">
+    <div class="h-full flex flex-col justify-center items-center">
         <!-- （头部）个人信息 -->
         <UserInfo></UserInfo>
         <!-- （主体）用户收藏、点赞等信息 -->

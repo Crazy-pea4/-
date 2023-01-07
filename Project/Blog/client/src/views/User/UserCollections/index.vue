@@ -1,9 +1,9 @@
 <template>
-    <div class="mt-8 w-sHeart py-1 px-3 bg-white">
+    <div class="mt-8 mb-8 w-sHeart py-1 px-3 rounded-md bg-black bg-opacity-40">
         <!-- 顶部tabBar -->
         <div class="flex h-10 relative">
             <div v-for="(i, index) in tabBar" :key="index"
-                class=" w-16 border-slate-600 hover:bg-gray-100 cursor-pointer text-base flex justify-center items-center mx-2 first:ml-0 last:mr-0"
+                class=" w-16 border-gray-300 cursor-pointer text-base flex justify-center items-center mx-2 first:ml-0 last:mr-0"
                 :class="{ 'border-b-2': $route.meta.index === index }" @click="$router.replace({ name: i.routeName })">
                 {{ i.title }}
             </div>
@@ -38,10 +38,10 @@ const answerStore = useAnswerStore()
 const refresh = () => {
     switch (route.name) {
         case 'LikedAnswer':
-            questionStore.GetQuestionCollectedList()
+            answerStore.GetAnswerLikedList()
             break;
         case 'CollectedQuestion':
-            answerStore.GetAnswerLikedList()
+            questionStore.GetQuestionCollectedList()
             break;
     }
 }

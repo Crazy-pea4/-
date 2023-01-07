@@ -1,17 +1,17 @@
 <template>
-    <div class="loginBox h-screen flex justify-between items-center">
+    <div class="loginBox h-screen flex justify-end items-center">
         <!-- 介绍语 -->
-        <div class="container w-1/2 h-full flex flex-col items-end relative">
+        <!-- <div class="container w-1/2 h-full flex flex-col items-end relative">
             <div class="text-8xl font-serif mt-40 2xl:mt-60 xl:mt-40">welcome</div>
             <div class="text-2xl mt-10 2xl:mt-10 xl:mt-10">博客v1.0</div>
-        </div>
+        </div> -->
         <!-- 登录框 -->
         <div class="container flex flex-col justify-around w-108 h-full bg-slate-50">
             <!-- 表单 -->
             <a-form :model="formState" name="normal_login" :rules="rules" class="w-10/12 mx-auto relative"
                 @finish="onFinish">
                 <!-- 标题 -->
-                <div class="absolute -top-24 w-full text-center right-1/2 translate-x-1/2 text-2xl">已有账号？立即登录</div>
+                <div class="absolute -top-24 w-full text-center right-1/2 translate-x-1/2 text-2xl">立即登录</div>
                 <!-- 账号 -->
                 <a-form-item name="phoneNumber" class="relative mb-12">
                     <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
@@ -133,9 +133,9 @@ const rules: Record<string, Rule[]> = {
 
 <style lang='css' scoped>
 .loginBox {
+    background: url("../../../public/assets/yanquan.jpg") no-repeat fixed;
+    background-position: left;
     background-color: #ffffff;
-    background-image: url("../../../public/assets/subtle-prism.svg");
-    background-attachment: fixed;
-    background-size: cover;
+    background-size: contain;
 }
 </style>

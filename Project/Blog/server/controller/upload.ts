@@ -9,8 +9,8 @@ import userModel from "../model/user";
 import config from "../config/index";
 
 const cos = new Cos({
-  SecretId: "你的secretId",
-  SecretKey: "你的secretKey",
+  SecretId: "xxxxxx",
+  SecretKey: "xxxxxx",
 });
 
 const uploadController: UploadController = {
@@ -52,18 +52,20 @@ const uploadController: UploadController = {
           }
         }
       );
+      const Key = `${id}_${Date.now()}_avatar.jpg`;
       // 确保将用户的先前头像删除完毕，再添加新头像
       cos.uploadFile({
         Bucket: "blog-user-avatar-1308742510",
         Region: "ap-guangzhou",
-        Key: `${id}_${req.file.originalname}`,
+        Key,
         FilePath: filepath,
-        SliceSize: 1024 * 1024 * 5,
+        Headers: {
+          // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 256，宽度等比压缩
+          "Pic-Operations": `{"is_pic_info": 1, "rules": [{"fileid": "${Key}", "rule": "imageMogr2/thumbnail/256x/"}]}`,
+        },
         onFileFinish: async function (err, data, options) {
           if (err) {
-            res
-              .status(500)
-              .json({ code: 500, message: "文件上传出错，请稍后重试" });
+            res.status(500).json({ code: 500, message: err });
           }
           // 成功后设置userModel.avatar为图床的图片url
           await userModel.findByIdAndUpdate(id, {
@@ -72,11 +74,7 @@ const uploadController: UploadController = {
             },
           });
           // 删除留在本地的图片
-          fs.rmSync(
-            `D:/Program/H5C3-JS/Project/Blog/server/public/uploads/${
-              req.file!.originalname
-            }`
-          );
+          fs.rmSync(filepath);
           res.status(200).json({
             code: 200,
             message: "上传成功！",

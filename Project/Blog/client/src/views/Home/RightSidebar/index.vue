@@ -3,17 +3,19 @@
         <!-- 时间 -->
         <Time />
         <!-- 日历 -->
-        <Calendar />
-        <!-- Ip显示 -->
-        <Ip />
+        <!-- <Calendar /> -->
+        <!-- 个人信息框 -->
+        <PersonalInfo></PersonalInfo>
+        <News></News>
     </div>
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import Calendar from './Calendar/index.vue'
-import Ip from './Ip/index.vue'
 import Time from './Time/index.vue'
+import PersonalInfo from "./personalInfo/index.vue"
+import News from './News/index.vue'
 
 </script>
 

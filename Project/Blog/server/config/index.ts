@@ -12,6 +12,6 @@ export default {
   jwt: {
     // jwt密钥
     secret: "e43c830d-687c-5850-8393-94d9d59d3bef-ym",
-    timeout: "7d",
+    timeout: "180 days",
   },
 };

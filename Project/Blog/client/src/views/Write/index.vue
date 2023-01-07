@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gray-100">
-        <div class="text-lg bg-white flex mt-4 pl-4">
+        <div class="text-lg text-black flex pt-4 pl-4">
             <div @click="router.back()" class="flex items-center float-left cursor-pointer">
                 <rollback-outlined class="mr-2" /> 返回
             </div>
