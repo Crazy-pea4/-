@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./2-advance/01-生命周期";
+import App from "./2-advance/12-hooks-customHooks";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
