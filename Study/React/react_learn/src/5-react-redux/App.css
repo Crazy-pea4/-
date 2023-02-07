@@ -1,0 +1,9 @@
+.setup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: 550px;
+  margin: 0 auto;
+  border: 3px solid #ccc;
+}

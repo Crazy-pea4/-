@@ -4,7 +4,9 @@
             <!-- 头像 -->
             <div class="h-14 relative">
                 <img @click="router.push({ name: 'User' })" class="h-24 w-24 rounded-full absolute
-                -top-10 left-1/2 -translate-x-1/2 object-cover cursor-pointer" :src="userSetting.avatarUrl" alt="头像" />
+                -top-10 left-1/2 -translate-x-1/2 object-cover cursor-pointer"
+                    :src="userSetting.avatarUrl ? userSetting.avatarUrl : 'https://yarh-blog-1308742510.cos.ap-guangzhou.myqcloud.com/404.jpg'"
+                    alt="头像" />
                 <div>
                     <a-popconfirm title="确认登出吗？" ok-text="Yes" cancel-text="No" @confirm="confirm" @cancel="cancel">
                         <span class="absolute top-3/4 right-2 font-semibold cursor-pointer">登出</span>
@@ -45,6 +47,7 @@ import { useRouter } from 'vue-router'
 import { StarFilled, LikeFilled } from '@ant-design/icons-vue';
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
+import clearLoginInfo from '@/utils/clearLoginInfo';
 
 // 创建路由器router
 const router = useRouter()
@@ -58,8 +61,7 @@ onMounted(() => {
 })
 
 const confirm = () => {
-    localStorage.removeItem('token')
-    sessionStorage.removeItem('isValid')
+    clearLoginInfo()
     router.replace({ name: 'Login' })
 };
 

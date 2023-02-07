@@ -1,5 +1,5 @@
 /* 引入校验功能库 */
-import Joi from "Joi";
+import Joi from "joi";
 
 /* 引入声明文件 */
 import {

@@ -11,13 +11,13 @@
             <a-form ref="formRef" :model="formState" :rules="rules" class="w-9/12 relative mx-auto mt-6"
                 @finish="onFinish">
                 <!-- 标题 -->
-                <div class="absolute -top-24 w-auto text-center right-1/2 translate-x-1/2 text-2xl">注册</div>
+                <div class="absolute -top-24 w-auto text-center right-1/2 translate-x-1/2 text-2xl text-slate-600">注册
+                </div>
                 <!-- 昵称 -->
                 <a-form-item name="nickname" class="relative">
-                    <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
+                    <span class="absolute left-1 -top-8 text-base transition-all text-slate-600 duration-500" :class="{
                         '-translate-y-2': isNickSelected,
                         'text-xl': isNickSelected,
-                        'text-blue-400': isNickSelected,
                     }">昵称：</span>
                     <a-input class="border-0 border-b-2 shadow-none" v-model:value="formState.nickname" type="text"
                         autocomplete="new-form" @focus="nickAnimation" @blur="nickAnimation">
@@ -28,10 +28,9 @@
                 </a-form-item>
                 <!-- 账号 -->
                 <a-form-item name="phoneNumber" class="relative my-11">
-                    <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
+                    <span class="absolute left-1 -top-8 text-base text-slate-600 transition-all duration-500" :class="{
                         '-translate-y-2': isActSelected,
                         'text-xl': isActSelected,
-                        'text-blue-400': isActSelected,
                     }">账号：</span>
                     <a-input class="border-0 border-b-2 shadow-none" v-model:value="formState.phoneNumber"
                         autocomplete="new-form" type="text" @focus="actAnimation" @blur="actAnimation">
@@ -42,10 +41,9 @@
                 </a-form-item>
                 <!-- 密码 -->
                 <a-form-item name="password" class="relative my-11">
-                    <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
+                    <span class="absolute left-1 -top-8 text-base text-slate-600 transition-all duration-500" :class="{
                         '-translate-y-2': isPwdSelected,
                         'text-xl': isPwdSelected,
-                        'text-blue-400': isPwdSelected,
                     }">密码：</span>
                     <a-input class="border-0 border-b-2 shadow-none" v-model:value="formState.password" type="password"
                         autocomplete="new-form" @focus="pwdAnimation" @blur="pwdAnimation">
@@ -56,10 +54,9 @@
                 </a-form-item>
                 <!-- 确认密码 -->
                 <a-form-item name="checkPass" class="relative">
-                    <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
+                    <span class="absolute left-1 -top-8 text-base text-slate-600 transition-all duration-500" :class="{
                         '-translate-y-2': isCheckPwdSelected,
                         'text-xl': isCheckPwdSelected,
-                        'text-blue-400': isCheckPwdSelected,
                     }">确认密码：</span>
                     <a-input class="border-0 border-b-2 shadow-none" v-model:value="formState.checkPass" type="password"
                         autocomplete="new-form" @focus="checkPwdAnimation" @blur="checkPwdAnimation">
@@ -70,8 +67,8 @@
                 </a-form-item>
                 <!-- 提交按钮 -->
                 <a-form-item>
-                    <a-button type="primary" html-type="submit">Submit</a-button>
-                    <span class="ml-2"><a class="text-xs" @click="ToLogin">已有账号？去登陆</a></span>
+                    <a-button type="text" html-type="submit" class="bg-slate-600 text-white">Submit</a-button>
+                    <span class="ml-2 text-xs text-slate-600 cursor-pointer" @click="ToLogin">已有账号？去登陆</span>
                 </a-form-item>
             </a-form>
         </div>

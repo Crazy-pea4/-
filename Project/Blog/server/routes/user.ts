@@ -24,13 +24,8 @@ router.get("/:id", checkExisted.user, userController.getUser);
 // 编辑修改指定用户，因为这里为了使用patch节省带宽，就无法使用validate中间件校验
 router.patch("/:id", authenticate, checkExisted.user, userController.editUser);
 
-// 删除指定用户
-router.delete(
-  "/:id",
-  authenticate,
-  checkExisted.user,
-  userController.deleteUser
-);
+// 注销
+router.delete("/:id", authenticate, checkExisted.user, userController.logOff);
 
 // 关注（id为被关注人的id）
 router.put(

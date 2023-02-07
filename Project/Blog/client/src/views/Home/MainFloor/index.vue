@@ -23,7 +23,10 @@
                     <!-- 提出问题的人的信息 -->
                     <div class="flex justify-end items-end" :data-questionId="item._id">
                         <!-- 发起者 -->
-                        <div class="text-sm mr-2">{{ item.questioner.nickname }}</div>
+                        <div class="text-sm mr-2">{{
+                            item.questioner === null ? "用户不存在" :
+                                item.questioner.nickname
+                        }}</div>
                         <!-- 发起时间 -->
                         <div class="text-xs">{{ item.createdAt }}</div>
                     </div>

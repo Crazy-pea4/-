@@ -17,6 +17,13 @@ export function editUser(id: string, data: editData) {
   });
 }
 
+export function logOff(id: String) {
+  return request({
+    url: `/user/${id}`,
+    method: "DELETE",
+  });
+}
+
 export function getUser(id: string) {
   return request({
     url: `/user/${id}?detail=nickname;introduction;gender`,

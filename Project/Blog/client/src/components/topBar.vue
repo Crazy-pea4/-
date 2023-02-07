@@ -1,12 +1,18 @@
 <template>
-    <div v-if="route.meta.isShowTopBar"
-        class="absolute flex justify-around text-3xl h-16 items-center top-0 left-12 lg:left-12 2xl:left-24 z-20">
-        <div class="flex flex-col text-center" @click="router.replace({ name: 'Home' })">
-            <home-filled class="cursor-pointer py-2 px-4" />
-        </div>
-        <div class="flex flex-col text-center" @click="visible = !visible"
-            :class="{ 'invisible': !route.meta.isShowCreateQuestion }">
-            <plus-square-outlined class="cursor-pointer py-2 px-4" />
+    <div>
+        <div v-if="route.meta.isShowTopBar"
+            class="absolute left-1/2 -translate-x-1/2 flex justify-between text-3xl h-14 w-11/12 z-20">
+            <div class="flex">
+                <div @click="router.replace({ name: 'Home' })">
+                    <home-filled class="cursor-pointer py-2 px-4" />
+                </div>
+                <div @click="visible = !visible" :class="{ 'invisible': !route.meta.isShowCreateQuestion }">
+                    <plus-square-outlined class="cursor-pointer py-2 px-4" />
+                </div>
+            </div>
+            <div class="">
+                <logout-outlined class="cursor-pointer py-2 px-4" @click="toLogin" />
+            </div>
         </div>
         <!-- 对话框 -->
         <div>
@@ -31,7 +37,7 @@
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { HomeFilled, PlusSquareOutlined } from '@ant-design/icons-vue'
+import { HomeFilled, PlusSquareOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { useQuestionStore } from "@/stores/question"
 import type { CreateQuestionData } from "@/@types/api/question"
 import type { FormInstance } from 'ant-design-vue';
@@ -48,8 +54,6 @@ interface FormState {
     title: string;
     descriptions: string;
 }
-
-const isShow = ref(true)
 
 const formState = reactive<FormState>({
     title: '',
@@ -72,6 +76,9 @@ const handleOk = () => {
         });
 };
 
+const toLogin = () => {
+    router.push({ name: "Login" })
+}
 </script>
 
 <style lang='css' scoped>

@@ -1,23 +1,18 @@
 <template>
-    <div class="loginBox h-screen flex justify-end items-center">
-        <!-- 介绍语 -->
-        <!-- <div class="container w-1/2 h-full flex flex-col items-end relative">
-            <div class="text-8xl font-serif mt-40 2xl:mt-60 xl:mt-40">welcome</div>
-            <div class="text-2xl mt-10 2xl:mt-10 xl:mt-10">博客v1.0</div>
-        </div> -->
+    <div class="loginBox h-screen flex justify-end">
         <!-- 登录框 -->
         <div class="container flex flex-col justify-around w-108 h-full bg-slate-50">
             <!-- 表单 -->
             <a-form :model="formState" name="normal_login" :rules="rules" class="w-10/12 mx-auto relative"
                 @finish="onFinish">
                 <!-- 标题 -->
-                <div class="absolute -top-24 w-full text-center right-1/2 translate-x-1/2 text-2xl">立即登录</div>
+                <div class="absolute -top-24 w-full text-center right-1/2 translate-x-1/2 text-2xl text-slate-600">立即登录
+                </div>
                 <!-- 账号 -->
                 <a-form-item name="phoneNumber" class="relative mb-12">
-                    <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
+                    <span class="absolute left-1 -top-8 text-base transition-all duration-500 text-slate-600" :class="{
                         '-translate-y-2': isActSelected,
                         'text-xl': isActSelected,
-                        'text-blue-400': isActSelected,
                     }">手机号：</span>
                     <a-input class="border-0 border-b-2 shadow-none" v-model:value="formState.phoneNumber" type="text"
                         @focus="actAnimation" @blur="actAnimation">
@@ -28,10 +23,9 @@
                 </a-form-item>
                 <!-- 密码 -->
                 <a-form-item name="password" class="relative">
-                    <span class="absolute left-1 -top-8 text-base transition-all duration-500" :class="{
+                    <span class="absolute left-1 -top-8 text-base transition-all duration-500 text-slate-600" :class="{
                         '-translate-y-2': isPwdSelected,
                         'text-xl': isPwdSelected,
-                        'text-blue-400': isPwdSelected,
                     }">密码：</span>
                     <a-input-password class="border-0 border-b-2 shadow-none" v-model:value="formState.password"
                         @focus="pwdAnimation" @blur="pwdAnimation">
@@ -42,17 +36,18 @@
                 </a-form-item>
                 <!-- 记住我 -->
                 <a-form-item class="ml-2">
-                    <a-checkbox v-model:checked="rememberMe">记住我</a-checkbox>
+                    <a-checkbox v-model:checked="rememberMe" class="checkBox">记住我</a-checkbox>
                     <span class="text-xs float-right mt-1"><a href="">忘记密码</a></span>
                 </a-form-item>
                 <!-- 登录和注册 -->
                 <a-form-item class="ml-2">
-                    <a-button type="primary" html-type="submit">
+                    <a-button type="text" html-type="submit" class="bg-slate-600 text-white">
                         登录
                     </a-button>
                     Or
-                    <a class="text-xs" @click="ToRegister">立即注册！</a>
+                    <span class="text-xs text-slate-600 cursor-pointer" @click="ToRegister">立即注册！</span>
                 </a-form-item>
+                <span class="cursor-pointer" @click="hack">懒得注册, Click here~</span>
             </a-form>
         </div>
     </div>
@@ -128,7 +123,10 @@ const rules: Record<string, Rule[]> = {
     password: [{ required: true, validator: validatePass, trigger: 'blur', max: 30 }],
 };
 
-
+const hack = () => {
+    formState.phoneNumber = "19898510903"
+    formState.password = "123456"
+}
 </script>
 
 <style lang='css' scoped>
@@ -137,5 +135,12 @@ const rules: Record<string, Rule[]> = {
     background-position: left;
     background-color: #ffffff;
     background-size: contain;
+}
+
+/* 不生效，去改源码了 */
+.checkbox :deep(.ant-checkbox-input),
+.checkbox :deep(.ant-checkbox-inner) {
+    background-color: rgb(71 85 105) !important;
+    border-color: rgb(71 85 105) !important;
 }
 </style>

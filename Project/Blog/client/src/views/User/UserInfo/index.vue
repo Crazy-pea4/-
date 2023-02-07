@@ -21,8 +21,8 @@
                 <div class="flex justify-center items-center text-xl relative">
                     <div class="">
                         {{ userSetting.nickname }}
-                        <!-- <a-input type="text" v-model:value="userSetting.nickname" /> -->
                     </div>
+                    <div class="self-end text-xs ml-4 cursor-pointer" @click="logOff">注销</div>
                 </div>
                 <!-- 性别 -->
                 <div class="flex justify-center items-center my-2">
@@ -31,11 +31,6 @@
                         <span v-show="userSetting.gender === 'male'">男</span>
                         <span v-show="userSetting.gender === 'female'">女</span>
                         <span v-show="userSetting.gender === 'unknown'">刚到地球</span>
-                        <!-- <a-radio-group v-model:value="userSetting.gender" class="flex justify-between">
-                            <a-radio :value="'male'">男</a-radio>
-                            <a-radio :value="'female'">女</a-radio>
-                            <a-radio :value="'unknown'">刚到地球</a-radio>
-                        </a-radio-group> -->
                     </div>
                 </div>
                 <!-- 介绍 -->
@@ -43,8 +38,6 @@
                     <div class="">介绍：</div>
                     <div class="">
                         {{ userSetting.introduction }}
-                        <!-- <a-textarea v-model:value="userSetting.introduction" placeholder="请输入一段介绍" :rows="4"
-                            :maxlength="500" /> -->
                     </div>
                 </div>
             </div>
@@ -83,10 +76,15 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted, watch } from 'vue'
+import { useRouter } from "vue-router"
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { warning } from "@/utils/message"
+import { Modal } from 'ant-design-vue';
+import clearLoginInfo from "@/utils/clearLoginInfo"
+
+const router = useRouter()
 
 // 创建settingStore
 const userStore = useUserStore()
@@ -150,8 +148,20 @@ const saveUserInfo = (async () => {
         warning("昵称不能为空")
     }
 })
+
+// 注销提示框
+const logOff = () => {
+    Modal.confirm({
+        title: '注销没有回头路！',
+        async onOk() {
+            const id = localStorage.getItem('id')!
+            await userStore.LogOff(id)
+            clearLoginInfo()
+            router.replace({ name: 'Login' })
+        },
+    })
+}
 </script>
 
 <style lang='' scoped>
-
 </style>

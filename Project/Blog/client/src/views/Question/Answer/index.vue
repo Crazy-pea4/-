@@ -10,10 +10,12 @@
             <div class="flex">
                 <!-- 头像 -->
                 <div class="">
-                    <img class="w-14 h-14 rounded-full object-cover" :src="userSetting.avatarUrl" alt="">
+                    <img class="w-14 h-14 rounded-full object-cover"
+                        :src="userSetting.avatarUrl ? userSetting.avatarUrl : 'https://yarh-blog-1308742510.cos.ap-guangzhou.myqcloud.com/404.jpg'"
+                        alt="">
                 </div>
                 <!-- 昵称 -->
-                <div class="ml-2 text-lg">{{ i.answerer.nickname }}</div>
+                <div class="ml-2 text-lg">{{ i.answerer ? i.answerer.nickname : "用户不存在" }}</div>
             </div>
             <!-- 回答主体 -->
             <div class="w-full my-4" v-html="i.content">

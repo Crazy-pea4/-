@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import {
   getUser,
   editUser,
+  logOff,
   collectingQuestions,
   uncollectingQuestions,
 } from "@/api/user";
@@ -31,6 +32,16 @@ export const useUserStore = defineStore("user", {
       try {
         await editUser(id, userSetting);
         await this.GetUser(id);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async LogOff(id: string) {
+      try {
+        const {
+          data: { data },
+        } = await logOff(id);
+        console.log(data, 123123);
       } catch (err) {
         console.log(err);
       }

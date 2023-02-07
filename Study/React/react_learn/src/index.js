@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./2-advance/13-CSSModule1";
+import App from "./7-mobx/App";
+import { Provider } from "mobx-react";
+import store from "./7-mobx/mobx-react/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -9,4 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 //     <App></App>
 //   </React.StrictMode>
 // );
-root.render(<App></App>);
+
+root.render(
+  <Provider store={store}>
+    <App></App>
+  </Provider>
+);

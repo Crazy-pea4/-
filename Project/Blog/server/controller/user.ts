@@ -12,6 +12,13 @@ import MD5_encrypt from "../utils/md5";
 import Jwt from "../utils/jwt";
 import handelResponse from "../utils/handelResponse";
 
+// 引入Tencent Cos对象存储服务包
+import Cos from "cos-nodejs-sdk-v5";
+const cos = new Cos({
+  SecretId: "AKIDFI7k9JExRaUCgwyoSs30kGqBKFwPdeRz",
+  SecretKey: "OaaNwLXXKwLXXKvJUSEoBKI3auSs6E9r",
+});
+
 const userController: UserController = {
   // 注册
   register: async (req, res, next) => {
@@ -89,14 +96,47 @@ const userController: UserController = {
       next(err);
     }
   },
-  // 删除指定用户
-  deleteUser: async (req, res, next) => {
+  // 注销
+  logOff: async (req, res, next) => {
     try {
-      const _id = req.params.id;
-      // 删除用户用户（返回删除的用户）
-      const deletedUser = await userModel.findByIdAndDelete(_id);
-      handelResponse(res, deletedUser);
-    } catch (err: any) {
+      const { id } = req.params;
+      // 注销不会清除创建的文章和点赞信息，但会清理cos中的头像
+      cos.getBucket(
+        {
+          Bucket: "blog-user-avatar-1308742510",
+          Region: "ap-guangzhou",
+          Prefix: id,
+        },
+        (err, data) => {
+          if (err) {
+            res.status(500).json({
+              code: 500,
+              message: err.message,
+            });
+          }
+          // 删除掉用户存在之前上传过的图片
+          if (data.Contents[0]) {
+            cos.deleteObject(
+              {
+                Bucket: "blog-user-avatar-1308742510",
+                Region: "ap-guangzhou",
+                Key: data.Contents[0].Key,
+              },
+              (err, data) => {
+                if (err) {
+                  res.status(500).json({
+                    code: 500,
+                    message: err.message,
+                  });
+                }
+              }
+            );
+          }
+        }
+      );
+      const user = await userModel.findByIdAndDelete(id);
+      handelResponse(res, user);
+    } catch (err) {
       next(err);
     }
   },
