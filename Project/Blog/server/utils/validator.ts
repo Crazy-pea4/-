@@ -118,10 +118,10 @@ export function questionCreateValidator(data: questionCreateData) {
       "string.base": "descriptions 类型错误 需要为string",
       "string.max": "descriptions 长度不能超过500位",
     }),
-    // topics: Joi.array().required().messages({
-    //   "any.required": "缺少必选参数 topics",
-    //   "array.base": "topics 类型错误 需要为array",
-    // }),
+    topics: Joi.array().required().messages({
+      "any.required": "缺少必选参数 topics",
+      "array.base": "topics 类型错误 需要为array",
+    }),
     createdAt: Joi.string().required().messages({
       "any.required": "缺少必选参数 createdAt",
       "string.base": "createdAt 类型错误 需要为string",

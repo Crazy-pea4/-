@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full pt-4 flex justify-center items-center">
-        <div class="w-sHeart h-32 flex relative">
+        <div class="w-sHeart h-32 flex relative z-20">
             <!-- 头像 -->
             <div class="h-28 w-28 mr-8">
                 <a-upload v-model:file-list="fileList" :list-type="userSetting.avatarUrl ? 'picture' : 'picture-card'"
@@ -94,9 +94,6 @@ onMounted(() => {
     userStore.GetUser(localStorage.getItem('id')!)
 })
 
-// 对话框显示变量
-const visible = ref(false);
-
 const nickname = ref('')
 const gender = ref('')
 const introduction = ref('')
@@ -105,6 +102,8 @@ watch(() => userStore.userSetting, () => {
     gender.value = userSetting.value.gender
     introduction.value = userSetting.value.introduction
 })
+// 对话框显示变量
+const visible = ref(false);
 
 // 获取form表单元素
 const formState = reactive({

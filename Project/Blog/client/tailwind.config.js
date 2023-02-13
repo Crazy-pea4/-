@@ -9,6 +9,7 @@ module.exports = {
         120: "30rem",
         130: "32rem",
         sHeart: "46rem",
+        mHeart: "54rem",
         heart: "75rem",
       },
       height: {

@@ -36,7 +36,7 @@ const questionSchema = new mongoose.Schema({
   topics: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Topic" }],
     default: [],
-    select: false,
+    required: true,
   },
 
   createdAt: {

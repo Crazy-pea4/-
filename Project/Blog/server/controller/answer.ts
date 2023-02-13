@@ -2,7 +2,7 @@
 import AnswerController from "../@types/controller/answer";
 
 /* 引入模型 */
-import questionModel from "../model/question";
+import userModel from "../model/user";
 import answerModel from "../model/answer";
 
 /* 引入工具 */
@@ -36,6 +36,7 @@ const answerController: AnswerController = {
       info.answerer = value;
       info.questionId = questionId;
 
+      // console.log(info.content);
       const result = await answerModel.create(info);
       handelResponse(res, result, info);
     } catch (err) {
@@ -85,12 +86,22 @@ const answerController: AnswerController = {
       // 限制每页有多少条数据
       limit = Math.max((limit as any) * 1, 0);
 
-      const answerList = await answerModel
+      const answerList = await userModel
         // 实现模糊搜索，忽略大小写
-        .find({ isLikes: true })
-        .populate("answerer")
+        .find({}, { likesAnswers: 1 })
+        // 多重populate
+        .populate({
+          path: "likesAnswers",
+          populate: "answerer",
+        })
         .limit(limit)
         .skip(page * limit);
+      // const answerList = await answerModel
+      //   // 实现模糊搜索，忽略大小写
+      //   .find({ isLikes: true })
+      //   .populate("answerer")
+      //   .limit(limit)
+      //   .skip(page * limit);
       handelResponse(res, answerList, "查询问题列表成功");
     } catch (err) {
       next(err);

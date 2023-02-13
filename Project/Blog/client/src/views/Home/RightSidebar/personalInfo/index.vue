@@ -1,15 +1,18 @@
 <template>
     <div>
-        <div class="w-52 h-80 border-2 border-gray-700 relative">
+        <div class="w-52 h-80 border-2 border-gray-300 relative">
             <!-- 头像 -->
             <div class="h-14 relative">
-                <img @click="router.push({ name: 'User' })" class="h-24 w-24 rounded-full absolute
-                -top-10 left-1/2 -translate-x-1/2 object-cover cursor-pointer"
-                    :src="userSetting.avatarUrl ? userSetting.avatarUrl : 'https://yarh-blog-1308742510.cos.ap-guangzhou.myqcloud.com/404.jpg'"
-                    alt="头像" />
-                <div>
+                <a-skeleton :avatar="{ 'size': 96 }" :title="false" :paragraph="false" active :loading="loading"
+                    class="skeleton text-center absolute -top-10">
+                    <img @click="router.push({ name: 'User' })" class="h-24 w-24 rounded-full absolute
+                -top-10 left-1/2 -translate-x-1/2 object-cover cursor-pointer border-2 border-solid border-gray-300"
+                        :src="userSetting.avatarUrl ? userSetting.avatarUrl : 'https://yarh-blog-1308742510.cos.ap-guangzhou.myqcloud.com/404.jpg'"
+                        alt="头像" />
+                </a-skeleton>
+                <div class="absolute top-3/4 right-2 font-semibold cursor-pointer">
                     <a-popconfirm title="确认登出吗？" ok-text="Yes" cancel-text="No" @confirm="confirm" @cancel="cancel">
-                        <span class="absolute top-3/4 right-2 font-semibold cursor-pointer">登出</span>
+                        <span>登出</span>
                     </a-popconfirm>
                 </div>
             </div>
@@ -56,8 +59,11 @@ const router = useRouter()
 const userStore = useUserStore()
 const { userSetting } = storeToRefs(userStore)
 
-onMounted(() => {
-    userStore.GetUser(localStorage.getItem('id')!)
+const loading = ref(true)
+
+onMounted(async () => {
+    await userStore.GetUser(localStorage.getItem('id')!)
+    loading.value = false
 })
 
 const confirm = () => {
@@ -70,6 +76,8 @@ const cancel = () => {
 
 </script>
 
-<style lang='' scoped>
-
+<style lang='css' scoped>
+.skeleton :deep(.ant-skeleton-header) {
+    padding: 0;
+}
 </style>

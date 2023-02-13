@@ -15,8 +15,8 @@ import handelResponse from "../utils/handelResponse";
 // 引入Tencent Cos对象存储服务包
 import Cos from "cos-nodejs-sdk-v5";
 const cos = new Cos({
-  SecretId: "AKIDFI7k9JExRaUCgwyoSs30kGqBKFwPdeRz",
-  SecretKey: "OaaNwLXXKwLXXKvJUSEoBKI3auSs6E9r",
+  SecretId: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  SecretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 });
 
 const userController: UserController = {
@@ -452,11 +452,18 @@ const userController: UserController = {
           isHesitation: method === "PUT" ? false : true,
         },
       });
-      // 像userModel中的likesAnswers添加点赞的回答
-      await userModel.updateOne(
-        { _id: value },
-        { $addToSet: { likesAnswers: id } }
-      );
+      // 对userModel的点赞回答字段处理
+      if (method === "PUT") {
+        await userModel.updateOne(
+          { _id: value },
+          { $addToSet: { likesAnswers: id } }
+        );
+      } else {
+        await userModel.updateOne(
+          { _id: value },
+          { $pull: { likesAnswers: id } }
+        );
+      }
       if (data) {
         res.status(200).json({
           code: 200,

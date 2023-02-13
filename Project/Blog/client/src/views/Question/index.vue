@@ -1,43 +1,51 @@
 <template>
     <div class="min-h-screen">
         <!-- 顶部问题标题区 -->
-        <header class="w-full pt-10 bg-black bg-opacity-40 shadow" v-if="question">
-            <div class="w-sHeart mx-auto flex flex-col">
+        <header class="w-full pt-10 bg-black bg-opacity-40 shadow" v-if="questionStore.question">
+            <div class="w-sHeart mx-auto flex flex-col lg:w-sHeart 2xl:w-mHeart">
                 <!-- 标题 -->
-                <div class="w-full text-2xl font-medium mb-2">
-                    {{ question.title }}
+                <div class="w-full text-2xl font-medium">
+                    {{ questionStore.question.title }}
                 </div>
                 <!-- 简介（描述） -->
-                <div class="w-full text-sm max-h-16 overflow-hidden overflow-ellipsis">
-                    {{ question.descriptions }}
+                <div class="w-full text-sm max-h-16 my-4 overflow-hidden overflow-ellipsis">
+                    {{ questionStore.question.descriptions }}
                 </div>
-                <!-- 操作按钮 -->
-                <div class="w-full flex rounded-md my-4">
-                    <div class="w-20 h-8 border-gray-200 border-1 rounded-md flex justify-center items-center cursor-pointer"
-                        @click="collectingQuestion" :class="{
-                            'bg-gray-200': question.isCollected,
-                            'text-gray-700': question.isCollected
-                        }">
-                        收藏回答</div>
-                    <div class="w-20 h-8 ml-4 border-1 flex justify-center items-center rounded-md border-gray-200 cursor-pointer"
-                        @click="ToWrite">
-                        写回答</div>
+                <!-- 操作按钮、话题 -->
+                <div class="w-full flex justify-between items-center h-14">
+                    <div class="flex rounded-md">
+                        <div class="w-20 h-8 border-gray-200 border-1 rounded-md flex justify-center items-center cursor-pointer"
+                            @click="collectingQuestion" :class="{
+                                'bg-gray-200': questionStore.question.isCollected,
+                                'text-gray-700': questionStore.question.isCollected
+                            }">
+                            收藏回答</div>
+                        <div class="w-20 h-8 ml-4 border-1 flex justify-center items-center rounded-md border-gray-200 cursor-pointer"
+                            @click="ToWrite">
+                            写回答</div>
+                    </div>
+                    <div class="flex justify-center truncate">
+                        <div v-for="i in questionStore.question.topics" :key="i._id"
+                            class="mx-2 flex first:ml-0 last:mr-0 text-lg">
+                            <img :src="i.topicPic" class="w-8 h-8" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
         <!-- 主体 -->
-        <Answer></Answer>
+        <div class="w-sHeart mx-auto my-6 lg:w-sHeart 2xl:w-mHeart">
+            <Answer storeType="answerList" :questionId="questionId"></Answer>
+        </div>
     </div>
 </template>
 
 <script setup lang='ts'>
 import { ref, reactive, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia'
-import { useAnswerStore } from '@/stores/answer'
 import { useQuestionStore } from '@/stores/question'
 import { useUserStore } from "@/stores/user"
-import Answer from "@/views/Question/Answer/index.vue"
+import Answer from "@/components/Answer/index.vue"
 
 // 创建路由器实例
 const router = useRouter()
@@ -46,21 +54,17 @@ const route = useRoute()
 const questionId = route.query.questionId as string
 
 // 创建Store实例
-const answerStore = useAnswerStore()
 const questionStore = useQuestionStore()
-const { question } = storeToRefs(questionStore)
 const userStore = useUserStore()
 
 onBeforeMount(async () => {
     // 由于使用了其他模块的store，在页面刷新的时候也要加上mainFloor的数据获取步骤
     await questionStore.GetQuestion(questionId)
-    // 获取目标问题下的回答
-    await answerStore.GetAnswerList(questionId)
 })
 
 // 收藏答案
 const collectingQuestion = async () => {
-    switch (question.value.isCollected) {
+    switch (questionStore.question.isCollected) {
         case true:
             await userStore.UncollectingQuestions(questionId)
             break;

@@ -9,14 +9,15 @@ import userModel from "../model/user";
 import config from "../config/index";
 
 const cos = new Cos({
-  SecretId: "xxxxxx",
-  SecretKey: "xxxxxx",
+  SecretId: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  SecretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 });
 
 const uploadController: UploadController = {
   upload: (req, res, next) => {
     const id = req.params.id;
     if (req.file) {
+      // const filepath = `public/uploads/${req.file.originalname}`; 服务器
       const filepath = `${config.app.baseUrl}/public/uploads/${req.file.originalname}`;
       // 查询用户先前是否已经上传过头像
       cos.getBucket(

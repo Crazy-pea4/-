@@ -1,8 +1,10 @@
+import type { TopicList } from "@/@types/store/topic";
 export interface QuestionList {
   [p: string]: string;
   _id: string;
   title: string;
   descriptions: string;
+  topics: TopicList[];
   createdAt: string;
   updatedAt: string;
   questioner: {

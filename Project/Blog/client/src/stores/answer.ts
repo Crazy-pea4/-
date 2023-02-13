@@ -36,7 +36,7 @@ export const useAnswerStore = defineStore("answer", {
         const {
           data: { data },
         } = await getAnswerLikedList();
-        this.likedList = data;
+        this.likedList = data[0].likesAnswers;
       } catch (err) {
         console.log(err);
       }

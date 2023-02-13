@@ -5,7 +5,7 @@
     <searchBar></searchBar>
     <backTop></backTop>
     <!-- 路由组件 -->
-    <div class="relative">
+    <div class="relative h-full">
       <!-- 路由 -->
       <RouterView v-slot="{ Component }">
         <keep-alive>

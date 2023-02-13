@@ -51,7 +51,7 @@ export const useQuestionStore = defineStore("question", {
         console.log(err);
       }
     },
-    async GetSearchList(props?: Props) {
+    async GetSearchList(props: Props) {
       try {
         const {
           data: { data: searchList },
