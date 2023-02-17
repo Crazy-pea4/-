@@ -26,7 +26,6 @@ export const useTopicStore = defineStore("topic", {
           data: { data },
         } = await getTopicList();
         this.topicList = data;
-        console.log(data);
       } catch (err) {
         console.log(err);
       }

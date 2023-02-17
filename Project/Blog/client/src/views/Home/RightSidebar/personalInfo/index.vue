@@ -45,11 +45,11 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from 'vue'
-import Ip from '../Ip/index.vue'
 import { useRouter } from 'vue-router'
 import { StarFilled, LikeFilled } from '@ant-design/icons-vue';
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
+import Ip from './Ip/index.vue'
 import clearLoginInfo from '@/utils/clearLoginInfo';
 
 // 创建路由器router

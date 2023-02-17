@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>点击下面按钮实现jsonp原理</h1>
+    <button>click</button>
+    <script>
+      /** JSON with Padding
+       *  注意：
+       *  1. 使用jsonp必须与后端配合，让后端返回一个Fn({...params})的形式
+       *  2. 需要手动使用onload删除script标签
+       *  3. 只能处理get请求
+       */
+    </script>
+    <script>
+      let h1 = document.querySelector("h1");
+      function test(p) {
+        h1.innerText = p;
+      }
+      document.querySelector("button").onclick = function () {
+        let myScript = document.createElement("script");
+        myScript.src = "./test.txt"; // 可以通过?cb=fnName的形式让后端拿到处理成函数名
+        document.body.appendChild(myScript);
+        // 当标签加载完成后，删除script标签，这样不会打乱文档流
+        myScript.onload = function () {
+          myScript.remove();
+        };
+      };
+    </script>
+    <!-- 由于使用的是script标签，因此就算引入的不是js文件，里面的字符内容也会被当成js代码去解析 -->
+    <!-- <script src="./test.txt"></script> -->
+  </body>
+</html>

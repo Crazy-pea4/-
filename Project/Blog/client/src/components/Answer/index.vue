@@ -84,6 +84,7 @@ onMounted(async () => {
 onUpdated(() => {
     hljs.highlightAll();
     // 这段代码说明看源码
+    // @ts-ignore
     window.hljs.initLineNumbersOnLoad();
 })
 

@@ -9,10 +9,22 @@
 
   <body>
     <script>
-      if (![]) {
-        console.log(123);
-      }
-      console.log([] == false);
+      var numberOfPairs = function (nums) {
+        let map = {};
+        let count = 0;
+        for (let i = 0; i <= nums.length; i++) {
+          if (nums.length <= 1) break;
+          if (!map[nums[i]]) {
+            map[nums[i]] = "" + i;
+          } else {
+            count++;
+            nums.splice(i--, 1);
+            nums.splice(Number(map[nums[i--]]), 1);
+          }
+        }
+        return [count, nums.length];
+      };
+      console.log(numberOfPairs([12, 3, 12, 12, 72]));
     </script>
   </body>
 </html>

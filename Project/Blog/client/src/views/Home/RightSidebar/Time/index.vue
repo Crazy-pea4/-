@@ -11,9 +11,6 @@ const time = ref(dayjs(new Date()).format('HH:mm:ss'))
 setInterval(() => {
     time.value = dayjs(new Date()).format('HH:mm:ss')
 }, 1000)
-
-
-
 </script>
 
 <style lang='' scoped>

@@ -85,7 +85,7 @@ const formState = reactive<FormState>({
 
 // select过滤函数
 const filterOption = (input: string, option: any) => {
-    return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
 };
 
 // 对话框显示变量
