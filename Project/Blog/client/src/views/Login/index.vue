@@ -1,5 +1,6 @@
 <template>
     <div class="loginBox h-screen flex justify-end">
+
         <!-- 登录框 -->
         <div class="container flex flex-col justify-around w-108 h-full bg-slate-50">
             <!-- 表单 -->
@@ -49,15 +50,24 @@
                 </a-form-item>
                 <span class="cursor-pointer" @click="hack">懒得注册, Click here~</span>
             </a-form>
+            <div class="px-1 text-gray-400 absolute bottom-0">
+                <span>
+                    由于之前后端没有校验，数据都被捣蛋鬼删掉了😓.
+                    所以现在后端加了个校验权限，不是自己创建的问题和回答删不掉！
+                </span>
+                <span>不过您要只想看一下我的笔记，可以直接</span>
+                <span class="text-black cursor-pointer" @click="hack">点懒得注册获得我的账号</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import type { Rule } from 'ant-design-vue/es/form';
+import { Modal } from 'ant-design-vue';
 import { login } from "@/api/auth"
 interface FormState {
     phoneNumber: string;
@@ -124,8 +134,15 @@ const rules: Record<string, Rule[]> = {
 };
 
 const hack = () => {
-    formState.phoneNumber = "19898510903"
-    formState.password = "123456"
+    Modal.confirm({
+        title: '不可以删掉我的笔记',
+        'okText': '知道了~',
+        onOk() {
+            formState.phoneNumber = "19898510903"
+            formState.password = "123456"
+        },
+    })
+
 }
 </script>
 

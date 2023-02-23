@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .px-full {
+        height: 1px;
+        background-color: #000;
+      }
+      .px-half {
+        height: 0.5px;
+        background-color: #000;
+        /* 也可以使用
+            transform: scaleY(0.5)
+            transform-origin: 50% 100%
+        */
+      }
+      .px-full-half {
+        height: 1.5px;
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <p>1px</p>
+    <div class="px-full"></div>
+    <p>0.5px</p>
+    <div class="px-half"></div>
+    <p>1.5px</p>
+    <div class="px-full-half"></div>
+  </body>
+</html>

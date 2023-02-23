@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 
+            外边距塌陷，指的是两个盒子处在垂直方向上
+            分别设置margin-bottom: 10和margin-top: 10
+            两个盒子最终也只会垂直隔开10px而不是20px
+
+            外边距塌陷只会发生在1. 垂直方向 2. 块级元素
+        */
+      .box1 {
+        width: 200px;
+        height: 200px;
+        background-color: darkgoldenrod;
+        margin-bottom: 10px;
+      }
+      .box2 {
+        width: 200px;
+        height: 200px;
+        background-color: darkkhaki;
+        /* 外边距塌陷 */
+        margin-top: 10px;
+        /* 或者可以使用 BFC 的方式解决子元素与父元素的外边距塌陷 */
+        display: flow-root;
+      }
+      .box2 .son {
+        width: 100px;
+        height: 100px;
+        background-color: darkgoldenrod;
+        /* 这里 5px 和 10px 重合了，把它变成行内块是其中一种解决方式 */
+        margin-top: 5px;
+        /* display: inline-block; */
+        /* margin-top: 20px;  这里20px比父元素10px大就用20px */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box1"></div>
+    <div class="box2">
+      <div class="son"></div>
+    </div>
+  </body>
+</html>

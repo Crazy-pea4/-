@@ -1,70 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <script>
-        // 浅拷贝
-        let obj = {
-            name: 'andy',
-            age: 36,
-            msg: {
-                title: 'shift'
-            }
-        };
-        let o = {};
-        for (k in obj) {
-            o[k] = obj[k];
-        };
-        console.log(o);
-        // 浅拷贝只拷贝一层，更深层次的只会拷贝引用，也就是共用同一个地址
-        o.age = 4; // 表层改变
-        o.msg.title = 'ctrl'; // 深层改变
-        console.log(o);
-        console.log(obj);
-        console.log('---------Object.assign--------');
-        // 另外，es6还新增了一个用于浅拷贝的语法糖Object.assign(target, sourse)
-        Object.assign(o, obj)
-        console.log(o);
+      // 浅拷贝
+      let obj = {
+        name: "andy",
+        age: 36,
+        msg: {
+          title: "shift",
+        },
+      };
+      let o = {};
+      for (k in obj) {
+        o[k] = obj[k];
+      }
+      console.log(o);
+      // 浅拷贝只拷贝一层，更深层次的只会拷贝引用，也就是共用同一个地址
+      o.age = 4; // 表层改变
+      o.msg.title = "ctrl"; // 深层改变
+      console.log(o);
+      console.log(obj);
+      console.log("---------Object.assign--------");
+      // 另外，es6还新增了一个用于浅拷贝的语法糖Object.assign(target, sourse)
+      Object.assign(o, obj);
+      console.log(o);
 
-        console.log('--------------深拷贝-----------------');
-        // 深拷贝
-        let obj2 = {
-            id: 2,
-            name: 'lucy',
-            msg: {
-                localtion: 'american'
-            },
-            likes: ['walk', 'cook']
-        }
-        let o2 = {};
+      console.log("--------------深拷贝-----------------");
+      // 深拷贝
+      let obj2 = {
+        id: 2,
+        name: "lucy",
+        msg: {
+          localtion: "american",
+        },
+        likes: ["walk", "cook"],
+      };
+      let o2 = {};
 
-        function deepCopy(targetObj, sourceObj) {
-            for (k in sourceObj) {
-                // 判断是否是属性值是否是复杂数据类型
-                if (sourceObj[k] instanceof Array) {
-                    targetObj[k] = [];
-                    // 递归执行，将将目标对象中k的值（空数组）作为递归的第一个参数，源对象中的复杂数据类型作为第二个参数
-                    deepCopy(targetObj[k], sourceObj[k]);
-                } else if (sourceObj[k] instanceof Object) {
-                    targetObj[k] = {};
-                    deepCopy(targetObj[k], sourceObj[k]);
-                } else {
-                    // 当sourceObj[k]不再是复杂数据类型后
-                    targetObj[k] = sourceObj[k];
-                }
-            }
+      function deepCopy(targetObj, sourceObj) {
+        for (k in sourceObj) {
+          // 判断是否是属性值是否是复杂数据类型
+          if (sourceObj[k] instanceof Array) {
+            targetObj[k] = [];
+            // 递归执行，将将目标对象中k的值（空数组）作为递归的第一个参数，源对象中的复杂数据类型作为第二个参数
+            deepCopy(targetObj[k], sourceObj[k]);
+          } else if (sourceObj[k] instanceof Object) {
+            targetObj[k] = {};
+            deepCopy(targetObj[k], sourceObj[k]);
+          } else {
+            // 当sourceObj[k]不再是复杂数据类型后
+            targetObj[k] = sourceObj[k];
+          }
         }
-        deepCopy(o2, obj2);
-        console.log(o2);
+      }
+      deepCopy(o2, obj2);
+      console.log(o2);
     </script>
-</body>
-
+  </body>
 </html>

@@ -4,8 +4,7 @@
             <div class="w-full px-4 py-2 my-6 first:mt-0 last:mb-0 relative bg-black bg-opacity-40 rounded-sm shadow"
                 v-for="i in answerStore[props.storeType]" :key="i._id">
                 <!-- 删除按钮 -->
-                <a-popconfirm title="确认要删除吗？" cancel-text="取消" ok-text="确认"
-                    @confirm="deleteAnswer(i.questionId, i._id)">
+                <a-popconfirm title="确认要删除吗？" cancel-text="取消" ok-text="确认" @confirm="deleteAnswer(i.questionId, i._id)">
                     <div class="absolute top-0 right-1 w-6 h-6 leading-5 text-xl text-center cursor-pointer">x</div>
                 </a-popconfirm>
                 <!-- 回答头部 -->
@@ -24,17 +23,16 @@
                 </div>
                 <!-- 赞和质疑 -->
                 <div class="flex w-24" @click="feedback($event, i.questionId)">
-                    <div class="w-16 h-7 flex justify-center items-center border-1 cursor-pointer rounded-xl mr-1"
-                        :class="{
-                            'bg-slate-600': i.isLikes,
-                            'text-white': i.isLikes,
-                            'border-slate-600': i.isLikes
-                        }" :data-answerId="i._id" :data-which="1" :data-isLikes="i.isLikes"
+                    <div class="w-16 h-7 flex justify-center items-center border-1 cursor-pointer rounded-xl mr-1" :class="{
+                        'bg-slate-600': i.isLikes,
+                        'text-white': i.isLikes,
+                        'border-slate-600': i.isLikes
+                    }" :data-answerId="i._id" :data-which="1" :data-isLikes="i.isLikes"
                         :data-isHesitation="i.isHesitation">
                         赞&nbsp;{{ i.likes }}
                     </div>
                     <div class="w-7 h-7 border-1 flex justify-center items-center cursor-pointer rounded-xl text-2xl"
-                        :class="{ 
+                        :class="{
                             'bg-slate-600': i.isHesitation,
                             'text-white': i.isHesitation,
                             'border-slate-600': i.isHesitation
@@ -49,7 +47,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, onMounted, onUpdated } from 'vue';
+import { ref, reactive, onMounted, watch, nextTick } from 'vue';
 import { useAnswerStore } from '@/stores/answer';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/panda-syntax-dark.css';
@@ -78,15 +76,26 @@ onMounted(async () => {
         console.log(err);
     }
 })
-/** 
- * hljs.highlightAll()是根据<pre><code></code></pre>来进行高亮显示
- * 但是a-skeleton组件的子组件生成比较慢，下面两句放在onMounted会失效 */
-onUpdated(() => {
+
+watch([loading], async () => {
+    await nextTick()
+    // a-skeleton组件的子组件生成比较慢，要用nextTick等待dom更新完毕再执行
     hljs.highlightAll();
     // 这段代码说明看源码
     // @ts-ignore
     window.hljs.initLineNumbersOnLoad();
 })
+/** 
+ * hljs.highlightAll()是根据<pre><code></code></pre>来进行高亮显示
+ * 但是a-skeleton组件的子组件生成比较慢，下面两句放在onMounted会失效 */
+// onUpdated(() => {
+//     hljs.highlightAll();
+//     // 这段代码说明看源码
+//     // @ts-ignore
+//     window.hljs = hljs
+//     // @ts-ignore
+//     window.hljs.initLineNumbersOnLoad();
+// })
 
 const deleteAnswer = (questionId: string, answerId: string) => {
     answerStore.DeleteAnswer(questionId, answerId)

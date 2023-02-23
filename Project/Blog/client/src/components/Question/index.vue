@@ -5,22 +5,10 @@
       <template v-if="questionStore[props.storeType].length > 0">
         <div
           class="w-full h-36 border-2 border-gray-300 relative rounded-sm hover:shadow flex flex-col justify-around text-center cursor-pointer my-5 px-5 first:mt-0 last:mb-0"
-          v-for="(item, index) in questionStore[props.storeType]"
-          :key="item._id"
-          :data-questionId="item._id"
-        >
+          v-for="(item, index) in questionStore[props.storeType]" :key="item._id" :data-questionId="item._id">
           <!-- 删除按钮 -->
-          <a-popconfirm
-            title="确认要删除吗？"
-            cancel-text="取消"
-            ok-text="确认"
-            @confirm="deleteQuestion(item._id)"
-          >
-            <div
-              class="absolute top-0 right-1 leading-6 text-xl w-6 h-6"
-              :data-questionId="item._id"
-              @click.stop
-            >
+          <a-popconfirm title="确认要删除吗？" cancel-text="取消" ok-text="确认" @confirm="deleteQuestion(item._id)">
+            <div class="absolute top-0 right-1 leading-6 text-xl w-6 h-6" :data-questionId="item._id" @click.stop>
               x
             </div>
           </a-popconfirm>
@@ -38,8 +26,8 @@
             <div class="text-sm mr-2">
               {{
                 item.questioner === null
-                  ? "用户不存在"
-                  : item.questioner.nickname
+                ? "用户不存在"
+                : item.questioner.nickname
               }}
             </div>
             <!-- 发起时间 -->

@@ -1,15 +1,9 @@
 <template>
     <div class="loginBox h-screen flex justify-end relative">
-        <!-- 介绍语 -->
-        <!-- <div class="container w-1/2 h-full flex flex-col items-end relative">
-            <div class="text-8xl font-serif mt-40 2xl:mt-60 xl:mt-40">welcome</div>
-            <div class="text-2xl mt-10 2xl:mt-10 xl:mt-10">博客v1.0</div>
-        </div> -->
         <!-- 注册框 -->
         <div class="container flex flex-col justify-around w-108 h-full bg-slate-50">
             <!-- 表单 -->
-            <a-form ref="formRef" :model="formState" :rules="rules" class="w-9/12 relative mx-auto mt-6"
-                @finish="onFinish">
+            <a-form ref="formRef" :model="formState" :rules="rules" class="w-9/12 relative mx-auto mt-6" @finish="onFinish">
                 <!-- 标题 -->
                 <div class="absolute -top-24 w-auto text-center right-1/2 translate-x-1/2 text-2xl text-slate-600">注册
                 </div>
