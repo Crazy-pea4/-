@@ -10,7 +10,7 @@
   },
   "name": "thunder-react-app",
   "description": "A fast react cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "type": "module",
   "scripts": {
