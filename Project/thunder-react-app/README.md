@@ -1,6 +1,6 @@
-## 使用方式
-
 本项目是一个用于快速创建 react 项目的脚手架。由于在学习 react 的过程中感受到 react 生态的繁杂，于是开发了该脚手架。目前支持一键创建 react @redux-toolkit react-redux react-router 配置文件并生成对应目录结构，采用 vite 构建工具。
+
+## 使用方式
 
 thunder-react-app 提供两种模式，simple 和 customlize：
 
