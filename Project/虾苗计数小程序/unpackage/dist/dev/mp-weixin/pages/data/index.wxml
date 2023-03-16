@@ -1,0 +1,1 @@
+<view class="dataPage data-v-af28c7f4"><view class="text data-v-af28c7f4">监测数据</view><view class="img data-v-af28c7f4"><image class="data-v-af28c7f4" src="{{a}}"/><view class="data-v-af28c7f4" hidden="{{!c}}"><text class="data-v-af28c7f4">虾苗数量：</text><text class="num data-v-af28c7f4">{{b}}</text></view></view></view>

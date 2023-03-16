@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const tree = {
+        val: "a",
+        children: [
+          {
+            val: "b",
+            children: [
+              {
+                val: "d",
+                children: [],
+              },
+              {
+                val: "e",
+                children: [],
+              },
+              {
+                val: "f",
+                children: [],
+              },
+            ],
+          },
+          {
+            val: "c",
+            children: [
+              {
+                val: "g",
+                children: [],
+              },
+              {
+                val: "h",
+                children: [],
+              },
+              {
+                val: "i",
+                children: [],
+              },
+            ],
+          },
+        ],
+      };
+
+      const dfs = (root) => {
+        if (!root) return;
+        console.log(root.val);
+        root.children.forEach((child) => {
+          dfs(child);
+        });
+      };
+
+      dfs(tree);
+      // a b d e f c g h i
+
+      const bfs = (root) => {
+        if (!root) return;
+        const queue = [root];
+        while (queue.length) {
+          const top = queue.shift();
+          console.log(top.val);
+          top.children.forEach((child) => {
+            queue.push(child);
+          });
+        }
+      };
+
+      bfs(tree);
+      // a b c d e f g h i
+    </script>
+  </body>
+</html>

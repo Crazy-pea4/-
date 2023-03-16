@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "commander": "^10.0.0",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^9.1.4",
+    "log-symbols": "^5.1.0",
+    "ora": "^6.1.2",
+    "pacote": "^15.1.1"
+  },
+  "name": "thunder-react-app",
+  "description": "A fast react cli",
+  "version": "1.0.2",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "thunder-react-app": "bin/thunder-react-app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

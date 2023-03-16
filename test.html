@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <script>
-      var numberOfPairs = function (nums) {
-        let map = {};
-        let count = 0;
-        for (let i = 0; i <= nums.length; i++) {
-          if (nums.length <= 1) break;
-          if (!map[nums[i]]) {
-            map[nums[i]] = "" + i;
-          } else {
-            count++;
-            nums.splice(i--, 1);
-            nums.splice(Number(map[nums[i--]]), 1);
-          }
-        }
-        return [count, nums.length];
-      };
-      console.log(numberOfPairs([12, 3, 12, 12, 72]));
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let tokens = ['1', '2', '1']
+    let arr = [...new Set(tokens)].map((item) => Number(item))
+    console.log(arr)
+  </script>
+</body>
+
 </html>

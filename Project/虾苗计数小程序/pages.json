@@ -1,0 +1,44 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "home页"
+			}
+		},
+		{
+			"path": "pages/data/index",
+			"style": {
+				"navigationBarTitleText": "data页"
+			}
+		}
+	],
+	"globalStyle": {
+		"enablePullDownRefresh": true,
+		"backgroundColorTop": "#d4d4d4",
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "虾苗检测小程序",
+		"navigationBarBackgroundColor": "#56bdf4"
+	},
+	"tabBar": {
+		"color": "#00aaff",
+		"selectedColor": "#00aaff",
+		"borderStyle": "white",
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/home/index",
+				"iconPath": "static/camera1.png",
+				"selectedIconPath": "static/camera2.png"
+				
+			},
+			{
+				"text": "数据",
+				"pagePath": "pages/data/index",
+				"iconPath": "static/data1.png",
+				"selectedIconPath": "static/data2.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

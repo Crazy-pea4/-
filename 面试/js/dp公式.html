@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 动态规划问题通式，尽最大可能拿最少东西塞满背包
+         * 
+         * price：背包容量
+         * disCount：物品
+         * 
+        */
+        //  创建dp数组，长度是背包容量+1，用Infinity填满
+        let dp = new Array(price + 1).fill(Infinity)
+        // 将第一位置0
+        dp[0] = 0
+        // 遍历物品
+        for (let i = 0; i < disCount.length; i++) {
+            // 遍历背包
+            for (let j = disCount[i]; j <= price; j++) {
+                dp[j] = Math.min(dp[j], dp[j - disCount[i]] + 1)
+            }
+        }
+        // dp数组末尾是否等于Infinity ? 失败条件 : dp[price]
+        console.log(dp[price] === Infinity ? "Impossible" : dp[price])
+    </script>
+</body>
+
+</html>

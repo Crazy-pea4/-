@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      var removeDuplicates = function (nums) {
-        let left = 0;
-        for (let right = left + 1; right < nums.length; right++) {
-          if (nums[left] !== nums[right]) {
-            left++;
-            nums[left] = nums[right];
-          }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function handleStr(str) {
+      let temp = ''
+      let map = {}
+      for (let i = 0; i < str.length; i++) {
+        if (isNaN(Number(str[i])) === true) {
+          map[str[i]] = Number(temp)
+          temp = ''
+        } else {
+          temp += str[i]
         }
-        return left + 1;
-      };
-      console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
-    </script>
-  </body>
+      }
+      console.log(map);
+      let result = ''
+      for (const k in map) {
+        for (let j = 0; j < map[k]; j++) {
+          result += k
+        }
+      }
+      console.log(result);
+    }
+
+    handleStr('1a2b3c')
+  </script>
+</body>
+
 </html>

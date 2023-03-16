@@ -1,15 +1,19 @@
 ## 核心思想
 
-vue采用的是MVVM模式，双向绑定。内存数据变化自动引起视图数据变化
+vue 采用的是 MVVM 模式，双向绑定。内存数据变化自动引起视图数据变化
 
-react不如与MVC也不属于MVVM，单向数据流。内存数据变化需要手动调用setState或useState等hooks才能引起视图变化
+react 不如与 MVC 也不属于 MVVM，单向数据流。内存数据变化需要手动调用 setState 或 useState 等 hooks 才能引起视图变化
 
 ## 写法
 
-vue使用模板语法，在`.vue`文件中处理html css js。
+vue 使用模板语法，在`.vue`文件中处理 html css js。
 
-react使用jsx，在js中写html
+react 使用 jsx，在 js 中写 html
 
-## 生命周期
+## diff 算法
 
+vue 和 react 的 diff 算法都是进行同层次的比较，主要有以下两点不同：
 
+vue 对比节点，如果节点元素类型相同，但是 className 不同，认为是不同类型的元素，会进行删除重建，但是 react 则会认为是同类型的节点，只会修改节点属性。
+
+vue 的列表比对采用的是首尾指针法（双指针。旧前旧后 | 新前新后），而 react 采用的是从左到右依次比对的方式，当一个集合只是把最后一个节点移动到了第一个，react 会把前面的节点依次移动，而 vue 只会把最后一个节点移动到最后一个，从这点上来说 vue 的对比方式更加高效。
